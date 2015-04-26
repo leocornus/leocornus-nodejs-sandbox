@@ -7,7 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "vows test/vows/* --spec"
+    "test": "vows test/vows/* --spec",
+    "mocha": "mocha test/mocha/*"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/seanchen/leocornus-nodejs-sandbox",
   "devDependencies": {
+    "mocha": "^2.2.4",
     "vows": "^0.8.1"
   }
 }
