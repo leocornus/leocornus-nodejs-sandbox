@@ -1,0 +1,26 @@
+{
+  "name": "leocornus-nodejs-sandbox",
+  "version": "0.0.1",
+  "description": "Sandbox to learn Node.js",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/seanchen/leocornus-nodejs-sandbox.git"
+  },
+  "keywords": [
+    "sandbox",
+    "playground"
+  ],
+  "author": "Sean Chen <sean.chen@leocorn.com> (http://github.com/seanchen)",
+  "license": "GPLv2",
+  "bugs": {
+    "url": "https://github.com/seanchen/leocornus-nodejs-sandbox/issues"
+  },
+  "homepage": "https://github.com/seanchen/leocornus-nodejs-sandbox"
+}
