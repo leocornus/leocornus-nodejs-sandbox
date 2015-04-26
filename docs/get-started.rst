@@ -14,4 +14,14 @@ Here are how we `create Node.js modules`_:
 - main is the main js file of the module, 
   by default it is: index.js
 
+How to test node.js module
+--------------------------
+
+There are many testing framework for node.js.
+
+- The moncha_ framework 
+- The vows_ framework
+
 .. _create Node.js modules: https://docs.npmjs.com/getting-started/creating-node-modules
+.. _moncha: http://mochajs.org
+.. _vows: http://vows.js.org

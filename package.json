@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "test"
+    "test": "vows test/vows/* --spec"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/seanchen/leocornus-nodejs-sandbox/issues"
   },
-  "homepage": "https://github.com/seanchen/leocornus-nodejs-sandbox"
+  "homepage": "https://github.com/seanchen/leocornus-nodejs-sandbox",
+  "devDependencies": {
+    "vows": "^0.8.1"
+  }
 }
