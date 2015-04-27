@@ -52,4 +52,4 @@ This presentation `glup vs grunt`_ is very interesting.
 .. _vows: http://vows.js.org
 .. _Jasmine: http://jasmine.github.io/
 .. _Jasmine, Mocha, and Vows: http://blog.carbonfive.com/2012/07/25/asynchronous-javascript-testing-in-jasmine-mocha-and-vows/
-.. _glug vs grunt: http://markdalgleish.github.io/presentation-build-wars-gulp-vs-grunt
+.. _glup vs grunt: http://markdalgleish.github.io/presentation-build-wars-gulp-vs-grunt

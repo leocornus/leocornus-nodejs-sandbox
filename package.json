@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "vows test/vows/* --spec",
-    "mocha": "mocha test/mocha/*"
+    "mocha": "mocha test/mocha/*",
+    "jasmine": "jasmine JASMINE_CONFIG_PATH=test/jasmine.json"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   },
   "homepage": "https://github.com/leocornus/leocornus-nodejs-sandbox",
   "devDependencies": {
+    "jasmine": "^2.2.1",
     "mocha": "^2.2.4",
     "vows": "^0.8.1"
   }
