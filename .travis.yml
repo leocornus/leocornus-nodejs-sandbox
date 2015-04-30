@@ -8,3 +8,4 @@ script:
   - npm test
   - npm run mocha
   - npm run jasmine
+  - npm run karma-jasmine

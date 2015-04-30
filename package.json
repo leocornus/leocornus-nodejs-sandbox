@@ -9,7 +9,8 @@
   "scripts": {
     "test": "vows test/vows/* --spec",
     "mocha": "mocha test/mocha/*",
-    "jasmine": "jasmine JASMINE_CONFIG_PATH=test/jasmine.json"
+    "jasmine": "jasmine JASMINE_CONFIG_PATH=test/jasmine.json",
+    "karma-jasmine": "node node_modules/karma/bin/karma start test/karma.conf.jasmine.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,12 @@
   "homepage": "https://github.com/leocornus/leocornus-nodejs-sandbox",
   "devDependencies": {
     "jasmine": "^2.2.1",
+    "jasmine-core": "^2.3.0",
+    "karma": "^0.12.31",
+    "karma-firefox-launcher": "^0.1.4",
+    "karma-jasmine": "^0.3.5",
+    "karma-mocha": "^0.1.10",
+    "karma-mocha-reporter": "^1.0.2",
     "mocha": "^2.2.4",
     "vows": "^0.8.1"
   }
