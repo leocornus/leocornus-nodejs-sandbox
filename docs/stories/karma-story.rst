@@ -92,4 +92,4 @@ Here are the example for minium config::
   };
 
 .. _writing your own karma adapter: https://developers.soundcloud.com/blog/writing-your-own-karma-adapter
-.. _charjs: http://chaijs.com/
+.. _chaijs: http://chaijs.com/
