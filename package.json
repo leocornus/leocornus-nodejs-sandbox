@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "vows test/vows/* --spec",
-    "mocha": "mocha test/mocha/*",
+    "mocha": "mocha test/mocha/*.js",
     "jasmine": "jasmine JASMINE_CONFIG_PATH=test/jasmine.json",
     "karma-jasmine": "node node_modules/karma/bin/karma start test/karma.conf.jasmine.js",
     "karma-mocha": "node node_modules/karma/bin/karma start test/karma.conf.mocha.js"
