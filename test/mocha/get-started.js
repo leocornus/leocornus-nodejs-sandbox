@@ -1,4 +1,5 @@
 // test case uisng mocha framework.
+// this is for testing a node module.
 
 var assert = require('assert');
 var sandbox = require('../../index');
