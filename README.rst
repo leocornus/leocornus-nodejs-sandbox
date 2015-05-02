@@ -3,7 +3,9 @@
 Sandbox to learn node.js
 ========================
 
-a fun place to learn node.js
+a fun place to learn node.js story by story
+
+|nodei|_
 
 .. |travis| image:: https://api.travis-ci.org/leocornus/leocornus-nodejs-sandbox.png
 .. _travis: https://travis-ci.org/leocornus/leocornus-nodejs-sandbox
@@ -11,3 +13,5 @@ a fun place to learn node.js
 .. _npm-version: https://www.npmjs.com/package/leocornus-nodejs-sandbox
 .. |npm-license| image:: https://img.shields.io/npm/l/leocornus-nodejs-sandbox.svg
 .. _npm-license: https://www.npmjs.com/package/leocornus-nodejs-sandbox
+.. |nodei| image:: https://nodei.co/npm/leocornus-nodejs-sandbox.png?downloads=true&downloadRank=true&stars=true
+.. _nodei: https://nodei.co/npm/leocornus-nodejs-sandbox/
