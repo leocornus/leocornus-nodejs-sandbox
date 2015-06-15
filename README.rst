@@ -1,11 +1,14 @@
 |travis|_ |npm-version|_ |npm-license|_
 
+|nodei|_
+
 Sandbox to learn node.js
 ========================
 
 a fun place to learn node.js story by story
 
-|nodei|_
+- `gulp story <docs/stories/gulp-story.rst>`_
+
 
 .. |travis| image:: https://api.travis-ci.org/leocornus/leocornus-nodejs-sandbox.png
 .. _travis: https://travis-ci.org/leocornus/leocornus-nodejs-sandbox
