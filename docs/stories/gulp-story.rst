@@ -23,11 +23,11 @@ It should be stored at the root of your node.js project.::
 We could add a script in **package.json** like this::
 
   "scripts": {
-    "gulp": "glup"
+    "gulp": "gulp"
   },
 
-Then we could run it using **npm run glup**, for example::
+Then we could run it using **npm run gulp**, for example::
 
-  $ npm run glup default
+  $ npm run gulp default
 
 .. _Getting Started: https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md

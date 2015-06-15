@@ -1,10 +1,16 @@
 var gulp = require('gulp');
+var mocha = require('gulp-mocha');
 
 gulp.task('default', function() {
   // place code for your default task here
 });
 
-gulp.task('test', function() {
+// mocha test runner.
+gulp.task('mocha', function() {
 
-  // empty for now.
+  return gulp.src(['test/mocha/*.js'], {read: false})
+    .pipe(mocha({
+      reporter: 'spec'
+    }));
+
 });
