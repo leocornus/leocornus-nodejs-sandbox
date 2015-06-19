@@ -43,6 +43,7 @@
     "karma-mocha": "^0.1.10",
     "karma-mocha-reporter": "^1.0.2",
     "mocha": "^2.2.4",
-    "vows": "^0.8.1"
+    "vows": "^0.8.1",
+    "yahoo-finance-stream": "^0.1.2"
   }
 }

@@ -14,3 +14,18 @@ gulp.task('mocha', function() {
     }));
 
 });
+
+// testing yahoo stream.
+gulp.task('yahoo', function() {
+
+  var stocks = require('yahoo-finance-stream')(
+    {frequency: 5000}
+  );
+
+  stocks.watch('rht');
+  stocks.watch('mcp');
+
+  stocks.on('data', function(stock) {
+    console.log('%s: %d', stock.symbol, stock.bid);
+  });
+});
