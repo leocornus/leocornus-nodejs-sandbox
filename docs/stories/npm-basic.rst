@@ -18,5 +18,5 @@ Here are some samples::
   # minor patch
   $ npm version patch -m "release %s for some bug fixes"
   # do a major release.
-  $ npm version 2.0.0 major -m "Release %s to support glup"
+  $ npm version 2.0.0 major -m "Release %s to support gulp"
 
