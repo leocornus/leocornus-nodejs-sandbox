@@ -20,3 +20,14 @@ Here are some samples::
   # do a major release.
   $ npm version 2.0.0 major -m "Release %s to support gulp"
 
+Using the **publish** command to publish a package::
+
+  $ npm publish
+
+Manually add a tag
+------------------
+
+steps::
+
+  $ git tag -a v0.0.1 -m "release 0.0.1 basic npm module"
+  $ git push --tags origin
