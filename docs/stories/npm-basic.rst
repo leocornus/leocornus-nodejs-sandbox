@@ -16,9 +16,9 @@ Here are some samples::
 
   $ npm config set sign-git-tag true
   # minor patch
-  $ npm version patch -m "release %s for some bug fixes"
+  $ npm version patch
   # do a major release.
-  $ npm version 2.0.0 major -m "Release %s to support gulp"
+  $ npm version 2.0.0 major
 
 Using the **publish** command to publish a package::
 
