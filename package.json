@@ -12,7 +12,11 @@
     "jasmine": "jasmine JASMINE_CONFIG_PATH=test/jasmine.json",
     "karma-jasmine": "node node_modules/karma/bin/karma start test/karma.conf.jasmine.js",
     "karma-mocha": "node node_modules/karma/bin/karma start test/karma.conf.mocha.js",
-    "gulp": "gulp"
+    "gulp": "gulp",
+    "browserify": "browserify"
+  },
+  "browser": {
+    "tipso": "./node_modules/tipso/src/tipso.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +34,7 @@
   "homepage": "https://github.com/leocornus/leocornus-nodejs-sandbox",
   "devDependencies": {
     "angular-mocks": "^1.3.15",
+    "browserify": "^11.0.0",
     "chai": "^2.3.0",
     "gulp": "^3.9.0",
     "gulp-mocha": "^2.1.1",
@@ -45,5 +50,10 @@
     "mocha": "^2.2.4",
     "vows": "^0.8.1",
     "yahoo-finance-stream": "^0.1.2"
+  },
+  "dependencies": {
+    "jquery": "^2.1.4",
+    "jquery.cookie": "^1.4.1",
+    "tipso": "^1.0.5"
   }
 }
