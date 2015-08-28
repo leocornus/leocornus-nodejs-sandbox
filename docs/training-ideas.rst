@@ -10,3 +10,22 @@ topics / ideas:
 - using bootstrap for wordpress
 - testing basic.
 - automatic wordpress deployment! (a wordpress plugin!)
+
+Questions and Challenges
+------------------------
+
+**how npm can help bootstrap development?**
+
+- is it easy to load?
+- is it easy to inlude?
+- how to get ready a simple and easy testing page?
+
+Starts from local dev environment
+---------------------------------
+
+- local npm installtion
+- JavaScript module development and management
+- unit testing
+- e2e testing
+- deployment process and script
+
