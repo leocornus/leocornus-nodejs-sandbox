@@ -10,6 +10,13 @@ Questions
 Conclusion
 ----------
 
+jQuery Plugin Development
+-------------------------
+
+`jQuery Plugin Development Boilerplate`_ has a good template to 
+get started jQuery plugin development.
+
+
 
 How to test and play around?
 ----------------------------
@@ -43,3 +50,4 @@ Here are the basic commands for browserify::
 .. _localStorage: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 .. _Using jQuery plugins with npm: http://blog.npmjs.org/post/112064849860/using-jquery-plugins-with-npm
 .. _browserify: https://www.npmjs.com/package/browserify
+.. _jQuery Plugin Development Boilerplate: http://www.websanova.com/blog/jquery/jquery-plugin-development-boilerplate.html
