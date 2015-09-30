@@ -7,7 +7,7 @@ require('jquery.cookie');
     "use strict";
 
     // plugin name and default values.
-    var pluginName = "sandbox",
+    var pluginSandbox = "sandbox",
         defaults = {
             id : "1234",
             desc : "sandbox plugin"
@@ -19,7 +19,7 @@ require('jquery.cookie');
         // extend mthod will merge object contents.
         this.settings = $.extend({}, defaults, options);
         this._defatuls = defaults;
-        this._name = pluginName;
+        this._name = pluginSandbox;
         this.init();
     }
 
@@ -27,8 +27,23 @@ require('jquery.cookie');
     $.extend(Plugin.prototype, {
         // the initialize function.
         init: function() {
+            // using self to keep the original this.
+            var self = this,
+                $element = $(this.element);
+
             console.log("desc: " + this.settings.desc);
             console.log("id: " + this.element.id);
+
+            // hook the ready event.
+            $element.on('mouseover', function() {
+                // this will become the specific element been clicked.
+                self.showMsg('mouseover: ' + this.innerHTML);
+            });
+
+            $element.on('click', function() {
+                // this will become the specific element been clicked.
+                self.showMsg(this.innerHTML);
+            });
         },
 
         // show the value of desc property.
@@ -37,7 +52,7 @@ require('jquery.cookie');
         }
     });
 
-    $.fn[pluginName] = function(options) {
+    $.fn[pluginSandbox] = function(options) {
 
         // return to maintain the chain.
         return this.each(function() {
@@ -48,8 +63,8 @@ require('jquery.cookie');
                 alert(this.id);
             });
 
-            if(!$.data(this, "plugin_" + pluginName)) {
-                $.data(this, "plugin_" + pluginName, 
+            if(!$.data(this, "plugin_" + pluginSandbox)) {
+                $.data(this, "plugin_" + pluginSandbox, 
                        new Plugin(this, options));
             }
         });
