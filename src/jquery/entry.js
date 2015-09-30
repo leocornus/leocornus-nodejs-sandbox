@@ -28,17 +28,26 @@ require('jquery.cookie');
         // the initialize function.
         init: function() {
             console.log("desc: " + this.settings.desc);
-            console.log("title: " + this.element.title);
+            console.log("id: " + this.element.id);
         },
 
         // show the value of desc property.
-        showMsg: function() {
-            alert(this.settings.desc);
+        showMsg: function(msg) {
+            alert(msg);
         }
     });
 
     $.fn[pluginName] = function(options) {
+
+        // return to maintain the chain.
         return this.each(function() {
+            // try to hook the click event in the plugin.
+            var $element = $(this);
+            $element.click(function() {
+                var $testClick = $(this);
+                alert(this.id);
+            });
+
             if(!$.data(this, "plugin_" + pluginName)) {
                 $.data(this, "plugin_" + pluginName, 
                        new Plugin(this, options));
