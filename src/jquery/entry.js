@@ -35,12 +35,12 @@ require('jquery.cookie');
             console.log("id: " + this.element.id);
 
             // hook the ready event.
-            $element.on('mouseover', function() {
+            $element.on('mouseover.' + pluginSandbox, function() {
                 // this will become the specific element been clicked.
                 self.showMsg('mouseover: ' + this.innerHTML);
             });
 
-            $element.on('click', function() {
+            $element.on('click.' + pluginSandbox, function() {
                 // this will become the specific element been clicked.
                 self.showMsg(this.innerHTML);
             });
