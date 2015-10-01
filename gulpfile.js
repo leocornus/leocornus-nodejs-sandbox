@@ -38,7 +38,14 @@ var Server = require('karma').server;
 gulp.task('karma', function(done) {
 
     return new Server.start({
-        configFile: __dirname + '/test/karma.conf.jasmine.js'
+        configFile: __dirname + '/test/karma.conf.jasmine.js',
+    }, done);
+});
+
+gulp.task('karma.jquery', function(done) {
+
+    return new Server.start({
+        configFile: __dirname + '/test/karma.conf.jquery.js'
     }, done);
 });
 
