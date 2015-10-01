@@ -3,7 +3,10 @@ var mocha = require('gulp-mocha');
 // jamine runner.
 var jasmine = require('gulp-jasmine');
 
-gulp.task('default', function() {
+// set the default task.
+gulp.task('default', ['karma', 'karma.jquery', 'jasmine']);
+
+gulp.task('hello', function() {
   // place code for your default task here
   console.log('Hello Gulp World!');
 });
