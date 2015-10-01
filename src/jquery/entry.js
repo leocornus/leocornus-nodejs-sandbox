@@ -63,7 +63,10 @@ require('jquery.cookie');
                 alert(this.id);
             });
 
+            // check the local storage index for the current
+            // element.
             if(!$.data(this, "plugin_" + pluginSandbox)) {
+                // no plugin created yet, let create a new one.
                 $.data(this, "plugin_" + pluginSandbox, 
                        new Plugin(this, options));
             }
