@@ -25,6 +25,23 @@ gulp.task('jasmine', function() {
   return gulp.src('test/jasmine/*.js').pipe(jasmine());
 });
 
+// run jasmine jquery test.
+// NOTE: This is not working.
+//gulp.task('jasmine.jquery', function() {
+//
+//  return gulp.src('test/jquery/**/*.js').pipe(jasmine());
+//});
+
+// try load karm for testing.
+var Server = require('karma').server;
+
+gulp.task('karma', function(done) {
+
+    return new Server.start({
+        configFile: __dirname + '/test/karma.conf.jasmine.js'
+    }, done);
+});
+
 // testing yahoo stream.
 gulp.task('yahoo', function() {
 
