@@ -7,6 +7,7 @@ module.exports = function(config) {
 
     files : [
       'node_modules/jquery/dist/jquery.min.js',
+      // HAVE to load the jquery plugin specifically
       'src/jquery/entry.js',
       'test/jquery/**/*.js',
       // load the html fixtures.
