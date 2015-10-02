@@ -8,6 +8,7 @@ Sandbox to learn node.js
 a fun place to learn node.js story by story
 
 - `gulp story <docs/stories/gulp-story.rst>`_
+- `jQuery story <docs/stories/jquery-story.rst>`_
 
 
 .. |travis| image:: https://api.travis-ci.org/leocornus/leocornus-nodejs-sandbox.png

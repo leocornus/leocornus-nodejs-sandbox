@@ -6,17 +6,23 @@ Questions
 
 - how to use npm for jQuery development?
 - What benefit we could get from npm for jQuery development?
+- how to test jQuery and jQeury Plugins
 
 Conclusion
 ----------
+
+Here are the short story:
+
+- npm to manage dependences and development process
+- gulp to simplify the day to day work
+- karma as the test runner
+- jasmine and jasmine-jquery to test jQuery apps
 
 jQuery Plugin Development
 -------------------------
 
 `jQuery Plugin Development Boilerplate`_ has a good template to 
 get started jQuery plugin development.
-
-
 
 How to test and play around?
 ----------------------------
