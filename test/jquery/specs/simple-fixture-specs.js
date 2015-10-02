@@ -14,8 +14,16 @@ describe('Testing jquery from HTML fixture', function() {
 
     it('testing jquery selector', function() {
         // select by id.
-        $element = $("#divid");
+        var $element = $("#divid");
         expect($element.attr('id')).toBe('divid');
         expect($element.hasClass('divclass')).toBe(true);
+    });
+
+    it('testing jquery functions', function() {
+
+        var $element = $('#divid');
+        expect($element.hasClass('newclass')).toBe(false);
+        $element.addClass('newclass');
+        expect($element.hasClass('newclass')).toBe(true);
     });
 });
