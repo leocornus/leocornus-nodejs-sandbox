@@ -1,4 +1,3 @@
-//jQuery = require('jquery');
 //require('tipso');
 //require('jquery.cookie');
 
@@ -43,6 +42,7 @@
             $element.on('click.' + pluginSandbox, function() {
                 // this will become the specific element been clicked.
                 self.showMsg(this.innerHTML);
+                this.innerHTML = 'clicked';
             });
         },
 
@@ -60,7 +60,7 @@
             var $element = $(this);
             $element.click(function() {
                 var $testClick = $(this);
-                alert(this.id);
+                //alert(this.id);
             });
 
             // check the local storage index for the current
@@ -75,7 +75,7 @@
 
 })(jQuery);
 
-jQuery(function(){
-  jQuery('.title-tipso').tipso();
-  jQuery('.sandbox').sandbox();
-});
+//jQuery(function(){
+//  jQuery('.title-tipso').tipso();
+//  jQuery('.sandbox').sandbox();
+//});

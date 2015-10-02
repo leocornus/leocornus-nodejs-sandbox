@@ -2,11 +2,12 @@
 module.exports = function(config) {
   config.set({
 
+    // this folder will become /base on karma server
     basePath : '../',
 
     files : [
       'node_modules/jquery/dist/jquery.min.js',
-      'src/jquery/*.js',
+      'src/jquery/entry.js',
       'test/jquery/**/*.js',
       // load the html fixtures.
       'test/jquery/fixtures/*.html'
@@ -15,7 +16,7 @@ module.exports = function(config) {
     autoWatch : true,
     singleRun : true,
 
-    frameworks: ['jasmine-jquery', 'jasmine'],
+    frameworks: ['jasmine'],
 
     browsers : ['Firefox'],
 
