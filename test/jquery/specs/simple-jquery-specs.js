@@ -1,6 +1,6 @@
-describe('first jquery plugin', function() {
+describe('Testing jQuery Basic', function() {
 
-    var simpleDiv = '<div id="simple">Some thing</div>';
+    var simpleDiv = '<div id="simple" class="sandbox">Some thing</div>';
     var $element, element;
 
     beforeEach(function() {
@@ -14,11 +14,16 @@ describe('first jquery plugin', function() {
         expect($element.html()).toBe("Some thing");
         // attr method to get the elemet attribute.
         expect($element.attr('id')).toBe('simple');
+        expect($element.attr('class')).toBe('sandbox');
     });
 
     it("simple DOM element", function() {
 
         expect(element.innerHTML).toBe("Some thing");
         expect(element.id).toBe('simple');
+    });
+
+    it("some jQuery method", function() {
+        expect($element.hasClass('sandbox')).toBe(true);
     });
 });
