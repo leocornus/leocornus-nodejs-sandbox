@@ -1,6 +1,6 @@
-global.jQuery = require('jquery');
-require('tipso');
-require('jquery.cookie');
+//jQuery = require('jquery');
+//require('tipso');
+//require('jquery.cookie');
 
 ;(function($) {
 

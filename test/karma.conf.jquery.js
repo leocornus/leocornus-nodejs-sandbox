@@ -6,7 +6,10 @@ module.exports = function(config) {
 
     files : [
       'node_modules/jquery/dist/jquery.min.js',
-      'test/jquery/**/*.js'
+      'src/jquery/*.js',
+      'test/jquery/**/*.js',
+      // load the html fixtures.
+      'test/jquery/fixtures/*.html'
     ],
 
     autoWatch : true,
