@@ -6,7 +6,9 @@ module.exports = function(config) {
     basePath : '../',
 
     files : [
-      'node_modules/jquery/dist/jquery.min.js',
+      'bower_components/jquery/dist/jquery.min.js',
+      'bower_components/bootstrap/dist/js/bootstrap.min.js',
+      'bower_components/bootstrap/dist/css/bootstrap.css',
       // HAVE to load the jquery plugin specifically
       'src/jquery/entry.js',
       'test/jquery/**/*.js',
