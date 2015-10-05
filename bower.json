@@ -1,0 +1,32 @@
+{
+  "name": "leocornus-nodejs-sandbox",
+  "main": "index.js",
+  "version": "0.0.6",
+  "homepage": "https://github.com/leocornus/leocornus-nodejs-sandbox",
+  "description": "fun place to learn nodejs",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "jquery",
+    "jquery",
+    "plugin",
+    "bootstrap"
+  ],
+  "authors": [
+    "Sean Chen"
+  ],
+  "license": "GPLv2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4"
+  }
+}
