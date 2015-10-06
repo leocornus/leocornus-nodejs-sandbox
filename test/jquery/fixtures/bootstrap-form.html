@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <title>Simple HTML file for testing bootstrap modal</title>
+  <link href="base/bower_components/bootstrap/dist/css/bootstrap.css"
+        rel="stylesheet"/>
+  <!-- the js library (jquery and bootstrap) will be loaded -->
+  <!-- by karma test runner server -->
+</head>
+
+<body>
+
+<div class="form-horizontal">
+  <fieldset>
+
+    <div class="form-group" id="nameGroup">
+      <label for="inputName" class="col-lg-4 control-label">Project Name</label>
+      <div class="col-lg-8">
+        <input type="text" class="form-control" id="inputName" placeholder="set name for your project">
+        <span class="help-block" id="nameBlock">Using only letter and number for project name. NO whitespaces and special chareters</span>
+        <span class="form-control-feedback" id="nameFeedback"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="projectDescription" class="col-lg-4 control-label">Project Description</label>
+      <div class="col-lg-8">
+        <textarea class="form-control" rows="3" id="projectDescription"></textarea>
+        <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+        <span class="form-control-feedback"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputOwners" class="col-lg-4 control-label">
+        Project Owners
+      </label>
+      <div class="col-lg-8">
+        <input type="text" class="form-control" id="inputOwners" placeholder="set project owners">
+        <span class="help-block">Multiple owners are separated by ','</span>
+      </div>
+    </div>
+  </fieldset>
+</div>
+
+</body>
+</html>
