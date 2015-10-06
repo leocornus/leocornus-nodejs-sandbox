@@ -22,11 +22,11 @@ describe('Testing Bootstrap Basic', function() {
         // find id to click.
         var $about = $container.find('.nav #about');
         var $home = $container.find('.nav #home');
-        var $aboutHerf = $container.find('.nav #about-a');
+        var $aboutHref = $container.find('.nav #about-a');
         expect($home.hasClass('active')).toBe(true);
         expect($about.hasClass('active')).toBe(false);
-        // 
-        $aboutHerf.click();
+        // trigger the click event on href link.
+        $aboutHref.click();
         expect($home.hasClass('active')).toBe(false);
         expect($about.hasClass('active')).toBe(true);
     });
