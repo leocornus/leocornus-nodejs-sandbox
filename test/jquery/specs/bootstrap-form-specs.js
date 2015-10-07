@@ -22,4 +22,15 @@ describe('Testing Bootstrap Form', function() {
         var $feedback = $group.find('.form-control-feedback');
         expect($feedback.attr('id')).toBe('nameFeedback');
     });
+
+    describe('try the sub section of a spec', function() {
+
+        it('testing query and add class', function() {
+
+            var $input = $('input#inputName');
+            var $group = $input.parents('.form-group');
+            var $feedback = $group.find('.form-control-feedback');
+            expect($group.hasClass('has-error')).toBe(false);
+        });
+    });
 });
