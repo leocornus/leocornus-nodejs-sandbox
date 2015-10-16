@@ -11,6 +11,7 @@ module.exports = function(config) {
       'bower_components/bootstrap/dist/css/bootstrap.css',
       // HAVE to load the jquery plugin specifically
       'src/jquery/entry.js',
+      'src/jquery/mw-sdk.js',
       'test/jquery/**/*.js',
       // load the html fixtures.
       'test/jquery/fixtures/*.html'
