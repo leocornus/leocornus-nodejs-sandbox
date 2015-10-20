@@ -76,7 +76,7 @@
         getApiUrl: function() {
 
             var url = "//" +
-                      this.siteOptions.baseUrl + "/" + 
+                      this.siteOptions.baseUrl + 
                       this.siteOptions.apiPath;
             return url;
         },
@@ -99,6 +99,7 @@
             this.apiGet(action, function(err, data) {
 
                 if(err) {
+                    // got error.
                     callback(err);
                     return;
                 }
@@ -106,12 +107,12 @@
                 // TODO the page content.
                 var content = data.parse.text['*'];
                 // process the content and to match bootstrap.
-                content = self.processArticleContent(content);
+                content = self.convert2BootstrapRow(content);
                 callback(null, content);
             });
         },
 
-        // process the arcicle content to toc and content
+        // process the article content to toc and content
         processArticleContent: function(content) {
 
             // parse the content html to a jQuery object.
@@ -141,11 +142,39 @@
             // remove the edit seciton for each heading.
             $content.find('span.mw-editsection').replaceWith('');
             var contentHtml = $content.html();
+            // replace globaly! all occurrence!
             contentHtml = contentHtml.replace(/"\/wiki\//g, 
                '"//' + this.siteOptions.baseUrl + '/wiki/');
+
             var ret = {'toc' : $toc.html(), 
                        'content' : contentHtml};
             return ret; 
+        },
+
+        // process the article content to bootstrap 2-column
+        // (9, 3) row.
+        convert2BootstrapRow: function(content) {
+
+            var $row = jQuery('<div class="row">');
+            // append the contnet and navbar column
+            $row.append('<div class="col-md-9" id="content"></div>');
+            $row.append('<div class="col-md-3" id="navbar"></div>');
+
+            var $content = $row.find('#content');
+            // adding scrollspy
+            // NOTE: This seems not working!
+            //$content.attr('data-spy', 'scroll').
+            //    attr('data-target', '#thenav').
+            //    attr('data-offset', '25');
+
+            var $navbar = $row.find('#navbar');
+
+            var ret = this.processArticleContent(content);
+
+            $content.html(ret['content']);
+            $navbar.html(ret['toc']);
+
+            return $row;
         },
 
         // get the raw data.
