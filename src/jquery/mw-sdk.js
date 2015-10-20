@@ -20,6 +20,7 @@
 
     var defaultSite = {
         'baseUrl' : 'en.wikipedia.org',
+        'origin' : null,
         'apiPath' : 'w/api.php'
     };
 
@@ -30,7 +31,8 @@
      *
      * var siteOptions = {
      *       'baseUrl' : 'en.wikipedia.org',
-     *       'apiPath' : 'w/api.php'
+     *       'apiPath' : 'w/api.php',
+     *       'origin' : 'http://the.current.domain'
      *     };
      */
     function MediaWikiClient(siteOptions) {
@@ -50,6 +52,12 @@
         apiGet: function(action, callback) {
             // tracking the original this.
             var self = this;
+
+            if (self.siteOptions.origin != null) {
+                action = jQuery.extend(
+                    {'origin': self.siteOptions.origin},
+                    action);
+            }
 
             jQuery.get(self.getApiUrl(), action)
               .done(function(data) {
