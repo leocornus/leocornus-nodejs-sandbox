@@ -21,7 +21,10 @@
     var defaultSite = {
         'baseUrl' : 'en.wikipedia.org',
         'origin' : null,
-        'apiPath' : '/w/api.php'
+        'apiPath' : '/w/api.php',
+        // the maximum number of items to return,
+        // default api number is 10, 500 is the max.
+        'limit' : 50
     };
 
     /**
@@ -81,6 +84,12 @@
             return url;
         },
 
+        // return the max return limit.
+        getLimit: function() {
+
+            return this.siteOptions.limit;
+        },
+
         // get an article
         getArticle: function(title, callback) {
 
@@ -114,6 +123,35 @@
 
         // return a list of page ids. or titles.
         getPagesInCategory: function(category, callback) {
+
+            var self = this;
+            if(!category.match("^Category")) {
+                // not start from Category
+                category = 'Category: ' + category;
+            }
+            var action = {
+                'format' : 'json',
+                'action' : 'query',
+                'list' : 'categorymembers',
+                //'generator' : 'categorymembers',
+                // return all types of member.
+                'cmprop' : 'ids|title|type',
+                'cmtitle' : category,
+                'cmlimit' : this.getLimit()
+            };
+
+            this.apiGet(action, function(err, data) {
+                // need get a list of page ids.
+                if(err) {
+                    callback(err);
+                    return;
+                }
+
+                // pages array
+                var pages = data.query.categorymembers;
+                var pageNav = self.createNavPills(pages);
+                callback(null, pageNav);
+            });
         },
 
         // process the article content to toc and content
@@ -179,6 +217,31 @@
             $navbar.html(ret['toc']);
 
             return $row;
+        },
+
+        /**
+         * get ready a nav nav-pills for the given pages array.
+         * each page is an object with the following data structure:
+         *
+         * {
+         *    'ns' : 0,
+         *    'pageid' : 23458,
+         *    'title' : 'Backups Sys Admin',
+         *    'type' : 'page',
+         * }
+         */
+        createNavPills: function(pages) {
+
+            var self = this;
+            var $navPills = jQuery('<ul class="nav nav-pills"></ul>');
+            jQuery.each(pages, function(index, page) {
+
+                var li = '<li><a data-toggle="pill" href="#">' +
+                         page['title'] + '</a></li>';
+                $navPills.append(li);
+            });
+
+            return $navPills;
         },
 
         // get the raw data.
