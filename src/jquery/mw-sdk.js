@@ -53,7 +53,7 @@
 
             jQuery.get(self.getApiUrl(), action)
               .done(function(data) {
-                  //self.log(data);
+                  self.log(data);
                   //self.setRawData(data);
                   //self.rawData = data;
                   callback(null, data);
@@ -110,19 +110,33 @@
             var $content = jQuery('<div>').html(content);
             // find the TOC div.
             var $toc = $content.find('div#toc');
+            //$toc.find('div#toctitle').replaceWith('');
             //alert(tocHtml);
             // convert the toc to bootstrap scroll spy.
-            var $nav = jQuery('<nav class="bs-docs-sidebar affix">').
+            var $nav = jQuery('<nav class="affix" id="sidenav">').
                        html($toc.html());
             $nav.find('ul').addClass('nav');
+            // add class for the first ul.
+            $nav.children('ul').addClass('nav-pills nav-stacked')
+                .attr('data-spy', 'affix').attr('id', 'thenav');
+            //$nav.find('a').attr('data-toggle', 'pill');
+            // remove all class for li
+            $nav.find('li').attr('class', '');
             var $toc = jQuery('<div>').html($nav);
+
+            // adding the scroll styp for body:
+            //var $body = jQuery('body');
+            //$body.attr('data-spy', 'scroll').attr('data-target', '#sidenav');
 
             // remove TOC from content.
             $content.find('div#toc').replaceWith('');
             // remove the edit seciton for each heading.
             $content.find('span.mw-editsection').replaceWith('');
+            var contentHtml = $content.html();
+            contentHtml = contentHtml.replace(/"\/wiki\//g, 
+               '"//' + this.siteOptions.baseUrl + '/wiki/');
             var ret = {'toc' : $toc.html(), 
-                       'content' : $content.html()};
+                       'content' : contentHtml};
             return ret; 
         },
 
