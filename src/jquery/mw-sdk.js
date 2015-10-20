@@ -21,7 +21,7 @@
     var defaultSite = {
         'baseUrl' : 'en.wikipedia.org',
         'origin' : null,
-        'apiPath' : 'w/api.php'
+        'apiPath' : '/w/api.php'
     };
 
     /**
@@ -110,6 +110,10 @@
                 content = self.convert2BootstrapRow(content);
                 callback(null, content);
             });
+        },
+
+        // return a list of page ids. or titles.
+        getPagesInCategory: function(category, callback) {
         },
 
         // process the article content to toc and content
