@@ -80,4 +80,22 @@ describe('Testing jQuery Basic', function() {
         // but we can find the div-1 class.
         expect($p.find('.div-1').length).toBe(1);
     });
+
+    it('jQuery has 2 each function', function() {
+
+        // each array function.
+        // get ready an array.
+        var data = ['some', 23, 'again'];
+        jQuery.each(data, function(index, value) {
+            if(index == 0) {
+                expect(value).toBe('some');
+            } 
+            if(index == 1) {
+                expect(value).toBe(23);
+            }
+            if(index == 2) {
+                expect(value).toBe('again');
+            }
+        });
+    });
 });
