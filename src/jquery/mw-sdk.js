@@ -149,8 +149,8 @@
 
                 // pages array
                 var pages = data.query.categorymembers;
-                var pageNav = self.createNavPills(pages);
-                callback(null, pageNav);
+                var $row = self.createCategoryRow(category, pages);
+                callback(null, $row);
             });
         },
 
@@ -234,14 +234,52 @@
 
             var self = this;
             var $navPills = jQuery('<ul class="nav nav-pills"></ul>');
+            //$navPills.attr('data-spy', 'affix');
             jQuery.each(pages, function(index, page) {
 
-                var li = '<li><a data-toggle="pill" href="#">' +
+                var activeClass = 'class=""';
+                if (index == 0) {
+                    activeClass = 'class="active"';
+                }
+
+                var li = '<li ' + activeClass + '><a data-toggle="pill" href="#">' +
                          page['title'] + '</a></li>';
                 $navPills.append(li);
             });
 
             return $navPills;
+        },
+
+        /**
+         */
+        createCategoryRow: function(category, pages) {
+
+            var self = this;
+            // build the row html
+            var rowHtml = '<div class="row">' +
+                   '  <div class="col-md-3" id="nav"></div>' + 
+            //       '  <div class="col-md-9" id="content"></div>' + 
+                   '</div>';
+            var $row = jQuery(rowHtml);
+
+            // build the nav pills
+            // adding the category content page to pages list
+            pages.unshift({
+                'ns' : 0,
+                'pageid' : 0,
+                'title' : category,
+                'type' : 'category'
+            });
+            var $navPills = this.createNavPills(pages);
+            $row.find('#nav').html($navPills);
+
+            // load the category page as the default content.
+            this.getArticle(category, function(err, $content) {
+                // append to row.
+                $row.append($content.find('#content'));
+            });
+
+            return $row;
         },
 
         // get the raw data.
