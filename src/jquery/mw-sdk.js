@@ -233,7 +233,7 @@
         createNavPills: function(pages) {
 
             var self = this;
-            var $navPills = jQuery('<ul class="nav nav-pills"></ul>');
+            var $navPills = jQuery('<ul class="nav nav-pills nav-stacked"></ul>');
             //$navPills.attr('data-spy', 'affix');
             jQuery.each(pages, function(index, page) {
 
@@ -257,7 +257,10 @@
             var self = this;
             // build the row html
             var rowHtml = '<div class="row">' +
-                   '  <div class="col-md-3" id="nav"></div>' + 
+                   '  <div class="col-md-9" id="content"></div>' +
+                   '  <div class="col-md-3" id="nav">' +
+                   '    <nav class="affix" id="sidenav"><div></div></nav>' + 
+                   '  </div>' + 
             //       '  <div class="col-md-9" id="content"></div>' + 
                    '</div>';
             var $row = jQuery(rowHtml);
@@ -271,12 +274,12 @@
                 'type' : 'category'
             });
             var $navPills = this.createNavPills(pages);
-            $row.find('#nav').html($navPills);
+            $row.find('#sidenav').append($navPills);
 
             // load the category page as the default content.
             this.getArticle(category, function(err, $content) {
                 // append to row.
-                $row.append($content.find('#content'));
+                $row.find('#content').append($content.find('#content').html());
             });
 
             return $row;
