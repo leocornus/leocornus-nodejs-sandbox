@@ -247,6 +247,15 @@
                 $navPills.append(li);
             });
 
+            // add the click event.
+            $navPills.find('li a').on('click', function() {
+
+                var pageTitle = jQuery(this).html();
+                self.getArticle(pageTitle, function(err, $content) {
+                    jQuery('#content').html($content.find('#content').html());
+                });
+            });
+
             return $navPills;
         },
 
