@@ -266,10 +266,13 @@
             var self = this;
             // build the row html
             var rowHtml = '<div class="row">' +
-                   '  <div class="col-md-9" id="content"></div>' +
-                   '  <div class="col-md-3" id="nav">' +
-                   '    <nav class="affix" id="sidenav"><div></div></nav>' + 
+                   '  <div class="col-md-3" id="navcol">' +
+                   '    <div class="sidebar-nav-fixed affix" ' +
+                   '         style="margin-left: -16px">' + 
+                   '      <div class="well" id="sidenav"></div>' + 
+                   '    </div>' + 
                    '  </div>' + 
+                   '  <div class="col-md-9" id="content"></div>' +
             //       '  <div class="col-md-9" id="content"></div>' + 
                    '</div>';
             var $row = jQuery(rowHtml);
@@ -284,6 +287,12 @@
             });
             var $navPills = this.createNavPills(pages);
             $row.find('#sidenav').append($navPills);
+
+            // hook the resize event.
+            jQuery(window).on('resize', function() {
+                jQuery('.sidebar-nav-fixed').
+                    outerWidth(jQuery('#navcol').outerWidth());
+            });
 
             // load the category page as the default content.
             this.getArticle(category, function(err, $content) {
