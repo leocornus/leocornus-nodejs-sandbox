@@ -28,4 +28,20 @@ describe('Basic JavaScript Testing Spec', function() {
         // we should find 2 match.
         expect(result.length).toBe(2);
     });
+
+    it('Testing the functions shift and unshift', function() {
+
+        /**
+         * the shift and unshift are prototype functions for
+         * array.
+         * undefined will be return for an empty array.
+         */
+        var testArray = ['a', 'b', 'c', 'd']
+        expect(testArray.length).toBe(4);
+        // shift will remove the first value of an array
+        // remove the value from array consecutively.
+        var shifted = testArray.shift();
+        expect(shifted).toBe('a')
+        expect(testArray.length).toBe(3);
+    });
 });
