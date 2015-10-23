@@ -40,7 +40,7 @@ describe('Basic JavaScript Testing Spec', function() {
          */
 
         // define the testing array here, so it will be available
-        // for all functions.
+        // for all functions specs.
         var testArray;
 
         // get ready some array for testing.

@@ -266,14 +266,13 @@
             var self = this;
             // build the row html
             var rowHtml = '<div class="row">' +
-                   '  <div class="col-md-3" id="navcol">' +
+                   '  <div class="col-md-4" id="navcol">' +
                    '    <div class="sidebar-nav-fixed affix" ' +
                    '         style="margin-left: -16px">' + 
                    '      <div class="well" id="sidenav"></div>' + 
                    '    </div>' + 
                    '  </div>' + 
-                   '  <div class="col-md-9" id="content"></div>' +
-            //       '  <div class="col-md-9" id="content"></div>' + 
+                   '  <div class="col-md-8" id="content"></div>' +
                    '</div>';
             var $row = jQuery(rowHtml);
 
