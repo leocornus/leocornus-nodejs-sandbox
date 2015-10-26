@@ -6,27 +6,49 @@ describe('Basic JavaScript Testing Spec', function() {
         // empty for now...
     });
 
-    it('Testing the replace function', function() {
+    describe('testing the string prototype functions', function() {
 
-        var colors = 'Colors list, red, Blue, organge, red';
-        var result = colors.replace('red', 'purple');
-        // verify things...
-        expect(colors).toMatch('red');
-        expect(colors).not.toMatch('purple');
-        // only one red is replaced.
-        expect(result).toMatch('red');
-        expect(result).toMatch('purple');
-    });
+        /**
+         * we will test functions for string object in java script,
+         * including:
+         *
+         * - match
+         * - replace
+         * - split
+         */
 
-    it('Testing the match function', function() {
+        it('Testing the replace function', function() {
 
-        // match is prototype function for string.
-        // get ready some testing string
-        var source = 'some testing string for test purpose' +
-            ' something again';
-        var result = source.match(/om/g);
-        // we should find 2 match.
-        expect(result.length).toBe(2);
+            var colors = 'Colors list, red, Blue, organge, red';
+            var result = colors.replace('red', 'purple');
+            // verify things...
+            expect(colors).toMatch('red');
+            expect(colors).not.toMatch('purple');
+            // only one red is replaced.
+            expect(result).toMatch('red');
+            expect(result).toMatch('purple');
+        });
+
+        it('Testing the match function', function() {
+
+            // match is prototype function for string.
+            // get ready some testing string
+            var source = 'some testing string for test purpose' +
+                ' something again';
+            var result = source.match(/om/g);
+            // we should find 2 match.
+            expect(result.length).toBe(2);
+        });
+
+        it('Testing the split function', function() {
+
+            // split works for both string and regex separator
+            var source = 'tesing, again, split';
+            var result = source.split(/,\s*/);
+            // result is a type of array, array is a type of object.
+            expect(typeof result).toBe('object');
+            expect(result.length).toBe(3);
+        });
     });
 
     describe('Testing array prototype functions', function() {
