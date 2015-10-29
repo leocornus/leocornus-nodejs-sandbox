@@ -233,7 +233,11 @@
         createNavPills: function(pages) {
 
             var self = this;
-            var $navPills = jQuery('<ul class="nav nav-pills nav-stacked"></ul>');
+            var navPills = '<ul class="nav nav-pills nav-stacked"' +
+                           '    style="max-height: 560px; ' + 
+                           '           overflow-y: auto"' +
+                           '></ul>';
+            var $navPills = jQuery(navPills);
             //$navPills.attr('data-spy', 'affix');
             jQuery.each(pages, function(index, page) {
 
