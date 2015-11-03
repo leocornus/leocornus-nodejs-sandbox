@@ -235,6 +235,7 @@
             var self = this;
             var navPills = '<ul class="nav nav-pills nav-stacked"' +
                            '    style="max-height: 560px; ' + 
+                           '           border: 1px blue solid;' +
                            '           overflow-y: auto"' +
                            '></ul>';
             var $navPills = jQuery(navPills);
@@ -246,15 +247,18 @@
                     activeClass = 'class="active"';
                 }
 
-                var li = '<li ' + activeClass + '><a data-toggle="pill" href="#">' +
-                         page['title'] + '</a></li>';
+                var li = '<li ' + activeClass + '>' + 
+                         '<a data-toggle="pill" href="#">' +
+                         '<i class="fa fa-file-text-o"></i>' + ' ' +
+                         '<span>' + page['title'] + 
+                         '</span></a></li>';
                 $navPills.append(li);
             });
 
             // add the click event.
             $navPills.find('li a').on('click', function() {
 
-                var pageTitle = jQuery(this).html();
+                var pageTitle = jQuery(this).find('span').html();
                 self.getArticle(pageTitle, function(err, $content) {
                     jQuery('#content').html($content.find('#content').html());
                 });
@@ -272,8 +276,8 @@
             var rowHtml = '<div class="row">' +
                    '  <div class="col-md-4" id="navcol">' +
                    '    <div class="sidebar-nav-fixed affix" ' +
-                   '         style="margin-left: -16px">' + 
-                   '      <div class="well" id="sidenav"></div>' + 
+                   '         style="margin-left: -16px" id="sidenav">' + 
+                   //'      <div class="well" id="sidenav"></div>' + 
                    '    </div>' + 
                    '  </div>' + 
                    '  <div class="col-md-8" id="content"></div>' +
