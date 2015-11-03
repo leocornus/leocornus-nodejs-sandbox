@@ -234,8 +234,7 @@
 
             var self = this;
             var navPills = '<ul class="nav nav-pills nav-stacked"' +
-                           '    style="max-height: 560px; ' + 
-                           '           border: 1px blue solid;' +
+                           '    style="max-height: 360px; ' + 
                            '           overflow-y: auto"' +
                            '></ul>';
             var $navPills = jQuery(navPills);
@@ -275,9 +274,13 @@
             // build the row html
             var rowHtml = '<div class="row">' +
                    '  <div class="col-md-4" id="navcol">' +
-                   '    <div class="sidebar-nav-fixed affix" ' +
-                   '         style="margin-left: -16px" id="sidenav">' + 
-                   //'      <div class="well" id="sidenav"></div>' + 
+                   '    <div class="panel panel-info ' + 
+                   '                sidebar-nav-fixed affix" ' +
+                   '         style="margin-left: -16px">' + 
+                   '      <div class="panel-heading">' +
+                   category + '</div>' +
+                   '      <div id="sidenav"></div>' + 
+                   '      <div class="panel-footer">Footer Info</div>' +
                    '    </div>' + 
                    '  </div>' + 
                    '  <div class="col-md-8" id="content"></div>' +
