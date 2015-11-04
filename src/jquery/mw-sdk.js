@@ -301,8 +301,7 @@
             // hook the resize event.
             jQuery(window).on('resize', function() {
 
-                self.syncOuterWidth(jQuery('#navcol'), 
-                                    jQuery('.sidebar-nav-fixed'));
+                self.syncSidenavWidth();
             });
 
             // load the category page as the default content.
@@ -316,8 +315,10 @@
 
         // utility method to set the outer width of target object to 
         // be the same with the source object.
-        syncOuterWidth: function($source, $target) {
+        syncSidenavWidth: function() {
 
+            var $source = jQuery('#navcol');
+            var $target = jQuery('.sidebar-nav-fixed');
             $target.outerWidth($source.outerWidth());
         },
 
