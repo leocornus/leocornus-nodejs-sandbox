@@ -262,7 +262,11 @@
 
                 var pageTitle = jQuery(this).find('span').html();
                 self.getArticle(pageTitle, function(err, $content) {
-                    jQuery('#content').html($content.find('#content').html());
+                    jQuery('html, body').animate({
+                       scrollTop: 0 
+                    }, 300, function() {
+                        jQuery('#content').html($content.find('#content').html());
+                    });
                 });
             });
 
