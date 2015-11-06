@@ -24,7 +24,10 @@
         'apiPath' : '/w/api.php',
         // the maximum number of items to return,
         // default api number is 10, 500 is the max.
-        'limit' : 50
+        'limit' : 50,
+        // default data-offset-top for the left nav panel.
+        // in pixel
+        'affixOffsetTop' : 300
     };
 
     /**
@@ -330,7 +333,7 @@
             $panel.affix({
                 offset: {
                     // in pixel.
-                    top: 300
+                    top: this.siteOptions.affixOffsetTop
                 }
             });
         },
