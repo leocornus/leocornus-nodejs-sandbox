@@ -275,7 +275,8 @@
             var rowHtml = '<div class="row">' +
                    '  <div class="col-md-4" id="navcol">' +
                    '    <div class="panel panel-info ' + 
-                   '                sidebar-nav-fixed affix" ' +
+                   '                sidebar-nav-fixed affix-top"' +
+                   '         id="navpanel"' + 
                    '         style="margin-left: -15px">' + 
                    '      <div class="panel-heading">' +
                    category + '</div>' +
@@ -318,7 +319,7 @@
         syncSidenavWidth: function() {
 
             var $source = jQuery('#navcol');
-            var $target = jQuery('.sidebar-nav-fixed');
+            var $target = jQuery('#navpanel');
             $target.outerWidth($source.outerWidth());
         },
 
