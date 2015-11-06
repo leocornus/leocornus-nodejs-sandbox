@@ -276,7 +276,7 @@
                    '  <div class="col-md-4" id="navcol">' +
                    '    <div class="panel panel-info ' + 
                    '                sidebar-nav-fixed affix" ' +
-                   '         style="margin-left: -16px">' + 
+                   '         style="margin-left: -15px">' + 
                    '      <div class="panel-heading">' +
                    category + '</div>' +
                    '      <div id="sidenav"></div>' + 
