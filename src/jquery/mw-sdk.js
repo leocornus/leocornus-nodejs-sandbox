@@ -321,6 +321,18 @@
             var $source = jQuery('#navcol');
             var $target = jQuery('#navpanel');
             $target.outerWidth($source.outerWidth());
+            this.setAffixSpy();
+        },
+
+        // set the affix spy.
+        setAffixSpy: function() {
+            var $panel = jQuery('#navpanel');
+            $panel.affix({
+                offset: {
+                    // in pixel.
+                    top: 300
+                }
+            });
         },
 
         // get the raw data.
