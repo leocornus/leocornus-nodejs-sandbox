@@ -22,6 +22,17 @@ gulp.task('mocha', function() {
 
 });
 
+gulp.task('mocha.nodemw', function() {
+
+  // the src method will locate the source file.
+  return gulp.src(['test/nodemw/*.js'], {read: false})
+    .pipe(mocha({
+      reporter: 'spec',
+      timeout: 5000
+    }));
+
+});
+
 // run jasmine test cases.
 gulp.task('jasmine', function() {
 
