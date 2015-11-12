@@ -260,12 +260,15 @@
             // add the click event.
             $navPills.find('li a').on('click', function() {
 
+                // set the cursor to wait.
+                self.toggleCursor('wait');
                 var pageTitle = jQuery(this).find('span').html();
                 self.getArticle(pageTitle, function(err, $content) {
                     jQuery('html, body').animate({
                        scrollTop: 0 
                     }, 300, function() {
                         jQuery('#content').html($content.find('#content').html());
+                        self.toggleCursor('default');
                     });
                 });
             });
@@ -340,6 +343,12 @@
                     top: this.siteOptions.affixOffsetTop
                 }
             });
+        },
+
+        // toggle cursor
+        toggleCursor: function(cursorStyle)  {
+            jQuery('a').css('cursor', cursorStyle);
+            jQuery('html,body').css('cursor', cursorStyle);
         },
 
         // get the raw data.
