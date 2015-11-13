@@ -281,6 +281,8 @@
         createCategoryRow: function(category, pages) {
 
             var self = this;
+            var searchBarHtml = self.buildSearchBar();
+            var infoBarHtml = self.buildInfoBar();
             // build the row html
             var rowHtml = '<div class="row">' +
                    '  <div class="col-md-4" id="navcol">' +
@@ -289,9 +291,11 @@
                    '         id="navpanel"' + 
                    '         style="margin-left: -15px">' + 
                    '      <div class="panel-heading">' +
-                   category + '</div>' +
+                   category + 
+                   '      </div>' +
+                   searchBarHtml + 
                    '      <div id="sidenav"></div>' + 
-                   '      <div class="panel-footer">Footer Info</div>' +
+                   infoBarHtml + 
                    '    </div>' + 
                    '  </div>' + 
                    '  <div class="col-md-8" id="content"></div>' +
@@ -349,6 +353,55 @@
         toggleCursor: function(cursorStyle)  {
             jQuery('a').css('cursor', cursorStyle);
             jQuery('html,body').css('cursor', cursorStyle);
+        },
+        
+        /**
+         * utility function to build search bar for category panel.
+         * the search bar will be hold in a panel-footer div.
+         */
+        buildSearchBar: function() {
+
+            var divHtml = 
+              '<div class="panel-footer">' + 
+              '  <div class="input-group input-group-sm"' +
+              '       role="group" aria-label="...">' + 
+              '    <span class="input-group-addon bg-info"' +
+              '          id="sizing-addon">' + 
+              '      <i class="fa fa-search text-primary"></i>' +
+              '    </span>' + 
+              '    <input type="text" class="form-control"' + 
+              '           placeholder="Search in category"' + 
+              '           aria-describedby="sizing-addon"/>' +
+              '  </div>' + 
+              '</div>';
+
+            // TODO: Add the search function here.
+            return divHtml;
+        },
+
+        /**
+         * utility function to build info bar for category panel.
+         * the info bar will be hold in a panel-footer div.
+         */
+        buildInfoBar: function() {
+
+            var divHtml = 
+              '<div class="panel-footer">' + 
+              '  <div class="text-right">' +
+              '    <span class="label label-success">' +
+              '      <span id="info">1-8 of 36 Articles</span>' +
+              '    </span>' + 
+              '    <a href="#"><span class="label label-warning">' +
+              '      <i class="fa fa-chevron-left"></i>' +
+              '    </span></a>' + 
+              '    <a href="#"><span class="label label-warning">' +
+              '      <i class="fa fa-chevron-right"></i>' +
+              '    </span></a>' + 
+              '  </div>' + 
+              '</div>';
+
+            // TODO: Add the search function here.
+            return divHtml;
         },
 
         // get the raw data.
