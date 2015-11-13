@@ -49,8 +49,12 @@ to execute the e2e testing, add the following scripts in file
       "update-webdriver": "webdriver-manager update",
 
       "preprotractor": "npm run update-webdriver",
-      "protractor": "protractor test/protractor.conf.js",
+      "protractor": "protractor test/protractor.conf.js --browser=firefox',
   }
+
+run protractor::
+
+  $ npm run protractor
 
 TODO: gulp task
 ---------------

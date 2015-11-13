@@ -7,9 +7,14 @@
     "doc": "docs"
   },
   "scripts": {
-    
-    "prestart" : "npm install",
-    "start" : "http-server -a 0.0.0.0 -p 8900",
+    "prestart": "npm install",
+    "start": "http-server -a 0.0.0.0 -p 8900",
+
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor test/protractor.conf.js --browser=firefox",
 
     "test": "vows test/vows/* --spec",
     "mocha": "mocha test/mocha/*.js",
@@ -59,6 +64,7 @@
     "karma-mocha": "^0.1.10",
     "karma-mocha-reporter": "^1.0.2",
     "mocha": "^2.2.4",
+    "protractor": "^2.5.1",
     "vows": "^0.8.1",
     "yahoo-finance-stream": "^0.1.2"
   },
