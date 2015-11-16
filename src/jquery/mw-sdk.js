@@ -283,7 +283,7 @@
             var self = this;
             var headingHtml = self.buildHeading(category);
             var searchBarHtml = self.buildSearchBar();
-            var infoBarHtml = self.buildInfoBar();
+            var infoBarHtml = self.buildInfoBar(pages.length);
             // build the row html
             var rowHtml = '<div class="row">' +
                    '  <div class="col-md-4" id="navcol">' +
@@ -398,13 +398,14 @@
          * utility function to build info bar for category panel.
          * the info bar will be hold in a panel-footer div.
          */
-        buildInfoBar: function() {
+        buildInfoBar: function(total) {
 
             var divHtml = 
               '<div class="panel-footer">' + 
               '  <div class="text-right">' +
               '    <span class="label label-success">' +
-              '      <span id="info">1-8 of 36 Articles</span>' +
+              '      <span id="infoSummary">Found ' + total + 
+              '      Articles</span>' +
               '    </span>' + 
               '    <a href="#"><span class="label label-warning">' +
               '      <i class="fa fa-chevron-left"></i>' +

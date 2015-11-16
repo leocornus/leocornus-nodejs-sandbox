@@ -24,4 +24,5 @@ describe('Testing jQuery Selectors', function() {
         // Yes, it is case sensitive!
         expect(johns.length).toBe(0);
     });
+
 });
