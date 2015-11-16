@@ -6,9 +6,14 @@ exports.config = {
     'protractor/*.js'
   ],
 
-  capabilities: {
-    'browserName': 'firefox'
-  },
+  //capabilities: {
+  //  'browserName': 'firefox'
+  //},
+
+  multiCapabilities: [
+    {'browserName': 'firefox'},
+    {'browserName': 'chrome'}
+  ],
 
   chromeOnly: false,
 

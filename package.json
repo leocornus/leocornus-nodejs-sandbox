@@ -14,7 +14,7 @@
     "update-webdriver": "webdriver-manager update",
 
     "preprotractor": "npm run update-webdriver",
-    "protractor": "protractor test/protractor.conf.js --browser=firefox",
+    "protractor": "protractor test/protractor.conf.js",
 
     "test": "vows test/vows/* --spec",
     "mocha": "mocha test/mocha/*.js",
