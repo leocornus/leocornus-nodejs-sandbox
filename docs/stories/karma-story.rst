@@ -15,6 +15,8 @@ Using and load karma test runner is very straitforward:
   So those node modules / libs will not be loaded
   unless you explicitly set up.
 
+There is a little trick for `using chrome on travis`_.
+
 Karma with Jasmine
 ------------------
 
@@ -93,3 +95,4 @@ Here are the example for minium config::
 
 .. _writing your own karma adapter: https://developers.soundcloud.com/blog/writing-your-own-karma-adapter
 .. _chaijs: http://chaijs.com/
+.. _using chrome on travis: http://swizec.com/blog/how-to-run-javascript-tests-in-chrome-on-travis/swizec/6647

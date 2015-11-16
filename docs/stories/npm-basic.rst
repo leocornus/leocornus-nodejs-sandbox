@@ -31,3 +31,10 @@ steps::
 
   $ git tag -a v0.0.1 -m "release 0.0.1 basic npm module"
   $ git push --tags origin
+
+Get more log from npm
+---------------------
+
+set log level to get more logging message::
+
+  $ npm config set loglevel verbose
