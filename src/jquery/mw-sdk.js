@@ -281,6 +281,7 @@
         createCategoryRow: function(category, pages) {
 
             var self = this;
+            var headingHtml = self.buildHeading(category);
             var searchBarHtml = self.buildSearchBar();
             var infoBarHtml = self.buildInfoBar();
             // build the row html
@@ -290,9 +291,7 @@
                    '                sidebar-nav-fixed affix-top"' +
                    '         id="navpanel"' + 
                    '         style="margin-left: -15px">' + 
-                   '      <div class="panel-heading">' +
-                   category + 
-                   '      </div>' +
+                   headingHtml +
                    searchBarHtml + 
                    '      <div id="sidenav"></div>' + 
                    infoBarHtml + 
@@ -322,7 +321,8 @@
             // load the category page as the default content.
             this.getArticle(category, function(err, $content) {
                 // append to row.
-                $row.find('#content').append($content.find('#content').html());
+                $row.find('#content').
+                    append($content.find('#content').html());
             });
 
             return $row;
@@ -354,6 +354,21 @@
             jQuery('a').css('cursor', cursorStyle);
             jQuery('html,body').css('cursor', cursorStyle);
         },
+
+        /**
+         * utility function to build the panel heading div.
+         */
+        buildHeading: function(category) {
+
+            var divHtml = 
+              '      <div class="panel-heading">' +
+              '        <strong><a href="#">' + category + 
+              //'          <i class="fa fa-refresh pull-right"></i>' + 
+              '        </a></strong>' +
+              '      </div>';
+
+            return divHtml;
+        },
         
         /**
          * utility function to build search bar for category panel.
@@ -370,7 +385,7 @@
               '      <i class="fa fa-search text-primary"></i>' +
               '    </span>' + 
               '    <input type="text" class="form-control"' + 
-              '           placeholder="Search in category"' + 
+              '           placeholder="Find an article in category"' + 
               '           aria-describedby="sizing-addon"/>' +
               '  </div>' + 
               '</div>';
@@ -400,7 +415,7 @@
               '  </div>' + 
               '</div>';
 
-            // TODO: Add the search function here.
+            // TODO: Add the pagination function here.
             return divHtml;
         },
 
