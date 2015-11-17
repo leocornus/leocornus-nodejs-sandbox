@@ -17,8 +17,6 @@ script:
   - bower install
   - npm test
   - npm run mocha
-  - npm run jasmine
   - npm run karma-jasmine
   - npm run karma-mocha
-  - npm run gulp karma.jquery
-  - npm run protractor
+  - npm run gulp
