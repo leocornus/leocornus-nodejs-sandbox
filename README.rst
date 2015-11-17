@@ -10,7 +10,7 @@ a fun place to learn node.js story by story
 - `Gulp Story <docs/stories/gulp-story.rst>`_
 - `Karma Story <docs/stories/karma-story.rst>`_
 - `jQuery Story <docs/stories/jquery-story.rst>`_
-- `Selenium WebDriver Story <docs/stories/selenium-webdriver-story.rst>`_
+- `Selenium WebDrivers Story <docs/stories/selenium-webdrivers-story.rst>`_
 - `Web Server Story <docs/stories/web-server-story.rst>`_
 - `Protractor Story <docs/stories/protractor-story.rst>`_
 
