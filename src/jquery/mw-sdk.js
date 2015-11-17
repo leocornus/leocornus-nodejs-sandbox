@@ -262,7 +262,7 @@
 
                 // set the cursor to wait.
                 self.toggleCursor('wait');
-                var pageTitle = jQuery(this).find('span').html();
+                var pageTitle = jQuery(this).find('span').text();
                 self.getArticle(pageTitle, function(err, $content) {
                     jQuery('html, body').animate({
                        scrollTop: 0 
@@ -405,11 +405,18 @@
 
         /**
          * filter the items on nav pills for the given search term.
+         * this will highlight the matched term
          */
         filterNavPills: function(searchTerm) {
 
+            var $navPills = jQuery('#sidenav');
+
+            // clear all marks.
+            $navPills.find('mark').replaceWith(function() {
+                return jQuery(this).text();
+            });
+
             if(searchTerm.length > 0) {
-                var $navPills = jQuery('#sidenav');
                 // hide all items.
                 jQuery.each($navPills.find('li'), 
                             function(index, item) {
@@ -423,15 +430,22 @@
                 // search the term.
                 var selector = 'li:contains("' + searchTerm + 
                                '")';
+                // display all matched items.
                 jQuery.each($navPills.find(selector),
                             function(index, item) {
                     // the item will be a DOM element.
-                    jQuery(item).attr('style', '');
+                    var $item = jQuery(item);
+                    $item.attr('style', '');
+                    // highlight mached terms.
+                    var $title = $item.find('a span');
+                    var newTitle = $title.text().
+                        replace(searchTerm, 
+                                '<mark>' + searchTerm + '</mark>');
+                    $title.html(newTitle);
                 });
             } else {
                 // search term less than 1, 
                 // we will show all articles.
-                var $navPills = jQuery('#sidenav');
                 jQuery.each($navPills.find('li'), 
                             function(index, item) {
                     // remove styles by set to empty.
