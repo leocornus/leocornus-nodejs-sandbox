@@ -66,12 +66,14 @@ gulp.task('karma.jquery', function(done) {
 
 // load the protractor.
 var protractor = require('gulp-protractor').protractor;
+var webdriver_update = require('gulp-protractor').webdriver_update;
 var webdriver = require('gulp-protractor').webdriver;
 
 // launch the webdriver.
+gulp.task('webdriver_update', webdriver_update);
 gulp.task('webdriver', webdriver);
 
-gulp.task('protractor', ['webdriver'], function() {
+gulp.task('protractor', ['webdriver_update', 'webdriver'], function() {
 
     gulp.src(['test/protractor/**/*.js']).pipe(protractor({
         configFile: 'test/protractor.conf.js'
