@@ -306,36 +306,7 @@
 
                 // get the search term.
                 var searchTerm = this.value;
-                if(searchTerm.length > 0) {
-                    // call toggle items.
-                    var $navPills = jQuery('#sidenav');
-                    // hide all items.
-                    jQuery.each($navPills.find('li'), 
-                                function(index, item) {
-                        var $item = jQuery(item);
-                        if(! $item.hasClass('active')) {
-                            // we will leave the active one as it is.
-                            $item.attr('style', 'display: none');
-                        }
-                    });
-                    // search the term.
-                    var selector = 'li:contains("' + searchTerm + 
-                                   '")';
-                    jQuery.each($navPills.find(selector),
-                                function(index, item) {
-                        // the item will be a DOM element.
-                        jQuery(item).attr('style', '');
-                    });
-                } else {
-                    // search term less than 1, 
-                    // we will show all articles.
-                    var $navPills = jQuery('#sidenav');
-                    jQuery.each($navPills.find('li'), 
-                                function(index, item) {
-                        // remove styles by set to empty.
-                        jQuery(item).attr('style', '');
-                    });
-                }
+                self.filterNavPills(searchTerm);
             });
 
             // build the nav pills
@@ -430,6 +401,43 @@
 
             // TODO: Add the search function here.
             return divHtml;
+        },
+
+        /**
+         * filter the items on nav pills for the given search term.
+         */
+        filterNavPills: function(searchTerm) {
+
+            if(searchTerm.length > 0) {
+                var $navPills = jQuery('#sidenav');
+                // hide all items.
+                jQuery.each($navPills.find('li'), 
+                            function(index, item) {
+                    var $item = jQuery(item);
+                    if(! $item.hasClass('active')) {
+                        // we will leave the active one as it is.
+                        $item.attr('style', 'display: none');
+                    }
+                });
+
+                // search the term.
+                var selector = 'li:contains("' + searchTerm + 
+                               '")';
+                jQuery.each($navPills.find(selector),
+                            function(index, item) {
+                    // the item will be a DOM element.
+                    jQuery(item).attr('style', '');
+                });
+            } else {
+                // search term less than 1, 
+                // we will show all articles.
+                var $navPills = jQuery('#sidenav');
+                jQuery.each($navPills.find('li'), 
+                            function(index, item) {
+                    // remove styles by set to empty.
+                    jQuery(item).attr('style', '');
+                });
+            }
         },
 
         /**
