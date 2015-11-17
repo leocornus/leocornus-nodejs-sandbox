@@ -4,7 +4,8 @@ var mocha = require('gulp-mocha');
 var jasmine = require('gulp-jasmine');
 
 // set the default task.
-gulp.task('default', ['karma', 'karma.jquery', 'jasmine']);
+gulp.task('default', 
+          ['karma', 'karma.jquery', 'jasmine', 'protractor']);
 
 gulp.task('hello', function() {
   // place code for your default task here
@@ -61,6 +62,20 @@ gulp.task('karma.jquery', function(done) {
     return new Server.start({
         configFile: __dirname + '/test/karma.conf.jquery.js'
     }, done);
+});
+
+// load the protractor.
+var protractor = require('gulp-protractor').protractor;
+var webdriver = require('gulp-protractor').webdriver;
+
+// launch the webdriver.
+gulp.task('webdriver', webdriver);
+
+gulp.task('protractor', ['webdriver'], function() {
+
+    gulp.src(['test/protractor/**/*.js']).pipe(protractor({
+        configFile: 'test/protractor.conf.js'
+    }));
 });
 
 // testing yahoo stream.

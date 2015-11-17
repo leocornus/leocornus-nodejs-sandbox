@@ -9,13 +9,10 @@
   "scripts": {
     "prestart": "npm install",
     "start": "http-server -a 0.0.0.0 -p 8900",
-
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
-
     "preprotractor": "npm run update-webdriver",
     "protractor": "protractor test/protractor.conf.js",
-
     "test": "vows test/vows/* --spec",
     "mocha": "mocha test/mocha/*.js",
     "jasmine": "jasmine JASMINE_CONFIG_PATH=test/jasmine.json",
@@ -51,6 +48,7 @@
     "gulp-jasmine": "^2.1.0",
     "gulp-karma": "0.0.4",
     "gulp-mocha": "^2.1.1",
+    "gulp-protractor": "^1.0.0",
     "gulp-util": "^3.0.5",
     "http-server": "^0.8.5",
     "jasmine": "^2.2.1",
