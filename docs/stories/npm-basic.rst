@@ -24,6 +24,11 @@ Using the **publish** command to publish a package::
 
   $ npm publish
 
+We need using the following command to signup and login::
+
+  $ npm adduser
+  $ npm login
+
 Manually add a tag
 ------------------
 

@@ -11,4 +11,3 @@ describe('Simple HTML Page', function() {
         expect(browser.getTitle()).toEqual('Testing Page');
     });
 });
-                  
