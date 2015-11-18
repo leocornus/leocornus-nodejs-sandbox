@@ -92,7 +92,7 @@ Here is simple e2e testing spec::
       beforeEach(function() {
           // load the home page.
           // relative to the baseUrl in protractor.conf.js.
-          browser.get('demo/protractor/simplet-one.html');
+          browser.get('demo/protractor/simple-one.html');
       });
   
       it('has correct page title', function() {
@@ -103,4 +103,34 @@ Here is simple e2e testing spec::
 
 the **browser** a wrapper to **WebDriverJS**.
 It provides a lot simple interface for testing...
-This make out e2e testing depends on **Angular.js**.
+This makes our e2e testing depends on **Angular.js**.
+::
+
+  $ bower install angular --save-dev
+
+A simple demo page (fixture)
+----------------------------
+
+The fixture, where we demostrate the scenario for testing, 
+will have to load Angular as while as jQuery.
+Here is a quick sample::
+
+  <html ng-app="simpleTest">
+    <head>
+      <title>Testing Page</title>
+  
+      <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+      <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+      <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+      <script src='/bower_components/angular/angular.min.js'></script>
+      <script>
+  // this will replace the code in controller.js
+  var simpleTest = angular.module('simpleTest', []);
+      </script>
+    </head>
+    <body>
+      <div class="container">
+        <div class="page-header"><h1>Hello Web Server</h1></div>
+      </div>
+    </body>
+  </html>
