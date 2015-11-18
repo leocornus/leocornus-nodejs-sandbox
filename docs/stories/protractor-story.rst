@@ -56,10 +56,31 @@ run protractor::
 
   $ npm run protractor
 
-TODO: gulp task
----------------
+gulp task
+---------
 
 need the instruction to create gulp task to execute e2e test cases.
+Install the gulp-protractor module::
+
+  $ npm install gulp-protractor --save-dev
+
+Create gulp task is pretty easy::
+
+  // load the protractor.
+  var protractor = require('gulp-protractor').protractor;
+  var webdriver_update = require('gulp-protractor').webdriver_update;
+  var webdriver = require('gulp-protractor').webdriver;
+  
+  // launch the webdriver.
+  gulp.task('webdriver_update', webdriver_update);
+  gulp.task('webdriver', webdriver);
+  
+  gulp.task('protractor', ['webdriver_update', 'webdriver'], function() {
+  
+      gulp.src(['test/protractor/**/*.js']).pipe(protractor({
+          configFile: 'test/protractor.conf.js'
+      }));
+  });
 
 A simple Protractor Spec
 ------------------------
