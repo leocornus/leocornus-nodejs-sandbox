@@ -4,8 +4,12 @@ var mocha = require('gulp-mocha');
 var jasmine = require('gulp-jasmine');
 
 // set the default task.
-gulp.task('default', 
-          ['karma', 'karma.jquery', 'jasmine', 'protractor', 'clean']);
+gulp.task('default', ['unit-test', 'e2e-test']);
+
+// the unit test tasks.
+gulp.task('unit-test', ['karma', 'karma.jquery', 'jasmine']);
+// the e2e test tasks.
+gulp.task('e2e-test', ['protractor', 'clean']);
 
 gulp.task('hello', function() {
   // place code for your default task here
@@ -66,26 +70,24 @@ gulp.task('karma.jquery', function(done) {
 
 // gulp webserver
 var webserver = require('gulp-webserver');
-var webserverStream = gulp.src('.').pipe(webserver({
-      host: '0.0.0.0',
-      port: 8900,
-      livereload: true,
-      directoryListing: true,
-      open: true
-    }));
+//var webserverStream = gulp.src('.').pipe(webserver({
+//      host: '0.0.0.0',
+//      port: 8900,
+//      livereload: true,
+//      directoryListing: true,
+//      open: true
+//    }));
 
 // task
-gulp.task('webserver', function(done) {
+gulp.task('webserver', function() {
 
-    webserverStream = gulp.src('.').pipe(webserver({
+    return gulp.src('.').pipe(webserver({
       host: '0.0.0.0',
       port: 8900,
       livereload: true,
       directoryListing: true,
       open: true
     }));
-    // web server is ready.
-    done();
 });
 
 // load the protractor.
@@ -97,7 +99,7 @@ var webdriver = require('gulp-protractor').webdriver;
 gulp.task('webdriver_update', webdriver_update);
 gulp.task('webdriver', webdriver);
 
-gulp.task('protractor', ['webdriver_update', 'webdriver'], function() {
+gulp.task('protractor', ['webserver', 'webdriver_update', 'webdriver'], function() {
 
     return gulp.src(['test/protractor/**/*.js']).pipe(protractor({
         configFile: 'test/protractor.conf.js'
