@@ -10,8 +10,9 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - npm install
   - bower install
-  - npm start > /dev/null &
-  - sleep 1 # let the server start...
+  # we will use gulp file to load web server too.
+  #- npm start > /dev/null &
+  #- sleep 1 # let the server start...
 
 script: 
   - bower install
