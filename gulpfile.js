@@ -110,7 +110,7 @@ gulp.task('clean', ['protractor'], function() {
 
     // kill the web server.
     //return webserverStream.emit('kill');
-    return gulp.src("").pipe(exit());
+    gulp.src("").pipe(exit());
 });
 
 // testing yahoo stream.
