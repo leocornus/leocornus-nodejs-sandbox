@@ -14,6 +14,16 @@ a fun place to learn node.js story by story
 - `Web Server Story <docs/stories/web-server-story.rst>`_
 - `Protractor Story <docs/stories/protractor-story.rst>`_
 
+Dependence Check List
+---------------------
+
+nodejs fun depends on the following tools and softwares:
+
+- nodejs, npm, bower
+- java
+- OPTIONAL xvfg for command line testing. both karma runner
+  and protractor depend on this.
+
 .. |travis| image:: https://api.travis-ci.org/leocornus/leocornus-nodejs-sandbox.png
 .. _travis: https://travis-ci.org/leocornus/leocornus-nodejs-sandbox
 .. |npm-version| image:: https://img.shields.io/npm/v/leocornus-nodejs-sandbox.svg
