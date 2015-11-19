@@ -27,5 +27,11 @@ version of libc.::
   // call update again after reboot your linux.
   $ yum update
 
+jdk dependence
+--------------
+
+Selenium depends on Java run time to load the selenium server.
+Make sure Java is available on your testing machine.
+
 .. _selenium-webdirvers api docs: http://seleniumhq.github.io/selenium/docs/api/javascript/
 .. _choosing your automated acceptance testing: http://dev.imagineeasy.com/post/90475083894/choosing-your-automated-acceptance-testing
