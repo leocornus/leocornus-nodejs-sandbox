@@ -105,10 +105,12 @@ gulp.task('protractor', ['webdriver_update', 'webdriver'], function() {
 
 });
 
+var exit = require('gulp-exit');
 gulp.task('clean', ['protractor'], function() {
 
     // kill the web server.
-    return webserverStream.emit('kill');
+    //return webserverStream.emit('kill');
+    return gulp.src("").pipe(exit());
 });
 
 // testing yahoo stream.

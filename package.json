@@ -45,6 +45,7 @@
     "browserify": "^11.0.0",
     "chai": "^2.3.0",
     "gulp": "^3.9.0",
+    "gulp-exit": "0.0.2",
     "gulp-jasmine": "^2.1.0",
     "gulp-karma": "0.0.4",
     "gulp-mocha": "^2.1.1",
