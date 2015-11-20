@@ -7,6 +7,7 @@ Sandbox to learn node.js
 
 a fun place to learn node.js story by story
 
+- `npm basic usage <docs/stories/npm-basic.rst>`_
 - `Gulp Story <docs/stories/gulp-story.rst>`_
 - `Karma Story <docs/stories/karma-story.rst>`_
 - `jQuery Story <docs/stories/jquery-story.rst>`_
