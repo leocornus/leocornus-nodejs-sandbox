@@ -26,7 +26,7 @@ describe('Simple HTML Page', function() {
 
             expect(sumDiv.getInnerHtml()).toEqual('nothing');
             plusButton.click();
-            expect(sumDiv.getInnerHtml()).toEqual('Hello Click');
+            expect(sumDiv.getInnerHtml()).toEqual('Hello Click!');
         });
     });
 });

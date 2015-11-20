@@ -99,11 +99,13 @@ var webdriver = require('gulp-protractor').webdriver;
 gulp.task('webdriver_update', webdriver_update);
 gulp.task('webdriver', webdriver);
 
+// protractor e2e test will depend on webserver and 
+// webdriver task.
 gulp.task('protractor', ['webserver', 'webdriver_update', 'webdriver'], function() {
 
     return gulp.src(['test/protractor/**/*.js']).pipe(protractor({
         configFile: 'test/protractor.conf.js'
-    }));
+    })).on('error', function(e) {throw e});
 
 });
 
