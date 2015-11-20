@@ -9,11 +9,19 @@
     <script>
 // this will replace the code in controller.js
 var simpleTest = angular.module('simpleTest', []);
+
+jQuery(document).ready(function() {
+    jQuery('#plus').click(function(event) {
+        jQuery('#sum').html('Hello Click');
+    });
+});
     </script>
   </head>
   <body>
     <div class="container">
       <div class="page-header"><h1>Hello Web Server</h1></div>
+      <p><div id="sum">nothing</div></p>
+      <p><button id="plus">Click Me</button></p>
     </div>
   </body>
 </html>
