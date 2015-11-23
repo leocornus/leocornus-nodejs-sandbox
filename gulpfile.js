@@ -9,7 +9,7 @@ gulp.task('default', ['unit-test', 'e2e-test']);
 // the unit test tasks.
 gulp.task('unit-test', ['karma', 'karma.jquery', 'jasmine']);
 // the e2e test tasks.
-gulp.task('e2e-test', ['protractor', 'express-stop']);
+gulp.task('e2e-test', ['protractor', 'express-app-stop']);
 
 gulp.task('hello', function() {
   // place code for your default task here
@@ -92,17 +92,20 @@ gulp.task('webserver', function() {
 
 // using the express to serve static files.
 var gls = require('gulp-live-server');
-var liveServer = gls.static('.', 8900);
-gulp.task('express-static', function() {
+//var liveServer = gls.static('.', 8900);
+// using a simple javascript file for express server.
+var liveServer = gls.new('test/express/simple.js');
+gulp.task('express-app', function() {
 
     liveServer.start();
 });
 
 // stop live server after e2e testing are finished.
-gulp.task('express-stop', ['protractor'], function() {
+gulp.task('express-app-stop', ['protractor'], function() {
 
     liveServer.stop();
 });
+
 
 // load the protractor.
 var protractor = require('gulp-protractor').protractor;
@@ -115,7 +118,7 @@ gulp.task('webdriver', webdriver);
 
 // protractor e2e test will depend on webserver and 
 // webdriver task.
-gulp.task('protractor', ['express-static', 'webdriver_update', 'webdriver'], function() {
+gulp.task('protractor', ['express-app', 'webdriver_update', 'webdriver'], function() {
 
     return gulp.src(['test/protractor/**/*.js']).pipe(protractor({
         configFile: 'test/protractor.conf.js'
