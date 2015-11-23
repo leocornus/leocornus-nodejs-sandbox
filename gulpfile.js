@@ -9,7 +9,7 @@ gulp.task('default', ['unit-test', 'e2e-test']);
 // the unit test tasks.
 gulp.task('unit-test', ['karma', 'karma.jquery', 'jasmine']);
 // the e2e test tasks.
-gulp.task('e2e-test', ['protractor', 'clean']);
+gulp.task('e2e-test', ['protractor', 'express-stop']);
 
 gulp.task('hello', function() {
   // place code for your default task here
@@ -98,6 +98,12 @@ gulp.task('express-static', function() {
     liveServer.start();
 });
 
+// stop live server after e2e testing are finished.
+gulp.task('express-stop', ['protractor'], function() {
+
+    liveServer.stop();
+});
+
 // load the protractor.
 var protractor = require('gulp-protractor').protractor;
 var webdriver_update = require('gulp-protractor').webdriver_update;
@@ -120,9 +126,6 @@ gulp.task('protractor', ['express-static', 'webdriver_update', 'webdriver'], fun
 var exit = require('gulp-exit');
 gulp.task('clean', ['protractor'], function() {
 
-    // kill the web server.
-    //return webserverStream.emit('kill');
-    liveServer.stop();
     gulp.src("").pipe(exit());
 });
 
