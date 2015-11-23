@@ -52,5 +52,36 @@ Here is a simple example::
 Then we could load karm by using the following command::
 
   $ gulp karma
+  $ npm run gulp karma
+
+
+start stop web server
+---------------------
+
+Start stop express server
+-------------------------
+
+the express static server could be used as web server.
+Here are simple way to start and stop a express static server.
+We will using **gulp-live-server** plugin to load express server::
+
+  // using the express to serve static files.
+  var gls = require('gulp-live-server');
+  var liveServer = gls.static('.', 8900);
+  gulp.task('express-static', function() {
+  
+      liveServer.start();
+  });
+
+  // the e2e testing task will start after exprss static is finished
+  gulp.task('protractor', ['express-static'], function() {
+      // E2E testing task...
+  });
+  
+  // stop live server after e2e testing are finished.
+  gulp.task('express-stop', ['protractor'], function() {
+  
+      liveServer.stop();
+  });
 
 .. _Getting Started: https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
