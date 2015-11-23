@@ -14,6 +14,7 @@ a fun place to learn node.js story by story
 - `Selenium WebDrivers Story <docs/stories/selenium-webdrivers-story.rst>`_
 - `Web Server Story <docs/stories/web-server-story.rst>`_
 - `Protractor Story <docs/stories/protractor-story.rst>`_
+- `Express Story <docs/stories/express-story.rst>`_
 
 Dependence Check List
 ---------------------
