@@ -48,6 +48,7 @@
     "gulp-exit": "0.0.2",
     "gulp-jasmine": "^2.1.0",
     "gulp-karma": "0.0.4",
+    "gulp-live-server": "0.0.29",
     "gulp-mocha": "^2.1.1",
     "gulp-protractor": "^1.0.0",
     "gulp-util": "^3.0.5",

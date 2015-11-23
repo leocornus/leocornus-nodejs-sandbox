@@ -90,6 +90,14 @@ gulp.task('webserver', function() {
     }));
 });
 
+// using the express to serve static files.
+var gls = require('gulp-live-server');
+var liveServer = gls.static('.', 8900);
+gulp.task('express-static', function() {
+
+    liveServer.start();
+});
+
 // load the protractor.
 var protractor = require('gulp-protractor').protractor;
 var webdriver_update = require('gulp-protractor').webdriver_update;
@@ -101,7 +109,7 @@ gulp.task('webdriver', webdriver);
 
 // protractor e2e test will depend on webserver and 
 // webdriver task.
-gulp.task('protractor', ['webserver', 'webdriver_update', 'webdriver'], function() {
+gulp.task('protractor', ['express-static', 'webdriver_update', 'webdriver'], function() {
 
     return gulp.src(['test/protractor/**/*.js']).pipe(protractor({
         configFile: 'test/protractor.conf.js'
@@ -114,6 +122,7 @@ gulp.task('clean', ['protractor'], function() {
 
     // kill the web server.
     //return webserverStream.emit('kill');
+    liveServer.stop();
     gulp.src("").pipe(exit());
 });
 
