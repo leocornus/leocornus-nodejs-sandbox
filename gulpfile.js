@@ -123,7 +123,10 @@ gulp.task('protractor', ['express-app', 'webdriver_update', 'webdriver'], functi
 
     return gulp.src(['test/protractor/**/*.js']).pipe(protractor({
         configFile: 'test/protractor.conf.js'
-    })).on('error', function(e) {throw e});
+    })).on('error', function(e) {
+        console.log(e.toString());
+        this.emit("end");
+    });
 
 });
 
