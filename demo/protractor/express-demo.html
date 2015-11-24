@@ -18,14 +18,26 @@ jQuery(document).ready(function() {
             jQuery('#hello-div').html(data);
         });
     });
+
+    jQuery("#echo-btn").click(function(event) {
+        jQuery.get('/echo?a=abc&b=bcdef', function(data) {
+
+            jQuery('#echo-div').html(JSON.stringify(data));
+        });
+    });
 });
     </script>
   </head>
   <body>
     <div class="container">
       <div class="page-header"><h1>Hello Web Server</h1></div>
+
       <p><div id="hello-div">none</div></p>
       <p><button id="hello-btn">Click Me</button></p>
+
+      <p><div id="echo-div">none</div></p>
+      <p><button id="echo-btn">Click Me</button></p>
+
     </div>
   </body>
 </html>

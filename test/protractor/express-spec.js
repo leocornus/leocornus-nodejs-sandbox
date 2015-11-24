@@ -16,4 +16,16 @@ describe('Testing Express', function() {
         helloButton.click();
         expect(helloDiv.getInnerHtml()).toEqual('<h1>Hello Express World</h1>');
     });
+
+    it('get response from echo page', function() {
+
+        // the click button
+        var echoBtn= element(by.id('echo-btn'));
+        // the place we will show the result.
+        var echoDiv =  element(by.id('echo-div'));
+
+        expect(echoDiv.getInnerHtml()).toEqual('none');
+        echoBtn.click();
+        expect(echoDiv.getInnerHtml()).toEqual('{"a":"abc","b":"bcdef"}');
+    });
 });
