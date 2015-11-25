@@ -20,7 +20,13 @@ jQuery(document).ready(function() {
     });
 
     jQuery("#echo-btn").click(function(event) {
-        jQuery.get('/echo?a=abc&b=bcdef', function(data) {
+
+        var action = {
+            'a':'abc',
+            'b':'bcdef'
+        };
+
+        jQuery.get('/echo', action).done(function(data) {
 
             jQuery('#echo-div').html(JSON.stringify(data));
         });
