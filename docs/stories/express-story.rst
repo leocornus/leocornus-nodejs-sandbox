@@ -26,4 +26,22 @@ This is a simple case, just add the folder as express static files::
   var server = app.listen(8900, function() {
   });
 
+the echo page, explore request and response
+-------------------------------------------
+
+The following is the simplest Express JavaScript app::
+
+  var express = require('express');
+  var app = express();
+  
+  // explore the request and response...
+  // simply echo the request to response.
+  app.get('/echo', function(req, res) {
+  
+      var query = req.query;
+      // the request query is an object.
+      //console.log(query);
+      res.send(query);
+  });
+
 
