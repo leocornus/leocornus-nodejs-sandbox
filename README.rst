@@ -22,8 +22,8 @@ Dependence Check List
 nodejs fun depends on the following tools and softwares:
 
 - nodejs, npm, bower
-- java
-- OPTIONAL xvfg for command line testing. both karma runner
+- java version 1.7 or higher, to run Selenium standalone server.
+- OPTIONAL Xvfb for command line testing. both karma runner
   and protractor depend on this.
 
 .. |travis| image:: https://api.travis-ci.org/leocornus/leocornus-nodejs-sandbox.png
