@@ -31,6 +31,18 @@ jQuery(document).ready(function() {
             jQuery('#echo-div').html(JSON.stringify(data));
         });
     });
+
+    jQuery("#api-btn").click(function(event) {
+        var params = {
+            'action' : 'visualeditor',
+            'page' : 'Main Page',
+            'paction': 'parse'
+        };
+
+        jQuery.get('/wiki/api.php', params).done(function(data) {
+            jQuery('#api-div').html(data.visualeditor.content);
+        });
+    });
 });
     </script>
   </head>
@@ -44,6 +56,8 @@ jQuery(document).ready(function() {
       <p><div id="echo-div">none</div></p>
       <p><button id="echo-btn">Click Me</button></p>
 
+      <p><div id="api-div">none</div></p>
+      <p><button id="api-btn">test api</button></p>
     </div>
   </body>
 </html>

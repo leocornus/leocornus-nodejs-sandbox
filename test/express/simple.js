@@ -18,6 +18,7 @@ app.get('/hello', function(req, res) {
 app.get('/echo', function(req, res) {
 
     var query = req.query;
+    console.log(query);
     res.send(query);
 });
 
@@ -26,7 +27,17 @@ var bot = require('nodemw');
 var client = new bot({
     server: 'en.wikipedia.org',
     path: '/w',
-    debug: false
+    debug: true
+});
+// set the url as close as the local now.
+app.get('/wiki/api.php', function(req, res) {
+
+    //console.log(req.query);
+
+    client.api.call(req.query, function(err, info, next, data) {
+        //console.log(data);
+        res.send(data);
+    });
 });
 
 // start server.
