@@ -27,6 +27,7 @@ gulp.task('mocha', function() {
 
 });
 
+// using mocha to test nodemw lib
 gulp.task('mocha.nodemw', function() {
 
   // the src method will locate the source file.
