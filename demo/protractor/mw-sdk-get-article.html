@@ -1,0 +1,64 @@
+<html ng-app="mwdemo">
+  <head>
+    <title>MediaWiki Demo</title>
+
+    <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+    <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src='/bower_components/angular/angular.min.js'></script>
+
+    <script src="/src/jquery/mw-sdk.js"></script>
+    <style>
+    .affix {
+        top: 50px;
+    }
+    </style>
+    <script>
+// we need this to load protractor.
+var mwdemo = angular.module('mwdemo', []);
+
+jQuery(document).ready(function() {
+    // using the local site for testing...
+    var localSite={'baseUrl':'10.160.192.88:8900',
+                   'affixOffsetTop' : 290,
+                   'limit' : 290,
+                   'apiPath':'/wiki/api.php'};
+    var client = new MediaWikiClient(localSite);
+    var title = 'OPSpedia Wiki VisualEditor';
+    title = 'Getting_Started_-_OPSpedia_Basics';
+    title = 'OPSpedia_Training_Plugin';
+    // testing the wikipedia site.
+    title = 'EMC_Corporation';
+    //title = 'OPSpedia:CI/Builds/111-cbe8042';
+    client.getArticle(title, function(err, content) {
+        //client.log(content);
+    
+        $('#content-container').html(content);
+        ////var tocDiv = $('div#toc').html();
+        ////alert(tocDiv);
+        ////$('div#toc').html('');
+        ////$('body').scrollspy( {
+        ////    target: '#sidenav'
+        ////});
+        //// refresh the scroll spy.
+        //$('[data-spy="scroll"]').each(function () {
+        //    $(this).scrollspy('refresh');
+        //});
+    });
+});
+    </script>
+  </head>
+  <body>
+<div class="container">
+<div class="jumbotron">
+  <h1>Hello, world!</h1>
+  <p>...</p>
+  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+</div>
+<div id="content-container" class="container">
+</div>
+</div>
+  </body>
+</html>
+

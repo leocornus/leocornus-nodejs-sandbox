@@ -19,7 +19,8 @@ describe('Testing wm-sdk basic', function() {
     it('get main page of wikipedia', function(done) {
 
         client.getArticle('Main Page', function(error, data) {
-            // it will be error
+            // it will be error because of the JavaScript
+            // cross domain restriction
             console.log(error);
             expect(error).not.toBeNull();
             // return data is object.
