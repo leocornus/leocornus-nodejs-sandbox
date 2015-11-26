@@ -25,26 +25,14 @@ jQuery(document).ready(function() {
                    'limit' : 290,
                    'apiPath':'/wiki/api.php'};
     var client = new MediaWikiClient(localSite);
-    var title = 'OPSpedia Wiki VisualEditor';
-    title = 'Getting_Started_-_OPSpedia_Basics';
-    title = 'OPSpedia_Training_Plugin';
-    // testing the wikipedia site.
-    title = 'EMC_Corporation';
-    //title = 'OPSpedia:CI/Builds/111-cbe8042';
-    client.getArticle(title, function(err, content) {
-        //client.log(content);
-    
-        $('#content-container').html(content);
-        ////var tocDiv = $('div#toc').html();
-        ////alert(tocDiv);
-        ////$('div#toc').html('');
-        ////$('body').scrollspy( {
-        ////    target: '#sidenav'
-        ////});
-        //// refresh the scroll spy.
-        //$('[data-spy="scroll"]').each(function () {
-        //    $(this).scrollspy('refresh');
-        //});
+
+    jQuery("#load-page").click(function(event) {
+
+        var title = jQuery("#page-title").val();
+        client.getArticle(title, function(err, content) {
+            //client.log(content);
+            $('#content-container').html(content);
+        });
     });
 });
     </script>
@@ -53,9 +41,13 @@ jQuery(document).ready(function() {
 <div class="container">
 <div class="jumbotron">
   <h1>Hello, world!</h1>
-  <p>...</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+  <p>Page Title: <input type="text" id="page-title"></input></p>
+  <p><a class="btn btn-primary btn-lg" id="load-page" href="#" 
+        role="button">
+    Load Page
+  </a></p>
 </div>
+
 <div id="content-container" class="container">
 </div>
 </div>
