@@ -18,7 +18,8 @@ app.get('/hello', function(req, res) {
 app.get('/echo', function(req, res) {
 
     var query = req.query;
-    console.log(query);
+    // the request query is an object.
+    //console.log(query);
     res.send(query);
 });
 

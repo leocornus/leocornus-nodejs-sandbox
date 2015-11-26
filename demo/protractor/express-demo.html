@@ -33,14 +33,16 @@ jQuery(document).ready(function() {
     });
 
     jQuery("#api-btn").click(function(event) {
+
+        var title = jQuery('#api-title').val();
         var params = {
-            'action' : 'visualeditor',
-            'page' : 'Main Page',
-            'paction': 'parse'
+            'action' : 'parse',
+            'page' : title,
+            'prop': 'text'
         };
 
         jQuery.get('/wiki/api.php', params).done(function(data) {
-            jQuery('#api-div').html(data.visualeditor.content);
+            jQuery('#api-div').html(data.parse.text['*']);
         });
     });
 });
@@ -56,6 +58,7 @@ jQuery(document).ready(function() {
       <p><div id="echo-div">none</div></p>
       <p><button id="echo-btn">Click Me</button></p>
 
+      <p><input type='text' id="api-title"/></p>
       <p><div id="api-div">none</div></p>
       <p><button id="api-btn">test api</button></p>
     </div>

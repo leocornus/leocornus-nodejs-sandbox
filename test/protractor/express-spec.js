@@ -28,4 +28,25 @@ describe('Testing Express', function() {
         echoBtn.click();
         expect(echoDiv.getInnerHtml()).toEqual('{"a":"abc","b":"bcdef"}');
     });
+
+    it('explore the wikipedia api through nodemw', function() {
+
+        var apiDiv = element(by.id('api-div'));
+        expect(apiDiv.getInnerHtml()).toEqual('none');
+
+        var apiBtn = element(by.id('api-btn'));
+        // set title on the page
+        var apiInput = element(by.id('api-title'));
+        // using sendkey.
+        apiInput.sendKeys('Blank pad rule');
+        apiBtn.click().then(function() {
+            // need pause wait respone from remote server.
+            // sleep in ms unit.
+            browser.sleep(1000);
+            var title = element(by.id('toctitle'));
+            expect(title.getText()).toEqual('Contents');
+            var caption = element(by.css('.thumbcaption'));
+            expect(caption.getText()).toContain('blank pad rule');
+        });
+    });
 });
