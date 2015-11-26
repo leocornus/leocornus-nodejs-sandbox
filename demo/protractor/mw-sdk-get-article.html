@@ -20,7 +20,7 @@ var mwdemo = angular.module('mwdemo', []);
 
 jQuery(document).ready(function() {
     // using the local site for testing...
-    var localSite={'baseUrl':'10.160.192.88:8900',
+    var localSite={'baseUrl':window.location.host,
                    'affixOffsetTop' : 290,
                    'limit' : 290,
                    'apiPath':'/wiki/api.php'};
