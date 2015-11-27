@@ -170,8 +170,11 @@
                 '                sidebar-nav-fixed affix-top"' +
                 '                id="navpanel"' + 
                 '                style="margin-left: -15px">' + 
+                '  <div class="panel-heading">' +
+                '    <strong>Contents</strong>' + 
+                '  </div>' +
                 '  <div id="sidenav">' + 
-                '    <ul class="nav nav-pills nav-stacked"' +
+                '    <ul class="nav nav-pills nav-stacked">' +
                 //'        style="max-height: 360px; ' + 
                 //'               overflow-y: auto">' +
                 liHtml + 
