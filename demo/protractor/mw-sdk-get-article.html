@@ -32,6 +32,7 @@ jQuery(document).ready(function() {
         client.getArticle(title, function(err, content) {
             //client.log(content);
             $('#content-container').html(content);
+            client.syncSidenavWidth();
         });
     });
 });

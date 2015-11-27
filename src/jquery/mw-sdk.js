@@ -119,7 +119,7 @@
                 // TODO the page content.
                 var content = data.parse.text['*'];
                 // process the content and to match bootstrap.
-                content = self.convert2BootstrapRow(content);
+                content = self.createArticleRow(content);
                 callback(null, content);
             });
         },
@@ -163,12 +163,28 @@
             // parse the content html to a jQuery object.
             var $content = jQuery('<div>').html(content);
             // find the TOC div.
-            var $toc = $content.find('div#toc');
+            var $toc = $content.find('div#toc>ul');
+            var liHtml = $toc.html();
+
+            var navPanel = '<div class="panel panel-info' +
+                '                sidebar-nav-fixed affix-top"' +
+                '                id="navpanel"' + 
+                '                style="margin-left: -15px">' + 
+                '  <div id="sidenav">' + 
+                '    <ul class="nav nav-pills nav-stacked"' +
+                //'        style="max-height: 360px; ' + 
+                //'               overflow-y: auto">' +
+                liHtml + 
+                '    </ul>' +
+                '  </div>' + 
+                '</div>';
+
             //$toc.find('div#toctitle').replaceWith('');
             //alert(tocHtml);
             // convert the toc to bootstrap scroll spy.
             var $nav = jQuery('<nav class="affix" id="sidenav">').
                        html($toc.html());
+            // add 
             $nav.find('ul').addClass('nav');
             // add class for the first ul.
             $nav.children('ul').addClass('nav-pills nav-stacked')
@@ -191,9 +207,36 @@
             contentHtml = contentHtml.replace(/"\/wiki\//g, 
                '"//' + this.siteOptions.baseUrl + '/wiki/');
 
-            var ret = {'toc' : $toc.html(), 
+            var ret = {'toc' : navPanel, 
                        'content' : contentHtml};
             return ret; 
+        },
+
+        // create article row.
+        createArticleRow: function(content) {
+
+            var self = this;
+
+            var processed = this.processArticleContent(content);
+            var contentHtml = processed['content'];
+            var tocHtml = processed['toc'];
+            var rowHtml = '<div class="row">' +
+                '  <div class="col-md-9" id="content">' + 
+                contentHtml + 
+                '  </div>' + 
+                '  <div class="col-md-3" id="navcol">' + 
+                tocHtml +
+                '  </div>' + 
+                '</div>';
+
+            // hook the resize event.
+            jQuery(window).on('resize', function() {
+
+                self.syncSidenavWidth();
+            });
+
+            var $row = jQuery(rowHtml);
+            return $row;
         },
 
         // process the article content to bootstrap 2-column
