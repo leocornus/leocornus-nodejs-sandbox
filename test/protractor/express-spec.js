@@ -42,7 +42,7 @@ describe('Testing Express', function() {
         apiBtn.click().then(function() {
             // need pause wait respone from remote server.
             // sleep in ms unit.
-            browser.sleep(1000);
+            browser.sleep(2000);
             var title = element(by.id('toctitle'));
             expect(title.getText()).toEqual('Contents');
             var caption = element(by.css('.thumbcaption'));
