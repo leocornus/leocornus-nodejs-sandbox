@@ -26,10 +26,10 @@ jQuery(document).ready(function() {
                    'apiPath':'/wiki/api.php'};
     var client = new MediaWikiClient(localSite);
 
-    jQuery("#load-page").click(function(event) {
+    jQuery("#load-cat").click(function(event) {
 
-        var title = jQuery("#page-title").val();
-        client.getArticle(title, function(err, content) {
+        var title = jQuery("#cat-title").val();
+        client.getPagesInCategory(title, function(err, content) {
             //client.log(content);
             $('#content-container').html(content);
             client.syncSidenavWidth();
@@ -41,11 +41,11 @@ jQuery(document).ready(function() {
   <body>
 <div class="container container-fluid">
 <div class="jumbotron">
-  <h1>Demonstrate Get Article</h1>
-  <p>Page Title: <input type="text" id="page-title"></input></p>
-  <p><a class="btn btn-primary btn-lg" id="load-page" href="#" 
+  <h1>Demonstrate Get Pages in Category</h1>
+  <p>Wiki Category: <input type="text" id="cat-title"></input></p>
+  <p><a class="btn btn-primary btn-lg" id="load-cat" href="#" 
         role="button">
-    Load Page
+    Load Category
   </a></p>
 </div>
 
