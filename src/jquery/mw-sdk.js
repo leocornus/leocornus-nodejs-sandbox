@@ -442,8 +442,14 @@
               '           placeholder="Find an article in category"' + 
               '           id="searchInCategory"' +
               '           aria-describedby="sizing-addon"/>' +
-              '    <span class="glyphicon glyphicon-remove form-control-feedback"' +
-              '          aria-hidden="true"></span>' +
+              '    <span class="input-group-addon bg-info"' +
+              '          id="sizing-addon-remove">' + 
+              '      <a href="#">' +
+              '      <i class="fa fa-remove text-primary"></i>' +
+              '      </a>' +
+              '    </span>' + 
+              //'    <span class="glyphicon glyphicon-remove form-control-feedback"' +
+              //'          aria-hidden="true"></span>' +
               '  </div>' + 
               '</div>';
 
