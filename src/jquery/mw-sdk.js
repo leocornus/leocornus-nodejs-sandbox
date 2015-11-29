@@ -431,7 +431,7 @@
         buildSearchBar: function() {
 
             var divHtml = 
-              '<div class="panel-footer">' + 
+              '<div class="panel-footer form-group has-success has-feedback">' + 
               '  <div class="input-group input-group-sm"' +
               '       role="group" aria-label="...">' + 
               '    <span class="input-group-addon bg-info"' +
@@ -442,6 +442,8 @@
               '           placeholder="Find an article in category"' + 
               '           id="searchInCategory"' +
               '           aria-describedby="sizing-addon"/>' +
+              '    <span class="glyphicon glyphicon-remove form-control-feedback"' +
+              '          aria-hidden="true"></span>' +
               '  </div>' + 
               '</div>';
 
