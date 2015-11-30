@@ -435,7 +435,7 @@
         buildSearchBar: function() {
 
             var divHtml = 
-              '<div class="panel-footer form-group has-success has-feedback">' + 
+              '<div class="panel-footer">' + 
               '  <div class="input-group input-group-sm"' +
               '       role="group" aria-label="...">' + 
               '    <span class="input-group-addon bg-info"' +
