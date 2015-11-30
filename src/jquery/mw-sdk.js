@@ -352,6 +352,7 @@
 
                 // get the search term.
                 var searchTerm = this.value;
+                self.toggleSearchRemoveButton(searchTerm, $(this).parent());
                 self.filterNavPills(searchTerm);
             });
 
@@ -442,19 +443,24 @@
               '           placeholder="Find an article in category"' + 
               '           id="searchInCategory"' +
               '           aria-describedby="sizing-addon"/>' +
-              '    <span class="input-group-addon bg-info"' +
-              '          id="sizing-addon-remove">' + 
-              '      <a href="#">' +
-              '      <i class="fa fa-remove text-primary"></i>' +
-              '      </a>' +
-              '    </span>' + 
-              //'    <span class="glyphicon glyphicon-remove form-control-feedback"' +
-              //'          aria-hidden="true"></span>' +
               '  </div>' + 
               '</div>';
 
             // TODO: Add the search function here.
             return divHtml;
+        },
+
+        buildSearchBarRemove: function() {
+
+            var removeHtml =
+              '<span class="input-group-addon bg-info"' +
+              '      id="search-remove">' + 
+              '  <a href="#" id="clearnSearchTerm">' +
+              '  <i class="fa fa-remove text-primary"></i>' +
+              '  </a>' +
+              '</span>';
+
+            return removeHtml;
         },
 
         /**
@@ -505,6 +511,34 @@
                     // remove styles by set to empty.
                     jQuery(item).attr('style', '');
                 });
+            }
+        },
+
+        /**
+         * toggle remove icon for search input
+         */
+        toggleSearchRemoveButton: function(searchTerm, $inputGroup) {
+
+            var self = this;
+
+            var removeBtn = $inputGroup.find('span#search-remove');
+            if(removeBtn.length > 0) {
+                // remove button presents.
+                if(searchTerm.length > 0) {
+                    // do nothing.
+                } else {
+                    // remove the remove button.
+                    removeBtn.remove();
+                }
+            } else {
+                // no remove button.
+                if(searchTerm.length > 0) {
+                    // add the remove button.
+                    removeBtn = this.buildSearchBarRemove();
+                    $inputGroup.append(removeBtn);
+                } else {
+                    // do nothing...
+                }
             }
         },
 
