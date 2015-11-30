@@ -352,9 +352,12 @@
 
                 // get the search term.
                 var searchTerm = this.value;
-                self.toggleSearchRemoveButton(searchTerm, $(this).parent());
+                // toggle remove button for the input group
+                self.toggleSearchRemoveButton(searchTerm, 
+                                              $(this).parent());
                 self.filterNavPills(searchTerm);
             });
+
 
             // build the nav pills
             // adding the category content page to pages list
@@ -450,12 +453,16 @@
             return divHtml;
         },
 
+        /**
+         * utility function to build the remove button for search
+         * bar input as a input add on.
+         */
         buildSearchBarRemove: function() {
 
             var removeHtml =
               '<span class="input-group-addon bg-info"' +
               '      id="search-remove">' + 
-              '  <a href="#" id="clearnSearchTerm">' +
+              '  <a href="#" id="cleanSearchTerm">' +
               '  <i class="fa fa-remove text-primary"></i>' +
               '  </a>' +
               '</span>';
@@ -536,6 +543,20 @@
                     // add the remove button.
                     removeBtn = this.buildSearchBarRemove();
                     $inputGroup.append(removeBtn);
+                    // listen to the click event for remove button 
+                    // of the search input field.
+                    $inputGroup.find('a#cleanSearchTerm').
+                         on('click', function(event) {
+
+                        // find the search input field
+                        $search = 
+                          $inputGroup.find('input#searchInCategory');
+                        // set value to nothing.
+                        $search.val('');
+                        // trigger keyup event.
+                        $search.trigger('keyup');
+                    });
+
                 } else {
                     // do nothing...
                 }
