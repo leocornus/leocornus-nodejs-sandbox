@@ -354,7 +354,7 @@
                 var searchTerm = this.value;
                 // toggle remove button for the input group
                 self.toggleSearchRemoveButton(searchTerm, 
-                                              $(this).parent());
+                                              jQuery(this).parent());
                 self.filterNavPills(searchTerm);
             });
 
