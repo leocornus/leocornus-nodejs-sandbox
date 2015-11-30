@@ -98,4 +98,19 @@ describe('Testing jQuery Basic', function() {
             }
         });
     });
+
+    it('jQuery find and children', function() {
+
+        var someDiv = '<div class="div">' + 
+            '  <span id="a">A</span>' +
+            '  <span id="b">B</span>' +
+            '  <span id="d">D</span>' +
+            '</div>';
+        var $someDiv = jQuery(someDiv);
+        // find the id=c
+        var $c = $someDiv.children('spand#c');
+        expect($c.length).toBe(0);
+        var $a = $someDiv.children('span#a');
+        expect($a.text()).toBe('A');
+    });
 });
