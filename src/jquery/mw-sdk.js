@@ -164,6 +164,7 @@
             var $content = jQuery('<div>').html(content);
             // find the TOC div.
             var $toc = $content.find('div#toc>ul');
+            //$toc.find('a').attr('data-toggle', 'pill');
             var liHtml = $toc.html();
 
             var navPanel = '<div class="panel panel-info' +
@@ -174,9 +175,9 @@
                 '    <strong>Contents</strong>' + 
                 '  </div>' +
                 '  <div id="sidenav">' + 
-                '    <ul class="nav nav-pills nav-stacked">' +
-                //'        style="max-height: 360px; ' + 
-                //'               overflow-y: auto">' +
+                '    <ul class="nav nav-pills nav-stacked"' +
+                '        style="max-height: 450px; ' + 
+                '               overflow-y: auto">' +
                 liHtml + 
                 '    </ul>' +
                 '  </div>' + 
