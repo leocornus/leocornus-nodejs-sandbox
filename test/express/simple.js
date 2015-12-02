@@ -1,10 +1,12 @@
 // the very simple express server.
 
 var express = require('express');
+var serveIndex = require('serve-index');
 var app = express();
 
 //load static files.
 app.use('/demo', express.static('demo'));
+app.use('/demo', serveIndex('demo'));
 app.use('/src', express.static('src'));
 app.use('/bower_components', express.static('bower_components'));
 
