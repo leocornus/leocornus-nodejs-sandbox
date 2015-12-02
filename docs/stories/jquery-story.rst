@@ -30,6 +30,8 @@ How to test and play around?
 Read `Using jQuery plugins with npm`_ to get started.
 The browserify_ is cool!
 
+Webpack_ is a better tool for package JavaScript files.
+
 local storage or cookie?
 ------------------------
 
@@ -57,3 +59,4 @@ Here are the basic commands for browserify::
 .. _Using jQuery plugins with npm: http://blog.npmjs.org/post/112064849860/using-jquery-plugins-with-npm
 .. _browserify: https://www.npmjs.com/package/browserify
 .. _jQuery Plugin Development Boilerplate: http://www.websanova.com/blog/jquery/jquery-plugin-development-boilerplate.html
+.. _webpack: https://webpack.github.io/
