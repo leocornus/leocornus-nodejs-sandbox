@@ -7,8 +7,10 @@ var app = express();
 //load static files.
 app.use('/demo', express.static('demo'));
 app.use('/demo', serveIndex('demo'));
-app.use('/src', express.static('src'));
+app.use('/src', express.static('src', {index:false}));
+app.use('/src', serveIndex('src'));
 app.use('/bower_components', express.static('bower_components'));
+app.use('/bower_components', serveIndex('bower_components'));
 
 // hello world simple get.
 app.get('/hello', function(req, res) {
