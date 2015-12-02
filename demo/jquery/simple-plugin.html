@@ -1,0 +1,28 @@
+<html ng-app="simplePlugin">
+  <head>
+    <title>Testing Simple Plugin</title>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+    <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src='/bower_components/angular/angular.min.js'></script>
+
+    <script src='/src/jquery/simple-plugin.js'></script>
+    <script>
+// this will replace the code in controller.js
+var simpleTest = angular.module('simplePlugin', []);
+
+jQuery(document).ready(function($) {
+    $('#test').simple();
+    $('#sum').simple();
+});
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header"><h1>Hello jQuery Plugin</h1></div>
+      <span id="test"><div id="sum">nothing</div></span>
+      <p><button id="plus">Click Me</button></p>
+    </div>
+  </body>
+</html>
