@@ -29,3 +29,8 @@ Starts from local dev environment
 - e2e testing
 - deployment process and script
 
+Quick start for jQuery plugin
+-----------------------------
+
+- create a simple jQuery plugin.
+- testing jQuery UI widgets.
