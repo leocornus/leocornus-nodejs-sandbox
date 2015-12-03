@@ -27,6 +27,27 @@ app.get('/echo', function(req, res) {
     res.send(query);
 });
 
+// simple search endpoint.
+app.get('/search', function(req, res) {
+
+    // simple result, an array of string.
+    var simpleResult = [
+        "Item One",
+        "Item Two",
+        "Item Three",
+        "Item Four"
+    ];
+
+    // hard code some result.
+    var result = [
+        {title:'The Title', uri:'http://one.com'},
+        {title:'The Two', uri:'http://two.com'},
+        {title:'The Three', uri:'http://three.com'}
+    ];
+
+    res.send(simpleResult);
+});
+
 // testing the nodemw direct api.
 var bot = require('nodemw');
 var client = new bot({
