@@ -62,6 +62,7 @@
                 minLength: self.settings.minLength,
 
                 select: function(event, ui) {
+                    event.preventDefault();
                     alert(ui.item.uri);
                 },
 
@@ -81,8 +82,10 @@
             // set the data-value
             $li.attr("data-value", item.title);
             // get ready the HTML for each item.
-            var itemHtml = item.title +
+            var itemHtml = '<i class="fa fa-file-text-o text-primary"></i> ' + 
+                item.title +
                 '<br/>' +
+                '<i class="fa fa-link text-warning"></i> ' + 
                 item.uri;
 
             $li.append(itemHtml);
