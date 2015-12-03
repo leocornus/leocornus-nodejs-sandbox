@@ -8,7 +8,7 @@
     var defaults = {
         // the url endpoint for search.
         searchUrl : '/search',
-        miniLength : 2
+        minLength : 2
     };
 
     // the plugin constructor.
@@ -47,21 +47,45 @@
             // get ready the data object for autocomplete.
             var searchData = {
                 source: function(request, response) {
-                    $.getJSON(self.settings.searchUrl, 
-                              request, response);
+                    $.ajax({
+                      url: self.settings.searchUrl,
+                      dataType: 'json',
+                      data: {
+                          term: request.term
+                      },
+                      success: function(data) {
+                          response(data);
+                      }
+                    });
                 }, 
 
-                miniLength: self.settings.miniLength,
+                minLength: self.settings.minLength,
 
                 select: function(event, ui) {
-                    alert(ui.item.value);
-                }
+                    alert(ui.item.uri);
+                },
+
             };
 
-            $element.autocomplete(searchData);
-                    //.data("ui-autocomplete")
-                    //._
-        }
+            $element.autocomplete(searchData)
+                    .data("ui-autocomplete")
+                    ._renderItem = function($ul, item) {
+
+                        console.log(item);
+
+                        var $li = $("<li>");
+                        // set the data-value
+                        $li.attr("data-value", item.title);
+                        var itemHtml = item.title +
+                            '<br/>' +
+                            item.uri;
+                        $li.append(itemHtml);
+                        // append to ul
+                        $ul.append($li);
+
+                        return $li;
+                    };
+        },
     });
 
 })(jQuery);

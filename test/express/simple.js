@@ -39,13 +39,13 @@ app.get('/search', function(req, res) {
     ];
 
     // hard code some result.
-    var result = [
+    var objectResult = [
         {title:'The Title', uri:'http://one.com'},
         {title:'The Two', uri:'http://two.com'},
         {title:'The Three', uri:'http://three.com'}
     ];
 
-    res.send(simpleResult);
+    res.send(objectResult);
 });
 
 // testing the nodemw direct api.
