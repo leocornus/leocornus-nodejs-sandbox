@@ -30,7 +30,7 @@
         // the initialize function.
         init: function() {
             var self = this;
-            $element = $(this.element);
+            var $element = $(this.element);
 
             // when mouseover, we will show the red back ground.
             $element.on('mouseover.' + pluginSimple, function() {
