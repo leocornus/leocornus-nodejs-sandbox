@@ -69,23 +69,28 @@
 
             $element.autocomplete(searchData)
                     .data("ui-autocomplete")
-                    ._renderItem = function($ul, item) {
-
-                        console.log(item);
-
-                        var $li = $("<li>");
-                        // set the data-value
-                        $li.attr("data-value", item.title);
-                        var itemHtml = item.title +
-                            '<br/>' +
-                            item.uri;
-                        $li.append(itemHtml);
-                        // append to ul
-                        $ul.append($li);
-
-                        return $li;
-                    };
+                    ._renderItem = self.renderItem;
         },
+
+        // customize render of each item.
+        renderItem: function($ul, item) {
+
+            console.log(item);
+
+            var $li = $("<li>");
+            // set the data-value
+            $li.attr("data-value", item.title);
+            // get ready the HTML for each item.
+            var itemHtml = item.title +
+                '<br/>' +
+                item.uri;
+
+            $li.append(itemHtml);
+            // append to ul
+            $ul.append($li);
+
+            return $li;
+        }
     });
 
 })(jQuery);
