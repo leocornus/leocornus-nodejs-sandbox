@@ -54,8 +54,8 @@
                 miniLength: self.settings.miniLength,
 
                 select: function(event, ui) {
-                    alert(ui.item.uri);
-                },
+                    alert(ui.item.value);
+                }
             };
 
             $element.autocomplete(searchData);
