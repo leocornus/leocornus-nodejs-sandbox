@@ -26,6 +26,15 @@ nodejs fun depends on the following tools and softwares:
 - OPTIONAL Xvfb for command line testing. both karma runner
   and protractor depend on this.
 
+Fun TODOs
+---------
+
+The learning TODO list:
+
+- webpack to pack js files, css files, etc.
+- javascript code coverage
+- integration with codecov.io
+
 .. |travis| image:: https://api.travis-ci.org/leocornus/leocornus-nodejs-sandbox.png
 .. _travis: https://travis-ci.org/leocornus/leocornus-nodejs-sandbox
 .. |npm-version| image:: https://img.shields.io/npm/v/leocornus-nodejs-sandbox.svg
