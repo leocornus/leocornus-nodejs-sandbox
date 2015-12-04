@@ -63,7 +63,7 @@
 
                 select: function(event, ui) {
                     event.preventDefault();
-                    alert(ui.item.uri);
+                    alert(ui.item.url);
                 },
 
             };
@@ -86,7 +86,7 @@
                 item.title +
                 '<br/>' +
                 '<i class="fa fa-link text-warning"></i> ' + 
-                item.uri;
+                item.url;
 
             $li.append(itemHtml);
             // append to ul

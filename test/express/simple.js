@@ -40,9 +40,9 @@ app.get('/search', function(req, res) {
 
     // hard code some result.
     var objectResult = [
-        {title:'The Title', uri:'http://one.com'},
-        {title:'The Two', uri:'http://two.com'},
-        {title:'The Three', uri:'http://three.com'}
+        {title:'The Title', url:'http://one.com'},
+        {title:'The Two', url:'http://two.com'},
+        {title:'The Three', url:'http://three.com'}
     ];
 
     res.send(objectResult);
