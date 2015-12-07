@@ -81,6 +81,7 @@
             var $li = $("<li>");
             // set the data-value
             $li.attr("data-value", item.title);
+            //$li.addClass('media');
             // get ready the HTML for each item.
             var itemHtml = '<i class="fa fa-file-text-o text-primary"></i> ' + 
                 item.title +
@@ -88,8 +89,23 @@
                 '<i class="fa fa-link text-warning"></i> ' + 
                 item.url;
 
+            // try using bootstrat media list
+            var itemHtml = 
+              '<div class="media">' +
+              '  <div class="media-left">' + 
+              '    <i class="fa fa-file-text-o fa-3x text-primary"></i>' +
+              '  </div>' + 
+              '  <div class="media-body">' +
+              '    <h4 class="media-heading">' + item.title + 
+              '    </h4>' +
+              '    <p>' + item.url + 
+              '    </p>' + 
+              '  </div>' +
+              '</div>';
+
             $li.append(itemHtml);
             // append to ul
+            //$ul.addClass('media-list');
             $ul.append($li);
 
             return $li;
