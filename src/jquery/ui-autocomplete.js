@@ -103,6 +103,16 @@
               '  </div>' +
               '</div>';
 
+            // try using button.
+            var itemHtml = 
+              '<i class="fa fa-file-text-o fa-2x fa-pull-left fa-border text-primary"></i>' +
+              '<strong>' + item.title + '</strong>' + 
+              '<br/>' +
+              'long description log description, long description and realy long description,' + 
+              'long description log description, long description and realy long description' + 
+              '<br/>' +
+              '<i class="fa fa-link text-warning"></i> ' + item.url;
+
             $li.append(itemHtml);
             // append to ul
             //$ul.addClass('media-list');
