@@ -1,0 +1,4 @@
+{
+  "proxy":"http://<proxy-ip>:<proxy-port>",
+  "https-proxy":"http://<proxy-ip>:<proxy-port>"
+}

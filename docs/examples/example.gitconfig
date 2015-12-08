@@ -1,0 +1,13 @@
+[filter "lfs"]
+        clean = git lfs clean %f
+        smudge = git lfs smudge %f
+        required = true
+[user]
+        name = Sean Chen
+        email = sean.chen@leocorn.com
+[https]
+        proxy = http://proxy.ip:port
+[http]
+        proxy = http://proxy.ip:port
+[url "https://"]
+        insteadOf = git://
