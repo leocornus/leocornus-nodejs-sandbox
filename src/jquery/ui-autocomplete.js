@@ -64,7 +64,8 @@
 
                 select: function(event, ui) {
                     event.preventDefault();
-                    alert(ui.item.url);
+                    //alert(ui.item.url);
+                    window.location.href = ui.item.url;
                 },
             };
 
@@ -76,7 +77,7 @@
         // customize render of each item.
         renderItem: function($ul, item) {
 
-            console.log(item);
+            //console.log(item);
 
             var $li = $("<li>");
             // set the data-value
@@ -94,7 +95,7 @@
             var itemHtml = 
               //'<div class="media">' +
               '  <div class="media-left">' + 
-              '    <i class="fa fa-file-text-o fa-3x fa-border text-primary"></i>' +
+              '    <i class="fa fa-file-text-o fa-2x fa-border text-primary"></i>' +
               '  </div>' + 
               '  <div class="media-body">' +
               '    <h4 class="media-heading">' + item.title + 
