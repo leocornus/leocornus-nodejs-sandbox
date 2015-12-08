@@ -95,7 +95,10 @@
             var itemHtml = 
               //'<div class="media">' +
               '  <div class="media-left">' + 
-              '    <i class="fa fa-file-text-o fa-2x fa-border text-primary"></i>' +
+              '    <span class="fa-stack fa-2x">' +
+              '      <i class="fa fa-circle fa-stack-2x label-default"></i>' +
+              '      <i class="fa fa-file-text-o fa-stack-1x text-danger"></i>' +
+              '    </span>' +
               '  </div>' + 
               '  <div class="media-body">' +
               '    <h4 class="media-heading">' + item.title + 
