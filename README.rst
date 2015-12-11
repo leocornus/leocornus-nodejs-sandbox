@@ -2,10 +2,25 @@
 
 |nodei|_
 
+It is very simple to get started with JavaScript programming.
+
+:install:
+  $ npm install
+:unit and e2e test:
+  $ npm run gulp
+:unit test:
+  $ npm run gulp unit-test
+:e2e test:
+  $ npm run gulp e2e-test
+:demo app:
+  $ npm run gulp express-app
+
+Visit http://localhost:8900/demo for demo applications.
+
 Sandbox to learn node.js
 ========================
 
-a fun place to learn node.js story by story
+A fun place to learn node.js story by story
 
 - `npm basic usage <docs/stories/npm-basic.rst>`_
 - `Gulp Story <docs/stories/gulp-story.rst>`_
