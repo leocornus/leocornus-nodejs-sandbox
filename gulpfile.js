@@ -131,6 +131,15 @@ gulp.task('protractor', ['express-app', 'webdriver_update', 'webdriver'], functi
 
 });
 
+// using webpack (through webpack-stream) to distribute package.
+var webpack = require('webpack-stream');
+gulp.task('dist', function() {
+
+    return gulp.src('src/jquery/ui-autocomplete.js')
+      .pipe(webpack())
+      .pipe(gulp.dest('dist/'));
+});
+
 var exit = require('gulp-exit');
 gulp.task('clean', ['protractor'], function() {
 
