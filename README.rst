@@ -37,7 +37,8 @@ Dependence Check List
 nodejs fun depends on the following tools and softwares:
 
 - nodejs, npm, bower
-- java version 1.7 or higher, to run Selenium standalone server.
+- Git
+- Java version 1.7 or higher, to run Selenium standalone server.
 - OPTIONAL Xvfb for command line testing. both karma runner
   and protractor depend on this.
 
