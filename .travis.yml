@@ -22,4 +22,4 @@ script:
   - npm run mocha
   - npm run karma-jasmine
   - npm run karma-mocha
-  - npm run gulp
+  - npm run test-vows
