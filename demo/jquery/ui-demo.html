@@ -21,6 +21,10 @@ var simpleTest = angular.module('uiDemo', []);
 jQuery(document).ready(function($) {
     $('#query').liveSearch();
 });
+
+jQuery(document).ready(function($) {
+    $('#query-right').liveSearch();
+});
     </script>
   </head>
   <body>
@@ -38,6 +42,21 @@ jQuery(document).ready(function($) {
                placeholder="Find something"
                id="query"
                aria-describedby="sizing-addon"/>
+      </div>
+
+      <div class="page-header"><h1>Try button on right side</h1></div>
+
+      <div class="input-group input-group-lg ui-front"
+           role="group" aria-label="...">
+        <input type="text" class="form-control"
+               placeholder="Find something"
+               id="query-right"
+               aria-describedby="sizing-addon"/>
+        <span class="input-group-addon bg-info"
+              id="sizing-addon">
+          <i class="fa fa-search text-primary"></i>
+          Live Search
+        </span>
       </div>
 
     </div>
