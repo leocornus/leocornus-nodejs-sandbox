@@ -7,13 +7,13 @@ It is very simple to get started with JavaScript programming.
 :install:
   $ npm install
 :unit and e2e test:
-  $ npm run gulp
+  $ npm test
 :unit test:
-  $ npm run gulp unit-test
+  $ npm run unit-test
 :e2e test:
-  $ npm run gulp e2e-test
+  $ npm run e2e-test
 :demo app:
-  $ npm run gulp express-app
+  $ npm run express-app
 
 Visit http://localhost:8900/demo for demo applications.
 
