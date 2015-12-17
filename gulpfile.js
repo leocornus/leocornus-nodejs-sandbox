@@ -140,6 +140,45 @@ gulp.task('dist', function() {
       .pipe(gulp.dest('dist/'));
 });
 
+// testing the webdriverio and selenium standalone
+var webdirverSingle = require('gulp-webdriver');
+gulp.task('test:webdriver', ['selenium'], function() {
+    return gulp.src('test/wdio.conf.js').pipe(webdirverSingle({
+        //logLevel: 'verbose',
+        logLevel: 'command',
+        waitforTimeout: 12345,
+        // only for testing purposes
+        cucumberOpts: {
+            require: 'nothing'
+        },
+        reporter: 'spec'
+    })).once('end', function() {
+        selenium.child.kill();
+    });
+});
+
+var selenium = require('selenium-standalone');
+gulp.task('selenium', function (done) {
+    selenium.install({
+        logger: function (message) { 
+            console.log(message);
+        }
+    }, function (err) {
+        if (err) return done(err);
+
+        selenium.start({
+           spawnOptions: {
+               stdio: 'inherit'
+           }
+        }, function (err, child) {
+          if (err) return done(err);
+
+          selenium.child = child;
+          done();
+        });
+    });
+});
+
 var exit = require('gulp-exit');
 gulp.task('clean', ['protractor'], function() {
 
