@@ -153,6 +153,25 @@ gulp.task('test:webdriver', ['selenium'], function() {
         },
         reporter: 'spec'
     })).once('end', function() {
+        // shutdown the selenium standalone server
+        selenium.child.kill();
+    });
+});
+
+// using jasmine as the test framework.
+gulp.task('test:webdriver:jasmine', ['selenium'], function() {
+    return gulp.src('test/wdio.conf.jasmine.js').
+    pipe(webdirverSingle({
+        //logLevel: 'verbose',
+        logLevel: 'command',
+        waitforTimeout: 12345,
+        // only for testing purposes
+        cucumberOpts: {
+            require: 'nothing'
+        },
+        reporter: 'spec'
+    })).once('end', function() {
+        // shutdown the selenium standalone server
         selenium.child.kill();
     });
 });

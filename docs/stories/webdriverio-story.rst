@@ -3,7 +3,7 @@ Webdirver to do funtion test
 
 target:
 
-- WebdriverIO
+- WebdriverIO and gulp-webdriver
 - selenium-standalone
 - gulp tasks 
 
