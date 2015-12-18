@@ -24,3 +24,4 @@ script:
   - npm run karma-mocha
   - npm run test-vows
   - npm run gulp test:webdriver
+  - npm run gulp test:webdriver:jasmine
