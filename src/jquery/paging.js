@@ -1,8 +1,7 @@
 /**
- * try to create a simplest jQuery plugin.
- * it will be used like this:
+ * a simple plugin to do pagination work for a list groun in a panel.
  *
- *   jQuery('#idone').simple();
+ *   jQuery('#id-of-parent-panel').simple();
  */
 
 ;(function($) {
@@ -11,13 +10,16 @@
     var pluginListGroupPaging = "listGroupPaging";
     // se the default alue.
     var defaults = {
-            desc : "pagination for list group"
+            desc : "pagination for list group",
+            perPage : 15
         };
 
     // the plugin constructor.
     function Plugin(element, options) {
         // the DOM element.
         this.element = element;
+        this.$element = $(element);
+        this.$listGroup = this.$element.find('.list-group');
         // extend mthod will merge object contents.
         this.settings = $.extend({}, defaults, options);
         this._defatuls = defaults;
@@ -30,15 +32,38 @@
 
         // the initialize function.
         init: function() {
+
             var self = this;
             var $element = $(this.element);
+            //console.log(this.$listGroup);
+            this.$items = this.$listGroup.find('.list-group-item');
+            //console.log(this.$items);
+            this.total = this.$items.length;
 
-            // when mouseover, we will show the red back ground.
-            $element.on('mouseover.' + pluginListGroupPaging, function() {
+            // tracking pages.
+            this.start = 0;
+            this.updatePageSummary();
+            this.showItems(this.start + 1, this.start + this.settings.perPage);
 
-                var $me = $(this);
-                $me.css('background-color', 'red');
-            });
+            // previous and next page. 
+   
+        },
+
+        showItems: function(start, end) {
+
+            // only show the first page.
+            this.$items.attr('style', 'display: none');
+            for(i = start - 1; i < end - 1; i++) {
+                $(this.$items[i]).attr('style', '');
+            }
+        },
+
+        updatePageSummary: function() {
+        
+            this.$element.find('.pull-right #start').html(this.start + 1);
+            var end = this.settings.perPage + this.start;
+            this.$element.find('.pull-right #end').html(end);
+            this.$element.find('.pull-right #total').html(this.total);
         }
     });
 
