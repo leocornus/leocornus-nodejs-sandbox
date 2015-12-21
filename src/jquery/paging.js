@@ -11,7 +11,7 @@
     // se the default alue.
     var defaults = {
             desc : "pagination for list group",
-            perPage : 15
+            perPage : 5
         };
 
     // the plugin constructor.
@@ -41,21 +41,108 @@
             this.total = this.$items.length;
 
             // tracking pages.
-            this.start = 0;
-            this.updatePageSummary();
-            this.showItems(this.start + 1, this.start + this.settings.perPage);
+            this.initPageSummary();
+            this.showItems();
 
             // previous and next page. 
-   
+            this.$element.find('.pull-right .btn-group .btn').
+                on('click', function() {
+                // the previous or next button.
+                self.turnPage(this.id);
+            });
         },
 
-        showItems: function(start, end) {
+        turnPage: function(direction) {
+
+            var start = this.getStartFrom();
+            var newStart = start;
+            switch(direction) {
+            case 'next':
+                newStart = start + this.settings.perPage;
+                // enable the previous button.
+                this.toggleButton('previous', true);
+                break;
+            case 'previous':
+                newStart = start - this.settings.perPage;
+                // enable the next button.
+                this.toggleButton('next', true);
+                if(newStart == 1) {
+                    // disable previous.
+                    this.toggleButton('previous', false);
+                }
+                break;
+            }
+
+            var end = newStart + this.settings.perPage - 1;
+            if (end >= this.total) {
+                // total items is less than a page.
+                // using the total as end at.
+                end = this.total;
+                // disable next button.
+                this.toggleButton('next', false);
+            }
+
+            // caculate the current page.
+            // turn page,
+            // update summary
+            this.$element.find('.pull-right #start').html(newStart);
+            this.$element.find('.pull-right #end').html(end);
+            // enable or disable buttons.
+            // show items.
+            this.showItems();
+        },
+
+        showItems: function() {
+
+            var start = this.getStartFrom();
+            var end = this.getEndAt();
 
             // only show the first page.
             this.$items.attr('style', 'display: none');
-            for(i = start - 1; i < end - 1; i++) {
+            for(i = start - 1; i < end; i++) {
                 $(this.$items[i]).attr('style', '');
             }
+        },
+
+        /**
+         *  the start from number
+         */
+        getStartFrom: function() {
+
+            var selector = '.pull-right #start';
+            var start = this.$element.find(selector).html();
+            return parseInt(start);
+        },
+
+        getEndAt: function() {
+
+            var selector = '.pull-right #end';
+            var end = this.$element.find(selector).html();
+            return parseInt(end);
+        },
+
+        /**
+         * initialize page summary.
+         */
+        initPageSummary: function() {
+
+            // disable the previous botton.
+            this.toggleButton('previous', false);
+
+            // calculate numbers.
+            var start = this.getStartFrom();
+            // set end number to per page number.
+            var end = this.settings.perPage;
+            if (end >= this.total) {
+                // total items is less than a page.
+                // using the total as end at.
+                end = this.total;
+                // disable next button.
+                this.toggleButton('next', false);
+            }
+
+            this.$element.find('.pull-right #end').html(end);
+            this.$element.find('.pull-right #total').html(this.total);
         },
 
         updatePageSummary: function() {
@@ -64,6 +151,34 @@
             var end = this.settings.perPage + this.start;
             this.$element.find('.pull-right #end').html(end);
             this.$element.find('.pull-right #total').html(this.total);
+        },
+
+        /**
+         * toggle buttons enable or disable.
+         */
+        toggleButton(what, enable) {
+
+            var selector = '';
+            switch(what) {
+            case 'next':
+                // find the next button.
+                selector = '.pull-right .btn-group .btn[id=next]';
+                break;
+            case 'previous':
+                // find the previous button.
+                selector = '.pull-right .btn-group .btn[id=previous]';
+                break;
+            case 'both':
+                // find bothe previous and next button.
+                selector = '.pull-right .btn-group .btn';
+                break;
+            }
+
+            if(enable) {
+                this.$element.find(selector).removeClass('disabled');
+            } else {
+                this.$element.find(selector).addClass('disabled');
+            }
         }
     });
 
