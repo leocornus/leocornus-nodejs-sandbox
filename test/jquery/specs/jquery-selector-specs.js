@@ -6,6 +6,9 @@ describe('Testing jQuery Selectors', function() {
       '  <div id="name"><i>George Martin</i></div>' +
       '  <div id="name"><i>Malcom John Sinclair</i></div>' +
       '  <div id="name"><i>J. Ohn</i></div>' +
+      // add some attribute.
+      '  <div id="new" attr="test">abc</div>' +
+      '  <div id="new">def</div>' +
       '</div>';
 
     var $element;
@@ -23,6 +26,13 @@ describe('Testing jQuery Selectors', function() {
         johns = $element.find('div[id=name]:contains("john")');
         // Yes, it is case sensitive!
         expect(johns.length).toBe(0);
+    });
+
+    it("simple not() selector", function() {
+
+        var divs = $element.find('div[id=new]').
+                   not('[attr=test]');
+        expect(divs.length).toBe(1);
     });
 
 });
