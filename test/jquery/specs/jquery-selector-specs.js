@@ -6,6 +6,7 @@ describe('Testing jQuery Selectors', function() {
       '  <div id="name"><i>George Martin</i></div>' +
       '  <div id="name"><i>Malcom John Sinclair</i></div>' +
       '  <div id="name"><i>J. Ohn</i></div>' +
+      '  <span id="name"><i>J. Ohnote</i></span>' +
       // add some attribute.
       '  <div id="new" attr="test">abc</div>' +
       '  <div id="new">def</div>' +
@@ -16,6 +17,21 @@ describe('Testing jQuery Selectors', function() {
     beforeEach(function() {
 
         $element = $(testHTML);
+    });
+
+    it('id selector', function() {
+
+       var names = $element.find('#name');
+       expect(names.length).toBe(5);
+       // the another way to select id=name.
+       names = $element.find('[id=name]');
+       expect(names.length).toBe(5);
+
+       // element tag with id.
+       names = $element.find('div#name');
+       expect(names.length).toBe(4);
+       names = $element.find('div[id=name]');
+       expect(names.length).toBe(4);
     });
 
     it("simple contains() selector", function() {
