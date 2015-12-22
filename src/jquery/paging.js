@@ -11,7 +11,7 @@
     // se the default alue.
     var defaults = {
             desc : "pagination for list group",
-            perPage : 5
+            perPage : 8 
         };
 
     // the plugin constructor.
@@ -141,14 +141,6 @@
                 this.toggleButton('next', false);
             }
 
-            this.$element.find('.pull-right #end').html(end);
-            this.$element.find('.pull-right #total').html(this.total);
-        },
-
-        updatePageSummary: function() {
-        
-            this.$element.find('.pull-right #start').html(this.start + 1);
-            var end = this.settings.perPage + this.start;
             this.$element.find('.pull-right #end').html(end);
             this.$element.find('.pull-right #total').html(this.total);
         },
