@@ -145,7 +145,7 @@
                 this.toggleButton('next', false);
             }
 
-            this.$element.find('.pull-right #start').html(end);
+            this.$element.find('.pull-right #start').html(start);
             this.$element.find('.pull-right #end').html(end);
             this.$element.find('.pull-right #total').html(this.total);
         },
