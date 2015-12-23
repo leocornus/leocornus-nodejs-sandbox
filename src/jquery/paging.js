@@ -109,6 +109,10 @@
          */
         getStartFrom: function() {
 
+            if(this.total < 1) {
+                // not item in the list group.
+                return 0;
+            }
             var selector = '.pull-right #start';
             var start = this.$element.find(selector).html();
             return parseInt(start);
@@ -141,6 +145,7 @@
                 this.toggleButton('next', false);
             }
 
+            this.$element.find('.pull-right #start').html(end);
             this.$element.find('.pull-right #end').html(end);
             this.$element.find('.pull-right #total').html(this.total);
         },
