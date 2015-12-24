@@ -8,7 +8,12 @@
     var defaults = {
         // the url endpoint for search.
         searchUrl : '/search',
-        minLength : 2
+        // the minimium length of characters whil will trigger
+        // auto complete process.
+        minLength : 2,
+        // Max items show on the suggestion. 
+        // if set to 0, it will show all items from the suggestion.
+        maxItems : 3 
     };
 
     // the plugin constructor.
@@ -55,7 +60,14 @@
                           term: request.term
                       },
                       success: function(data) {
-                          response(data);
+                          var total = data.length;
+                          var max = self.settings.maxItems;
+                          if(max > 0 && total > max) {
+                              // slice the result.
+                              response(data.slice(0, max));
+                          } else {
+                              response(data);
+                          }
                       }
                     });
                 }, 
