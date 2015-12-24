@@ -94,5 +94,18 @@ describe('Basic JavaScript Testing Spec', function() {
             expect(newSize).toBe(4);
             expect(testArray.length).toBe(4);
         });
+
+        it('Testing the function slice for array', function() {
+
+            // slice sill include begin number and 
+            // exclude end number.
+            var extractArray = testArray.slice(0, 2);
+            expect(extractArray.length).toBe(2);
+            expect(extractArray[0]).toBe('a');
+            // extract from 1,
+            extractArray = testArray.slice(1, 2);
+            expect(extractArray.length).toBe(1);
+            expect(extractArray[0]).toBe('b');
+        });
     });
 });
