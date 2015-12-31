@@ -30,6 +30,7 @@ A fun place to learn node.js story by story
 - `Web Server Story <docs/stories/web-server-story.rst>`_
 - `Protractor Story <docs/stories/protractor-story.rst>`_
 - `Express Story <docs/stories/express-story.rst>`_
+- `JavaScript Quality <docs/stories/js-quality-story.rst>`_
 
 Dependence Check List
 ---------------------
