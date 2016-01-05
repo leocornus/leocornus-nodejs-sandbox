@@ -11,14 +11,19 @@ describe('gulp-webdriver test simple specs', function () {
         expect(browser.options.cucumberOpts.require[0]).
             toBe('nothing');
 
+        // have to return here.
         return browser;
     });
 
-    it('checks if title contains the search query', function() {
-        return browser
+    it('checks if title contains the search query', function(done) {
+
+        browser
             .url('/')
+            // pause to make sure the page is loaded.
+            .pause(3000)
             .getTitle(function(err,title) {
                 expect(title).toBe('WebdriverJS Testpage');
-            });
+            })
+            .call(done);
     });
 });
