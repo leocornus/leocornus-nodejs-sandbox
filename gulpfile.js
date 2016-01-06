@@ -10,6 +10,8 @@ gulp.task('default', ['unit-test', 'e2e-test']);
 gulp.task('unit-test', ['karma', 'karma.jquery', 'jasmine']);
 // the e2e test tasks.
 gulp.task('e2e-test', ['protractor', 'express-app-stop']);
+// the e2e test with webdrive directly.
+gulp.task('wdio-test', ['test:webdriver:jasmine', 'wdio:express-app-stop']);
 
 gulp.task('hello', function() {
   // place code for your default task here
@@ -108,6 +110,11 @@ gulp.task('express-app-stop', ['protractor'], function() {
     liveServer.stop();
 });
 
+// stop live server after e2e testing are finished.
+gulp.task('wdio:express-app-stop', ['test:webdriver:jasmine'], function() {
+
+    liveServer.stop();
+});
 
 // load the protractor.
 var protractor = require('gulp-protractor').protractor;
@@ -177,7 +184,7 @@ gulp.task('test:webdriver:jasmine', ['selenium'], function() {
 });
 
 var selenium = require('selenium-standalone');
-gulp.task('selenium', function (done) {
+gulp.task('selenium', ['express-app'], function (done) {
     selenium.install({
         logger: function (message) { 
             console.log(message);
