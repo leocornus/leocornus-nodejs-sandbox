@@ -6,7 +6,8 @@ exports.config = {
     updateJob: false, // will get overwritten
 
     specs: [
-        './test/wdio/webdriver_test.jasmine.js'
+        './test/wdio/webdriver_test.jasmine.js',
+        './test/wdio/ui-demo-specs.jasmine.js'
     ],
     exclude: [
         // 'path/to/excluded/files'
