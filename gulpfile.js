@@ -151,7 +151,7 @@ gulp.task('dist', function() {
 var webdirverSingle = require('gulp-webdriver');
 gulp.task('test:webdriver', ['selenium'], function() {
     return gulp.src('test/wdio.conf.js').pipe(webdirverSingle({
-        //logLevel: 'verbose',
+        //logLevel: 'verbose, command',
         logLevel: 'command',
         waitforTimeout: 12345,
         // only for testing purposes
@@ -170,7 +170,7 @@ gulp.task('test:webdriver:jasmine', ['selenium'], function() {
     return gulp.src('test/wdio.conf.jasmine.js').
     pipe(webdirverSingle({
         //logLevel: 'verbose',
-        logLevel: 'command',
+        logLevel: 'silent',
         waitforTimeout: 12345,
         // only for testing purposes
         cucumberOpts: {
@@ -194,7 +194,7 @@ gulp.task('selenium', ['express-app'], function (done) {
 
         selenium.start({
            spawnOptions: {
-               stdio: 'inherit'
+               //stdio: 'inherit'
            }
         }, function (err, child) {
           if (err) return done(err);

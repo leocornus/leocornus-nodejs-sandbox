@@ -7,7 +7,7 @@ describe('gulp-webdriver test simple specs', function () {
         expect(browser.options.waitforTimeout).toBe(12345);
         expect(browser.options.coloredLogs).toBe(true);
         expect(browser.options.updateJob).toBe(false);
-        expect(browser.options.logLevel).toBe('command');
+        expect(browser.options.logLevel).toBe('silent');
         expect(browser.options.cucumberOpts.require[0]).
             toBe('nothing');
 
