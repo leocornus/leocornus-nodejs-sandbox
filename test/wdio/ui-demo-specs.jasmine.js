@@ -23,17 +23,17 @@ describe('Using webdriver io to desting ui demo page', function () {
                 expect(title).toBe('Demo jQuery UI');
             })
             .setValue('input#query', 'livesearch')
-            // pause to wait...
-            .pause(3000)
+            // pause to wait for the response.
+            .pause(2000)
             // get text from the autocomplete
-            .getText('ul.ui-autocomplete').then(function(err, text) {
-
+            .getText('ul.ui-autocomplete').then(function(text) {
                 console.log(text);
-                expect(text).not.toBe('');
+                expect(text[0]).not.toBe('');
+                expect(text[1]).toBe('');
             })
-            .getHTML('ul.ui-autocomplete').then(function(err, html) {
-
+            .getHTML('ul.ui-autocomplete').then(function(html) {
                 console.log(html);
+                expect(html).not.toBe('');
             })
             .call(done);
     });
