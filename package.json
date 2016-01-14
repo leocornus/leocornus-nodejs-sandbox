@@ -18,6 +18,7 @@
     "test": "gulp",
     "unit-test": "gulp unit-test",
     "e2e-test": "gulp e2e-test",
+    "wdio-test": "gulp wdio-test",
     "express-app": "gulp express-app",
     "mocha": "mocha test/mocha/*.js",
     "jasmine": "jasmine JASMINE_CONFIG_PATH=test/jasmine.json",
