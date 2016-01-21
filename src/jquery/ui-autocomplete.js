@@ -107,15 +107,16 @@
             var itemHtml = 
               //'<div class="media">' +
               '  <div class="media-left">' + 
-              '    <span class="fa-stack fa-2x">' +
-              '      <i class="fa fa-circle fa-stack-2x label-default"></i>' +
-              '      <i class="fa fa-file-text-o fa-stack-1x text-danger"></i>' +
+              '    <span class="text-warning fa-stack fa-lg">' +
+              '      <i class="fa fa-circle fa-stack-2x"></i>' +
+              '      <i class="fa fa-file-text-o fa-stack-1x fa-inverse"></i>' +
               '    </span>' +
               '  </div>' + 
               '  <div class="media-body">' +
               '    <h4 class="media-heading">' + item.title + 
               '    </h4>' +
-              '    <p>' + item.description + 
+              '    <p class="media-description">' + 
+                     item.description + 
               '    </p>' + 
               '<i class="fa fa-link text-warning"></i> ' + item.url +
               '  </div>';

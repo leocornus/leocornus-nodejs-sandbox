@@ -12,7 +12,7 @@ It is very simple to get started with JavaScript programming.
   $ npm run unit-test
 :e2e test:
   $ npm run e2e-test
-:webdriveio test:
+:webdriverio test:
   $ npm run wdio-test 
 :demo app:
   $ npm run express-app
