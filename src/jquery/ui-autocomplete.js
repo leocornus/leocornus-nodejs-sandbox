@@ -113,12 +113,15 @@
               '    </span>' +
               '  </div>' + 
               '  <div class="media-body">' +
-              '    <h4 class="media-heading">' + item.title + 
+              '    <h4 class="media-heading">' +
+                     '<a href="' + item.url + 
+                         '" style="padding: 0;">' + item.title + 
+                     '</a>' +
               '    </h4>' +
+              '    <small class="text-muted">SITE</small>' +
               '    <p class="media-description">' + 
                      item.description + 
               '    </p>' + 
-              '<i class="fa fa-link text-warning"></i> ' + item.url +
               '  </div>';
               //'</div>';
 
