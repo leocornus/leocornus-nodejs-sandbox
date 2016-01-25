@@ -12,6 +12,7 @@ The demo page will answer the following questions:
 styles for the files list.
 
 - using bootstrap and fontawesome
+- media of media-list for each file.
 - icons for documentation files
 - preview thumbnail for images
 
@@ -19,3 +20,4 @@ Challenges
 ----------
 
 - how to show the thumbnail of a file? JavaScript way.
+
