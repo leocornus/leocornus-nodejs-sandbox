@@ -107,5 +107,17 @@ describe('Basic JavaScript Testing Spec', function() {
             expect(extractArray.length).toBe(1);
             expect(extractArray[0]).toBe('b');
         });
+
+        it('Testing the function join for array', function() {
+
+            // join the element of an array into a string
+            var defaultJoin = testArray.join();
+            // default separator is ','
+            expect(defaultJoin).toBe('a,b,c,d');
+
+            // customize separator.
+            var customJoin = testArray.join('|');
+            expect(customJoin).toBe('a|b|c|d');
+        });
     });
 });
