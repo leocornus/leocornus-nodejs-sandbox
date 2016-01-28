@@ -21,6 +21,20 @@ describe('Testing JavaScript types', function() {
             expect(theNumber).toBe(123);
             expect(theNumber).not.toBe('123');
         });
+
+        /**
+         * test modulus operator for numbers.
+         */
+        it('modulus opterator for numbers', function() {
+
+            var x = 5;
+            var a = 4;
+            var b = 0;
+            var y = 2;
+            expect(x % y).toBe(1);
+            expect(a % y).toBe(0);
+            expect(b % y).toBe(0);
+        });
     });
 
 });
