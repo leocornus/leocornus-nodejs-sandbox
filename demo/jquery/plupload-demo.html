@@ -25,21 +25,27 @@ var simpleTest = angular.module('plDemo', []);
 
 <body>
 
-<h1>Plupload Core API testing</h1>
+<div class="container">
 
-<div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
+  <div class="page-header"><h1>Plupload Core API testing</h1></div>
 
-<br />
- 
-<div id="container">
-    <a id="pickfiles" href="javascript:;">[Select files]</a>
-    <a id="uploadfiles" href="javascript:;">[Upload files]</a>
-</div>
- 
-<br />
-<pre id="console">
-</pre>
- 
+  <div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
+
+  <br />
+  <div class="row"> 
+    <div class="col-md-6" id="container">
+      <a id="pickfiles" href="javascript:;">[Select files]</a>
+      <a id="uploadfiles" href="javascript:;">[Upload files]</a>
+    </div>
+
+    <div class="col-md-6">
+    </div>
+  </div>
+   
+  <br />
+  <pre id="console">
+  </pre>
+</div> 
  
 <script type="text/javascript">
 // Custom example logic
