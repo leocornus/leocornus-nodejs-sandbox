@@ -29,16 +29,18 @@ var simpleTest = angular.module('plDemo', []);
 
   <div class="page-header"><h1>Plupload Core API testing</h1></div>
 
-  <div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
-
-  <br />
   <div class="row"> 
     <div class="col-md-6" id="container">
+      <h3>Files to Upload</h3>
+      <div id="filelist">
+        Your browser doesn't have Flash, Silverlight or HTML5 support.
+      </div>
       <a id="pickfiles" href="javascript:;">[Select files]</a>
       <a id="uploadfiles" href="javascript:;">[Upload files]</a>
     </div>
 
     <div class="col-md-6">
+      <h3>Metadata</h3>
     </div>
   </div>
    
@@ -82,8 +84,13 @@ var uploader = new plupload.Uploader({
  
     init: {
         PostInit: function() {
-            document.getElementById('filelist').innerHTML = '';
- 
+            // initialized well done.
+            // get ready the media list for the files.
+            var ul =
+                '<ul class="media-list" id="filelist-ul"></ul>';
+            jQuery('#filelist').html(ul);
+
+            // set up the click action.
             document.getElementById('uploadfiles').onclick = function() {
                 uploader.start();
                 return false;
@@ -92,8 +99,38 @@ var uploader = new plupload.Uploader({
  
         FilesAdded: function(up, files) {
             plupload.each(files, function(file) {
+                // add file to the list.
                 console.log(file);
-                document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+                $ul = jQuery('#filelist-ul');
+
+                var $li = $("<li>");
+                // set the data-value
+                $li.attr("data-value", file.name);
+                $li.attr("id", file.id);
+                $li.addClass('media');
+                //$li.addClass('clearfix');
+                // try using bootstrat media list
+                var itemHtml = 
+                  //'<div class="media">' +
+                  '  <div class="media-left">' + 
+                  '    <span class="text-warning fa-stack fa-lg">' +
+                  '      <i class="fa fa-circle fa-stack-2x"></i>' +
+                  '      <i class="fa fa-file-text-o fa-stack-1x fa-inverse"></i>' +
+                  '    </span>' +
+                  '  </div>' + 
+                  '  <div class="media-body">' +
+                  '    <h4 class="media-heading">' +
+                  file.name +
+                  '    </h4>' +
+                  '    <p class="media-description">' + 
+                  file.size + 
+                  '    </p>' + 
+                  '  </div>';
+
+                $li.append(itemHtml);
+
+                // append to ul
+                $ul.append($li);
             });
         },
  
