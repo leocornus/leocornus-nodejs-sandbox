@@ -30,6 +30,41 @@ var simpleTest = angular.module('plDemo', []);
   <div class="page-header"><h1>Plupload Core API testing</h1></div>
 
   <div class="row"> 
+
+    <div class="col-md-6">
+      <h3>Metadata</h3>
+<div class="form-horizontal">
+  <fieldset>
+    <div class="form-group">
+      <label for="projectDescription" class="col-lg-4 control-label">
+        File Description
+      </label>
+      <div class="col-lg-8">
+        <textarea class="form-control" rows="5" 
+                  placeholder="set description for the files"
+                  id="projectDescription"></textarea>
+        <span class="help-block">
+          File description, using mediawiki wiki syntax.
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputOwners" class="col-lg-4 control-label">
+        File Categories
+      </label>
+      <div class="col-lg-8" id="owners-col">
+        <textarea class="form-control" id="projectOwners" rows="2"
+                placeholder="set file categories"></textarea>
+        <span class="help-block">
+          Categories for those files.
+        </span>
+      </div>
+    </div>
+  </fieldset>
+</div>
+    </div>
+
     <div class="col-md-6" id="container">
       <h3>Files to Upload</h3>
       <div id="filelist">
@@ -37,10 +72,6 @@ var simpleTest = angular.module('plDemo', []);
       </div>
       <a id="pickfiles" href="javascript:;">[Select files]</a>
       <a id="uploadfiles" href="javascript:;">[Upload files]</a>
-    </div>
-
-    <div class="col-md-6">
-      <h3>Metadata</h3>
     </div>
   </div>
    
@@ -123,7 +154,7 @@ var uploader = new plupload.Uploader({
                   file.name +
                   '    </h4>' +
                   '    <p class="media-description">' + 
-                  file.size + 
+                  plupload.formatSize(file.size) + 
                   '    </p>' + 
                   '  </div>';
 
