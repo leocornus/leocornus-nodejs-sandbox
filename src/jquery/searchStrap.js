@@ -61,23 +61,27 @@
         },
 
         // handle search result.
-        handleSearchResult(data) {
+        handleSearchResult: function(data) {
 
             // log the data for debuging...
-            console.log(data);
+            //console.log(data);
+
+            // TODO: analyze the search result.
+
+            // using list group for search result.
             $ul = $('<ul class="list-group"></ul>');
             $.each(data, function(index, item) {
-
+                // present each item as a list group item.
                 var liHtml = 
                     '<li class="list-group-item">' +
-                    '  <h4>' +
+                    '  <h4 class="list-group-item-heading">' +
                     '    <a href="' + item.url + 
                                 '" style="padding: 0;">' +
                            item.title +
                     '    </a>' +
                     '  </h4>' +
                     '  <small class="text-muted">SITE</small>' +
-                    '  <p>' +
+                    '  <p class="list-group-item-text">' +
                          item.description +
                     '  </p>' +
                     '</li>';
