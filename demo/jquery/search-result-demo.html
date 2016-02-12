@@ -13,37 +13,52 @@
     <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
     <script src='/bower_components/angular/angular.min.js'></script>
 
-    <script src='/src/jquery/ui-autocomplete.js'></script>
+    <script src='/src/jquery/searchStrap.js'></script>
     <script>
 // this will replace the code in controller.js
 var simpleTest = angular.module('uiDemo', []);
 
 jQuery(document).ready(function($) {
-    $('#query').liveSearch();
-});
-
-jQuery(document).ready(function($) {
-    $('#query-right').liveSearch();
+    $('#query-right').searchStrap();
 });
     </script>
   </head>
   <body>
     <div class="container">
-      <div class="page-header"><h1>Hello Google Search!</h1></div>
+      <div class="page-header">
+        <h1>Hello Google Search!</h1>
 
-      <div class="input-group input-group-lg ui-front"
-           role="group" aria-label="...">
-        <input type="text" class="form-control"
-               placeholder="Find something"
-               id="query-right"
-               aria-describedby="sizing-addon"/>
-        <span class="input-group-addon bg-info"
-              id="sizing-addon">
-          <i class="fa fa-search text-primary"></i>
-          Search
-        </span>
+        <div class="input-group input-group-lg ui-front"
+             role="group" aria-label="...">
+          <input type="text" class="form-control"
+                 placeholder="Find something"
+                 id="query-right"
+                 aria-describedby="sizing-addon"/>
+          <span class="input-group-addon bg-info"
+                id="sizing-addon">
+            <i class="fa fa-search text-primary"></i>
+            Search
+          </span>
+        </div>
       </div>
 
+      <div id="search-result"> 
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div>
+              <h4>
+                <a href="item.url" style="padding: 0;">
+                  The title.
+                </a>
+              </h4>
+              <small class="text-muted">SITE</small>
+              <p>
+                item.description 
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </body>
 </html>
