@@ -67,6 +67,9 @@
             //console.log(data);
 
             // TODO: analyze the search result.
+            info =  '<p class="text-info">' +
+                'About 23,456 results (0.51 seconds)' +
+                '</p>';
 
             // using list group for search result.
             $ul = $('<ul class="list-group"></ul>');
@@ -88,7 +91,17 @@
                 $ul.append(liHtml);
             });
 
-            $('#search-result').html('').append($ul);
+            // TODO: build the header info bar
+            pagination = '<nav><ul class="pagination">' +
+                '  <li><a><span>&laquo;</span></a></li>' +
+                '  <li class="active"><a><span>1</span></a></li>' +
+                '  <li><a><span>2</span></a></li>' +
+                '  <li><a><span>3</span></a></li>' +
+                '  <li><a><span>Next &raquo;</span></a></li>' +
+                '</ul></nav>';
+
+            $('#search-result').html('').append(info).
+                append($ul).append(pagination);
         }
     });
 
