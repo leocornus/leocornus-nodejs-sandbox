@@ -13,13 +13,18 @@
         // the url endpoint for search.
         searchUrl : '/search',
         // the kkkkkk
-        itemsPerPage: 10
+        itemsPerPage: 10,
+        // id for the search button.
+        searchButton : 'search-button',
+        // query param for search term.
+        queryName : 'searchterm'
     };
 
     // the plugin constructor.
     function Plugin(element, options) {
         // the DOM element.
         this.element = element;
+        this.$element = $(element);
         // extend mthod will merge object contents.
         this.settings = $.extend({}, defaults, options);
         this._defatuls = defaults;
@@ -32,10 +37,50 @@
 
         // the initialize function.
         init: function() {
-            var self = this;
-            var $element = $(this.element);
 
-            self.search('test');
+            var self = this;
+            // we will get search term from query
+            var paramName = self.settings.queryName;
+            var searchTerm = decodeURI(this.getUrlVars()[paramName]);
+            this.$element.val(searchTerm);
+
+            self.search(searchTerm);
+
+            // hook the click event to search button.
+            //console.log(self.settings.searchButton);
+            $('#' + self.settings.searchButton).
+                on('click', function() {
+
+                self.handleButtonClick();
+            });
+
+            // hook the key press event.
+            this.$element.on('keypress', function(event) {
+
+                //console.log(event);
+                // only handle the enter key.
+                if(event.keyCode == 13) {
+                    self.handleButtonClick();
+                }
+            });
+        },
+
+        /**
+         * parse the URL got the query parameters.
+         */
+        getUrlVars : function() {
+
+            var vars = [], hash;
+            var href = window.location.href;
+            var hashes = href.slice(href.indexOf('?') + 1).split('&');
+            for(var i = 0; i < hashes.length; i++)
+            {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+
+            return vars;
         },
 
         // search to get result.
@@ -61,6 +106,15 @@
             });
         },
 
+        /**
+         * handle button click event.
+         */
+        handleButtonClick : function() {
+
+            var term = this.$element.val();
+            this.search(term);
+        },
+
         // handle search result.
         handleSearchResult: function(data) {
 
@@ -71,7 +125,7 @@
             // TODO: analyze the search result.
             // var info = this->buildInfoBar(data);
             info =  '<p class="text-info">' +
-                'Found ' + data.total + ' results (0.51 seconds)' +
+                'Found ' + data.total + ' results (0.51 seconds) ' +
                 'for <span class="label-info">' + 
                 currentQuery.term + '</span>' +
                 '</p>';
