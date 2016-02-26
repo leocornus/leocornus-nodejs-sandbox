@@ -168,6 +168,13 @@
          * pagination bar.
          */
         buildPagination : function(currentQuery, total) {
+
+            // calculate pages.
+            // find the current page
+            // border check up (first, last)
+            // generate HTML
+            // create jQuery object.
+            // hook click event for all available pages.
         }
     });
 
