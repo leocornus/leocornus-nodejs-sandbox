@@ -30,6 +30,7 @@ app.get('/echo', function(req, res) {
 var search = require('./search');
 // simple search endpoint.
 app.get('/search', search);
+app.post('/search', search);
 
 // testing the nodemw direct api.
 var bot = require('nodemw');

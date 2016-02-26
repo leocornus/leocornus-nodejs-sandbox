@@ -47,11 +47,12 @@
             var searchAction = {
                 term: searchTerm,
                 start: 0,
-                end: self.settings.itemsPerPage
+                perPage: self.settings.itemsPerPage
             };
 
             $.ajax({
                 url: self.settings.searchUrl,
+                method: 'GET',
                 dataType: 'json',
                 data: searchAction,
                 success: function(data) {
@@ -64,7 +65,7 @@
         handleSearchResult: function(data) {
 
             // log the data for debuging...
-            //console.log(data);
+            console.log(data);
 
             // TODO: analyze the search result.
             info =  '<p class="text-info">' +

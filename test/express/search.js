@@ -4,6 +4,13 @@
 
 var search = function(req, res) {
 
+    console.log(req.query);
+
+    // get the query params.
+    var searchTerm = req.query.term;
+    var start = req.query.start;
+    var perPage = req.query.perPage;
+
     // simple result, an array of string.
     var simpleResult = [
         "Item One",
@@ -19,7 +26,7 @@ var search = function(req, res) {
 
     // hard code some result.
     var objectResult = [
-        {title:'The Title', url:'http://one.com',
+        {title:'The Title One', url:'http://one.com',
          description: longestDesc
         },
         {title:'The Two', url:'http://two.com',
