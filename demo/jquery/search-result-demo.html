@@ -19,7 +19,9 @@
 var simpleTest = angular.module('uiDemo', []);
 
 jQuery(document).ready(function($) {
-    $('#query-right').searchStrap();
+    $('#query-right').searchStrap({
+        searchUrl: '/advancedsearch'
+    });
 });
     </script>
 

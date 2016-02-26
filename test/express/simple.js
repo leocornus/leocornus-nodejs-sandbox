@@ -32,6 +32,10 @@ var search = require('./search');
 app.get('/search', search);
 app.post('/search', search);
 
+// advanced search endpoint
+var advancedSearch = require('./advancedsearch');
+app.get('/advancedsearch', advancedSearch);
+
 // testing the nodemw direct api.
 var bot = require('nodemw');
 var client = new bot({
