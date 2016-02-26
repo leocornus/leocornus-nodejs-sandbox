@@ -1,8 +1,7 @@
 /**
- * simple search function.
+ * advanced search function.
  */
-
-var search = function(req, res) {
+var advancedsearch = function(req, res) {
 
     console.log(req.query);
 
@@ -11,13 +10,24 @@ var search = function(req, res) {
     var start = req.query.start;
     var perPage = req.query.perPage;
 
-    // simple result, an array of string.
-    var simpleResult = [
-        "Item One",
-        "Item Two",
-        "Item Three",
-        "Item Four"
-    ];
+    // get ready the search result.
+    var total = 20
+    var searchResult = generateResult(total);
+
+    // build the response.
+    response = {
+        currentQuery : req.query,
+        total : total,
+        searchResult : searchResult
+    }
+
+    res.send(response);
+};
+
+/**
+ * utility function to generate some search result.
+ */
+function generateResult(total) {
 
     var longestDesc = 'one one one one one one one one, ' +
         'one one one one one one one one, ' + 
@@ -67,7 +77,7 @@ var search = function(req, res) {
         }
     ];
 
-    res.send(objectResult);
-};
+    return objectResult;
+}
 
-module.exports = search;
+module.exports = advancedsearch;

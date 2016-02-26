@@ -67,14 +67,18 @@
             // log the data for debuging...
             console.log(data);
 
+            currentQuery = data.currentQuery;
             // TODO: analyze the search result.
+            // var info = this->buildInfoBar(data);
             info =  '<p class="text-info">' +
-                'About 23,456 results (0.51 seconds)' +
+                'Found ' + data.total + ' results (0.51 seconds)' +
+                'for <span class="label-info">' + 
+                currentQuery.term + '</span>' +
                 '</p>';
 
             // using list group for search result.
             $ul = $('<ul class="list-group"></ul>');
-            $.each(data, function(index, item) {
+            $.each(data.searchResult, function(index, item) {
                 // present each item as a list group item.
                 var liHtml = 
                     '<li class="list-group-item">' +
@@ -92,7 +96,7 @@
                 $ul.append(liHtml);
             });
 
-            // TODO: build the header info bar
+            // TODO: using current query to build the pagination bar
             pagination = '<nav><ul class="pagination">' +
                 '  <li><a><span>&laquo;</span></a></li>' +
                 '  <li class="active"><a><span>1</span></a></li>' +
@@ -103,6 +107,13 @@
 
             $('#search-result').html('').append(info).
                 append($ul).append(pagination);
+        },
+
+        /**
+         * using the current query and total to build the 
+         * pagination bar.
+         */
+        buildPagination : function(currentQuery, total) {
         }
     });
 
