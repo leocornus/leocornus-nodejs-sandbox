@@ -155,6 +155,8 @@
         // handle search result.
         handleSearchResult: function(data) {
 
+            var self = this;
+
             // log the data for debuging...
             console.log(data);
 
@@ -194,6 +196,19 @@
 
             $('#search-result').html('').append(info).
                 append($ul).append(pagination);
+
+            // create jQuery object.
+            // hook click event for all available pages.
+            $('#search-result').find('nav ul li[class!="active"] a').
+                on('click', function(event) {
+
+                // identify the page.
+                var pageText = $(this).text();
+                var searchTerm = currentQuery.term;
+                var perPage = currentQuery.perPage;
+                self.handlePagination($(this), pageText, 
+                                      searchTerm, perPage);
+            });
         },
 
         /**
@@ -246,11 +261,22 @@
                     '<li><a><span>Next &raquo;</span></a></li>';
             }
 
-            // create jQuery object.
-            // hook click event for all available pages.
-
+            // add the ending tags.
             pagination = pagination + '</ul></nav>';
             return pagination;
+        },
+
+        /**
+         * handle the pagination.
+         */
+        handlePagination: function($href, pageText, term, perPage) {
+
+            //console.log('page = ' + pageText);
+            start = (parseInt(pageText) - 1) * parseInt(perPage) + 1;
+            // calculate start number to build search query.
+            var query = 
+                this.prepareSearchQuery(term, start);
+            this.search(query);
         }
     });
 
