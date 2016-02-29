@@ -44,7 +44,12 @@
             var searchTerm = decodeURI(this.getUrlVars()[paramName]);
             this.$element.val(searchTerm);
 
-            self.search(searchTerm);
+            // prepare the query to perform the initial search
+            var searchQuery = {
+                term: searchTerm,
+                start: 0
+            };
+            self.search(searchQuery);
 
             // hook the click event to search button.
             //console.log(self.settings.searchButton);
@@ -83,15 +88,22 @@
             return vars;
         },
 
-        // search to get result.
-        search: function(searchTerm) {
+        /**
+         * Perform search according to the search query.
+         * Search query will track the search states, including:
+         *
+         * - search term
+         * - start number
+         * - TODO facets, filter query, 
+         */
+        search: function(searchQuery) {
 
             var self = this;
 
             // get ready action data for search endpoint.
             var searchAction = {
-                term: searchTerm,
-                start: 0,
+                term: searchQuery.term,
+                start: searchQuery.start,
                 perPage: self.settings.itemsPerPage
             };
 
@@ -107,12 +119,18 @@
         },
 
         /**
-         * handle button click event.
+         * handle button click event or enter key press.
+         * we will reset search for both cases.
          */
         handleButtonClick : function() {
 
             var term = this.$element.val();
-            this.search(term);
+            // prepare the query to perform the initial search
+            var searchQuery = {
+                term: term,
+                start: 0
+            };
+            this.search(searchQuery);
             // build the new url.
             url = '?' + this.settings.queryName + 
                   '=' + encodeURI(term);
