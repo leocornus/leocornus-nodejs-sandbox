@@ -113,6 +113,10 @@
 
             var term = this.$element.val();
             this.search(term);
+            // build the new url.
+            url = '?' + this.settings.queryName + 
+                  '=' + encodeURI(term);
+            window.history.pushState('', 'testing', url);
         },
 
         // handle search result.
