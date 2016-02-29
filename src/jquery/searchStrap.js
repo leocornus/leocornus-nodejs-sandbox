@@ -46,7 +46,7 @@
             this.$element.val(searchTerm);
 
             // prepare the query to perform the initial search
-            var searchQuery = this.prepareSearchQuery(searchTerm, 0);
+            var searchQuery = this.prepareSearchQuery(searchTerm, 1);
             self.search(searchQuery);
 
             // hook the click event to search button.
@@ -90,8 +90,13 @@
          * utility method to build the search query.
          * only handle search term and pagination now.
          * TODO: Will add field query soon.
+         *
+         * default start item is 1.
          */
         prepareSearchQuery: function(term, start) {
+
+            // set the default value to 1 for start.
+            var start = typeof start !== 'undefined' ? start : 1;
 
             var searchQuery = {
                 term: term,
@@ -139,7 +144,7 @@
 
             var term = this.$element.val();
             // prepare the query to perform the initial search
-            var query = this.prepareSearchQuery(term, 0);
+            var query = this.prepareSearchQuery(term, 1);
             this.search(query);
             // build the new url.
             url = '?' + this.settings.queryName + 
@@ -153,7 +158,8 @@
             // log the data for debuging...
             console.log(data);
 
-            currentQuery = data.currentQuery;
+            var currentQuery = data.currentQuery;
+            var total = data.total;
             // TODO: analyze the search result.
             // var info = this->buildInfoBar(data);
             info =  '<p class="text-info">' +
@@ -183,13 +189,8 @@
             });
 
             // TODO: using current query to build the pagination bar
-            pagination = '<nav><ul class="pagination">' +
-                '  <li><a><span>&laquo;</span></a></li>' +
-                '  <li class="active"><a><span>1</span></a></li>' +
-                '  <li><a><span>2</span></a></li>' +
-                '  <li><a><span>3</span></a></li>' +
-                '  <li><a><span>Next &raquo;</span></a></li>' +
-                '</ul></nav>';
+            var pagination = 
+                this.buildPagination(currentQuery, total);
 
             $('#search-result').html('').append(info).
                 append($ul).append(pagination);
@@ -201,12 +202,55 @@
          */
         buildPagination : function(currentQuery, total) {
 
-            // calculate pages.
-            // find the current page
+            // collect current query states:
+            // start item index is from 1
+            var start = currentQuery.start;
+            var perPage = currentQuery.perPage;
+
+            // based on start, total, and perPage
+            // find the current page, (start - 1) / perPage + 1
+            var currentPage = (start - 1) / perPage + 1;
+
+            // total pages: page number starts from 1
+            var totalPages = Math.ceil(total / perPage);
+
             // border check up (first, last)
-            // generate HTML
+            // previous button will be handled by first page.
+            // next button will be hanelded by last page.
+            var pagination = '<nav><ul class="pagination">';
+
+            // decide the previous page.
+            if(currentPage !== 1) {
+                pagination = pagination + 
+                    '<li><a><span>&laquo; Previous</span></a></li>';
+            }
+
+            // generate the page list.
+            for(var page = 1; page <= totalPages; page ++) {
+
+                // normal page.
+                var thePage =
+                    '<li><a><span>' + page + '</span></a></li>';
+                if(page == currentPage) {
+                    thePage = 
+                      '<li class="active"><a><span>' + 
+                      page +
+                      '</span></a></li>';
+                }
+                pagination = pagination + thePage;
+            }
+
+            // decide the next page.
+            if(currentPage !== totalPages) { 
+                pagination = pagination +
+                    '<li><a><span>Next &raquo;</span></a></li>';
+            }
+
             // create jQuery object.
             // hook click event for all available pages.
+
+            pagination = pagination + '</ul></nav>';
+            return pagination;
         }
     });
 
