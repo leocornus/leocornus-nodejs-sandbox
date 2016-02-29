@@ -7,12 +7,13 @@ var advancedsearch = function(req, res) {
 
     // get the query params.
     var searchTerm = req.query.term;
-    var start = req.query.start;
-    var perPage = req.query.perPage;
+    var start = parseInt(req.query.start);
+    var perPage = parseInt(req.query.perPage);
 
     // get ready the search result.
-    var total = 20
-    var searchResult = generateResult(total);
+    var total = 26;
+    console.log('start = ' + start);
+    var searchResult = generateResult(total, start, perPage);
 
     // build the response.
     response = {
@@ -25,57 +26,41 @@ var advancedsearch = function(req, res) {
 };
 
 /**
- * utility function to generate some search result.
+ * untility function to generate a doc in the search result.
  */
-function generateResult(total) {
+function generateDoc(index) {
 
-    var longestDesc = 'one one one one one one one one, ' +
+    var title = 'Title ' + index + ' title!';
+    var desc = 'one one one one one one one one, ' +
         'one one one one one one one one, ' + 
         'one one one one one one one one, ' + 
         'one one one one one one one one';
+    var url = 'http://url' + index + '.' + index + '.com';
 
-    // hard code some result.
-    var objectResult = [
-        {title:'The Title One', url:'http://one.com',
-         description: longestDesc
-        },
-        {title:'The Two', url:'http://two.com',
-         description: 'one one one one two two two two two'
-        },
-        {title:'The Title', url:'http://one.com',
-         description: longestDesc
-        },
-        {title:'The Two', url:'http://two.com',
-         description: 'one one one one two two two two two'
-        },
-        {title:'The Title', url:'http://one.com',
-         description: longestDesc
-        },
-        {title:'The Two', url:'http://two.com',
-         description: 'one one one one two two two two two'
-        },
-        {title:'The Title', url:'http://one.com',
-         description: longestDesc
-        },
-        {title:'The Two', url:'http://two.com',
-         description: 'one one one one two two two two two'
-        },
-        {title:'The Title', url:'http://one.com',
-         description: longestDesc
-        },
-        {title:'The Two', url:'http://two.com',
-         description: 'one one one one two two two two two'
-        },
-        {title:'The Title', url:'http://one.com',
-         description: longestDesc
-        },
-        {title:'The Two', url:'http://two.com',
-         description: 'one one one one two two two two two'
-        },
-        {title:'The Three', url:'http://three.com',
-         description: 'three three three'
+    var doc = {
+        title: title,
+        url: url,
+        description: desc
+    };
+
+    return doc;
+}
+
+/**
+ * utility function to generate some search result.
+ * it will return an arry of the result.
+ */
+function generateResult(total, start, perPage) {
+
+    var objectResult = [];
+    for (var i = 0; i < perPage; i ++) {
+
+        // add document.
+        objectResult.push(generateDoc(start + i));
+        if((start + i) == total) {
+            break;
         }
-    ];
+    }
 
     return objectResult;
 }
