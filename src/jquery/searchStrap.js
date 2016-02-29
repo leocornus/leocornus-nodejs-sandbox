@@ -46,10 +46,7 @@
             this.$element.val(searchTerm);
 
             // prepare the query to perform the initial search
-            var searchQuery = {
-                term: searchTerm,
-                start: 0
-            };
+            var searchQuery = this.prepareSearchQuery(searchTerm, 0);
             self.search(searchQuery);
 
             // hook the click event to search button.
@@ -90,6 +87,21 @@
         },
 
         /**
+         * utility method to build the search query.
+         * only handle search term and pagination now.
+         * TODO: Will add field query soon.
+         */
+        prepareSearchQuery: function(term, start) {
+
+            var searchQuery = {
+                term: term,
+                start: start
+            };
+
+            return searchQuery;
+        },
+
+        /**
          * Perform search according to the search query.
          * Search query will track the search states, including:
          *
@@ -127,11 +139,8 @@
 
             var term = this.$element.val();
             // prepare the query to perform the initial search
-            var searchQuery = {
-                term: term,
-                start: 0
-            };
-            this.search(searchQuery);
+            var query = this.prepareSearchQuery(term, 0);
+            this.search(query);
             // build the new url.
             url = '?' + this.settings.queryName + 
                   '=' + encodeURIComponent(term);
