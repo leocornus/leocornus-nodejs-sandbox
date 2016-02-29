@@ -35,6 +35,31 @@ describe('Testing JavaScript types', function() {
             expect(a % y).toBe(0);
             expect(b % y).toBe(0);
         });
+
+        /**
+         * test the divide
+         */
+        it('Pagination calculation', function() {
+
+            var total = 13;
+            var perPage = 10;
+            // ceil will return the smallest integer 
+            // greater then or equal to the givan number.
+            var totalPages = Math.ceil(total / perPage);
+            expect(totalPages).toBe(2);
+
+            // case for the exact page!
+            total = 60;
+            perPage = 5;
+            totalPages = Math.ceil(total/perPage);
+            expect(totalPages).toBe(12);
+
+            // case for less than one page.
+            total = 8;
+            perPage = 10;
+            totalPages = Math.ceil(total/perPage);
+            expect(totalPages).toBe(1);
+        });
     });
 
 });
