@@ -41,7 +41,8 @@
             var self = this;
             // we will get search term from query
             var paramName = self.settings.queryName;
-            var searchTerm = decodeURI(this.getUrlVars()[paramName]);
+            var searchTerm =
+                decodeURIComponent(this.getUrlVars()[paramName]);
             this.$element.val(searchTerm);
 
             // prepare the query to perform the initial search
@@ -133,7 +134,7 @@
             this.search(searchQuery);
             // build the new url.
             url = '?' + this.settings.queryName + 
-                  '=' + encodeURI(term);
+                  '=' + encodeURIComponent(term);
             window.history.pushState('', 'testing', url);
         },
 
