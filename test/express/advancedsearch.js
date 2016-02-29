@@ -11,8 +11,8 @@ var advancedsearch = function(req, res) {
     var perPage = parseInt(req.query.perPage);
 
     // get ready the search result.
-    var total = 26;
-    console.log('start = ' + start);
+    var total = searchTerm.length;
+    //console.log('start = ' + start);
     var searchResult = generateResult(total, start, perPage);
 
     // build the response.
