@@ -195,7 +195,7 @@
                 (currentQuery.start - 1) / currentQuery.perPage + 1;
             var totalPages = Math.ceil(total / currentQuery.perPage);
             var pagination = 
-                this.buildPagination(currentPage, totalPages);
+                this.buildPaginationDots(currentPage, totalPages);
 
             $('#search-result').html('').append(info).
                 append($ul).append(pagination);
@@ -254,6 +254,93 @@
             pagination = pagination + '</ul></nav>';
             return pagination;
         },
+        
+        /**
+         * build the pagination with ... and 
+         * without First and Last button.
+         */
+        buildPaginationDots: function(currentPage, totalPages) {
+
+            var pagination = '<nav><ul class="pagination">';
+
+            var thePage = '';
+            // decide the previous page button
+            if(currentPage !== 1) {
+                thePage = this.buildAPage('&laquo; Previous');
+                pagination = pagination + thePage;
+            }
+
+            // calculate the start page:
+            // - set startPage = currentPage - 2 
+            // - if startPage < 1 then set startPage = 1
+            var startPage = currentPage - 2;
+            startPage = startPage < 1 ? 1 : startPage;
+
+            // calculate the end page.
+            // - assumet we get the start page.
+            // - set endPage = startPage + 5 - 1
+            // - if endPage > totalPages set endPage = totalPages
+            var endPage = startPage + 4;
+            endPage = endPage > totalPages ? totalPages : endPage
+
+            // decide the first page and first ... page
+            // - if startPage <= 3 then no ... page
+            //   - we will have all pages before start page.
+            //   - simplely set the startPage = 1
+            startPage = startPage <= 3 ? 1 : startPage;
+            // - else the case (startPage > 4)
+            //   - we will have first page and first ... page.
+            //   - build the first page and the first ... page.
+            if(startPage > 1) {
+                // build the first page and the first ... page
+                thePage = this.buildAPage('1');
+                pagination = pagination + thePage;
+                // build the first ... page.
+                thePage = this.buildAPage('...', 'disabled');
+                pagination = pagination + thePage;
+            }
+
+            // decide the last page and last ... page
+            // - if endPage >= totalPages - 2 then no need ... page.
+            //   - we will build all pages to total pages.
+            //   - simplely set endPage = totalPages.
+            endPage = endPage >= (totalPages - 2) ? 
+                      totalPages : endPage;
+
+            // generate the page list from start to end pages..
+            for(var page = startPage; page <= endPage; page ++) {
+
+                // normal page.
+                var thePage = this.buildAPage(page);
+                if(page == currentPage) {
+                    // active page.
+                    thePage = this.buildAPage(page, 'active');
+                }
+                pagination = pagination + thePage;
+            }
+
+            // - else (endPage < totalPages - 2)
+            //   - we have build the last ... page and last page.
+            if(endPage <= (totalPages - 2)) {
+
+                // build the first page and the last ... page
+                thePage = this.buildAPage('...', 'disabled');
+                pagination = pagination + thePage;
+                // build the last page.
+                thePage = this.buildAPage(totalPages);
+                pagination = pagination + thePage;
+            }
+
+            // decide the next page button.
+            if(currentPage !== totalPages) { 
+                thePage = this.buildAPage('Next &raquo;');
+                pagination = pagination + thePage;
+            }
+
+            // add the ending tags.
+            pagination = pagination + '</ul></nav>';
+            return pagination;
+        },
 
         /**
          * utility method to build a page button on the pagination.
@@ -269,6 +356,12 @@
                 '<li class="' + numberClass + '"><a><span>' +
                 number + 
                 '</span></a></li>';
+            if(numberClass == 'disabled') {
+                page = 
+                    '<li class="' + numberClass + '"><span>' +
+                    number + 
+                    '</span></li>';
+            }
 
             return page;
         },
