@@ -218,7 +218,7 @@
          * using the current query and total to build the 
          * pagination bar.
          */
-        buildPagination : function(currentPage, totalPages) {
+        buildPagination: function(currentPage, totalPages) {
 
             // border check up (first, last)
             // previous button will be handled by first page.
@@ -228,21 +228,17 @@
             // decide the previous page.
             if(currentPage !== 1) {
                 pagination = pagination + 
-                    '<li><a><span>First</span></a></li>' +
-                    '<li><a><span>&laquo; Previous</span></a></li>';
+                    this.buildAPage('First') +
+                    this.buildAPage('&laquo; Previous');
             }
 
             // generate the page list.
             for(var page = 1; page <= totalPages; page ++) {
 
                 // normal page.
-                var thePage =
-                    '<li><a><span>' + page + '</span></a></li>';
+                var thePage = this.buildAPage(page);
                 if(page == currentPage) {
-                    thePage = 
-                      '<li class="active"><a><span>' + 
-                      page +
-                      '</span></a></li>';
+                    thePage = this.buildAPage(page, 'active');
                 }
                 pagination = pagination + thePage;
             }
@@ -250,13 +246,31 @@
             // decide the next page.
             if(currentPage !== totalPages) { 
                 pagination = pagination +
-                    '<li><a><span>Next &raquo;</span></a></li>' +
-                    '<li><a><span>Last</span></a></li>';
+                    this.buildAPage('Next &raquo;') +
+                    this.buildAPage('Last');
             }
 
             // add the ending tags.
             pagination = pagination + '</ul></nav>';
             return pagination;
+        },
+
+        /**
+         * utility method to build a page button on the pagination.
+         *
+         * the number class could be active, disabled, or nothing
+         */
+        buildAPage: function(number, numberClass) {
+
+            // set default number class to nothing.
+            var numberClass = typeof numberClass !== 'undefined' ?
+                              numberClass : '';
+            var page = 
+                '<li class="' + numberClass + '"><a><span>' +
+                number + 
+                '</span></a></li>';
+
+            return page;
         },
 
         /**
