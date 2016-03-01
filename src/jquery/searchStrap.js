@@ -191,8 +191,11 @@
             });
 
             // TODO: using current query to build the pagination bar
+            var currentPage = 
+                (currentQuery.start - 1) / currentQuery.perPage + 1;
+            var totalPages = Math.ceil(total / currentQuery.perPage);
             var pagination = 
-                this.buildPagination(currentQuery, total);
+                this.buildPagination(currentPage, totalPages);
 
             $('#search-result').html('').append(info).
                 append($ul).append(pagination);
@@ -203,11 +206,11 @@
                 on('click', function(event) {
 
                 // identify the page.
-                var pageText = $(this).text();
                 var searchTerm = currentQuery.term;
                 var perPage = currentQuery.perPage;
-                self.handlePagination($(this), pageText, 
-                                      searchTerm, perPage);
+                self.handlePagination($(this), searchTerm, 
+                                      currentPage, totalPages, 
+                                      perPage);
             });
         },
 
@@ -215,19 +218,7 @@
          * using the current query and total to build the 
          * pagination bar.
          */
-        buildPagination : function(currentQuery, total) {
-
-            // collect current query states:
-            // start item index is from 1
-            var start = currentQuery.start;
-            var perPage = currentQuery.perPage;
-
-            // based on start, total, and perPage
-            // find the current page, (start - 1) / perPage + 1
-            var currentPage = (start - 1) / perPage + 1;
-
-            // total pages: page number starts from 1
-            var totalPages = Math.ceil(total / perPage);
+        buildPagination : function(currentPage, totalPages) {
 
             // border check up (first, last)
             // previous button will be handled by first page.
@@ -237,6 +228,7 @@
             // decide the previous page.
             if(currentPage !== 1) {
                 pagination = pagination + 
+                    '<li><a><span>First</span></a></li>' +
                     '<li><a><span>&laquo; Previous</span></a></li>';
             }
 
@@ -258,7 +250,8 @@
             // decide the next page.
             if(currentPage !== totalPages) { 
                 pagination = pagination +
-                    '<li><a><span>Next &raquo;</span></a></li>';
+                    '<li><a><span>Next &raquo;</span></a></li>' +
+                    '<li><a><span>Last</span></a></li>';
             }
 
             // add the ending tags.
@@ -269,10 +262,31 @@
         /**
          * handle the pagination.
          */
-        handlePagination: function($href, pageText, term, perPage) {
+        handlePagination: function($href, term, currentPage,
+                                   totalPages, perPage) {
 
+            var pageText = $href.text();
+            var nextPage = 1;
             //console.log('page = ' + pageText);
-            start = (parseInt(pageText) - 1) * parseInt(perPage) + 1;
+            if(pageText.includes('First')) {
+                // the first page button. do nothing using 
+                // the default, start from 1
+                nextPage = 1;
+            } else if(pageText.includes('Last')) {
+                // last page.
+                nextPage = totalPages;
+            } else if(pageText.includes('Previous')) {
+                // previous page.
+                nextPage = currentPage - 1;
+            } else if(pageText.includes('Next')) {
+                // the next page.
+                nextPage = currentPage + 1;
+            } else {
+                // get what user selected.
+                nextPage = parseInt(pageText);
+            }
+            var start = (nextPage - 1) * parseInt(perPage) + 1;
+
             // calculate start number to build search query.
             var query = 
                 this.prepareSearchQuery(term, start);

@@ -21,6 +21,7 @@ var simpleTest = angular.module('uiDemo', []);
 jQuery(document).ready(function($) {
     $('#query-right').searchStrap({
         searchUrl: '/advancedsearch',
+        itemsPerPage: 5,
         searchButton: 'sizing-addon'
     });
 });
