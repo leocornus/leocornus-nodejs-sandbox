@@ -156,19 +156,22 @@
         handleSearchResult: function(data) {
 
             var self = this;
-
             // log the data for debuging...
-            console.log(data);
+            //console.log(data);
 
             var currentQuery = data.currentQuery;
-            var total = data.total;
             // TODO: analyze the search result.
-            // var info = this->buildInfoBar(data);
-            info =  '<p class="text-info">' +
-                'Found ' + data.total + ' results (0.51 seconds) ' +
-                'for <span class="label-info">' + 
-                currentQuery.term + '</span>' +
-                '</p>';
+            // total results.
+            var total = data.total;
+            // current page.
+            var currentPage =
+                (currentQuery.start - 1) / currentQuery.perPage + 1;
+            // caculate the total pages.
+            var totalPages = Math.ceil(total / currentQuery.perPage);
+
+            // build the info bar.
+            var info = this.buildInfoBar(currentQuery.term, total,
+                                         currentPage, totalPages);
 
             // using list group for search result.
             $ul = $('<ul class="list-group"></ul>');
@@ -191,9 +194,6 @@
             });
 
             // TODO: using current query to build the pagination bar
-            var currentPage = 
-                (currentQuery.start - 1) / currentQuery.perPage + 1;
-            var totalPages = Math.ceil(total / currentQuery.perPage);
             var pagination = 
                 this.buildPaginationDots(currentPage, totalPages);
 
@@ -213,6 +213,24 @@
                                       perPage);
             });
         },
+
+        /**
+         * build the information bar for search result.
+         */
+        buildInfoBar: function(term, total, currentPage, totalPages) {
+
+            var info =  '<p class="text-info">' +
+                'Found ' + total + ' results (0.51 seconds) ' +
+                'for <span class="label-info">' + 
+                term + '</span>' +
+                '</p>';
+
+            return info;
+        },
+
+        /**
+         * build the HTML for each item
+         */
 
         /**
          * using the current query and total to build the 
