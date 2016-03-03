@@ -77,6 +77,7 @@
     "protractor": "^2.5.1",
     "selenium-standalone": "^4.8.0",
     "serve-index": "^1.7.2",
+    "video.js": "^5.7.1",
     "vows": "^0.8.1",
     "webpack-stream": "^3.0.1",
     "yahoo-finance-stream": "^0.1.2"

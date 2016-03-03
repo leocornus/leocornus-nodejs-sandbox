@@ -11,6 +11,9 @@ app.use('/src', express.static('src', {index:false}));
 app.use('/src', serveIndex('src'));
 app.use('/bower_components', express.static('bower_components'));
 app.use('/bower_components', serveIndex('bower_components'));
+// addin the node_modules too.
+app.use('/node_modules', express.static('node_modules'));
+app.use('/node_modules', serveIndex('node_modules'));
 
 // hello world simple get.
 app.get('/hello', function(req, res) {
