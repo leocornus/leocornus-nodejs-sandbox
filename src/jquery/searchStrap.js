@@ -177,19 +177,7 @@
             $ul = $('<ul class="list-group"></ul>');
             $.each(data.searchResult, function(index, item) {
                 // present each item as a list group item.
-                var liHtml = 
-                    '<li class="list-group-item">' +
-                    '  <h4 class="list-group-item-heading">' +
-                    '    <a href="' + item.url + 
-                                '" style="padding: 0;">' +
-                           item.title +
-                    '    </a>' +
-                    '  </h4>' +
-                    '  <small class="text-muted">SITE</small>' +
-                    '  <p class="list-group-item-text">' +
-                         item.description +
-                    '  </p>' +
-                    '</li>';
+                var liHtml = self.buildItemHtml(item);
                 $ul.append(liHtml);
             });
 
@@ -230,7 +218,27 @@
 
         /**
          * build the HTML for each item
+         *
+         * @param item object of each item
          */
+        buildItemHtml: function(item) {
+
+            var liHtml =
+                '<li class="list-group-item">' +
+                '  <h4 class="list-group-item-heading">' +
+                '    <a href="' + item.url +
+                            '" style="padding: 0;">' +
+                       item.title +
+                '    </a>' +
+                '  </h4>' +
+                '  <small class="text-muted">SITE</small>' +
+                '  <p class="list-group-item-text">' +
+                     item.description +
+                '  </p>' +
+                '</li>';
+
+            return liHtml;
+        },
 
         /**
          * using the current query and total to build the 
@@ -374,6 +382,8 @@
                 '<li class="' + numberClass + '"><a><span>' +
                 number + 
                 '</span></a></li>';
+
+            // take off a tag for disabled page.
             if(numberClass == 'disabled') {
                 page = 
                     '<li class="' + numberClass + '"><span>' +
