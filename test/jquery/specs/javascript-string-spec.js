@@ -39,6 +39,15 @@ describe('JavaScript String Prototype Testing Specs', function() {
             // no more red.
             expect(result).not.toMatch('red');
             expect(result).toMatch('purple');
+
+            // we could use the RegExp class to build the match
+            // pattern.
+            var fromString = 'red';
+            var fromPattern = new RegExp(fromString, 'g');
+            // we should have the save result.
+            result = colors.replace(/red/g, 'purple');
+            expect(result).not.toMatch('red');
+            expect(result).toMatch('purple');
         });
 
         it('Testing the match function', function() {
