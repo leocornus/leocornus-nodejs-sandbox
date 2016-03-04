@@ -13,6 +13,10 @@
   </style>
 
   <script>
+function updateEmbedCode(id) {
+
+    alert(id);
+}
   </script>
 </head>
 
@@ -30,50 +34,55 @@
           Embed Code <img src="assets/arrow_header_down.gif" width="13" height="13" alt="" id="smenu10_arrow">
           </a>
         </h2>
-
-        <ul id="options-nav" style="width: 640px">
-          <li class="current">
-            <a href="#">Default</a>
-          </li>
-          <li>
-            <a href="#">Custom One</a>
-          </li>
-        </ul>
       </div>
 
-      <div class="column_row">
-        <div class="row_left">&nbsp;</div>
-        <div class="row_centre">
-          <strong>English</strong>
-        </div>
-        <div class="row_right">
-          <strong>French</strong>
-        </div>
-      </div>
+      <div id="smenu10" style="display:none;">
 
-      <div class="column_row">
-        <div class="row_left">
-          <strong><label for="mytext">
-            <label for="mytext_fr">Code 
-              <a href="#" title="header=[Code] body=[This is the what you copy and paste onto a page of your website to make the video player appear.]">[?]</a>:
-            </label></label>
-          </strong>
+        <div class="grouping_header">
+          <ul id="options-nav" style="width: 640px">
+            <li id="default" class="current">
+              <a href="#" onclick="updateEmbedCode('default');return false;">Default</a>
+            </li>
+            <li id="customone">
+              <a href="#" onclick="updateEmbedCode('customone');return false;">Custom One</a>
+            </li>
+          </ul>
         </div>
-        <!-- row center -->
-        <div class="row_centre">
-          <form name="myform">
-            <input type="text" name="mytext" value="<object width=&quot;400&quot; height=&quot;300&quot; classid=&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000&quot; id=&quot;mds2325&quot; class=&quot;mdsvideo&quot;><param name=&quot;movie&quot; value=&quot;http://www.media.gov.on.ca/player/5.1.818/player.swf?config=http://www.media.gov.on.ca/5ff96c18fba293a0/en/config.xml&quot;></param><param name=&quot;allowfullscreen&quot; value=&quot;true&quot;></param><param name=&quot;allowscriptaccess&quot; value=&quot;always&quot;></param><param name=&quot;wmode&quot; value=&quot;transparent&quot;></param><embed src=&quot;http://www.media.gov.on.ca/player/5.1.818/player.swf?config=http://www.media.gov.on.ca/5ff96c18fba293a0/en/config.xml&amp;amp;image=http://www.media.gov.on.ca/5ff96c18fba293a0/en/images/preview.jpg&quot; width=&quot;400&quot; height=&quot;300&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot; wmode=&quot;transparent&quot; type=&quot;application/x-shockwave-flash&quot;  class=&quot;mdsvideo&quot;></embed></object><p class=&quot;mdsvideo&quot;></p>" class="copybox">
-            <input onclick="javascript:copyToClipboard('myform.mytext')" type="button" value="select english embed code" class="copyclipboard">
-          </form>
-        </div> <!-- end row center -->
 
-        <div class="row_right">
-          <form name="myform_fr">
-            <input type="text" name="mytext_fr" value="<object width=&quot;400&quot; height=&quot;300&quot; classid=&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000&quot; id=&quot;mds2325&quot; class=&quot;mdsvideo&quot;><param name=&quot;movie&quot; value=&quot;http://www.media.gov.on.ca/player/5.1.818/player.swf?config=http://www.media.gov.on.ca/5ff96c18fba293a0/fr/config.xml&quot;></param><param name=&quot;allowfullscreen&quot; value=&quot;true&quot;></param><param name=&quot;allowscriptaccess&quot; value=&quot;always&quot;></param><param name=&quot;wmode&quot; value=&quot;transparent&quot;></param><embed src=&quot;http://www.media.gov.on.ca/player/5.1.818/player.swf?config=http://www.media.gov.on.ca/5ff96c18fba293a0/fr/config.xml&amp;amp;image=http://www.media.gov.on.ca&quot; width=&quot;400&quot; height=&quot;300&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot; wmode=&quot;transparent&quot; type=&quot;application/x-shockwave-flash&quot;  class=&quot;mdsvideo&quot;></embed></object><p class=&quot;mdsvideo&quot;></p>" class="copybox">
-            <input onclick="javascript:copyToClipboard('myform_fr.mytext_fr')" type="button" value="select french embed code" class="copyclipboard">
-          </form>
+        <div class="column_row">
+          <div class="row_left">&nbsp;</div>
+          <div class="row_centre">
+            <strong>English</strong>
+          </div>
+          <div class="row_right">
+            <strong>French</strong>
+          </div>
         </div>
-      </div>
+
+        <div class="column_row">
+          <div class="row_left">
+            <strong><label for="mytext">
+              <label for="mytext_fr">Code 
+                <a href="#" title="header=[Code] body=[This is the what you copy and paste onto a page of your website to make the video player appear.]">[?]</a>:
+              </label></label>
+            </strong>
+          </div>
+          <!-- row center -->
+          <div class="row_centre">
+            <form name="myform">
+              <input type="text" name="mytext" value="<object width=&quot;400&quot; height=&quot;300&quot; classid=&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000&quot; id=&quot;mds2325&quot; class=&quot;mdsvideo&quot;><param name=&quot;movie&quot; value=&quot;http://www.media.gov.on.ca/player/5.1.818/player.swf?config=http://www.media.gov.on.ca/5ff96c18fba293a0/en/config.xml&quot;></param><param name=&quot;allowfullscreen&quot; value=&quot;true&quot;></param><param name=&quot;allowscriptaccess&quot; value=&quot;always&quot;></param><param name=&quot;wmode&quot; value=&quot;transparent&quot;></param><embed src=&quot;http://www.media.gov.on.ca/player/5.1.818/player.swf?config=http://www.media.gov.on.ca/5ff96c18fba293a0/en/config.xml&amp;amp;image=http://www.media.gov.on.ca/5ff96c18fba293a0/en/images/preview.jpg&quot; width=&quot;400&quot; height=&quot;300&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot; wmode=&quot;transparent&quot; type=&quot;application/x-shockwave-flash&quot;  class=&quot;mdsvideo&quot;></embed></object><p class=&quot;mdsvideo&quot;></p>" class="copybox">
+              <input onclick="javascript:copyToClipboard('myform.mytext')" type="button" value="select english embed code" class="copyclipboard">
+            </form>
+          </div> <!-- end row center -->
+
+          <div class="row_right">
+            <form name="myform_fr">
+              <input type="text" name="mytext_fr" value="<object width=&quot;400&quot; height=&quot;300&quot; classid=&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000&quot; id=&quot;mds2325&quot; class=&quot;mdsvideo&quot;><param name=&quot;movie&quot; value=&quot;http://www.media.gov.on.ca/player/5.1.818/player.swf?config=http://www.media.gov.on.ca/5ff96c18fba293a0/fr/config.xml&quot;></param><param name=&quot;allowfullscreen&quot; value=&quot;true&quot;></param><param name=&quot;allowscriptaccess&quot; value=&quot;always&quot;></param><param name=&quot;wmode&quot; value=&quot;transparent&quot;></param><embed src=&quot;http://www.media.gov.on.ca/player/5.1.818/player.swf?config=http://www.media.gov.on.ca/5ff96c18fba293a0/fr/config.xml&amp;amp;image=http://www.media.gov.on.ca&quot; width=&quot;400&quot; height=&quot;300&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot; wmode=&quot;transparent&quot; type=&quot;application/x-shockwave-flash&quot;  class=&quot;mdsvideo&quot;></embed></object><p class=&quot;mdsvideo&quot;></p>" class="copybox">
+              <input onclick="javascript:copyToClipboard('myform_fr.mytext_fr')" type="button" value="select french embed code" class="copyclipboard">
+            </form>
+          </div>
+        </div>
+      </div> <!-- smenu10 -->
     </div> <!-- group content -->
   </div> <!-- grouping -->
 
