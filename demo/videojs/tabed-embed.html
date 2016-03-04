@@ -31,16 +31,38 @@ function updateEmbedCode(id) {
         // add to all selected one.
         selected.addClass('current');
 
+        // get the default player:
+        var defaultPlayer = jQuery('#default_player').text();
+        var customPlayer = 'https://custom.one.com/player.swf';
+
         // update code label:
         if(id=="default") {
             jQuery("#code_label").text('Default Code');
+            replaceEmbedCode(customPlayer, defaultPlayer);
         } else if(id=="customone") {
             jQuery("#code_label").text('Custom Code');
+            replaceEmbedCode(defaultPlayer, customPlayer);
         }
+    }
+}
 
-        // TODO: search and replace.
-        // get the current one.
-        // replace with the selected one.
+function replaceEmbedCode(fromPlayer, toPlayer) {
+
+    // find the current code:
+    var englishInput= jQuery("form[name='myform'] input[name='mytext']");
+    var frenchInput= jQuery("form[name='myform_fr'] input[name='mytext_fr']");
+    // get ready the search regular express  pattern.
+    // we will find all matches.
+    var fromReg = new RegExp(fromPlayer, 'g');
+    var newVal = '';
+
+    if(englishInput.length > 0) {
+        newVal = englishInput.val().replace(fromReg, toPlayer);
+        englishInput.val(newVal);
+    }
+    if(frenchInput.length > 0) {
+        newVal = frenchInput.val().replace(fromReg, toPlayer);
+        frenchInput.val(newVal);
     }
 }
   </script>
@@ -59,6 +81,7 @@ function updateEmbedCode(id) {
           <a href="#" onclick="showHide('smenu10');return false;">
           Embed Code <img src="assets/arrow_header_down.gif" width="13" height="13" alt="" id="smenu10_arrow">
           </a>
+          <span id="default_player" style="display:none">http://www.media.gov.on.ca/player/5.1.818/player.swf</span>
         </h2>
       </div>
 
