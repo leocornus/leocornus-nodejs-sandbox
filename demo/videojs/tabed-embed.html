@@ -6,7 +6,14 @@
   <link rel='stylesheet' href='assets/changeme.css'/>
 
   <script src='assets/scripts.js'></script>
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
 
+  <style>
+.grouping_header ul#options-nav li {float: left; position: relative; margin: 0px 0px -1px 0px; background: none; padding-left: 0px;}
+  </style>
+
+  <script>
+  </script>
 </head>
 
 <body>
@@ -21,8 +28,17 @@
         <h2>
           <a href="#" onclick="showHide('smenu10');return false;">
           Embed Code <img src="assets/arrow_header_down.gif" width="13" height="13" alt="" id="smenu10_arrow">
-         </a>
+          </a>
         </h2>
+
+        <ul id="options-nav" style="width: 640px">
+          <li class="current">
+            <a href="#">Default</a>
+          </li>
+          <li>
+            <a href="#">Custom One</a>
+          </li>
+        </ul>
       </div>
 
       <div class="column_row">
