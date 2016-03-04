@@ -1,0 +1,2941 @@
+/* $Id$ */
+
+
+
+/*
+
+ * TABLE OF CONTENTS
+
+ *
+
+ * ZERO OUT      = Sets most everything to ZERO, so there's a clean slate to start with = set any defaults here (Lists especially)
+
+ * BODY          = sets the base font
+
+ * POSITIONING   = generic tags for positioning
+
+ * LINKS         = default and other link styling
+
+ * #HEADER       = Ontario logo, #arc, #search, #navbar (main menu/navigation), #banner
+
+ * #content = Main content area (Many layouts – see style guide)
+
+ * #left_column  = .left_nav (left hand navigation group), .menu (menu list)
+
+ * #FOOTER       = #full_footer, Copyright, Site Map, Contact Us, Privacy Notices
+
+ */
+
+
+
+/*
+
+ * Zero out everything.
+
+ * This CSS sets all padding, margins, defaults to 0.
+
+ * Note: Tables still need cellspacing="0" in the markup
+
+ */
+
+
+
+a,abbr,acronym,address,applet,b,big,blockquote,body,caption,
+
+center,cite,code,dd,del,dfn,div,dl,dt,em,fieldset,font,
+
+form,h1,h2,h3,h4,h5,h6,html,i,iframe,img,ins,kbd,label,
+
+legend,li,object,ol,p,pre,q,s,samp,small,span,strike,
+
+strong,sub,sup,table,tbody,td,tfoot,th,thead,tr,tt,u,
+
+ul,var {
+
+	background: transparent;
+
+	border: 0;
+
+	font-size: 100%;
+
+	margin: 0;
+
+	outline: 0;
+
+	padding: 0;
+
+/*	vertical-align: baseline;*/
+
+}
+
+
+
+html {
+
+	height: 100%;
+
+}
+
+
+
+blockquote, q {
+
+	quotes: none;
+
+}
+
+
+
+/* Remember to highlight inserts somehow! */
+
+ins {
+
+	text-decoration: none;
+
+}
+
+
+
+del {
+
+	text-decoration: line-through;
+
+}
+
+
+
+/* -ZERO OUT EVERYTHING - END * ---------------------------------------------------------------- */
+
+
+
+/* ----------- ZERO OUT LISTS - set your default list styles here ---------------- */
+
+
+
+/* This is the default style - change at will - */
+
+
+
+ul {
+
+	list-style: none;
+
+}
+
+
+
+ol, ul {
+
+	margin-left: 20px;
+
+	margin-bottom: 20px;
+
+}
+
+
+
+/* Sets the base font to approx 10pt */
+
+body {
+
+	background-color: #FFF;
+
+	color: #000;
+
+	font-size: 62.5%;
+
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+
+	text-align: center;
+
+}
+
+
+
+/* Default sizing for standard elements -------------------------- */
+
+
+
+/* SET text attributes here */
+
+
+
+/* Sets default margins for all paragraphs */
+
+p {
+
+	margin: 1em 0 1.5em;
+
+}
+
+
+
+/* -------- HEADERS --------- */
+
+
+
+/* Must set explicitly, it is zeroed out above */
+
+h1, h2, h3, h4 {
+
+	font-weight: 700;
+
+	line-height: 1.2em;
+
+}
+
+
+
+h1 {
+
+	color: #000;
+
+	font-size: 1.4em;
+
+	margin: 0.5em 0 1em 0;
+
+}
+
+
+
+h2 {
+
+	color: #000;
+
+	font-size: 1.2em;
+
+	padding-bottom: 6px;
+
+}
+
+
+
+h3 {
+
+	color: #000; /* COLOUR CHANGE */
+
+	font-size: 1.1em;
+
+	margin: 0.5em 0; /* Default margins for h tags: in this order: top/bottom, right/left */
+
+}
+
+
+
+h4 {
+
+	color: #000;
+
+	margin: 0.5em 0 0.7em 0;
+
+}
+
+
+
+img {
+
+	border: 0;
+
+}
+
+
+
+/* --------------------------------------------------------------- */
+
+
+
+/* Common/generic styles ------------------------------------------------- */
+
+
+
+/* Positioning */
+
+
+
+/* Aligns - floats right */
+
+.right {
+
+	float: right;
+
+	margin-left: 20px;
+
+	text-align: right;
+
+	margin-right: 0;
+
+}
+
+
+
+/* Aligns - floats left */
+
+.left {
+
+	float: left;
+
+	margin-right: 20px;
+
+	margin-left: 0;
+
+}
+
+
+
+/* Removes top margin */
+
+.top {
+
+	margin-top: 0;
+
+}
+
+
+
+/* Removes bottom margin */
+
+.bottom {
+
+	margin-bottom: 0;
+
+}
+
+
+
+/* Centers */
+
+.center {
+
+	text-align: center;
+
+	margin-left: auto;
+
+	margin-right: auto;
+
+}
+
+
+
+/* To clear floats */
+
+.clear {
+
+	clear: both;
+
+}
+
+
+
+/* ========= */
+
+/* = Other = */
+
+/* ========= */
+
+
+
+/* Smaller text */
+
+.small {
+
+	font-size: .85em;
+
+	line-height: 140%;
+
+}
+
+
+
+/* Larger text */
+
+.large {
+
+	font-size: 1.4em;
+
+	margin-top: 20px;
+
+	display: block;
+
+}
+
+
+
+/* Use to indent text in a pragraph */
+
+.indent {
+
+	margin-left: 2em;
+
+}
+
+
+
+.label {
+
+	display: block;
+
+	width: 5em;
+
+	float: left;
+
+}
+
+
+
+/* SEARCH BAR - submit (go) button default */
+
+
+
+/* Styles the submit / GO button -- */
+
+
+
+
+
+hr {
+
+	height: 1px;
+
+	color: #bfbfbf;
+
+	background-color: #bfbfbf;
+
+	border: none;
+
+	float: left;
+
+	clear: both;
+
+	width: 96%;
+
+	margin: 1em 0;
+
+}
+
+
+
+/* Thicker separator line - change colour if desired for greater emphasis */
+
+hr.thick {
+
+	height: 3px;
+
+	color: #666;
+
+	background-color: #666;
+
+}
+
+
+
+/* --------------------------------------------------------------- */
+
+
+
+/* Tables still need 'cellspacing="0"' in the markup - CSS2 does not yet have proper table support */
+
+table {
+
+  border-collapse: collapse;
+
+  border-spacing: 0;
+
+  width : 100%;
+
+  border : 1px solid #ccc;
+
+}
+
+thead th{ background-color: #ccc;}
+
+th{ background-color: #eee;}
+
+td, th{
+
+	border-bottom : 1px solid #ccc;
+
+	border-right :  1px solid #ccc;
+
+	border-left :  1px solid #ccc;
+
+	padding : 3px;
+
+	line-height: 1.3em;
+
+}
+
+
+
+caption {
+
+	font-weight : bold;
+
+}
+
+
+
+/* ---- LINKS ---------------------------------------------------- */
+
+
+
+/* Default link style */
+
+
+
+a {
+
+	text-decoration: none;
+
+	color: #0e6789;
+
+	background-color: transparent;
+
+}
+
+
+
+a:visited {
+
+	color: #666;
+
+}
+
+
+
+#language a, a:link, a:visited, a:active {
+
+	text-decoration: none;
+
+	font-weight: 700;
+
+	color: #0e6789; /* COLOUR CHANGE */
+
+	background-color: transparent;
+
+}
+
+
+
+a:hover {
+
+	text-decoration: underline;
+
+	color: #000; /* COLOUR CHANGE */
+
+}
+
+
+
+#content a:focus {
+
+	text-decoration: underline;
+
+}
+
+
+
+/* Default link style */
+
+
+
+/* --- SITE HOLDER(wrapper) ---- */
+
+
+
+#wrapper {
+
+	margin-left: auto;
+
+	margin-right: auto;
+
+	text-align: left;
+
+	width: 980px;
+
+	margin-top: 10px;
+
+}
+
+
+
+/* LEFT NAV STYLES --------------------------------------------- */
+
+
+
+#left_column {
+
+	/*width: 260px;*/
+
+	width: 250px;
+
+	display: inline;
+
+	float: left;
+
+	/*margin-right: 20px;*/
+
+	margin-right: 30px;
+
+	margin-left: 0;
+
+	font-size: 1.2em; /* STANDARDIZE */
+
+	line-height: 160%; /* STANDARDIZE */
+
+}
+
+
+
+#left_column ul {
+
+	margin: 0;
+
+	padding: 0;
+
+}
+
+
+
+.leftnav {
+
+	width: 100%;
+
+	overflow: hidden;
+
+	margin-bottom: 10px;
+
+}
+
+
+
+/* -- First colour of Header bar for Menu titles -- */
+
+
+
+.leftnav .header {
+
+	border-bottom: 1px solid #fff; /* Ncs may 29/09 - added top border call */
+
+	border-top: 1px solid #fff;
+
+
+
+	position: relative;
+
+
+
+	font-size: 1.1em; /* Ncs jun2/09 added font-sizing - for backwards compatibility */
+
+}
+
+
+
+.leftnav .header a {
+
+	color: #333;
+
+	font-weight: 700;
+
+	display: block;
+
+	padding: 4px 5px 6px; /* Ncs jun2/09 moved all padding to this selector for backwards compatibility */
+
+}
+
+
+
+.leftnav .header img, .downarrow {
+
+	position: absolute;
+
+	left: 235px;
+
+	top: 7px;
+
+}
+
+
+
+/* -- Second colour of Header bar for Menu titles -- */
+
+.leftnav .mycolour .header {
+
+	background: #1d2d43 url(../images/arc_left_mycolour.gif) top left no-repeat;
+
+	/* COLOUR CHANGE header BG image match #colour to bottom half of arc graphic */
+
+	/* May 29 - removed bottom border call */
+
+}
+
+
+
+.leftnav .mycolour .header a {
+
+	color: #fff; /* COLOUR CHANGE update font to contrast w BG color (above in .leftnav .mycolour .header) */
+
+	font-weight: 700;
+
+}
+
+
+
+/* -- Standard MY GOVERNMENT colour of Header bar for Menu titles -- */
+
+
+
+.leftnav .mygovt .header {
+
+	background-color: #4a1910; /* STANDARD COLOUR - DO NOT EDIT */
+
+	background-image: url(../images/arc_left_red.gif);
+
+	background-repeat: no-repeat;
+
+}
+
+
+
+.leftnav .mygovt .header a {
+
+	color: #fff; /* COLOUR CHANGE update font to contrast w BG color (above in .leftnav .mycolour .header) */
+
+	font-weight: 700;
+
+}
+
+
+
+/* Ncs jun2/09 removed font-size, moved to to .leftnav .header for backwards compatibility - set padding/margin to 0 for chrome */
+
+.leftnav h2 {
+
+	padding: 0;
+
+	margin: 0;
+
+}
+
+
+
+/* EXPANDING MENU STYLES --------------------------------------------- */
+
+
+
+.menu {
+
+	width: 100%;
+
+	float: left;
+
+}
+
+
+
+.menu li {
+
+	display: inline;
+
+}
+
+
+
+.menu a, .menu a:link, .menu a:visited, .menu a:active {
+
+	color: #000;
+
+	font-weight: 700;
+
+	display: block;
+
+	padding: 8px 4px 10px 24px; /* This creates the size of the menu item box - last value is the distance of the text from the side */
+
+	border-bottom: 1px dotted #666;
+
+	background: #f7f7ef url(../images/triangle_right.gif) no-repeat 12px 13px; /* COLOUR CHANGE */
+
+}
+
+/* sub menu styling - positions the arrow graphic in a bit more - EDIT ncs jun2/09 added pseudo selectors for specificity*/
+
+.menu li ul li a, .menu li ul li a, .menu li ul li a:link, .menu li ul li a:visited, .menu li ul li a:active {
+
+	font-size: .9em;
+
+	padding: 8px 4px 8px 36px;
+
+	background: #FFF url(../images/triangle_right.gif) no-repeat 23px 13px;
+
+}
+
+
+
+/* MENU - Current item colour - USE to DESIGNATE THE CURRENT PAGE - add this id to the appropriate li in the menu */
+
+
+
+#current {
+
+	background-color: #fff;
+
+}
+
+
+
+/* ------------ END LEFT NAV ------------------------ */
+
+
+
+
+
+/* ------------ HEADER - ONTARIO LOGO / BANNER FLASH / SEARCH / NAV -------------------- */
+
+#header {
+
+	width: 980px;
+
+	position: relative;
+
+}
+
+
+
+/* HEADER LAYOUT STYLES --------------------------------------------- */
+
+
+
+#arc {
+
+	width: 100%;
+
+	height: 92px;
+
+	float: left;
+
+	background: #dff0f7 url(../images/header_arc.jpg) no-repeat;
+
+}
+
+
+
+/* Search form */
+
+#arc form {
+
+	float: right;
+
+	margin: 40px 0 0 0;
+
+	padding-right: 20px;
+
+}
+
+
+
+/* Search box */
+
+#searchBox {
+
+	width: 300px;
+
+	height: 1.5em;
+
+	padding: 3px;
+
+	border: 0;
+
+	background-color: #fff;
+
+	border: 1px solid #dff0f7;
+
+}
+
+
+
+#searchBox:hover {
+
+	border: 1px solid #fff;
+
+}
+
+
+
+/* Submit (go) button */
+
+#submit {
+
+	border: 0;
+
+	color: #fff;
+
+}
+
+
+
+/* Submit (go) button hover state */
+
+#submit:hover {
+
+	outline: 1px solid #fff;
+
+}
+
+
+
+/* =========== */
+
+/* = Top Nav = */
+
+/* =========== */
+
+
+
+#textlinks a.last, #navbar p a.last {
+
+	border: none;
+
+	padding-right: 0;
+
+}
+
+
+
+#textlinks {
+
+	position: absolute;
+
+	right: 0;
+
+	top: 5px;
+
+	text-align: right;
+
+	margin-right: 0; /* Added jun2/09 */
+
+}
+
+
+
+#textlinks a {
+
+	padding: 0 1em 0 .75em;
+
+	border-right: 1px solid #999;
+
+}
+
+
+
+a#skipNav:link, a#skipNav:visited, a#skipNav:hover {
+
+	color: #FFF;
+
+	border: none;
+
+}
+
+
+
+a#skipNav:active, a#skipNav:focus {
+
+	color: #17397d;
+
+	border-right: 1px solid #999;
+
+}
+
+
+
+/* The main nav bar */
+
+#navbar {
+
+	width: 100%;
+
+	height: 2.75em;
+
+	float: left;
+
+	border-bottom: 20px solid #FFF;
+
+	background-color: #1d2d43;  /* COLOUR CHANGE - replace Background colour with your colour that matches the graphic */
+
+}
+
+
+
+/* The main nav bar */
+
+#home #navbar {
+
+	border-bottom: 8px solid #FFF;
+
+}
+
+
+
+#navbar {
+
+	font-size: 1.1em;
+
+	font-weight: 700;
+
+	text-transform: uppercase;
+
+	text-align: center;
+
+	padding: 0;
+
+	margin: 0;
+
+	overflow: hidden;
+
+}
+
+
+
+/* Links in navbar */
+
+#navbar p {
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    text-align: center;
+
+    margin: 6px 0 0;
+
+}
+
+
+
+#navbar p a {
+
+	color: #FFF; /* COLOUR CHANGE - MAKE SURE CONTRAST IS VERY HIGH */
+
+	padding: 0 10px 0 8px;
+
+}
+
+
+
+#breadcrumbNav{
+
+	margin: 0 0 8px 0;
+
+	float: left;
+
+	width: 100%;
+
+}
+
+
+
+#breadcrumbNav li{
+
+	display: inline
+
+}
+
+
+
+/* -- END topnav --*/
+
+
+
+/* Holds flash banner or static banner */
+
+#banner {
+
+	width: 980px;
+
+
+
+	overflow: hidden; /* Necessary for IE6 */
+
+	clear: left;
+
+	margin-bottom: 10px;
+
+	/*border-bottom: 4px solid #453617; */
+
+}
+
+
+
+/* ================= */
+
+/* = Splash Styles = */
+
+/* ================= */
+
+
+
+#container, #splash_page #container {
+
+	width: 720px;
+
+	text-align: center;
+
+	margin: 0 auto;
+
+}
+
+
+
+#splash {
+
+	margin-top: 50px;
+
+	float: left;
+
+	padding-bottom: 80px;
+
+	font-size: 1.3em;
+
+	text-align: left;
+
+	background: url(../images/header_arc.gif) no-repeat bottom left;
+
+	border: 1px solid #8d2f0e;
+
+	border-bottom: 2em solid #8d2f0e;
+
+}
+
+
+
+#splash .two_cols {
+
+	background: url(../images/splash_line.gif) no-repeat top center;
+
+	float: left;
+
+	width: 100%;
+
+	text-align: center;
+
+	padding-top: 3em;
+
+}
+
+
+
+.button {
+
+	margin: 20px auto;
+}
+
+
+
+#splash .two_cols .column .button {
+
+	margin: 20px auto;
+
+	width: 210px;
+
+}
+
+
+
+#splash .two_cols .column .arrow {
+
+	vertical-align: middle;
+
+}
+
+
+
+#splash h2 a {
+
+	font-size: 110%;
+
+	font-weight: 700;
+
+	color: #000; /* COLOUR CHANGE - match if you like */
+
+	text-transform: uppercase;
+
+}
+
+
+
+/* -- RIGHT COLUMN / CONTENT --*/
+
+
+
+/* Content area */
+
+#content {
+
+	width: 700px;
+
+	float: right;
+
+	margin-right: 20px;
+
+	font-size: 1.3em; /* STANDARDIZE */
+
+	display: inline;
+
+	overflow: hidden;
+
+}
+
+
+
+/* Content area for one column layouts */
+
+body#onecol div#content {
+
+	width: 980px;
+
+}
+
+
+
+/* ============= */
+
+/* = AD BANNER = */
+
+/* ============= */
+
+
+
+#ad_banner {
+
+	clear: both;
+
+	border: 1px solid #ccc;
+
+	background-color: #30F;
+
+	margin-bottom: 20px;
+
+	width: 698px;
+
+	overflow: hidden;
+
+	height: 87px;
+
+}
+
+
+
+#ad_banner div {
+
+	margin: -1px 0 0 -4px;
+
+}
+
+
+
+/* A style to contain other elements on the page - gives a dotted border at the bottom of the area */
+
+.row {
+
+	width: 720px;
+
+	float: left;
+
+	display: inline;
+
+	margin-right: -3px; /* IE 6 duplicate text fix */
+
+	margin-bottom: 20px;
+
+	border-bottom: 1px dotted #ccc;
+
+	overflow: hidden;
+
+}
+
+
+
+/* A style to contain other elements on the page - gives a dotted border at the bottom of the area */
+
+body#onecol .row {
+
+	width: 1000px;
+
+}
+
+
+
+.row p {
+
+	margin-right: 20px;
+
+}
+
+
+
+.two_cols {
+
+	background: url(../images/two_cols.gif) repeat-y;
+
+	background-position: -5px 0;
+
+}
+
+
+
+.three_cols {
+
+	background-image: url(../images/three_cols.gif);
+
+	background-repeat: repeat-y;
+
+	background-position: -4px -50px;
+
+}
+
+
+
+/* When a .column is placed inside a two_cols row you get 2 equal columns of 340px that fill the right_column */
+
+.two_cols .column {
+
+	width: 340px;
+
+}
+
+
+
+/* When a .column is placed inside a three_cols row you get 3 equal columns of 220px that fill the right_column */
+
+.three_cols .column, .box .column, .two_thirds .other {
+
+	width: 220px;
+
+}
+
+
+
+/* Use in combination with a photo, or to create a layout that splits the screen into 2 sections one twice as big as the second */
+
+.two_thirds .column {
+
+	width: 460px;
+
+}
+
+
+
+/* Updated nav style nov 4 */
+
+#nav ul {
+
+	font-size: 1.1em;
+
+	font-weight: 700;
+
+	text-transform: uppercase;
+
+	text-align: center;
+
+	padding: 7px 0;
+
+	margin: 0;
+
+	overflow: hidden;
+
+}
+
+
+
+#nav ul li {
+
+	margin-left: 0;
+
+	padding: 10px 0 8px;
+
+	border-left: 2px solid #fff;
+
+	list-style: none;
+
+	display: inline;
+
+}
+
+
+
+#nav a {
+
+	color: #fff;
+
+}
+
+
+
+/* FOOTER STYLES ------------ */
+
+
+
+#footer {
+
+	clear: both;
+
+	width: 980px;
+
+	padding-top: 20px;
+
+}
+
+
+
+/* Changed from orginal to make the footer span the whole bottom area */
+
+#full_footer {
+
+	border-top: 1px solid #7f7f7f;
+
+	padding-bottom: 1em;
+
+	width: 100%;
+
+}
+
+
+
+#footer p {
+
+	font-weight: 700;
+
+	text-transform: uppercase;
+
+	color: #666;
+
+	margin-top: 0.7em;
+
+	font-size: .9em;
+
+}
+
+
+
+#footer a, #footer a:link, #footer a:visited, #footer a:active {
+
+	color: #666;
+
+	text-decoration: underline;
+
+}
+
+
+
+/* --- list of links footer - new nov2009 ---- */
+
+
+
+#footer ul.right {
+
+	width: 500px;
+
+	margin-top: 0.7em;
+
+}
+
+
+
+#footer ul.left {
+
+	width: 480px;
+
+	margin-left: 0;
+
+}
+
+
+
+#footer ul {
+
+	font-weight: 700;
+
+	text-transform: uppercase;
+
+	color: #666;
+
+	font-size: .9em;
+
+	margin-left: 0;
+
+	padding-left: 0;
+
+	display: inline;
+
+	margin: 0 0 1.0em;
+
+}
+
+
+
+#footer ul li {
+
+	margin-left: 0;
+
+	margin-top: 0.7em;
+
+	padding: 0 10px;
+
+	border-left: 1px solid #000;
+
+	list-style: none;
+
+	display: inline;
+
+}
+
+
+
+#footer ul li.noborder {
+
+	border: 0 none;
+
+}
+
+
+
+#footer ul.left li {
+
+	float: left;
+
+}
+
+
+
+#footer p.last-mod {
+
+	text-transform: none;
+
+	clear: right;
+
+	float: right;
+
+	text-align: right;
+
+	width: 500px;
+
+	margin: 0 10px 0 0;
+
+}
+
+/* --- list of links footer - new nov2009 ---- */
+
+/* --- TITLE BARS --- */
+
+
+
+
+
+
+
+/* ---- V1.2 code for early adopters --- */
+
+
+
+/* Use in combination with a photo, or to create a layout that splits the screen into 2 sections one twice as big as the second */
+
+.two_thirds .column .header {
+
+	width: 460px;
+
+}
+
+
+
+/* 2 seperate headers - USE: class="row two_cols" nest .content div inside, then nest .header div inside that */
+
+.two_cols .column .header {
+
+	width: 340px;
+
+}
+
+
+
+/* 3 seperate headers - USE: class="row three_cols" nest .content div inside, then nest .header div inside that */
+
+.three_cols .column .header, .two_thirds .other .header {
+
+	width: 220px;
+
+}
+
+
+
+.two_cols .split_lrg .content {
+
+	padding: 0 0 0 2px;
+
+}
+
+
+
+.two_cols .split_lrg .content img {
+
+	float: left;
+
+}
+
+
+
+.two_cols .split_lrg h3, .two_cols .split_lrg .content ul, .two_cols .split_lrg .content p {
+
+	float: left;
+
+	width: 160px;
+
+	padding: .8em 0 0 10px;
+
+}
+
+
+
+.row .splt_lrg .header {
+
+	margin-bottom: 0;
+
+}
+
+
+
+/* Overwrites prev statement to set the spacing back to default at the top */
+
+.two_cols .split_lrg .content p {
+
+	padding-top: .5em;
+
+}
+
+
+
+.column,.two_cols .column,.three_cols .column,.two_thirds .column,.box,.two_thirds .other{
+
+	display: inline;
+
+	float: left;
+
+	overflow: hidden;
+
+	margin-left: 0;
+
+	margin-right: 19px;
+
+}
+
+
+
+/* ---- END V1.2 code for early adopters --- */
+
+
+
+/* ------ HEADERS MORE ------ */
+
+
+
+.header h1, .header h2 {
+
+  color: #333;
+
+  margin: 5px 10px 0 0;
+
+  padding: 0 0 5px 10px;
+
+}
+
+.header h1 {
+
+	font-size: 1.2em;
+
+}
+
+.header h2 {
+
+  font-size: 1.1em;
+
+  float: left;
+
+}
+
+
+
+/* added more2 style */
+
+.more, .more2 { /* style for the more> links - more2 added nov2009 */
+
+  float: right;
+
+  margin: 0.5em 0.5em 0 0;
+
+  font-size: .8em;
+
+  font-weight: 700;
+
+  text-transform: uppercase;	
+
+}
+
+/* added more2 style - this is a newly positioned link allowing for nicely structured html */
+
+.more a, .more2 a { 
+
+  color:#000
+
+}
+
+.more a img, .more2 a img { padding-left: 0.3em}
+
+/* Coloured box */
+
+
+
+.box {
+
+	float: left;
+
+	width: 720px;
+
+	background-color: #f8f6d7;
+
+	border-bottom: 1px solid #666;
+
+	margin: 10px 0 20px 0;
+
+	overflow: hidden;
+
+}
+
+
+
+.box h3, .box p, .box ul, .box table {
+
+	margin-left: 20px;
+
+	margin-right: 20px;
+
+}
+
+
+
+.box table td {
+
+	border-top: 1px dotted #666;
+
+}
+
+
+
+.box .more {
+
+	right: 46px;
+
+	padding-left: 40px;
+
+}
+
+
+
+/* ---- PAGE ACTIONS (email,print,accessibility ) ----*/
+
+#pageActions {
+
+	margin: 0 !important;
+
+	padding: 0;
+
+	float: right;
+
+	text-transform: uppercase;
+
+}
+
+
+
+#pageActions a:hover {
+
+	text-decoration: underline;
+
+}
+
+
+
+ul#pageActions, #pageActions ul {
+
+	list-style-image: none;
+
+	list-style-position: outside;
+
+	list-style-type: none;
+
+	padding: 2px 0 0;
+
+}
+
+
+
+#content #pageActions li {
+
+	list-style-type: none;
+
+	float: left;
+
+	font-weight: 700;
+
+}
+
+
+
+#pageActions li.email {
+
+	background: url(../images/icon_email.gif) no-repeat 1px 1px !important;
+
+	font-size: .8em;
+
+	font-family: arial;
+
+	margin: 0 !important;
+
+}
+
+
+
+#pageActions .email a {
+
+	margin: 0;
+
+	padding: 0 10px;
+
+}
+
+
+
+#pageActions li.print {
+
+	background: url(../images/icon_print.gif) no-repeat 1px 1px !important;
+
+	font-size: .8em;
+
+	font-family: arial;
+
+	margin: 0 !important;
+
+}
+
+
+
+#pageActions .print a {
+
+	margin: 0;
+
+	padding: 0 5px 0 10px;
+
+}
+
+
+
+#pageActions li.accessibility {
+
+	background: url(../images/icon_accessible.gif) no-repeat 5px 1px !important;
+
+	padding: 0;
+
+	margin: 0 !important;
+
+	font-size: .8em;
+
+	font-family: arial;
+
+}
+
+
+
+#pageActions .accessibility a {
+
+	margin: 0;
+
+	padding: 0 0 0 26px;
+
+}
+
+
+
+#pageActions li.share {
+
+	background: url(../images/icon_share.gif) no-repeat 5px 1px !important;
+
+	padding: 0;
+
+	margin: 0 !important;
+
+	font-size: .8em;
+
+	font-family: arial;
+
+}
+
+
+
+#pageActions .share a {
+
+	margin: 0;
+
+	padding: 0 0 0 18px;
+
+}
+
+
+
+/* --- Photo/Nav Tops and Bottoms (decoration) -- */
+
+
+
+img.photo {
+
+	border-top: 1px solid #fff;
+
+	border-bottom: 1px solid #fff;
+
+	width: inherit;
+
+	float: left;
+
+}
+
+
+
+.column img.photo, .content img.photo {
+
+	width: 210px;
+
+	margin-left: 5px;
+
+}
+
+
+
+/* Used for the left floated series of images - you can put a caption below - this styles that caption */
+
+.photocap {
+
+	background-repeat: no-repeat;
+
+	height: 6px;
+
+	line-height: 1px;
+
+	font-size: .1em;
+
+	clear: left;
+
+	margin-left: 5px;
+
+}
+
+
+
+#left_column .photocap {
+
+	margin-left: 0;
+
+}
+
+
+
+.photo_top {
+
+	width: 210px;
+
+	background-image: url(../images/corner_photo_top.gif);
+
+	background-position: top left;
+
+	margin-left: 5px;
+
+	margin-top: 10px;
+
+}
+
+
+
+.photo_bottom {
+
+	width: 210px;
+
+	background-image: url(../images/corner_photo_bottom.gif);
+
+	background-position: bottom left;
+
+	margin-left: 5px;
+
+}
+
+
+
+.nav_top {
+
+	background-image: url(../images/corner_nav_top.gif);
+
+	background-position: top left;
+
+}
+
+
+
+.nav_bottom {
+
+	background-image: url(../images/corner_nav_bottom.gif);
+
+	background-position: bottom left;
+
+}
+
+
+
+#left_column .photolink {
+
+	width: 250px;
+
+}
+
+
+
+.photolink {
+
+	width: 125px;
+
+	float: left;
+
+}
+
+
+
+.photolink a {
+
+	font-weight: 700;
+
+}
+
+
+
+/* Set colour of link text under photos/ministers photo here */
+
+.photolink .text {
+
+	float: left;
+
+	padding: 5px 0 0 5px;
+
+	color: #FFF;
+
+}
+
+
+
+.icon_top {
+
+	width: 125px;
+
+	background-image: url(../images/corner_icon_top.gif);
+
+	background-position: top left;
+
+}
+
+
+
+.icon_bottom {
+
+	width: 125px;
+
+	background-image: url(../images/corner_icon_bottom.gif);
+
+	background-position: bottom left;
+
+}
+
+
+
+.icon {
+
+	width: 125px;
+
+	float: left;
+
+	padding-bottom: 20px;
+
+}
+
+
+
+.icon .photolink, .icon .photocap {
+
+	padding-right: 0;
+
+	margin-left: 0;
+
+}
+
+
+
+.spacer {
+
+	float: left;
+
+	width: 40px;
+
+}
+
+
+
+.half_spacer {
+
+	float: left;
+
+	width: 19px;
+
+}
+
+
+
+.mini_spacer {
+
+	float: left;
+
+	width: 5px;
+
+}
+
+
+
+/* =========== */
+
+/* = Colours = */
+
+/* =========== */
+
+
+
+.grey {
+
+	background-color: #868686;
+
+}
+
+
+
+.mycolour {
+
+	background-color: #000;
+
+}
+
+
+
+.red {
+
+	background-color: #F30;
+
+}
+
+
+
+/* ====================== */
+
+/* = Content Area Lists = */
+
+/* ====================== */
+
+
+
+#content ul li {
+
+	list-style-type: disc;
+
+	color: #000;
+
+	margin-left: 20px;
+
+	padding-left: 5px;
+
+	line-height: 150%;
+
+}
+
+
+
+/* Text color for lists in content area */
+
+#content ul li {
+
+	color: #566d1b;
+
+}
+
+
+
+.column li a, .content li a {
+
+	font-size: 90%;
+
+}
+
+
+
+.column ul, .content ul {
+
+	margin: 0;
+
+	padding: 0;
+
+	margin-bottom: 20px;
+
+	margin-top: 10px;
+
+}
+
+
+
+/* ------ GRID - ------------ */
+
+
+
+.grid_1, .grid_2, .grid_3, .grid_4, .grid_5, .grid_6, .grid_7, .grid_8, .grid_8plus, .grid_9, .grid_10, .grid_11, .grid_12, .grid_13, .grid_14, .grid_15, .grid_16 {
+
+	display: inline;
+
+	float: left;
+
+	border-right: 1px dotted #ccc;
+
+	overflow: hidden;
+
+	margin-left: 0;
+
+	padding-right: 9px;
+
+	margin-right: 10px;
+
+}
+
+
+
+/* For planning, testing debugging */
+
+/* Widths WIDER THAN THE #content NAV GRID BOXES */
+
+
+
+/* Whole page minus 20px (nav extra space) */
+
+#wrapper .grid_16, .grid_16 .header {
+
+	width: 960px;
+
+}
+
+
+
+#wrapper .grid_15, .grid_15 .header {
+
+	width: 880px;
+
+}
+
+
+
+#wrapper .grid_14, .grid_14 .header {
+
+	width: 820px;
+
+}
+
+
+
+#wrapper .grid_13, .grid_13 .header {
+
+	width: 760px;
+
+}
+
+
+
+/* END widths WIDER THAN THE #content NAV GRID BOXES */
+
+
+
+/* Whole right_column */
+
+#wrapper .grid_12, .grid_12 .header {
+
+	width: 700px;
+
+}
+
+
+
+#wrapper .grid_11, .grid_11 .header {
+
+	width: 640px;
+
+}
+
+
+
+#wrapper .grid_10, .grid_10 .header {
+
+	width: 580px;
+
+}
+
+
+
+#wrapper .grid_9, .grid_9 .header {
+
+	width: 520px;
+
+}
+
+
+
+/* For layouts w no left nav - transitional */
+
+#wrapper .grid_8plus, .grid_8plus .header {
+
+	width: 500px;
+
+}
+
+
+
+/* Two thirds of right_column */
+
+#wrapper .grid_8, .grid_8 .header {
+
+	width: 460px;
+
+}
+
+
+
+#wrapper .grid_7, .grid_7 .header {
+
+	width: 400px;
+
+}
+
+
+
+/* Half of right_column */
+
+#wrapper .grid_6, .grid_6 .header {
+
+	width: 340px;
+
+}
+
+
+
+#wrapper .grid_5, .grid_5 .header {
+
+	width: 280px;
+
+}
+
+
+
+/* One third of right_column */
+
+#wrapper .grid_4, .grid_4 .header {
+
+	width: 220px;
+
+}
+
+
+
+/* A quarter of right_column */
+
+#wrapper .grid_3, .grid_3 .header {
+
+	width: 160px;
+
+}
+
+
+
+#wrapper .grid_2, .grid_2 .header {
+
+	width: 100px;
+
+}
+
+
+
+#wrapper .grid_1, .grid_1 .header {
+
+	width: 40px;
+
+}
+
+
+
+/* ------ GRID - ------------ */
+
+.grid_1,.grid_2,.grid_3,.grid_4,.grid_5,.grid_6,.grid_7,.grid_8,.grid_8plus,.grid_9,.grid_10,.grid_11,.grid_12,.grid_13,.grid_14,.grid_15,.grid_16 {
+
+	display: inline;
+
+	float: left;
+
+	border-right: 1px dotted #ccc;
+
+	overflow: hidden;
+
+	margin-left: 0;
+
+	padding-right: 9px;
+
+	margin-right: 10px;
+
+}
+
+
+
+.grid_6plus,.grid_7plus,.grid_9plus,.grid_10plus,.grid_11plus,.grid_12plus,.grid_13plus,.grid_14plus,.grid_15plus,.grid_16plus {
+
+	display: inline;
+
+	float: left;
+
+	overflow: hidden;
+
+	margin-left: 0;
+
+	padding-right: 9px;
+
+	margin-right: 10px;
+
+	/*border-right: 1px dotted #ccc;*/
+
+}
+
+
+
+/* *******-- grid_#plus<--- ******* whole page FOR CURRENT 980px width - adapted grid adds 20px to accomodate the first round of templates */
+
+#wrapper .grid_16plus,.grid_16plus .header {
+
+	width: 980px;
+
+}
+
+
+
+/* Whole page minus 20px (nav extra space) */
+
+#wrapper .grid_16,.grid_16 .header {
+
+	width: 960px;
+
+}
+
+
+
+#wrapper .grid_15plus,.grid_15plus .header {
+
+	width: 900px;
+
+}
+
+
+
+#wrapper .grid_15,.grid_15 .header {
+
+	width: 880px;
+
+}
+
+
+
+#wrapper .grid_14plus,.grid_14plus .header {
+
+	width: 840px;
+
+}
+
+
+
+#wrapper .grid_14,.grid_14 .header {
+
+	width: 820px;
+
+}
+
+
+
+#wrapper .grid_13plus,.grid_13plus .header {
+
+	width: 780px;
+
+}
+
+
+
+#wrapper .grid_13,.grid_13 .header {
+
+	width: 760px;
+
+}
+
+
+
+/* END widths WIDER THAN THE #content NAV GRID BOXES */
+
+
+
+#wrapper .grid_12plus,.grid_12plus .header {
+
+	width: 720px;
+
+}
+
+
+
+/* Width of whole right_column WITH NAV */
+
+#wrapper .grid_12,.grid_12 .header {
+
+	width: 700px;
+
+}
+
+
+
+#wrapper .grid_11plus,.grid_11plus .header {
+
+	width: 660px;
+
+}
+
+
+
+#wrapper .grid_11,.grid_11 .header {
+
+	width: 640px;
+
+}
+
+
+
+#wrapper .grid_10plus,.grid_10plus .header {
+
+	width: 600px;
+
+}
+
+
+
+#wrapper .grid_10,.grid_10 .header {
+
+	width: 580px;
+
+}
+
+
+
+#wrapper .grid_9plus,.grid_9plus .header {
+
+	width: 540px;
+
+}
+
+#wrapper .grid_9,.grid_9 .header {
+
+	width: 520px;
+
+}
+
+
+
+/* For layouts w no left nav - transitional */
+
+#wrapper .grid_8plus,.grid_8plus .header {
+
+	width: 500px;
+
+}
+
+
+
+/* Two thirds of right_column WITH NAV */
+
+#wrapper .grid_8,.grid_8 .header {
+
+	width: 460px;
+
+}
+
+
+
+#wrapper .grid_7plus,.grid_7plus .header {
+
+	width: 420px;
+
+}
+
+
+
+#wrapper .grid_7,.grid_7 .header {
+
+	width: 400px;
+
+}
+
+
+
+#wrapper .grid_6plus,.grid_6plus .header {
+
+	width: 360px;
+
+}
+
+
+
+/* Half of right_column WITH NAV */
+
+#wrapper .grid_6,.grid_6 .header {
+
+	width: 340px;
+
+}
+
+
+
+#wrapper .grid_5,.grid_5 .header {
+
+	width: 280px;
+
+}
+
+
+
+/* One third of right_column WITH NAV */
+
+#wrapper .grid_4,.grid_4 .header {
+
+	width: 220px;
+
+}
+
+
+
+/* A quarter of right_column WITH NAV */
+
+#wrapper .grid_3,.grid_3 .header {
+
+	width: 160px;
+
+}
+
+
+
+#wrapper .grid_2,.grid_2 .header {
+
+	width: 100px;
+
+}
+
+
+
+#wrapper .grid_1,.grid_1 .header {
+
+	width: 40px;
+
+}
+
+
+
+/* -- USEFUL for NESTING grid items -- remove last margin in set */
+
+
+
+/* Removes all margins */
+
+.nomargin {
+
+	margin: 0;
+
+}
+
+
+
+/* Removes all borders */
+
+.noborder {
+
+	border: 0;
+
+}
+
+
+
+.borderboth {
+
+	padding-left: 9px;
+
+	border-right: 1px dotted #ccc;
+
+	border-left: 1px dotted #ccc;
+
+}
+
+
+
+/* ============ */
+
+/* = CLEARING = */
+
+/* ============ */
+
+
+
+html body div.clear, html body span.clear {
+
+	background: none;
+
+	border: 0;
+
+	clear: both;
+
+	display: block;
+
+	float: none;
+
+	font-size: 0;
+
+	margin: 0;
+
+	padding: 0;
+
+	overflow: hidden;
+
+	visibility: hidden;
+
+	width: 0;
+
+	height: 0;
+
+}
+
+
+
+* html .clearfix {
+
+	height: 1%;
+
+}
+
+
+
+.clearfix {
+
+
+
+	display: block;
+
+}
+
+
+
+.clearfix:after, .row:after {
+
+	content: ".";
+
+	display: block;
+
+	height: 0;
+
+	clear: both;
+
+	visibility: hidden;
+
+}
+
+
+
+/* Those two .clearfix have to be separate!) */
+
+.clearfix, .row {
+
+	display: inline-block;
+
+}
+
+
+
+.clearfix, .row {
+
+	display: block;
+
+}
+
+
+
+/* CHANGE-ABLE */
+
+
+
+#content .nobulletlist li {
+
+	margin: 0;
+
+	padding: 0;
+
+	list-style-type: none;
+
+}
+
+
+
+#content .news ul li {
+
+	list-style-type: none;
+
+	margin: 0;
+
+	padding: 0 5px;
+
+}
+
+
+
+/* ================= */
+
+/* = Accessibility = */
+
+/* ================= */
+
+
+
+/* use to hide h1s or h2s you don't want visible to the sighted but read by screen readers */
+
+h1.accessible,h2.accessible {
+
+	position: absolute;
+
+	left: -10000px;
+
+	top: auto;
+
+	width: 1px;
+
+	height: 1px;
+
+	overflow: hidden;
+
+}
+
+
+
+/* ---- CSS for Forms ---- */
+
+fieldset.searchForm label {
+
+	font-size: 1.4em;
+
+	color: #fff;
+
+	font-weight: 700;
+
+}
+
+
+
+fieldset.formSection {
+
+	border: 1px solid #ccc;
+
+	margin: 12px 0;
+
+	padding: 10px;
+
+}
+
+
+
+fieldset.formSection label {
+
+	display: block;
+
+	float: left;
+
+	width: 30%;
+
+	clear: left;
+
+	padding: 0;
+
+	margin: 5px 0 0;
+
+	text-align: right;
+
+}
+
+
+
+ /* set width of form elements to auto-size, otherwise watch for wrap on resize */
+
+fieldset.formSection input, fieldset.formSection select, fieldset.formSection textarea {
+
+	width: auto;
+
+	margin: 5px 0 0 10px;
+
+}
+
+
+
+/* set width of form elements to auto-size, otherwise watch for wrap on resize */
+
+fieldset.formSection input[type=radio], fieldset.formSection input[type=checkbox] {
+
+	width: auto;
+
+	margin: 8px 0 0 10px;
+
+}
+
+
+
+fieldset.formSection .twoLines {
+
+	margin: 26px 0 0 10px;
+
+}
+
+
+
+fieldset.formSection .threeLines {
+
+	margin: 38px 0 0 10px;
+
+}
+
+
+
+fieldset.formSection .submit{
+
+	float: right;
+
+}
+
+
+
+textarea {
+
+	overflow: auto;
+
+}
+
