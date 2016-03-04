@@ -10,12 +10,38 @@
 
   <style>
 .grouping_header ul#options-nav li {float: left; position: relative; margin: 0px 0px -1px 0px; background: none; padding-left: 0px;}
+
+#options-nav li.current a:hover {
+    color: inhert;
+}
   </style>
 
   <script>
 function updateEmbedCode(id) {
 
-    alert(id);
+    var selector = "ul#options-nav li#" + id;
+    //alert(selector);
+    var selected = jQuery(selector);
+    if(selected.hasClass('current')) {
+        //alert('do nothing');
+        return;
+    } else {
+        // remove from all current one.
+        jQuery("ul#options-nav li.current").removeClass('current');
+        // add to all selected one.
+        selected.addClass('current');
+
+        // update code label:
+        if(id=="default") {
+            jQuery("#code_label").text('Default Code');
+        } else if(id=="customone") {
+            jQuery("#code_label").text('Custom Code');
+        }
+
+        // TODO: search and replace.
+        // get the current one.
+        // replace with the selected one.
+    }
 }
   </script>
 </head>
@@ -62,7 +88,7 @@ function updateEmbedCode(id) {
         <div class="column_row">
           <div class="row_left">
             <strong><label for="mytext">
-              <label for="mytext_fr">Code 
+              <label for="mytext_fr"><span id="code_label">Default Code</span>
                 <a href="#" title="header=[Code] body=[This is the what you copy and paste onto a page of your website to make the video player appear.]">[?]</a>:
               </label></label>
             </strong>
