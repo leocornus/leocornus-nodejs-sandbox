@@ -45,7 +45,7 @@ describe('JavaScript String Prototype Testing Specs', function() {
             var fromString = 'red';
             var fromPattern = new RegExp(fromString, 'g');
             // we should have the save result.
-            result = colors.replace(/red/g, 'purple');
+            result = colors.replace(fromPattern, 'purple');
             expect(result).not.toMatch('red');
             expect(result).toMatch('purple');
         });
