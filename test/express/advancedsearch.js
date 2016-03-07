@@ -13,13 +13,13 @@ var advancedsearch = function(req, res) {
     // get ready the search result.
     var total = searchTerm.length;
     //console.log('start = ' + start);
-    var searchResult = generateResult(total, start, perPage);
+    var docs = generateMatchDocs(total, start, perPage);
 
     // build the response.
     response = {
         currentQuery : req.query,
         total : total,
-        searchResult : searchResult
+        docs : docs 
     }
 
     res.send(response);

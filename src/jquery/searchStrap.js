@@ -175,7 +175,7 @@
 
             // using list group for search result.
             $ul = $('<ul class="list-group"></ul>');
-            $.each(data.searchResult, function(index, item) {
+            $.each(data.docs, function(index, item) {
                 // present each item as a list group item.
                 var liHtml = self.buildItemHtml(item);
                 $ul.append(liHtml);
