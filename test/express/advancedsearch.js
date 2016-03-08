@@ -50,7 +50,7 @@ function generateDoc(index) {
  * utility function to generate some search result.
  * it will return an arry of the result.
  */
-function generateResult(total, start, perPage) {
+function generateMatchDocs(total, start, perPage) {
 
     var objectResult = [];
     for (var i = 0; i < perPage; i ++) {
