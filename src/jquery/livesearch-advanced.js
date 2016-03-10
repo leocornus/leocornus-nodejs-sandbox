@@ -121,9 +121,39 @@
             var $element = $(this.element);
 
             // find the parent div.input-group
-            // build div.input-group-btn
+            var $inputGroup = $element.parent("." . parentClass);
+            // add the ui-front class if it not present!
+            if(!$inputGroup.hasClass('ui-front')) {
+                $inputGroup.addClass('ui-front');
+            }
+            
             // build the search button
+            var searchButton = 
+              '<button class="btn btn-info">' +
+              '  <span class="glyphicon glyphicon-search"></span>' +
+              '</button>';
+            // TODO: hook the click event.
+
             // build the fiter dropdown button using filterOptions.
+            var filterButton = 
+              '<button type="button"' +
+              '        class="btn btn-info dropdown-toggle"' +
+              '        data-toggle="dropdown"' +
+              '>' +
+              '  <span class="glyphicon glyphicon-filter"></span>' +
+              '  <span class="sr-only">Toggle Dropdown</span>' +
+              '</button>' +
+              // TODO: build the dropdown options.
+              '<ul class="dropdown-menu dropdown-menu-right">' +
+              '  <li><a href="#">All</a></li>' +
+              '  <li><a href="#">Current Site</a></li>' +
+              '  <li><a href="#">Current Section</a></li>' +
+              '</ul>';
+
+            // compose div.input-group-btn
+            var $btns = $('<span class="input-group-btn"></span>');
+            $btns.append(searchButton).append(filterButton);
+            $inputGroup.append($btns);
 
             return '';
         },
