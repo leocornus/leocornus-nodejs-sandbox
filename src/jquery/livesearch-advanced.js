@@ -126,7 +126,7 @@
             if(!$inputGroup.hasClass('ui-front')) {
                 $inputGroup.addClass('ui-front');
             }
-            
+
             // build the search button
             var searchButton = 
               '<button class="btn btn-info">' +
@@ -134,6 +134,8 @@
               '</button>';
             // TODO: hook the click event.
 
+            // build the dropdown options.
+            var options = this.buildFilterDropdownOptions();
             // build the fiter dropdown button using filterOptions.
             var filterButton = 
               '<button type="button"' +
@@ -143,11 +145,8 @@
               '  <span class="glyphicon glyphicon-filter"></span>' +
               '  <span class="sr-only">Toggle Dropdown</span>' +
               '</button>' +
-              // TODO: build the dropdown options.
               '<ul class="dropdown-menu dropdown-menu-right">' +
-              '  <li><a href="#">All</a></li>' +
-              '  <li><a href="#">Current Site</a></li>' +
-              '  <li><a href="#">Current Section</a></li>' +
+              options +
               '</ul>';
 
             // compose div.input-group-btn
@@ -156,6 +155,29 @@
             $inputGroup.append($btns);
 
             return '';
+        },
+
+        /**
+         * build filter dropdown options.
+         */
+        buildFilterDropdownOptions: function() {
+
+            var options = '';
+
+            $.each(this.settings.filterOptions, 
+                   function(index, option) {
+                var li = '<li';
+                if(index == 0) {
+                    li = li + ' class="active">';
+                } else {
+                    li = li + '>';
+                }
+                li = li + '<a href="#">' + option.label + 
+                     '</a></li>';
+                options = options + li;
+            });
+
+            return options;
         },
 
         // customize render of each item.
