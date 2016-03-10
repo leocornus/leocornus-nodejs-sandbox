@@ -8,6 +8,15 @@
     var defaults = {
         // the url endpoint for search.
         searchUrl : '/search',
+        // filter query will depend on the search backend.
+        // this plugin here will assume we are using solr alike
+        // search backedn.
+        filterOptions: [
+           {label: 'All', value: ''},
+           {label: 'Current Section', value: 'site: wiki'},
+        ],
+        // TODO: allow user to customize the filter icon.
+        // TODO: allow user to turn on and off the filter options.
         // the minimium length of characters whil will trigger
         // auto complete process.
         minLength : 2,
@@ -49,8 +58,26 @@
         init: function() {
             var self = this;
             var $element = $(this.element);
+            
+            // build the search button and/or filter button.
+            var parentClass = 'input-group';
+            this.buildGroupBtnInParent(parentClass);
 
             // get ready the data object for autocomplete.
+            var searchData = this.buildSearchData();
+
+            // hook in the jquery ui autocomplete.
+            $element.autocomplete(searchData)
+                    .data("ui-autocomplete")
+                    ._renderItem = self.renderItem;
+        },
+
+        /**
+         * build the search data.
+         */
+        buildSearchData: function() {
+
+            var self = this;
             var searchData = {
                 source: function(request, response) {
                     $.ajax({
@@ -81,9 +108,24 @@
                 },
             };
 
-            $element.autocomplete(searchData)
-                    .data("ui-autocomplete")
-                    ._renderItem = self.renderItem;
+            return searchData;
+        },
+
+        /**
+         * build the search and filter buttons for the 
+         * search input group.
+         */
+        buildGroupBtnInParent: function(parentClass) {
+
+            var self = this;
+            var $element = $(this.element);
+
+            // find the parent div.input-group
+            // build div.input-group-btn
+            // build the search button
+            // build the fiter dropdown button using filterOptions.
+
+            return '';
         },
 
         // customize render of each item.
