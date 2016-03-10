@@ -62,4 +62,27 @@ describe('Testing JavaScript types', function() {
         });
     });
 
+    describe('Testing JavaScript JSON format', function() {
+
+        /**
+         * try to define an array by using JSON format.
+         */
+        it('define a simple array', function() {
+
+            // simple array with strings.
+            var aArray = ['a', 'b'];
+            // Array in JavaScript is an object type.
+            expect(typeof aArray).toBe('object');
+            // the function isArray will check the given object 
+            // is an array or not!
+            expect(Array.isArray(aArray)).toBe(true);
+
+            // JavasScript array allow mix data type for each item
+            aArray = ['a', 'b', 1, 3, {a: '123'}];
+            // this array has string as its first value.
+            expect(typeof aArray[0]).toBe('string');
+            expect(typeof aArray[2]).toBe('number');
+            expect(typeof aArray[4]).toBe('object');
+        });
+    });
 });
