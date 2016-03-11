@@ -134,17 +134,11 @@
                 $inputGroup.addClass('ui-front');
             }
 
-            // build the search button
-            //var searchButton = 
-            //  '<button class="btn btn-info">' +
-            //  '  <span class="glyphicon glyphicon-search"></span>' +
-            //  '  <span>All</span>' +
-            //  '  <span class="caret"></span>' +
-            //  '</button>';
-
-            // build the dropdown options.
+            // build the all-in-one button, including:
+            //  search button, filter label, and filter dropdown
+            // build the search button with filter dropdown options.
             var options = this.buildFilterDropdownOptions();
-            // build the fiter dropdown button using filterOptions.
+            // build the filter dropdown button using filterOptions.
             var filterButton = 
               '<button type="button"' +
               '        class="btn btn-info dropdown-toggle"' +
@@ -171,8 +165,6 @@
                 console.log(this);
                 self.handleFilterClick(this, event);
             });
-
-            return '';
         },
 
         /**
