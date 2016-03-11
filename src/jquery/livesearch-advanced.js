@@ -14,6 +14,9 @@
         filterOptions: [
            {label: 'All', value: ''},
            {label: 'Current Section', value: 'site: wiki'},
+           {label: 'Custom Section', value: 'site: custom'},
+           {label: 'User Profile', value: 'site: User Profile'},
+           {label: 'Tickets', value: 'site: Tickets'}
         ],
         // TODO: allow user to customize the filter icon.
         // TODO: allow user to turn on and off the filter options.
