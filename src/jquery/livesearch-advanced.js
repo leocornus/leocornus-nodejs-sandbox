@@ -125,10 +125,9 @@
         buildGroupBtnInParent: function(parentClass) {
 
             var self = this;
-            var $element = $(this.element);
 
             // find the parent div.input-group
-            var $inputGroup = $element.parent("." . parentClass);
+            var $inputGroup = this.$element.parent("." . parentClass);
             // add the ui-front class if it not present!
             if(!$inputGroup.hasClass('ui-front')) {
                 $inputGroup.addClass('ui-front');
@@ -138,6 +137,11 @@
             //  search button, filter label, and filter dropdown
             // build the search button with filter dropdown options.
             var options = this.buildFilterDropdownOptions();
+            // get the first otpion's label as the default label.
+            var filterLabel = this.settings.filterOptions[0].label;
+            // update the placeholder value.
+            this.$element.attr('placeholder', 
+                               'Search ' + filterLabel);
             // build the filter dropdown button using filterOptions.
             var filterButton = 
               '<button type="button"' +
@@ -145,7 +149,8 @@
               '        data-toggle="dropdown"' +
               '>' +
               '  <span class="glyphicon glyphicon-search"></span>' +
-              '  <span id="filter-label">All</span>' +
+              '  <span id="filter-label">' + 
+                   filterLabel + '</span>' +
               '  <span class="caret"></span>' +
               '  <span class="sr-only">Toggle Dropdown</span>' +
               '</button>' +

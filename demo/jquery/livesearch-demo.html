@@ -19,7 +19,13 @@
 var simpleTest = angular.module('uiDemo', []);
 
 jQuery(document).ready(function($) {
-    $('#query-right').liveSearch();
+    $('#query-right').liveSearch({
+        filterOptions: [
+            {label: 'All Blogs', value: ''},
+            {label: 'Current Blog', value: 'site: current'},
+            {label: 'Blog One', value: 'site: one'}
+        ]
+    });
 });
     </script>
   </head>
