@@ -128,11 +128,12 @@
             }
 
             // build the search button
-            var searchButton = 
-              '<button class="btn btn-info">' +
-              '  <span class="glyphicon glyphicon-search"></span>' +
-              '</button>';
-            // TODO: hook the click event.
+            //var searchButton = 
+            //  '<button class="btn btn-info">' +
+            //  '  <span class="glyphicon glyphicon-search"></span>' +
+            //  '  <span>All</span>' +
+            //  '  <span class="caret"></span>' +
+            //  '</button>';
 
             // build the dropdown options.
             var options = this.buildFilterDropdownOptions();
@@ -142,7 +143,9 @@
               '        class="btn btn-info dropdown-toggle"' +
               '        data-toggle="dropdown"' +
               '>' +
-              '  <span class="glyphicon glyphicon-filter"></span>' +
+              '  <span class="glyphicon glyphicon-search"></span>' +
+              '  <span>All</span>' +
+              '  <span class="caret"></span>' +
               '  <span class="sr-only">Toggle Dropdown</span>' +
               '</button>' +
               '<ul class="dropdown-menu dropdown-menu-right">' +
@@ -151,8 +154,11 @@
 
             // compose div.input-group-btn
             var $btns = $('<span class="input-group-btn"></span>');
-            $btns.append(searchButton).append(filterButton);
+            //$btns.append(searchButton).append(filterButton);
+            $btns.append(filterButton);
             $inputGroup.append($btns);
+
+            // TODO: hook the click event.
 
             return '';
         },
