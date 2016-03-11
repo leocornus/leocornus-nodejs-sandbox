@@ -204,8 +204,11 @@
                 } else {
                     li = li + '>';
                 }
-                li = li + '<a href="#" value="' + 
-                     option.value + '">' + 
+
+                // prepare the filter query value.
+                var query = encodeURIComponent(option.value);
+                li = li + '<a href="#" query="' + 
+                     query + '">' + 
                      option.label + 
                      '</a></li>';
                 options = options + li;
@@ -238,7 +241,8 @@
                 // update the placeholder value.
                 this.$element.attr('placeholder',
                                    'Search ' + $a.text());
-                this.settings.filterQuery = $a.attr('value');
+                var query = decodeURIComponent($a.attr('query'));
+                this.settings.filterQuery = query;
             }
         },
 
