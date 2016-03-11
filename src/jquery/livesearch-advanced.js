@@ -4,6 +4,7 @@
  */
 
 ;(function($) {
+
     var pluginLiveSearch = 'liveSearch';
     var defaults = {
         // the url endpoint for search.
@@ -30,8 +31,11 @@
 
     // the plugin constructor.
     function Plugin(element, options) {
+
         // the DOM element.
         this.element = element;
+        // the jQuery object.
+        this.$element = $(element);
         this.id = element.id;
         // extend mthod will merge object contents.
         this.settings = $.extend({}, defaults, options);
@@ -59,8 +63,8 @@
 
         // initialize.
         init: function() {
+
             var self = this;
-            var $element = $(this.element);
             
             // build the search button and/or filter button.
             var parentClass = 'input-group';
@@ -70,7 +74,7 @@
             var searchData = this.buildSearchData();
 
             // hook in the jquery ui autocomplete.
-            $element.autocomplete(searchData)
+            this.$element.autocomplete(searchData)
                     .data("ui-autocomplete")
                     ._renderItem = self.renderItem;
         },
@@ -147,7 +151,7 @@
               '        data-toggle="dropdown"' +
               '>' +
               '  <span class="glyphicon glyphicon-search"></span>' +
-              '  <span>All</span>' +
+              '  <span id="filter-label">All</span>' +
               '  <span class="caret"></span>' +
               '  <span class="sr-only">Toggle Dropdown</span>' +
               '</button>' +
@@ -162,12 +166,18 @@
             $inputGroup.append($btns);
 
             // TODO: hook the click event.
+            $inputGroup.find('li a').on('click', function(event) {
+                console.log(event);
+                console.log(this);
+                self.handleFilterClick(this, event);
+            });
 
             return '';
         },
 
         /**
          * build filter dropdown options.
+         * We will use the label of each option to display.
          */
         buildFilterDropdownOptions: function() {
 
@@ -187,6 +197,33 @@
             });
 
             return options;
+        },
+
+        /**
+         * handle the filter option click, when user switch filers.
+         */
+        handleFilterClick: function(selectedElement, clickEvent) {
+
+            // selected element should be <a>
+            var $a = $(selectedElement);
+            // find the direct parent <li>
+            var $li = $a.parent('li');
+            // find the <li> parent, which should be <ul>.
+            var $ul = $li.parent('ul');
+
+            if($li.hasClass('active')) {
+                // Here is the current filter, nothing to do.
+            } else {
+                // find the current active <li>
+                $ul.find('li.active').removeClass('active');
+                // set active for current selection.
+                $li.addClass('active');
+                // update the filter label
+                $('#filter-label').text($a.text());
+                // update the placeholder value.
+                this.$element.attr('placeholder',
+                                   'Search ' + $a.text());
+            }
         },
 
         // customize render of each item.
