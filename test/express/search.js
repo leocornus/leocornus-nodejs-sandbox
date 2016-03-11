@@ -27,42 +27,55 @@ var search = function(req, res) {
     // hard code some result.
     var objectResult = [
         {title:'The Title One', url:'http://one.com',
+         site: 'A-SITE',
          description: longestDesc
         },
         {title:'The Two', url:'http://two.com',
+         site: 'A-SITE',
          description: 'one one one one two two two two two'
         },
         {title:'The Title', url:'http://one.com',
+         site: 'A-SITE',
          description: longestDesc
         },
         {title:'The Two', url:'http://two.com',
+         site: 'A-SITE',
          description: 'one one one one two two two two two'
         },
         {title:'The Title', url:'http://one.com',
+         site: 'A-SITE',
          description: longestDesc
         },
         {title:'The Two', url:'http://two.com',
+         site: 'A-SITE',
          description: 'one one one one two two two two two'
         },
         {title:'The Title', url:'http://one.com',
+         site: 'A-SITE',
          description: longestDesc
         },
         {title:'The Two', url:'http://two.com',
+         site: 'A-SITE',
          description: 'one one one one two two two two two'
         },
         {title:'The Title', url:'http://one.com',
+         site: 'A-SITE',
          description: longestDesc
         },
         {title:'The Two', url:'http://two.com',
+         site: 'A-SITE',
          description: 'one one one one two two two two two'
         },
         {title:'The Title', url:'http://one.com',
+         site: 'A-SITE',
          description: longestDesc
         },
         {title:'The Two', url:'http://two.com',
+         site: 'A-SITE',
          description: 'one one one one two two two two two'
         },
         {title:'The Three', url:'http://three.com',
+         site: 'A-SITE',
          description: 'three three three'
         }
     ];

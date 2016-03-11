@@ -26,7 +26,7 @@
         minLength : 2,
         // Max items show on the suggestion. 
         // if set to 0, it will show all items from the suggestion.
-        maxItems : 3 
+        maxItems : 3
     };
 
     // the plugin constructor.
@@ -255,7 +255,8 @@
                          '" style="padding: 0;">' + item.title + 
                      '</a>' +
               '    </h4>' +
-              '    <small class="text-muted">SITE</small>' +
+              '    <small class="text-muted">' + 
+                     item.site + '</small>' +
               '    <p class="media-description">' + 
                      item.description + 
               '    </p>' + 
