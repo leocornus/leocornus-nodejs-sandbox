@@ -19,6 +19,8 @@
            {label: 'User Profile', value: 'site: User Profile'},
            {label: 'Tickets', value: 'site: Tickets'}
         ],
+        // default filter query is empty, search everything
+        filterQuery: '',
         // TODO: allow user to customize the filter icon.
         // TODO: allow user to turn on and off the filter options.
         // the minimium length of characters whil will trigger
@@ -87,11 +89,17 @@
             var self = this;
             var searchData = {
                 source: function(request, response) {
+
+                    // get teh filter options as the filter query.
+                    //var filterQuery = self.buildFilterQuery();
+
+                    // send the ajax call.
                     $.ajax({
                       url: self.settings.searchUrl,
                       dataType: 'json',
                       data: {
-                          term: request.term
+                          term: request.term,
+                          fq: self.settings.filterQuery 
                       },
                       success: function(data) {
                           var total = data.length;
@@ -116,6 +124,14 @@
             };
 
             return searchData;
+        },
+
+        /**
+         * build filter query
+         */
+        buildFilterQuery: function() {
+
+            // filter query
         },
 
         /**
@@ -188,7 +204,9 @@
                 } else {
                     li = li + '>';
                 }
-                li = li + '<a href="#">' + option.label + 
+                li = li + '<a href="#" value="' + 
+                     option.value + '">' + 
+                     option.label + 
                      '</a></li>';
                 options = options + li;
             });
@@ -220,6 +238,7 @@
                 // update the placeholder value.
                 this.$element.attr('placeholder',
                                    'Search ' + $a.text());
+                this.settings.filterQuery = $a.attr('value');
             }
         },
 
