@@ -9,6 +9,8 @@
     var defaults = {
         // the url endpoint for search.
         searchUrl : '/search',
+        // the url for search result page.
+        searchResultUrl: '/searchresult',
         // filter query will depend on the search backend.
         // this plugin here will assume we are using solr alike
         // search backedn.
@@ -79,6 +81,32 @@
             this.$element.autocomplete(searchData)
                     .data("ui-autocomplete")
                     ._renderItem = self.renderItem;
+
+            // hook the key press event.
+            this.$element.on('keypress', function(event) {
+
+                //console.log(event);
+                // only handle the enter key.
+                if(event.keyCode == 13) {
+                    self.loadSearchResult();
+                }
+            });
+        },
+
+        /**
+         * load the search result page.
+         */
+        loadSearchResult: function() {
+
+            // encode he search term
+            var term = encodeURIComponent(this.$element.val());
+            var fq = encodeURIComponent(this.settings.filterQuery);
+            // build the search URL
+            var url = this.settings.searchResultUrl + 
+                '?searchterm=' + term + 
+                '&fq=' + fq;
+            // load the search result page.
+            window.location.href = url;
         },
 
         /**
