@@ -20,10 +20,15 @@ var simpleTest = angular.module('uiDemo', []);
 
 jQuery(document).ready(function($) {
     $('#query-right').liveSearch({
+        searchResult: {
+            url: '/demo/jquery/search-result-demo.html',
+            queryName: 'searchterm'
+        },
+        maxItems : 6,
         filterOptions: [
             {label: 'All Blogs', value: ''},
             {label: 'Current Blog', value: 'site: current'},
-            {label: 'Blog One', value: 'site: one'}
+            {label: 'All Wiki', value: 'site: wiki'}
         ]
     });
 });
@@ -40,7 +45,7 @@ jQuery(document).ready(function($) {
 
         <div class="col-md-6" style="margin-top:35px;">
 
-          <div class="input-group col-md-9"
+          <div class="input-group"
                role="group" aria-label="...">
             <input class="form-control"
                    placeholder="Search All"

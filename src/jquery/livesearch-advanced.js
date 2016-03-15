@@ -8,9 +8,15 @@
     var pluginLiveSearch = 'liveSearch';
     var defaults = {
         // the url endpoint for search.
-        searchUrl : '/search',
-        // the url for search result page.
-        searchResultUrl: '/searchresult',
+        searchApi: '/search',
+
+        // the properties for search result page.
+        searchResult: {
+            url: '/searchresult',
+            queryName: 'searchterm',
+            filterQueryName: 'filterQuery'
+        },
+
         // filter query will depend on the search backend.
         // this plugin here will assume we are using solr alike
         // search backedn.
@@ -21,8 +27,10 @@
            {label: 'User Profile', value: 'site: User Profile'},
            {label: 'Tickets', value: 'site: Tickets'}
         ],
+
         // default filter query is empty, search everything
         filterQuery: '',
+
         // TODO: allow user to customize the filter icon.
         // TODO: allow user to turn on and off the filter options.
         // the minimium length of characters whil will trigger
@@ -102,9 +110,11 @@
             var term = encodeURIComponent(this.$element.val());
             var fq = encodeURIComponent(this.settings.filterQuery);
             // build the search URL
-            var url = this.settings.searchResultUrl + 
-                '?searchterm=' + term + 
-                '&fq=' + fq;
+            var url = this.settings.searchResult.url + 
+                '?' + this.settings.searchResult.queryName + 
+                '=' + term + 
+                '&' + this.settings.searchResult.filterQueryName +
+                '=' + fq;
             // load the search result page.
             window.location.href = url;
         },
@@ -123,7 +133,7 @@
 
                     // send the ajax call.
                     $.ajax({
-                      url: self.settings.searchUrl,
+                      url: self.settings.searchApi,
                       dataType: 'json',
                       data: {
                           term: request.term,
