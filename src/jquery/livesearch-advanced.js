@@ -50,6 +50,12 @@
         this.$element = $(element);
         this.id = element.id;
         // extend mthod will merge object contents.
+        // we need merge the (sub) object first...
+        // this will make sure the searchResult object
+        // can carry over the default values.
+        var resultPage = $.extend({}, defaults.searchResult, 
+                                  options.searchResult);
+        options.searchResult = resultPage;
         this.settings = $.extend({}, defaults, options);
         this._defatuls = defaults;
         this._name = pluginLiveSearch;
