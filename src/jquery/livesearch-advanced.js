@@ -83,9 +83,9 @@
                     ._renderItem = self.renderItem;
 
             // hook the key press event.
-            this.$element.on('keypress', function(event) {
+            this.$element.on('keyup', function(event) {
 
-                //console.log(event);
+                //console.log(event.keyCode);
                 // only handle the enter key.
                 if(event.keyCode == 13) {
                     self.loadSearchResult();
@@ -272,6 +272,13 @@
                 var query = decodeURIComponent($a.attr('query'));
                 this.settings.filterQuery = query;
             }
+
+            this.$element.focus();
+            // trigger the keydown event
+            // jquery ui-autocomplete listen to the keydown event.
+            var e = $.Event("keydown", 
+                            {target: this.element});
+            this.$element.trigger(e);
         },
 
         // customize render of each item.
