@@ -19,21 +19,21 @@
       var simpleTest = angular.module('uiDemo', []);
       // for post
       jQuery(document).ready(function ($) {
-          $('.nlogged').voteModeration({
+          $('.nlogged').likeDislike({
               userId: 2,
               vote_count: 18
 
           });
       });
       jQuery(document).ready(function ($) {
-          $('.logged').voteModeration({
+          $('.logged').likeDislike({
               userId: 12,
               vote_count: 22
           });
       });
       // for comments
       jQuery(document).ready(function ($) {
-          $('.comment').voteModeration({
+          $('.comment').likeDislike({
               userId: 2,
               comment_selector: '[id^="comment-"]'
           });

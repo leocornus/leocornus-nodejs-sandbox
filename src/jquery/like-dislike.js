@@ -4,7 +4,7 @@
 (function ($) {
 
     // Plugin name
-    var pluginVoteMod = 'voteModeration';
+    var pluginLikeBut = 'likeDislike';
     //var $element = $(this.element);
     // default icons and titles for vote box
     var icn = {
@@ -36,17 +36,17 @@
         // extend mthod will merge object contents.
         this.settings = $.extend({}, icn, options);
         //this._defatuls = defaults;
-        this._name = pluginVoteMod;
+        this._name = pluginLikeBut;
         this.init();
     }
 
-    $.fn[pluginVoteMod] = function (options) {
+    $.fn[pluginLikeBut] = function (options) {
         // return to maintain the chain.
         return this.each(function () {
             // check the local storage index for the current element.
-            if (!$.data(this, "plugin_" + pluginVoteMod)) {
+            if (!$.data(this, "plugin_" + pluginLikeBut)) {
                 // no plugin created yet, let create a new one.
-                $.data(this, "plugin_" + pluginVoteMod, new Plugin(this, options));
+                $.data(this, "plugin_" + pluginLikeBut, new Plugin(this, options));
             }
         });
     };
