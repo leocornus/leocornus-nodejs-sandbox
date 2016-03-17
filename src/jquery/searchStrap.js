@@ -8,7 +8,7 @@
 
     // plugin name and default values.
     var pluginSearchStrap = "searchStrap";
-    // se the default alue.
+    // set the default values
     var defaults = {
         // the url endpoint for search.
         searchUrl : '/search',
@@ -17,7 +17,10 @@
         // id for the search button.
         searchButton : 'search-button',
         // query param for search term.
-        queryName : 'searchterm'
+        queryName : 'searchterm',
+
+        // jQuery selector for the the search result section.
+        resultSelector: '#search-result'
     };
 
     // the plugin constructor.
@@ -185,12 +188,14 @@
             var pagination = 
                 this.buildPaginationDots(currentPage, totalPages);
 
-            $('#search-result').html('').append(info).
-                append($ul).append(pagination);
+            // the search result section: 
+            var $result = $(self.settings.resultSelector);
+            $result.html('').append(info)
+                            .append($ul).append(pagination);
 
             // create jQuery object.
             // hook click event for all available pages.
-            $('#search-result').find('nav ul li[class!="active"] a').
+            $result.find('nav ul li[class!="active"] a').
                 on('click', function(event) {
 
                 // identify the page.
