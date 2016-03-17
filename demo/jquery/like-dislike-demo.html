@@ -1,6 +1,6 @@
-<html ng-app="uiDemo">
+<html ng-app="likebtn">
 <head>
-  <title>Demo jQuery UI</title>
+  <title>Demo Like Dislike Buttons</title>
 
   <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
   <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
@@ -16,29 +16,16 @@
 
   <script src='/src/jquery/like-dislike.js'></script>
   <script>
-      var simpleTest = angular.module('uiDemo', []);
+      var simpleTest = angular.module('likebtn', []);
+
       // for post
       jQuery(document).ready(function ($) {
-          $('.nlogged').likeDislike({
+          $('.page-body').likeDislike({
               userId: 2,
               vote_count: 18
 
           });
       });
-      jQuery(document).ready(function ($) {
-          $('.logged').likeDislike({
-              userId: 12,
-              vote_count: 22
-          });
-      });
-      // for comments
-      jQuery(document).ready(function ($) {
-          $('.comment').likeDislike({
-              userId: 2,
-              commentSelector: '[id^="comment-"]'
-          });
-      });
-
   </script>
 </head>
 <body >
@@ -59,27 +46,8 @@
         Here are some content. Here are some content.
         Here are some content. Here are some content.
         Here are some content. Here are some content.
-      </div>
-      <div class="article-buttons">
-        <a href="#" class="btn text-success">Like 
-          <i class="fa fa-thumbs-up fa-lg"></i>
-          <span class="badge">12</span>
-        </a>
-        <a href="#" class="btn pull-right text-danger">Dislike
-          <i class="fa fa-exclamation-triangle fa-lg"></i>
-        </a>
-      </div>
-
-      <div class="article-buttons">
-        <a href="#" class="btn text-success disabled">Like 
-          <i class="fa fa-thumbs-up fa-lg"></i>
-          <span class="badge">12</span>
-        </a>
-        <a href="#" class="btn pull-right text-danger disabled">Dislike
-          <i class="fa fa-exclamation-triangle fa-lg"></i>
-        </a>
-        <div class="logged"></div>
-        <div class="nlogged"></div>
+        <div class="article-buttons">
+        </div>
       </div>
       <div class="comment">
         <ul class="list-unstyled">

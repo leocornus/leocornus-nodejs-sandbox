@@ -1,10 +1,15 @@
 /**
- * a jQuery plugin to display functioning votebox
+ * a jQuery plugin to display functioning like and dislike buttons.
+ * 
+ * - this plugin will take the content area as the start point.
+ * - we assume the post article and all comments are in the
+ *   content area
  */
-(function ($) {
+;(function ($) {
 
     // Plugin name
     var pluginLikeBut = 'likeDislike';
+
     // default options for the like and dislike buttons.
     var defaults = {
 
@@ -12,11 +17,11 @@
         serverApi: '/vote',
 
         // selector for article vote area: div, span, etc.
-        // default is 
-        articleSelector: '.article-vote',
+        // default is class=article-buttons
+        articleSelector: 'div.row div.col-md-8 div.body-content .article-buttons',
 
         // selector for the comments vote area,
-        commentsSelector: '[id^="comment"]',
+        commentsSelector: 'div.row div.col-md-8 div.comment .article-buttons',
 
         // cursor for what?
         cursor: 'default',
@@ -81,8 +86,128 @@
 
     $.extend(Plugin.prototype, {
 
-        // initialize.
+        /**
+         * initializion the plugin.
+         */
         init: function() {
+
+            var self = this;
+
+            // TODO: call server API to collect user informaion:
+            // - is user logged in?
+            // - user information if user logged in
+            // - current vote counts.
+
+            // TODO: based on login status.
+
+            // 1. build the vote box for article 
+            self.buildVoteButtons();
+
+            // 2. build vote boxes for each comment.
+        },
+
+        /**
+         * build vote box for article.
+         */
+        buildVoteButtons: function() {
+
+            // the original this.
+            var self = this;
+
+            // find the article buttons area.
+            var buttons = self.$element.
+                find(self.settings.articleSelector);
+            if(buttons.length > 0) {
+                // only build if we found the area!
+                var $btns = $(buttons[0]);
+                // TODO: build button based on login status.
+                var btn = self.buildLikeButton(0, 'I like this', 
+                                               '', 'fa-lg');
+                $btns.append(btn);
+                btn = self.buildDislikeButton('I donot like this', 
+                                               '', 'fa-lg');
+                $btns.append(btn);
+                // TODO: hook the click events.
+                $btns.find('a').on('click', function() {
+                });
+            }
+
+            // looking for the comments article buttons area
+            // we will add vote button for all comments.
+            self.$element.find(self.settings.commentsSelector)
+                .each(function(index, element) {
+
+                // where we add those buttons.
+                var $btns = $(this);
+                var btn = self.buildLikeButton(0, 'I like this');
+                $btns.append(btn);
+                btn = self.buildDislikeButton('I donnot like this');
+                $btns.append(btn);
+
+                // TODO: hook the click events.
+            });
+        },
+
+        /**
+         * utility method the build the like buttons.
+         */
+        buildLikeButton: function(voteCount, tooltipTitle, 
+                                  disabled, sizeClass) {
+
+            // set voteCount default to 0,
+            voteCount = typeof voteCount != 'undefined' ? 
+                        voteCount : 0;
+            // set tooltip Title default to I like this.
+            tooltipTitle = typeof tooltipTitle != 'undefined' ?
+                           tooltipTitle : 'I like this!';
+            // set disabled to '' which equals to false.
+            disabled = typeof disabled != 'undefined' ?
+                       disabled : '';
+            // set size class to '' which means normal size.
+            sizeClass = typeof sizeClass != 'undefined' ?
+                        sizeClass : '';
+
+            var btnHtml = 
+                '<a href="#" ' +
+                '   class="btn text-success ' + disabled + '"' +
+                '   title="' + tooltipTitle + '">Like' +
+                '  <i class="fa fa-thumbs-up ' + sizeClass + 
+                '           "></i>' +
+                '  <span class="badge">' + voteCount + '</span>' +
+                '</a>';
+
+            return btnHtml;
+        },
+
+        /**
+         * utility method the build the like buttons.
+         */
+        buildDislikeButton: function(tooltipTitle, disabled,
+                                     sizeClass) {
+
+            // set tooltip Title default to I like this.
+            tooltipTitle = typeof tooltipTitle != 'undefined' ?
+                           tooltipTitle : 'I do not like this!';
+            // set disabled to '' which equals to false.
+            disabled = typeof disabled != 'undefined' ?
+                       disabled : '';
+            // set size class to '' which means normal size.
+            sizeClass = typeof sizeClass != 'undefined' ?
+                        sizeClass : '';
+
+            var btnHtml = 
+                '<a href="#" ' +
+                '   class="btn pull-right text-danger ' +
+                disabled + '"' +
+                '   title="' + tooltipTitle + '">Dislike' +
+                '  <i class="fa fa-exclamation-triangle ' + 
+                sizeClass + '"></i>' +
+                '</a>';
+
+            return btnHtml;
+        },
+
+        initBak: function() {
 
             var $element = $(this.element);
             var self = this;
@@ -126,7 +251,7 @@
         /**
          * utility method to build the vote box.
          */
-        buildVoteBox: function () {
+        buildVoteBoxLegacy: function () {
 
             var self = this;
 
