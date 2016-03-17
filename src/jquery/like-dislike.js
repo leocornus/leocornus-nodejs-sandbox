@@ -127,8 +127,10 @@
                 btn = self.buildDislikeButton('I donot like this', 
                                                '', 'fa-lg');
                 $btns.append(btn);
+                $btns.find('[data-toggle="tooltip"]').tooltip();
                 // TODO: hook the click events.
                 $btns.find('a').on('click', function() {
+                    self.handleVote($(this));
                 });
             }
 
@@ -143,6 +145,7 @@
                 $btns.append(btn);
                 btn = self.buildDislikeButton('I donnot like this');
                 $btns.append(btn);
+                $btns.find('[data-toggle="tooltip"]').tooltip();
 
                 // TODO: hook the click events.
             });
@@ -170,6 +173,8 @@
             var btnHtml = 
                 '<a href="#" ' +
                 '   class="btn text-success ' + disabled + '"' +
+                '   data-toggle="tooltip"' +
+                '   data-placement="top"' +
                 '   title="' + tooltipTitle + '">Like' +
                 '  <i class="fa fa-thumbs-up ' + sizeClass + 
                 '           "></i>' +
@@ -197,14 +202,24 @@
 
             var btnHtml = 
                 '<a href="#" ' +
-                '   class="btn pull-right text-danger ' +
+                '   class="btn pull-right text-warning' +
                 disabled + '"' +
+                '   data-toggle="tooltip"' +
+                '   data-placement="top"' +
                 '   title="' + tooltipTitle + '">Dislike' +
                 '  <i class="fa fa-exclamation-triangle ' + 
                 sizeClass + '"></i>' +
                 '</a>';
 
             return btnHtml;
+        },
+
+        /**
+         * handle like or dislike button click
+         */
+        handleVote: function($element) {
+
+            console.log($element);
         },
 
         initBak: function() {
@@ -300,7 +315,7 @@
          *
          * @param voteAction could be up or down.
          */
-        handleVote: function(voteAction, ele) {
+        handleVoteLegacy: function(voteAction, ele) {
 
             var self = this;
 
