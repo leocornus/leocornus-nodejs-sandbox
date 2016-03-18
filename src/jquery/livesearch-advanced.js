@@ -207,10 +207,12 @@
               '<button type="button"' +
               '        class="btn btn-info dropdown-toggle"' +
               '        data-toggle="dropdown"' +
+              '        data-placement="left"' +
+              '        title="Change Search Section"' +
               '>' +
               '  <span class="glyphicon glyphicon-search"></span>' +
-              '  <span id="filter-label">' + 
-                   filterLabel + '</span>' +
+              '  <span id="filter-label"> ' + 
+                   filterLabel + ' </span>' +
               '  <span class="caret"></span>' +
               '  <span class="sr-only">Toggle Dropdown</span>' +
               '</button>' +
@@ -222,6 +224,7 @@
             var $btns = $('<span class="input-group-btn"></span>');
             //$btns.append(searchButton).append(filterButton);
             $btns.append(filterButton);
+            $btns.find('[data-toggle="dropdown"]').tooltip();
             $inputGroup.append($btns);
 
             // TODO: hook the click event.
