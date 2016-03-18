@@ -293,11 +293,9 @@
             }
 
             this.$element.focus();
-            // trigger the keydown event
-            // jquery ui-autocomplete listen to the keydown event.
-            var e = $.Event("keydown", 
-                            {target: this.element});
-            this.$element.trigger(e);
+            // trigger the ui autocomplete search event
+            // which will show up suggestion box after we set filter.
+            this.$element.autocomplete('search', this.$element.val());
         },
 
         // customize render of each item.

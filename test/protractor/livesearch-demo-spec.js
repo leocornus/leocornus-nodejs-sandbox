@@ -58,7 +58,7 @@ describe('test livesearch demo page', function () {
             var href = element(by.css('.media-list')).
                 element(by.css('.media-body .media-heading')).
                 element(by.tagName('a'));
-            var str = ".com";
+            var str = "http:";
             expect(href.getAttribute("href")).toContain(str);
         });
 
