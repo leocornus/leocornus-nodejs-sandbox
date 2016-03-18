@@ -148,6 +148,9 @@
                 $btns.find('[data-toggle="tooltip"]').tooltip();
 
                 // TODO: hook the click events.
+                $btns.find('a').on('click', function() {
+                    self.handleVote($(this));
+                });
             });
         },
 
@@ -220,6 +223,32 @@
         handleVote: function($element) {
 
             console.log($element);
+            // check the class to decide the action:
+            // if not logged in
+            // we only handle class test-success
+            if($element.hasClass('text-success')) {
+
+                // TODO: call server api to perform vote.
+                // TODO: the following will be AJAX call back.
+
+                // if vote success:
+                // toggle the class.
+                $element.removeClass('text-success');
+                $element.addClass('text-muted');
+                // hide tooltip
+                $element.tooltip('hide');
+                // update tooltip title
+                //$element.attr('title', 'You already liked!');
+                $element.attr('data-original-title', 'You already liked!');
+                $element.tooltip();
+                // increase vote count
+                // get vote count
+                var $voteBadge = $element.find('span.badge');
+                var count = parseInt($voteBadge.text());
+                $voteBadge.text(count + 1);
+            } else {
+                $element.tooltip('hide');
+            }
         },
 
         initBak: function() {
