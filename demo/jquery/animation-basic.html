@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>animate demo</title>
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+
+  <script src='/bower_components/angular/angular.min.js'></script>
+
+  <style>
+  div.block {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    float: left;
+    margin: 5px;
+  }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-header"><h1>Animation Demo</h1></div>
+
+  <div>
+  <button id="left">&laquo;</button>
+  <button id="right">&raquo;</button>
+  </div>
+  
+  <p>
+    <div class="block bg-info">
+      <i class="fa fa-smile-o fa-5x text-success"></i>
+    </div>
+  </p>
+
+</div>
+ 
+<script>
+$( "#right" ).click(function() {
+  $( "div.block" ).animate({ "left": "+=50px" }, "slow" );
+});
+ 
+$( "#left" ).click(function(){
+  $( "div.block" ).animate({ "left": "-=50px" }, "slow" );
+});
+</script>
+ 
+</body>
+</html>
