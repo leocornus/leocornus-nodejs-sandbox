@@ -36,7 +36,7 @@
   
   <p>
     <div class="block bg-info">
-<span class="fa-stack fa-3x text-success">
+<span class="fa-stack fa-3x text-success bg-primary">
   <i class="fa fa-square-o fa-stack-2x"></i>
   <i class="fa fa-twitter fa-stack-1x"></i>
 </span>
@@ -59,6 +59,32 @@ $( "#up" ).click(function(){
 $( "#down" ).click(function(){
   $( "span.fa-stack" ).animate({ "top": "+=50px" }, "fast" );
 });
+
+$('body').keydown(function(event) {
+
+    switch(event.keyCode) {
+        case 74:
+            // the j key going down
+            $( "span.fa-stack" ).animate({ "top": "+=50px" }, "fast" );
+            break;
+        case 75:
+            // the k key going up
+            $( "span.fa-stack" ).animate({ "top": "-=50px" }, "slow" );
+            break;
+        case 72:
+            // the h key going left
+            $( "span.fa-stack" ).animate({ "left": "-=50px" }, "slow" );
+            break;
+        case 76:
+            // the l key going right
+            $( "span.fa-stack" ).animate({ "left": "+=50px" }, "slow" );
+            break;
+        default:
+            console.log(event.keyCode);
+            break;
+    }
+});
+
 </script>
  
 </body>
