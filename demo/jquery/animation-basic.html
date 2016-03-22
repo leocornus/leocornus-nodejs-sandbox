@@ -12,12 +12,10 @@
   <script src='/bower_components/angular/angular.min.js'></script>
 
   <style>
-  div.block1 {
+  div.block {
     position: relative;
-    width: 70px;
-    height: 70px;
-    float: left;
-    margin: 5px;
+    width: 684px;
+    height: 684px;
   }
   </style>
 </head>
@@ -36,7 +34,7 @@
   
   <p>
     <div class="block bg-info">
-<span class="fa-stack fa-3x text-success bg-primary">
+<span class="fa-stack fa-3x bg-danger text-success">
   <i class="fa fa-square-o fa-stack-2x"></i>
   <i class="fa fa-twitter fa-stack-1x"></i>
 </span>
@@ -62,22 +60,35 @@ $( "#down" ).click(function(){
 
 $('body').keydown(function(event) {
 
+    var $theBox = $("span.fa-stack");
+    var position = $theBox.position();
+    var width = $theBox.width();
+    var height = $theBox.height();
+
     switch(event.keyCode) {
         case 74:
             // the j key going down
-            $( "span.fa-stack" ).animate({ "top": "+=50px" }, "fast" );
+            if((position.top + height) < 684) {
+                $theBox.animate({ "top": "+=50px" }, "fast" );
+            }
             break;
         case 75:
             // the k key going up
-            $( "span.fa-stack" ).animate({ "top": "-=50px" }, "slow" );
+            if(position.top > 0) {
+                $theBox.animate({ "top": "-=50px" }, "slow" );
+            }
             break;
         case 72:
             // the h key going left
-            $( "span.fa-stack" ).animate({ "left": "-=50px" }, "slow" );
+            if(position.left > 0) {
+                $theBox.animate({ "left": "-=50px" }, "slow" );
+            }
             break;
         case 76:
             // the l key going right
-            $( "span.fa-stack" ).animate({ "left": "+=50px" }, "slow" );
+            if((position.left + width) < 684) {
+                $theBox.animate({ "left": "+=50px" }, "slow" );
+            }
             break;
         default:
             console.log(event.keyCode);
