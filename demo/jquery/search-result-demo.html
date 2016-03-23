@@ -19,7 +19,7 @@
 var simpleTest = angular.module('uiDemo', []);
 
 jQuery(document).ready(function($) {
-    $('#query-right').searchStrap({
+    $('#search-input').searchStrap({
         searchUrl: '/advancedsearch',
         itemsPerPage: 5,
         searchButton: 'sizing-addon'
@@ -35,23 +35,57 @@ jQuery(document).ready(function($) {
   </head>
   <body>
     <div class="container">
+      <!-- page header -->
       <div class="page-header">
-        <h1>Hello Search Demo!</h1>
+        <div class="row">
+          <div class="col-md-8">
+            <h1 class="">Search Result Demo Page</h1> 
+          </div>
 
-        <div class="input-group col-md-6"
-             role="group" aria-label="...">
-          <input type="text" class="form-control"
-                 placeholder="Find something"
-                 id="query-right"
-                 aria-describedby="sizing-addon"/>
-          <span class="input-group-addon bg-info"
-             id="sizing-addon">
-            <i class="fa fa-search text-primary"></i>
-            Search
-          </span>
+          <div class="col-md-4">
+            <h1>
+              <div class="input-group"
+                   role="group" aria-label="...">
+                <input class="form-control"
+                       placeholder="Search All"
+                       id="query-right"/>
+              </div>
+            </h1>
+          </div>
         </div>
       </div>
 
+      <!-- Search bar -->
+      <div class="container container-fluid bar-search bg-muted">
+      <div class="row">
+        <div class="col-md-8">
+
+          <h4 class="pull-left">Search Logo: </h4>
+
+          <div class="input-group"
+               role="group" aria-label="...">
+            <input type="text" class="form-control"
+                   placeholder="Find something"
+                   id="search-input"
+                   aria-describedby="sizing-addon"/>
+            <span class="input-group-addon bg-info"
+               id="sizing-addon">
+              <i class="fa fa-search text-primary"></i>
+              Search
+            </span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="pull-right">
+             <a class="btn btn-default">
+                <i class="fa fa-gear text-success"></i>
+             </a>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- search result -->
       <div id="search-result"> 
         <ul class="list-group">
           <li class="list-group-item">
