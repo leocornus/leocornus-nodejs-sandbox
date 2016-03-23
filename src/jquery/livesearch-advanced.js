@@ -205,7 +205,7 @@
             // build the filter dropdown button using filterOptions.
             var filterButton = 
               '<button type="button"' +
-              '        class="btn btn-info dropdown-toggle"' +
+              '        class="btn btn-primary btn-default dropdown-toggle"' +
               '        data-toggle="dropdown"' +
               '        data-placement="left"' +
               '        title="Change Search Section"' +
@@ -241,19 +241,25 @@
          */
         buildFilterDropdownOptions: function() {
 
+            var self = this;
             var options = '';
 
-            $.each(this.settings.filterOptions, 
+            $.each(self.settings.filterOptions, 
                    function(index, option) {
+
+                // prepare the filter query value.
+                var query = encodeURIComponent(option.value);
+                // get ready the option li.
                 var li = '<li';
                 if(index == 0) {
+                    // using the first one as default.
                     li = li + ' class="active">';
+                    // set the default filterQuery.
+                    self.settings.filterQuery = query;
                 } else {
                     li = li + '>';
                 }
 
-                // prepare the filter query value.
-                var query = encodeURIComponent(option.value);
                 li = li + '<a href="#" query="' + 
                      query + '">' + 
                      option.label + 

@@ -10,6 +10,7 @@ var search = function(req, res) {
     var searchTerm = req.query.term;
     var start = req.query.start;
     var perPage = req.query.perPage;
+    var filterQuery = req.query.fq;
 
     // simple result, an array of string.
     var simpleResult = [
@@ -19,7 +20,8 @@ var search = function(req, res) {
         "Item Four"
     ];
 
-    var longestDesc = 'one one one one one one one one, ' +
+    var longestDesc = filterQuery + ' -- ' +
+        'one one one one one one one one, ' +
         'one one one one one one one one, ' + 
         'one one one one one one one one, ' + 
         'one one one one one one one one';
