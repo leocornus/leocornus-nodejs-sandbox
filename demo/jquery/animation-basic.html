@@ -14,8 +14,8 @@
   <style>
   div.block {
     position: relative;
-    width: 684px;
-    height: 684px;
+    width: 280px;
+    height: 280px;
   }
   </style>
 </head>
@@ -34,7 +34,8 @@
   
   <p>
     <div class="block bg-info">
-<span class="fa-stack fa-3x bg-danger text-success">
+<span class="fa-stack bg-danger text-success" 
+      style="top: 0px; left: 0px">
   <i class="fa fa-square-o fa-stack-2x"></i>
   <i class="fa fa-twitter fa-stack-1x"></i>
 </span>
@@ -64,30 +65,35 @@ $('body').keydown(function(event) {
     var position = $theBox.position();
     var width = $theBox.width();
     var height = $theBox.height();
+    console.log(event);
 
     switch(event.keyCode) {
         case 74:
             // the j key going down
-            if((position.top + height) < 684) {
-                $theBox.animate({ "top": "+=50px" }, "fast" );
+            if((position.top + height) < 280) {
+                //$theBox.animate({ "top": "+=50px" }, "fast" );
+                $theBox.css({ "top": "+=14px"});
             }
             break;
         case 75:
             // the k key going up
             if(position.top > 0) {
-                $theBox.animate({ "top": "-=50px" }, "slow" );
+                //$theBox.animate({ "top": "-=50px" }, "fast" );
+                $theBox.css({ "top": "-=14px"});
             }
             break;
         case 72:
             // the h key going left
             if(position.left > 0) {
-                $theBox.animate({ "left": "-=50px" }, "slow" );
+                //$theBox.animate({ "left": "-=50px" }, "fast" );
+                $theBox.css({"left": "-=14px"});
             }
             break;
         case 76:
             // the l key going right
-            if((position.left + width) < 684) {
-                $theBox.animate({ "left": "+=50px" }, "slow" );
+            if((position.left + width) < 280) {
+                //$theBox.animate({ "left": "+=50px" }, "fast" );
+                $theBox.css({"left": "+=14px"});
             }
             break;
         default:
