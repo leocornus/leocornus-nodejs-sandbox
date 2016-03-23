@@ -13,12 +13,27 @@
     <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
     <script src='/bower_components/angular/angular.min.js'></script>
 
+    <script src='/src/jquery/livesearch-advanced.js'></script>
     <script src='/src/jquery/searchStrap.js'></script>
     <script>
 // this will replace the code in controller.js
 var simpleTest = angular.module('uiDemo', []);
 
 jQuery(document).ready(function($) {
+    $('#query-right').liveSearch({
+        searchResult: {
+            url: '/demo/jquery/search-result-demo.html',
+            queryName: 'searchterm'
+        },
+        maxItems : 6,
+        filterOptions: [
+            {label: 'All Blogs', value: ''},
+            {label: 'Current Blog', value: 'site: current'},
+            {label: 'All Wiki', value: 'site: wiki'},
+            {label: 'Tickets', value: 'site: "tickets"'}
+        ]
+    });
+
     $('#search-input').searchStrap({
         searchUrl: '/advancedsearch',
         itemsPerPage: 5,
@@ -38,11 +53,11 @@ jQuery(document).ready(function($) {
       <!-- page header -->
       <div class="page-header">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-7">
             <h1 class="">Search Result Demo Page</h1> 
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-5" style="border: 0px red solid">
             <h1>
               <div class="input-group"
                    role="group" aria-label="...">
@@ -77,8 +92,9 @@ jQuery(document).ready(function($) {
         </div>
         <div class="col-md-4">
           <div class="pull-right">
-             <a class="btn btn-default">
-                <i class="fa fa-gear text-success"></i>
+             <a class="btn btn-primary">
+                <i class="fa fa-gear"></i>
+                Settings
              </a>
           </div>
         </div>
