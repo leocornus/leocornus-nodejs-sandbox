@@ -180,7 +180,7 @@
             $ul = $('<ul class="list-group"></ul>');
             $.each(data.docs, function(index, item) {
                 // present each item as a list group item.
-                var liHtml = self.buildItemHtml(item);
+                var liHtml = self.buildMediaItemHtml(item);
                 $ul.append(liHtml);
             });
 
@@ -243,6 +243,40 @@
                 '</li>';
 
             return liHtml;
+        },
+
+        /**
+         * build the HTML for each item using media object.
+         *
+         * @param item object of each item
+         */
+        buildMediaItemHtml: function(item) {
+
+            var itemHtml = 
+              '<li class="list-group-item">' +
+              '<div class="media">' +
+              '  <div class="media-left">' + 
+              '    <span class="text-warning fa-stack fa-lg">' +
+              '      <i class="fa fa-circle fa-stack-2x"></i>' +
+              '      <i class="fa fa-file-text-o fa-stack-1x fa-inverse"></i>' +
+              '    </span>' +
+              '  </div>' + 
+              '  <div class="media-body">' +
+              '    <h4 class="media-heading">' +
+                     '<a href="' + item.url + 
+                         '" style="padding: 0;">' + item.title + 
+                     '</a>' +
+              '    </h4>' +
+              '    <small class="text-muted">' + 
+                     item.site + '</small>' +
+              '    <p class="media-description">' + 
+                     item.description + 
+              '    </p>' + 
+              '  </div>' +
+              '</div>' + 
+              '</li>';
+
+            return itemHtml;
         },
 
         /**
