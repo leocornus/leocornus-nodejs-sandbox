@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src='/bower_components/jquery/dist/jquery.min.js'></script>
+<script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src="/bower_components/d3/d3.js"></script>
+
+<style>
+  svg.circle {
+    border: 1px solid black;
+    position: absolute;
+    top: 0;
+    left: 50px;
+    width: 16px;
+    height: 16px;
+  }
+
+  div.svg-circle {
+    border: 1px red solid;
+    width: 300px;
+    height: 300px;
+  }
+</style>
+
+ 
+</head>
+
+<body>
+  <div class="svg-circle bg-info">
+  <svg class="circle" viewBox = "0 0 200 200" version = "1.1"
+       style="top:0px; left:50px">
+    <circle cx = "100" cy = "100" r = "97" fill = "orange" 
+            stroke = "navy" stroke-width = "6"/>
+  </svg>
+  </div>
+
+
+<script>
+
+$('body').keydown(function(event) {
+
+    console.log(event);
+    var $theBox = $("svg.circle");
+    var position = $theBox.position();
+    console.log(position);
+    var width = $theBox.width();
+    var height = $theBox.height();
+    console.log(event);
+
+    switch(event.keyCode) {
+        case 74:
+            // the j key going down
+            if((position.top + height) < 280) {
+                //$theBox.animate({ "top": "+=50px" }, "fast" );
+                $theBox.css({ "top": "+=14px"});
+            }
+            break;
+        case 75:
+            // the k key going up
+            if(position.top > 0) {
+                //$theBox.animate({ "top": "-=50px" }, "fast" );
+                $theBox.css({ "top": "-=14px"});
+            }
+            break;
+        case 72:
+            // the h key going left
+            if(position.left > 0) {
+                //$theBox.animate({ "left": "-=50px" }, "fast" );
+                $theBox.css({"left": "-=14px"});
+            }
+            break;
+        case 76:
+            // the l key going right
+            if((position.left + width) < 280) {
+                //$theBox.animate({ "left": "+=50px" }, "fast" );
+                $theBox.css({"left": "+=14px"});
+            }
+            break;
+        default:
+            console.log(event.keyCode);
+            break;
+    }
+});
+
+</script>
+</body>
+</html>
