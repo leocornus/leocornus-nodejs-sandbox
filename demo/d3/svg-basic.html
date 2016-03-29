@@ -46,27 +46,59 @@
 </head>
 
 <body>
-  <div class="svg-circle bg-info">
-  <svg class="circle" viewBox = "0 0 200 200" version = "1.1"
-       style="top:0px; left:50px">
-    <circle cx="100" cy="100" r="97" fill="orange" 
-            stroke="navy" stroke-width="6"/>
-  </svg>
+<div class="container">
+  <div class="row">
+  <div class="col-md-6">
+    <div class="svg-circle bg-info">
+      <svg class="circle" viewBox = "0 0 200 200" version = "1.1"
+           style="top:0px; left:50px">
+        <circle cx="100" cy="100" r="97" fill="orange" 
+                stroke="navy" stroke-width="6"/>
+        <text x="35" y="175" font-size="180" fill="red">A</text>
+      </svg>
 
-  <svg class="letter bg-primary">
-    <text x="2" y="13" font-size="16" fill="red">A</text>
-  </svg>
+      <svg class="letter bg-primary">
+        <text x="2" y="13" font-size="16" fill="red">A</text>
+      </svg>
 
-  <svg class="number">
-    <text x="3" y="13" font-size="16" fill="red">9</text>
-  </svg>
-  <svg class="number" style="left: 66px">
-    <text x="3" y="13" font-size="16" fill="red">8</text>
-  </svg>
-  <svg class="number" style="left: 80px">
-    <text x="3" y="13" font-size="16" fill="red"></text>
-  </svg>
+      <svg class="number">
+        <text x="3" y="13" font-size="16" fill="red">9</text>
+      </svg>
+      <svg class="number" style="left: 66px">
+        <text x="3" y="13" font-size="16" fill="red">8</text>
+      </svg>
+      <svg class="number" style="left: 80px">
+        <text x="3" y="13" font-size="16" fill="red"></text>
+      </svg>
+    </div>
   </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Some Memos</div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          The property <strong>viewBox</strong> is for user unit.
+          It is different concept compare to the screen unit 
+          (pixels), which is defined by the 
+          <strong>width</strong> and <strong>height</strong> 
+          attributes.
+        </li>
+        <li class="list-group-item">
+          The <strong>x</strong> and <strong>y</strong> attributes
+          of <strong>text</strong> is different from what 
+          shapes use for. They are mean to be the <strong>left 
+          bottom corner</strong>.
+        </li>
+        <li class="list-group-item">
+          All measures (x, y, cx, cy, font-size, etc.) in svg 
+          will be relative to <strong>viewBox</strong>, if it is 
+          defined.
+        </li>
+      </ul>
+    </div>
+  </div>
+  </div>
+</div>
 
 <script>
 
