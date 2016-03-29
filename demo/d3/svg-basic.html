@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
 <script src='/bower_components/jquery/dist/jquery.min.js'></script>
 <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
 <script src="/bower_components/d3/d3.js"></script>
@@ -10,6 +12,24 @@
     border: 1px solid black;
     position: absolute;
     top: 0;
+    left: 50px;
+    width: 16px;
+    height: 16px;
+  }
+
+  svg.letter  {
+    border: 1px solid black;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 16px;
+    height: 16px;
+  }
+
+  svg.number {
+    border: 0px solid black;
+    position: absolute;
+    top: 25px;
     left: 50px;
     width: 16px;
     height: 16px;
@@ -29,11 +49,24 @@
   <div class="svg-circle bg-info">
   <svg class="circle" viewBox = "0 0 200 200" version = "1.1"
        style="top:0px; left:50px">
-    <circle cx = "100" cy = "100" r = "97" fill = "orange" 
-            stroke = "navy" stroke-width = "6"/>
+    <circle cx="100" cy="100" r="97" fill="orange" 
+            stroke="navy" stroke-width="6"/>
+  </svg>
+
+  <svg class="letter bg-primary">
+    <text x="2" y="13" font-size="16" fill="red">A</text>
+  </svg>
+
+  <svg class="number">
+    <text x="3" y="13" font-size="16" fill="red">9</text>
+  </svg>
+  <svg class="number" style="left: 66px">
+    <text x="3" y="13" font-size="16" fill="red">8</text>
+  </svg>
+  <svg class="number" style="left: 80px">
+    <text x="3" y="13" font-size="16" fill="red"></text>
   </svg>
   </div>
-
 
 <script>
 
