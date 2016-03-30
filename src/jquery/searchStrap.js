@@ -288,7 +288,8 @@
             // border check up (first, last)
             // previous button will be handled by first page.
             // next button will be hanelded by last page.
-            var pagination = '<nav><ul class="pagination">';
+            var pagination = '<nav class="text-center">' +
+                             '<ul class="pagination">';
 
             // decide the previous page.
             if(currentPage !== 1) {
@@ -326,7 +327,8 @@
          */
         buildPaginationDots: function(currentPage, totalPages) {
 
-            var pagination = '<nav><ul class="pagination">';
+            var pagination = '<nav class="text-center">' +
+                             '<ul class="pagination">';
 
             var thePage = '';
             // decide the previous page button
