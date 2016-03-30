@@ -34,7 +34,7 @@ jQuery(document).ready(function($) {
         ]
     });
 
-    $('#search-input').searchStrap({
+    $('#nosearch-input').searchStrap({
         searchUrl: '/advancedsearch',
         itemsPerPage: 5,
         searchButton: 'sizing-addon'
@@ -45,6 +45,14 @@ jQuery(document).ready(function($) {
     <style>
     .list-group-item {
         border: 0px;
+    }
+
+    .panel-custom {
+        border: 0px;
+    }
+
+    .panel-footer-custom {
+        background: #FFF;
     }
     </style>
   </head>
@@ -72,11 +80,11 @@ jQuery(document).ready(function($) {
 
       <!-- Search bar -->
       <div class="container container-fluid bar-search bg-muted">
-      <div class="row">
+      <div class="row" id="search-bar">
+        <div class="col-md-2">
+        </div>
+
         <div class="col-md-8">
-
-          <h4 class="pull-left">Search Logo: </h4>
-
           <div class="input-group"
                role="group" aria-label="...">
             <input type="text" class="form-control"
@@ -93,35 +101,75 @@ jQuery(document).ready(function($) {
             </span>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="pull-right">
-             <a class="btn btn-primary">
-                <i class="fa fa-gear"></i>
-                Settings
-             </a>
-          </div>
+
+        <div class="col-md-2">
         </div>
       </div>
+      <p></p>
       </div>
 
       <!-- search result -->
-      <div id="search-result"> 
+      <div class="container container-fluid bar-search bg-muted">
+      <div class="row" id="search-result"> 
+
+      <div class="col-md-8">
+        <div class="panel panel-info panel-custom">
+          <div class="panel-heading">
+            Current Search:
+          </div>
+
+          <div class="panel-body">
+            Sort by dropdown<br/>
+            Page 4 of 345 Results
+          </div>
+
         <ul class="list-group">
           <li class="list-group-item">
-            <div>
-              <h4>
-                <a href="item.url" style="padding: 0;">
-                  The title.
-                </a>
-              </h4>
-              <small class="text-muted">SITE</small>
-              <p>
-                item.description 
-              </p>
+
+            <div class="media">  
+              <div class="media-left">
+                <span class="text-info fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-file-text-o fa-stack-1x fa-inverse"></i>
+                </span>
+              </div>
+
+              <div class="media-body">
+                <h4 class="media-heading">
+                  <a href="http://url6.6.com" style="padding: 0;">
+                    Title 6 title!
+                  </a>
+                </h4>
+                <small class="text-muted">undefined</small>
+                <p class="media-description">
+one one one   one one one one one, one one one one one one one one, one one one one one one one one, one one one one one one one one    
+                </p>
+              </div>
             </div>
+
           </li>
         </ul>
+          
+          <div class="panel-footer panel-footer-custom">
+            pagination
+          </div>
+        </div>
+      </div> <!-- col-8 -->
+
+      <div class="col-md-4">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            Search Filters
+          </div>
+
+          <div class="panel-body">
+            LIST OF FILTERS.
+          </div>
+      </div> <!-- col-4 -->
+
+      </div> <!-- search result row -->
       </div>
+
     </div>
   </body>
 </html>
