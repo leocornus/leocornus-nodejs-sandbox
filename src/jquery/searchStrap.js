@@ -334,8 +334,10 @@
             // decide the previous page button
             if(currentPage !== 1) {
                 thePage = this.buildAPage('&laquo; Previous');
-                pagination = pagination + thePage;
+            } else {
+                thePage = this.buildAPage('&laquo; Previous', 'disabled');
             }
+            pagination = pagination + thePage;
 
             // calculate the start page:
             // - set startPage = currentPage - 2 
@@ -349,6 +351,9 @@
             // - if endPage > totalPages set endPage = totalPages
             var endPage = startPage + 4;
             endPage = endPage > totalPages ? totalPages : endPage
+
+            // decide the start page again based on the end page.
+            startPage = endPage - 4;
 
             // decide the first page and first ... page
             // - if startPage <= 3 then no ... page
@@ -401,8 +406,10 @@
             // decide the next page button.
             if(currentPage !== totalPages) { 
                 thePage = this.buildAPage('Next &raquo;');
-                pagination = pagination + thePage;
+            } else {
+                thePage = this.buildAPage('Next &raquo;', 'disabled');
             }
+            pagination = pagination + thePage;
 
             // add the ending tags.
             pagination = pagination + '</ul></nav>';
