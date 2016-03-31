@@ -40,6 +40,7 @@ function generateDoc(index) {
     var doc = {
         title: title,
         url: url,
+        site: 'SITE-' + index,
         description: desc
     };
 

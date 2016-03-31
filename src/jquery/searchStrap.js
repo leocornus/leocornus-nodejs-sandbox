@@ -318,7 +318,7 @@
             // filter for keywords
             // filter for authors.
 
-            var $panel = $('<div class="panel panel-info ' +
+            var $panel = $('<div class="panel panel-success' +
                            '            panel-custom"></div>');
 
             // append everything together.
