@@ -383,13 +383,15 @@
             // - if startPage <= 3 then no ... page
             //   - we will have all pages before start page.
             //   - simplely set the startPage = 1
-            startPage = startPage <= 3 ? 1 : startPage;
+            startPage = startPage <= 4 ? 1 : startPage;
             // - else the case (startPage > 4)
             //   - we will have first page and first ... page.
             //   - build the first page and the first ... page.
             if(startPage > 1) {
                 // build the first page and the first ... page
                 thePage = this.buildAPage('1');
+                pagination = pagination + thePage;
+                thePage = this.buildAPage('2');
                 pagination = pagination + thePage;
                 // build the first ... page.
                 thePage = this.buildAPage('...', 'disabled');
@@ -417,12 +419,14 @@
 
             // - else (endPage < totalPages - 2)
             //   - we have build the last ... page and last page.
-            if(endPage <= (totalPages - 2)) {
+            if(endPage <= (totalPages - 3)) {
 
                 // build the first page and the last ... page
                 thePage = this.buildAPage('...', 'disabled');
                 pagination = pagination + thePage;
                 // build the last page.
+                thePage = this.buildAPage(totalPages -1);
+                pagination = pagination + thePage;
                 thePage = this.buildAPage(totalPages);
                 pagination = pagination + thePage;
             }
