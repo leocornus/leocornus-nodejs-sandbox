@@ -191,8 +191,8 @@
 
             // build the simple result page.
             var $result = 
-                this.buildSimpleResult(data.docs, currentQuery, total,
-                                       currentPage, totalPages);
+                this.build2ColumnResult(data.docs, currentQuery, 
+                            total, currentPage, totalPages);
 
             // TODO: hook events:
             // hook click event for all available pages on 
@@ -226,7 +226,105 @@
          *   - search filters
          *   - facets label and facets values in tag cloud.
          */
-        build2ColumnResult: function() {
+        build2ColumnResult: function(docs, currentQuery, total, 
+                                     currentPage, totalPages) {
+
+            // build the current search panel
+            var $currentSearch = 
+                this.buildCurrentSearchPanel(docs, currentQuery, 
+                        total, currentPage, totalPages);
+            // build the search filter panel.
+            var $searchFilter = this.buildSearchFilterPanel();
+
+            // the left column.
+            var $leftCol = $('<div class="col-md-8"></div>');
+            $leftCol.append($currentSearch);
+            // the right column
+            var $rightCol = $('<div class="col-md-4"></div>');
+            $rightCol.append($searchFilter);
+
+            var $result = $(this.settings.resultSelector);
+            $result.html('').append($leftCol).append($rightCol);
+
+            return $result;
+        },
+
+        /**
+         * build the current search panel.
+         */
+        buildCurrentSearchPanel: function(docs, currentQuery,
+            total, currentPage, totalPages) {
+
+            var self = this;
+
+            // panel heading...
+            var heading = 
+                '<div class="panel-heading">' +
+                '  Current Search:' +
+                '</div>';
+
+            // panel body
+            var body = 
+                '<div class="panel-body">' +
+                '  Sort by dropdown<br/>' +
+                '  Page 4 of 345 Results' +
+                '</div>';
+
+            // using list group for search result.
+            var $ul = $('<ul class="list-group"></ul>');
+            $.each(docs, function(index, item) {
+                // present each item as a list group item.
+                var liHtml = self.buildMediaItemHtml(item);
+                $ul.append(liHtml);
+            });
+
+            // build the pagination bar.
+            var pagination = 
+                this.buildPaginationDots(currentPage, totalPages);
+            // panel footer, pagination nav bar.
+            var footer = 
+                '<div class="panel-footer panel-footer-custom">' +
+                pagination +
+                '</div>';
+
+            var $panel = $('<div class="panel panel-info ' +
+                           '            panel-custom"></div>');
+
+            // append everything together.
+            $panel.append(heading).append(body)
+                  .append($ul).append(footer);
+
+            return $panel;
+        },
+
+        /**
+         * build the search filter panel.
+         */
+        buildSearchFilterPanel: function() {
+
+            // panel heading...
+            var heading = 
+                '<div class="panel-heading">' +
+                '  Search Filters' +
+                '</div>';
+
+            var body = 
+                '<div class="panel-body">' +
+                '  LIST OF FILTERS.' +
+                '  <p></p>' +
+                '  In Tag Cloud' +
+                '</div>';
+            // filter for sites
+            // filter for keywords
+            // filter for authors.
+
+            var $panel = $('<div class="panel panel-info ' +
+                           '            panel-custom"></div>');
+
+            // append everything together.
+            $panel.append(heading).append(body);
+
+            return $panel;
         },
 
         /**
