@@ -202,6 +202,26 @@
         },
 
         /**
+         * build the 2 column search result list, which will have
+         *   - col-8 column for current search result, using panel.
+         *   - col-4 column for search filters, unsing panel.
+         *
+         * The current search panel will include:
+         *   - current search with field query list, panel-heading
+         *   - sorting dropdown, panel-body
+         *   - summary of search result: total pages, current pages, 
+         *     total items
+         *   - list of items in list-group > list-group-item > media
+         *   - pagination, panel-footer
+         *
+         * The search filter panel will include:
+         *   - search filters
+         *   - facets label and facets values in tag cloud.
+         */
+        build2ColumnResult: function() {
+        },
+
+        /**
          * build simple search result list, including:
          *   1. basic summary for search rsult.
          *   2. straight list-group for the document list.
