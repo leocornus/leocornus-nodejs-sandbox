@@ -149,9 +149,20 @@
             // prepare the query to perform the initial search
             var query = this.prepareSearchQuery(term, 1);
             this.search(query);
+
+            // update the brwoser url.
+            this.updateBrowserUrl(query);
+        },
+
+        /**
+         * update the url on browser
+         */
+        updateBrowserUrl: function(searchQuery) {
+
             // build the new url.
             url = '?' + this.settings.queryName + 
-                  '=' + encodeURIComponent(term);
+                  '=' + encodeURIComponent(searchQuery.term);
+            //
             window.history.pushState('', 'testing', url);
         },
 
@@ -166,10 +177,10 @@
             // TODO: analyze the search result.
             // total results.
             var total = data.total;
-            // current page.
+            // calculate current page.
             var currentPage =
                 (currentQuery.start - 1) / currentQuery.perPage + 1;
-            // caculate the total pages.
+            // calculate the total pages.
             var totalPages = Math.ceil(total / currentQuery.perPage);
 
             // build the info bar.
