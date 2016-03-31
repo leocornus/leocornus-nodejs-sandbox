@@ -366,18 +366,18 @@
             // calculate the start page:
             // - set startPage = currentPage - 2 
             // - if startPage < 1 then set startPage = 1
-            var startPage = currentPage - 2;
+            var startPage = currentPage - 1;
             startPage = startPage < 1 ? 1 : startPage;
 
             // calculate the end page.
             // - assumet we get the start page.
             // - set endPage = startPage + 5 - 1
             // - if endPage > totalPages set endPage = totalPages
-            var endPage = startPage + 4;
+            var endPage = startPage + 2;
             endPage = endPage > totalPages ? totalPages : endPage
 
             // decide the start page again based on the end page.
-            startPage = endPage - 4;
+            startPage = endPage - 2;
 
             // decide the first page and first ... page
             // - if startPage <= 3 then no ... page
