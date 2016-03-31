@@ -183,19 +183,32 @@
             // calculate the total pages.
             var totalPages = Math.ceil(total / currentQuery.perPage);
 
+            // build the simple result page.
+            this.buildSimpleResult(data.docs, currentQuery, total,
+                                   currentPage, totalPages);
+        },
+
+        /**
+         * build simple result list.
+         */
+        buildSimpleResult: function(docs, currentQuery, total, 
+                                    currentPage, totalPages) {
+
+            var self = this;
+
             // build the info bar.
             var info = this.buildInfoBar(currentQuery.term, total,
                                          currentPage, totalPages);
 
             // using list group for search result.
-            $ul = $('<ul class="list-group"></ul>');
-            $.each(data.docs, function(index, item) {
+            var $ul = $('<ul class="list-group"></ul>');
+            $.each(docs, function(index, item) {
                 // present each item as a list group item.
                 var liHtml = self.buildMediaItemHtml(item);
                 $ul.append(liHtml);
             });
 
-            // TODO: using current query to build the pagination bar
+            // build the pagination bar.
             var pagination = 
                 this.buildPaginationDots(currentPage, totalPages);
 
