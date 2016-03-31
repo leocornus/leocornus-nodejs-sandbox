@@ -166,7 +166,13 @@
             window.history.pushState('', 'testing', url);
         },
 
-        // handle search result.
+        /**
+         * handle search result. it will mainly 
+         * - calculate numbers,
+         * - build the document list, 
+         *   including summary and pagination
+         * - hook events.
+         */
         handleSearchResult: function(data) {
 
             var self = this;
@@ -184,11 +190,13 @@
             var totalPages = Math.ceil(total / currentQuery.perPage);
 
             // build the simple result page.
-            var $result = this.buildSimpleResult(data.docs, currentQuery, total,
-                                   currentPage, totalPages);
+            var $result = 
+                this.buildSimpleResult(data.docs, currentQuery, total,
+                                       currentPage, totalPages);
 
             // TODO: hook events:
-            // hook click event for all available pages on pagination.
+            // hook click event for all available pages on 
+            // pagination nav bar.
             $result.find('nav ul li[class!="active"] a').
                 on('click', function(event) {
 
