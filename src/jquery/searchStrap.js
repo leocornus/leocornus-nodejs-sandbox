@@ -260,14 +260,17 @@
             // panel heading...
             var heading = 
                 '<div class="panel-heading">' +
-                '  Current Search:' +
+                '  <strong>Current Search:</strong><br/>' +
+                currentQuery.term + '<br/>' +
+                //'  <strong>Sort by:</strong>' +
                 '</div>';
 
             // panel body
             var body = 
-                '<div class="panel-body">' +
-                '  Sort by dropdown<br/>' +
-                '  Page 4 of 345 Results' +
+                '<div class="panel-body bg-info-custom">' +
+                'Page <strong>' + currentPage + 
+                '</strong> of <strong>' +
+                total + '</strong> total results';
                 '</div>';
 
             // using list group for search result.
@@ -287,7 +290,7 @@
                 pagination +
                 '</div>';
 
-            var $panel = $('<div class="panel panel-info ' +
+            var $panel = $('<div class="panel panel-info' +
                            '            panel-custom"></div>');
 
             // append everything together.
@@ -305,7 +308,7 @@
             // panel heading...
             var heading = 
                 '<div class="panel-heading">' +
-                '  Search Filters' +
+                '  <strong>Search Filters</strong>' +
                 '</div>';
 
             var body = 
