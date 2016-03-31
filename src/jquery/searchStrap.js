@@ -184,12 +184,28 @@
             var totalPages = Math.ceil(total / currentQuery.perPage);
 
             // build the simple result page.
-            this.buildSimpleResult(data.docs, currentQuery, total,
+            var $result = this.buildSimpleResult(data.docs, currentQuery, total,
                                    currentPage, totalPages);
+
+            // TODO: hook events:
+            // hook click event for all available pages on pagination.
+            $result.find('nav ul li[class!="active"] a').
+                on('click', function(event) {
+
+                // identify the page.
+                var searchTerm = currentQuery.term;
+                var perPage = currentQuery.perPage;
+                self.handlePagination($(this), searchTerm, 
+                                      currentPage, totalPages, 
+                                      perPage);
+            });
         },
 
         /**
-         * build simple result list.
+         * build simple search result list, including:
+         *   1. basic summary for search rsult.
+         *   2. straight list-group for the document list.
+         *   3. pagination.
          */
         buildSimpleResult: function(docs, currentQuery, total, 
                                     currentPage, totalPages) {
@@ -217,18 +233,7 @@
             $result.html('').append(info)
                             .append($ul).append(pagination);
 
-            // create jQuery object.
-            // hook click event for all available pages.
-            $result.find('nav ul li[class!="active"] a').
-                on('click', function(event) {
-
-                // identify the page.
-                var searchTerm = currentQuery.term;
-                var perPage = currentQuery.perPage;
-                self.handlePagination($(this), searchTerm, 
-                                      currentPage, totalPages, 
-                                      perPage);
-            });
+            return $result;
         },
 
         /**
