@@ -76,7 +76,7 @@ endPage = endPage > totalPages ? totalPages : endPage
 startPage = endPage - (surroundingPages * 2);
 
 // decide the first page and first ... page
-// - if startPage <= (tailingPage + 1) then no ... page
+// - if startPage <= (tailingPage + 2) then no ... page
 //   - we will have all pages before start page.
 //   - simplely set the startPage = 1
 startPage = startPage <= (tailingPage + 1) ? 1 : startPage;

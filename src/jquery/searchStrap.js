@@ -294,7 +294,8 @@
 
             // build the pagination bar.
             var pagination = 
-                this.buildPaginationDots(currentPage, totalPages);
+                this.buildPaginationDots(currentPage, totalPages,
+                                         2, 2);
             // panel footer, pagination nav bar.
             var footer = 
                 '<div class="panel-footer panel-footer-custom">' +
@@ -494,7 +495,8 @@
          * build the pagination with ... and 
          * without First and Last button.
          */
-        buildPaginationDots: function(currentPage, totalPages) {
+        buildPaginationDots: function(currentPage, totalPages,
+                surroundingPages, tailingPages) {
 
             var pagination = '<nav class="text-center">' +
                              '<ul class="pagination">';
@@ -511,33 +513,35 @@
             // calculate the start page:
             // - set startPage = currentPage - 2 
             // - if startPage < 1 then set startPage = 1
-            var startPage = currentPage - 1;
+            var startPage = currentPage - surroundingPages;
             startPage = startPage < 1 ? 1 : startPage;
 
             // calculate the end page.
             // - assumet we get the start page.
             // - set endPage = startPage + 5 - 1
             // - if endPage > totalPages set endPage = totalPages
-            var endPage = startPage + 2;
+            var endPage = startPage + (surroundingPages * 2);
             endPage = endPage > totalPages ? totalPages : endPage
 
             // decide the start page again based on the end page.
-            startPage = endPage - 2;
+            startPage = endPage - (surroundingPages * 2);
 
             // decide the first page and first ... page
             // - if startPage <= 3 then no ... page
             //   - we will have all pages before start page.
             //   - simplely set the startPage = 1
-            startPage = startPage <= 4 ? 1 : startPage;
+            startPage = startPage <= (tailingPages + 2) ? 
+                        1 : startPage;
             // - else the case (startPage > 4)
             //   - we will have first page and first ... page.
             //   - build the first page and the first ... page.
             if(startPage > 1) {
                 // build the first page and the first ... page
-                thePage = this.buildAPage('1');
-                pagination = pagination + thePage;
-                thePage = this.buildAPage('2');
-                pagination = pagination + thePage;
+                // build the tailing pages at the beginning.
+                for(var i = 1; i <= tailingPages; i++) {
+                    thePage = this.buildAPage(i);
+                    pagination = pagination + thePage;
+                }
                 // build the first ... page.
                 thePage = this.buildAPage('...', 'disabled');
                 pagination = pagination + thePage;
@@ -547,7 +551,7 @@
             // - if endPage >= totalPages - 2 then no need ... page.
             //   - we will build all pages to total pages.
             //   - simplely set endPage = totalPages.
-            endPage = endPage >= (totalPages - 2) ? 
+            endPage = endPage >= (totalPages - tailingPages - 1) ? 
                       totalPages : endPage;
 
             // generate the page list from start to end pages..
@@ -564,16 +568,16 @@
 
             // - else (endPage < totalPages - 2)
             //   - we have build the last ... page and last page.
-            if(endPage <= (totalPages - 3)) {
+            if(endPage < totalPages) {
 
                 // build the first page and the last ... page
                 thePage = this.buildAPage('...', 'disabled');
                 pagination = pagination + thePage;
-                // build the last page.
-                thePage = this.buildAPage(totalPages -1);
-                pagination = pagination + thePage;
-                thePage = this.buildAPage(totalPages);
-                pagination = pagination + thePage;
+                // build the tailing page at the end.
+                for(var i = tailingPages - 1; i >= 0; i--) {
+                    thePage = this.buildAPage(totalPages - i);
+                    pagination = pagination + thePage;
+                }
             }
 
             // decide the next page button.
