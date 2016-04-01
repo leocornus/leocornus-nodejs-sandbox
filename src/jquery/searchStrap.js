@@ -19,6 +19,14 @@
         // query param for search term.
         queryName : 'searchterm',
 
+        // options for facet, based on Solr
+        // here are default facet.
+        facet: {
+            //TODO: facetQuery: ['term one', 'term two'],
+            // only support facet field for now.
+            facetField: ['site', 'authors', 'keywords']
+        },
+
         // jQuery selector for the the search result section.
         resultSelector: '#search-result'
     };
@@ -28,6 +36,9 @@
         // the DOM element.
         this.element = element;
         this.$element = $(element);
+        // merge the facet options.
+        var facet = $.extend({}, defaults.facet, options.facet);
+        options.facet = facet;
         // extend mthod will merge object contents.
         this.settings = $.extend({}, defaults, options);
         this._defatuls = defaults;
@@ -122,10 +133,15 @@
             var self = this;
 
             // get ready action data for search endpoint.
+            var thefacet = {
+                    facetField: ['site', 'keywords', 'authors']
+            };
             var searchAction = {
                 term: searchQuery.term,
                 start: searchQuery.start,
-                perPage: self.settings.itemsPerPage
+                perPage: self.settings.itemsPerPage,
+                // facet
+                facet: JSON.stringify(self.settings.facet)
             };
 
             $.ajax({
@@ -178,7 +194,7 @@
 
             var self = this;
             // log the data for debuging...
-            //console.log(data);
+            console.log(data);
 
             var currentQuery = data.currentQuery;
             // TODO: analyze the search result.
