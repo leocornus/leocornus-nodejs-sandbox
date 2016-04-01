@@ -263,16 +263,24 @@
                 '<div class="panel-heading">' +
                 '  <strong>Current Search:</strong><br/>' +
                 currentQuery.term + '<br/>' +
-                //'  <strong>Sort by:</strong>' +
+                '<span>' +
+                '  <strong>Order by:</strong>' +
+                '  <select class="success" id="order">' +
+                '    <option value="relevance">Relevance</option>' +
+                '    <option value="changetime">Last Modified Date</option>' +
+                '  </select>' +
+                '</span>' +
                 '</div>';
 
             // panel body
             var end = currentQuery.start + currentQuery.perPage - 1;
+            end = end > total ? total : end;
             var body = 
                 '<div class="panel-body bg-info-custom">' +
-                'Showing <strong>' + currentQuery.start + 
+                'Page <strong>' + currentPage + '</strong>' +
+                ' Showing [<strong>' + currentQuery.start + 
                 '</strong> - <strong>' + end + 
-                '</strong> of <strong>' +
+                '</strong>] of <strong>' +
                 total + '</strong> total results';
                 '</div>';
 
