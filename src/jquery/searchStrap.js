@@ -132,6 +132,7 @@
                 url: self.settings.searchUrl,
                 method: 'GET',
                 dataType: 'json',
+                // data object will 
                 data: searchAction,
                 success: function(data) {
                     self.handleSearchResult(data);
@@ -266,9 +267,11 @@
                 '</div>';
 
             // panel body
+            var end = currentQuery.start + currentQuery.perPage - 1;
             var body = 
                 '<div class="panel-body bg-info-custom">' +
-                'Page <strong>' + currentPage + 
+                'Showing <strong>' + currentQuery.start + 
+                '</strong> - <strong>' + end + 
                 '</strong> of <strong>' +
                 total + '</strong> total results';
                 '</div>';
