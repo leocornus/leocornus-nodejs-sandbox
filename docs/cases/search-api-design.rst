@@ -28,7 +28,11 @@ Here is quick one to start with::
       // advanced query params
       filterQuery: FILTER_QUERY,
       fieldList: LIST_OF_FIELDS, // default is empty, all fields.
-      facets: FACETS // set the facets we needed.
+      // set the facet we need.
+      facet: {
+          facetQuery : ['Search Term One', 'TERM TWO'],
+          facetField : ['site', 'keywords', 'authors']
+      }
   }
 
 Response Structure
@@ -40,7 +44,28 @@ Here is the response structure::
       currentQuery: searchQuery, // the whole object of search query
       total: TOTAL,
       docs: LIST_OF_MATCHED_DOCS,
-      facets: FACETS
+      // structure of facets
+      facet: {
+          facetQuery: {
+              'SEARCH TERM ONE': TOTAL_NUMBER,
+              'TERM TWO': TOTAL_NUMBER
+          },
+          facetField: {
+              site: {
+                  'wiki': 120,
+                  'site1': 230,
+              },
+              keywords: {
+                  'acronyms': 30,
+                  'news': 219,
+                  'events': 23
+              },
+              authors{
+                  'Sean Chen': 30,
+                  'John Li': 219
+              },
+          }
+      }
   }
 
 Pagination Stragegy
