@@ -294,8 +294,7 @@
 
             // build the pagination bar.
             var pagination = 
-                this.buildPaginationDots(currentPage, totalPages,
-                                         2, 2);
+                this.buildPaginationDots(currentPage, totalPages);
             // panel footer, pagination nav bar.
             var footer = 
                 '<div class="panel-footer panel-footer-custom">' +
@@ -497,6 +496,14 @@
          */
         buildPaginationDots: function(currentPage, totalPages,
                 surroundingPages, tailingPages) {
+
+            // set default value for surrouning and tailing pages.
+            var surroundingPages = 
+                typeof surroundingPages !== 'undefined' ?
+                surroundingPages : 1;
+            var tailingPages = 
+                typeof tailingPages !== 'undefined' ?
+                tailingPages : 2;
 
             var pagination = '<nav class="text-center">' +
                              '<ul class="pagination">';
