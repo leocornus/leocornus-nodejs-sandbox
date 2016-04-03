@@ -12,7 +12,7 @@
   <h2>Simple video by using video tag smaller size</h2>
 
   <video id="my-video-smaller" class="video-js" controls preload="auto" 
-   width="320"
+   height="220"
   poster="http://vjs.zencdn.net/v/oceans.png" data-setup="{}">
     <source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
     <p class="vjs-no-js">
@@ -42,5 +42,36 @@
       <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
     </p>
   </video>
+
+  <h2>Quick testing</h2>
+
+  <video id="my-video-bigger-local" class="video-js" controls preload="auto" width="640"
+  poster="http://intra.net.gov.on.ca/mds/internal/0adffcf3cf1ff467/en/images/capture_001.jpg" data-setup="{}">
+    <source src="http://intra.net.gov.on.ca/mds/internal/0adffcf3cf1ff467/en/videos/15770_2048.mp4" type='video/mp4'>
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+  </video>
+
+  <h2>Simple embed code</h2>
+
+  <embed type="application/x-shockwave-flash" 
+         src="https://intra.net.gov.on.ca/mds/player.swf" 
+         width="345" height="220" style="undefined" id="mpl" 
+         name="mpl" bgcolor="#FFFFFF" 
+         quality="high" allowfullscreen="true" 
+         allowscriptaccess="always" wmode="opaque" 
+         flashvars="file=http://intra.net.gov.on.ca/mds/internal/0adffcf3cf1ff467/en/videos/15770_2048.mp4&amp;backcolor=000000&amp;frontcolor=ffffff&amp;lightcolor=808285&amp;screencolor=000000&amp;bufferlength=7&amp;volume=90&amp;image=http://intra.net.gov.on.ca/mds/internal/0adffcf3cf1ff467/en/images/capture_001.jpg">
+
+<object width="640" height="384" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="mds15770" class="mdsvideo">
+  <param name="movie" 
+        value="http://intra.net.gov.on.ca/media/player/5.1.818/player.swf?config=http://intra.net.gov.on.ca/mds/internal/0adffcf3cf1ff467/en/config.xml">
+  </param>
+  <param name="allowfullscreen" value="true"></param>
+  <param name="allowscriptaccess" value="always"></param>
+  <param name="wmode" value="transparent"></param>
+  <embed src="http://intra.net.gov.on.ca/media/player/5.1.818/player.swf?config=http://intra.net.gov.on.ca/mds/internal/0adffcf3cf1ff467/en/config.xml&amp;image=http://intra.net.gov.on.ca/mds/internal/0adffcf3cf1ff467/en/images/capture_001.jpg" width="640" height="384" allowscriptaccess="always" allowfullscreen="true" wmode="transparent" type="application/x-shockwave-flash"  class="mdsvideo"></embed></object><p class="mdsvideo"><a href="http://www.videodelivery.gov.on.ca/player/download.php?file=http://intra.net.gov.on.ca/mds/internal/0adffcf3cf1ff467/en/transcripts/page.html">Transcript</a> | <a href="http://www.videodelivery.gov.on.ca/player/download.php?file=http://intra.net.gov.on.ca/mds/internal/0adffcf3cf1ff467/en/videos/mobile.mp4">Mobile</a></p>
+
 </body>
 </html>

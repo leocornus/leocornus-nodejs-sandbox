@@ -20,6 +20,7 @@ var simpleTest = angular.module('uiDemo', []);
 
 jQuery(document).ready(function($) {
     $('#query-right').liveSearch({
+        searchApi: 'http://gsddtovsdvap014.cihs.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_search_action',
         searchResult: {
             url: '/demo/jquery/search-result-demo.html',
             queryName: 'searchterm'
@@ -28,7 +29,9 @@ jQuery(document).ready(function($) {
         filterOptions: [
             {label: 'All Blogs', value: ''},
             {label: 'Current Blog', value: 'site: current'},
-            {label: 'All Wiki', value: 'site: wiki'}
+            {label: 'All Wiki', value: 'site: wiki'},
+            {label: 'Tickets', value: 'site: "OPSpedia Tickets"'},
+            {label: 'Topical', value: 'site: topical'}
         ]
     });
 });
@@ -54,7 +57,6 @@ jQuery(document).ready(function($) {
 
         </div>
       </header>
-
     </div>
   </body>
 </html>
