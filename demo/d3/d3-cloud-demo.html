@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>animate demo</title>
+  <title>D3 wordcloud demo page</title>
   <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
   <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
 
@@ -25,15 +25,24 @@ var theWords = ["Hello", "world", "normally", "you", "want", "more", "words",
       "than", "this", "apple", 'peach', "pear", "cat", "ant", "mouse",
       "does", "that", "enough", "how", "many"]
     .map(function(d) {
-          return {text: d, size: 10 + Math.random() * 90, test: "haha"};
-     });
+        return {
+            text: d, 
+            // the range of Math.random is between 0 (inclusive)
+            // and 1 (exclusive).
+            size: 10 + Math.random() * 90, 
+            test: "haha"
+        };
+    });
 
 console.log(theWords);
 
 var layout = d3.layout.cloud()
     .size([330, 305])
     .words(theWords)
-    .padding(5)
+    // numerical padding for each word.
+    // What's the unit for padding?
+    // less padding will fit in more words.
+    .padding(1)
     .rotate(function() { return ~~(Math.random() * orientations) * 90; })
     .font("Impact")
     .fontSize(function(d) { return d.size; })
@@ -68,7 +77,7 @@ function draw(words) {
     <div class="page-header">
       <div class="row">
         <div class="col-md-7">
-          <h1 class="">Search Result Demo Page</h1> 
+          <h1 class="">D3 Word-cloud Demo Page</h1> 
         </div>
 
         <div class="col-md-5" style="border: 0px red solid">
@@ -88,6 +97,17 @@ function draw(words) {
     <div class="container container-fluid bar-search bg-muted">
     <div class="row" id="search-bar">
       <div class="col-md-8">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            some memos.
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item">
+              Math.random will return range between 0 and 1.
+              It will include 0 but NOT include 1.
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div class="col-md-4">
