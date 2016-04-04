@@ -16,17 +16,25 @@
 
   <script>
 jQuery(document).ready(function($) {
+// fill color?
 var fill = d3.scale.category20();
+// orientation, direction
+var orientations = 1;
+// list of words.
+var theWords = ["Hello", "world", "normally", "you", "want", "more", "words",
+      "than", "this", "apple", 'peach', "pear", "cat", "ant", "mouse",
+      "does", "that", "enough", "how", "many"]
+    .map(function(d) {
+          return {text: d, size: 10 + Math.random() * 90, test: "haha"};
+     });
+
+console.log(theWords);
 
 var layout = d3.layout.cloud()
-    .size([330, 505])
-    .words([
-      "Hello", "world", "normally", "you", "want", "more", "words",
-      "than", "this"].map(function(d) {
-      return {text: d, size: 10 + Math.random() * 90, test: "haha"};
-    }))
+    .size([330, 305])
+    .words(theWords)
     .padding(5)
-    .rotate(function() { return ~~(Math.random() * 2) * 90; })
+    .rotate(function() { return ~~(Math.random() * orientations) * 90; })
     .font("Impact")
     .fontSize(function(d) { return d.size; })
     .on("end", draw);
@@ -87,9 +95,9 @@ function draw(words) {
           <div class="panel-heading">
             Search Filters
           </div>
-        </div>
-        <div class="panel-body">
-          <div id="cloud-one"></div>
+          <div class="panel-body">
+            <div id="cloud-one" style="border: 1px solid black"></div>
+          </div>
         </div>
       </div>
     </div>
