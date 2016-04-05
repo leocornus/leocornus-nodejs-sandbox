@@ -11,7 +11,7 @@
 
   <script src='/bower_components/d3/d3.js'></script>
   <script src='/bower_components/d3-cloud/build/d3.layout.cloud.js'></script>
-  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+
   <script src='/bower_components/angular/angular.min.js'></script>
 
   <script>
@@ -29,7 +29,7 @@ var theWords = ["Hello", "world", "normally", "you", "want", "more", "words",
             text: d, 
             // the range of Math.random is between 0 (inclusive)
             // and 1 (exclusive).
-            size: 10 + Math.random() * 90, 
+            size: 5 + Math.random() * 45, 
             test: "haha"
         };
     });
@@ -37,7 +37,7 @@ var theWords = ["Hello", "world", "normally", "you", "want", "more", "words",
 console.log(theWords);
 
 var layout = d3.layout.cloud()
-    .size([330, 305])
+    .size([358, 215])
     .words(theWords)
     // numerical padding for each word.
     // What's the unit for padding?
@@ -99,12 +99,21 @@ function draw(words) {
       <div class="col-md-8">
         <div class="panel panel-info">
           <div class="panel-heading">
-            some memos.
+            Memos and Questions
           </div>
           <ul class="list-group">
+            <li class="list-group-item list-group-item-warning">
+              <strong>Dependences</strong>: d3, d3-cloud, jQuery
+              <br/>
+              Bootstrap is optional.
+            </li>
             <li class="list-group-item">
               Math.random will return range between 0 and 1.
               It will include 0 but NOT include 1.
+            </li>
+            <li class="list-group-item list-group-item-danger">
+              Q: what is the effecient way to control the size of 
+              the word cloud?
             </li>
           </ul>
         </div>
@@ -115,8 +124,8 @@ function draw(words) {
           <div class="panel-heading">
             Search Filters
           </div>
-          <div class="panel-body">
-            <div id="cloud-one" style="border: 1px solid black"></div>
+          <div class="panel-body" id="cloud-one"
+               style="padding: 10px 0px 0px 0px;">
           </div>
         </div>
       </div>
