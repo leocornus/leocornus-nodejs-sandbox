@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Lightbox Demo</title>
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+  <link rel='stylesheet' href='/bower_components/lightbox2/dist/css/lightbox.min.css'/>
+
+  <script src='/bower_components/angular/angular.min.js'></script>
+
+  <style>
+  div.block {
+    position: relative;
+    width: 280px;
+    height: 280px;
+  }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="">Lightbox Demo Page</h1> 
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+  <div class="col-md-6">
+    <div class="image-row">
+      <a class="example-image-link" href="http://lokeshdhakar.com/projects/lightbox2/images/image-1.jpg" data-lightbox="example-1">
+        <img class="example-image" src="http://lokeshdhakar.com/projects/lightbox2/images/thumb-1.jpg" alt="Girl looking out people on beach"></a>
+
+      <a class="example-image-link" href="http://lokeshdhakar.com/projects/lightbox2/images/image-2.jpg" data-lightbox="example-2" data-title="Optional caption.">
+        <img class="example-image" src="http://lokeshdhakar.com/projects/lightbox2/images/thumb-2.jpg" alt="Two men in bicycle jerseys sitting outside at table having coffee"></a>
+    </div>
+
+    <h3>A Four Image Set</h3>
+
+    <div>
+      <a class="example-image-link" href="http://lokeshdhakar.com/projects/lightbox2/images/image-3.jpg" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img class="example-image" src="http://lokeshdhakar.com/projects/lightbox2/images/thumb-3.jpg" alt=""/></a>
+      <a class="example-image-link" href="http://lokeshdhakar.com/projects/lightbox2/images/image-4.jpg" data-lightbox="example-set" data-title="Or press the right arrow on your keyboard."><img class="example-image" src="http://lokeshdhakar.com/projects/lightbox2/images/thumb-4.jpg" alt="" /></a>
+      <a class="example-image-link" href="http://lokeshdhakar.com/projects/lightbox2/images/image-5.jpg" data-lightbox="example-set" data-title="The next image in the set is preloaded as you're viewing."><img class="example-image" src="http://lokeshdhakar.com/projects/lightbox2/images/thumb-5.jpg" alt="" /></a>
+      <a class="example-image-link" href="http://lokeshdhakar.com/projects/lightbox2/images/image-6.jpg" data-lightbox="example-set" data-title="Click anywhere outside the image or the X to the right to close."><img class="example-image" src="http://lokeshdhakar.com/projects/lightbox2/images/thumb-6.jpg" alt="" /></a>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Some Memos</div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <a href="https://github.com/lokesh/lightbox2">
+            Lightbox on GitHub
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a href="https://github.com/codrops/Slicebox">Slicebox</a> 
+          is another choice, we might need a separate demo page.
+        </li>
+      </ul>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+  <script src='/bower_components/lightbox2/dist/js/lightbox.js'></script>
+
+</body>
+</html>
