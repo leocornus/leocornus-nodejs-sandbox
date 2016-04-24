@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spot On</title>
+
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+<script src='/bower_components/jquery/dist/jquery.min.js'></script>
+<script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src="/bower_components/d3/d3.js"></script>
+
+<style>
+  svg.circle {
+    border: 1px solid black;
+    position: absolute;
+    top: 0;
+    left: 50px;
+    width: 16px;
+    height: 16px;
+  }
+
+  svg.circle-big {
+    border: 1px solid black;
+    position: absolute;
+    top: 0;
+    left: 100px;
+    width: 32px;
+    height: 32px;
+  }
+
+  svg.letter  {
+    border: 1px solid black;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 16px;
+    height: 16px;
+  }
+
+  svg.number {
+    border: 0px solid black;
+    position: absolute;
+    top: 25px;
+    left: 50px;
+    width: 16px;
+    height: 16px;
+  }
+
+  div.svg-circle {
+    border: 1px red solid;
+    width: 300px;
+    height: 300px;
+  }
+</style>
+
+ 
+</head>
+
+<body>
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="">Spot On Animal Guess Game</h1> 
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+  <div class="col-md-6">
+    <div class="svg-circle bg-info">
+      <svg class="circle" viewBox = "0 0 200 200" version = "1.1">
+        <circle cx="100" cy="100" r="97" fill="orange" 
+                stroke="navy" stroke-width="6"/>
+        <text x="35" y="160" font-size="190" fill="red">A</text>
+      </svg>
+
+      <svg class="circle-big" viewBox = "0 0 200 200" >
+        <circle cx="100" cy="100" r="97" fill="orange" 
+                stroke="navy" stroke-width="6"/>
+        <text x="35" y="160" font-size="190" fill="red">B</text>
+      </svg>
+
+      <svg class="letter bg-primary">
+        <text x="2" y="13" font-size="16" fill="red">C</text>
+      </svg>
+
+      <svg class="number">
+        <text x="3" y="13" font-size="16" fill="red">9</text>
+      </svg>
+      <svg class="number" style="left: 66px">
+        <text x="3" y="13" font-size="16" fill="red">8</text>
+      </svg>
+      <svg class="number" style="left: 80px">
+        <text x="3" y="13" font-size="16" fill="red">0</text>
+      </svg>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Ideas</div>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <h4>Overview</h4>
+          <p>
+            Guess the animal based on the images.
+            We need a set of animal images and a list of animal name.
+            Animal image will be covered, 
+            player click any where on the cover to get stated.
+
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  </div>
+</div>
+
+<script>
+
+$('body').keydown(function(event) {
+
+    console.log(event);
+    var $theBox = $("svg.circle");
+    var position = $theBox.position();
+    console.log(position);
+    var width = $theBox.width();
+    var height = $theBox.height();
+    console.log(event);
+
+    switch(event.keyCode) {
+        case 74:
+            // the j key going down
+            if((position.top + height) < 280) {
+                //$theBox.animate({ "top": "+=50px" }, "fast" );
+                $theBox.css({ "top": "+=14px"});
+            }
+            break;
+        case 75:
+            // the k key going up
+            if(position.top > 0) {
+                //$theBox.animate({ "top": "-=50px" }, "fast" );
+                $theBox.css({ "top": "-=14px"});
+            }
+            break;
+        case 72:
+            // the h key going left
+            if(position.left > 0) {
+                //$theBox.animate({ "left": "-=50px" }, "fast" );
+                $theBox.css({"left": "-=14px"});
+            }
+            break;
+        case 76:
+            // the l key going right
+            if((position.left + width) < 280) {
+                //$theBox.animate({ "left": "+=50px" }, "fast" );
+                $theBox.css({"left": "+=14px"});
+            }
+            break;
+        default:
+            console.log(event.keyCode);
+            break;
+    }
+});
+
+</script>
+</body>
+</html>
