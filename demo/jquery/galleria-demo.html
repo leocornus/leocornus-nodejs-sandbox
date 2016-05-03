@@ -17,7 +17,7 @@
 .image-row img {
   width: 120px
 } 
-.galleria{ 
+.galleria-bak{ 
 
   width: 100%; 
   height: 500px;
@@ -61,6 +61,14 @@
       </a>
     </div>
     <script>
+      Galleria.configure({
+          // both height and width could set by number
+          // in pixel.
+          height: 400,
+          // Width could use percentage in string format.
+          //width: 500
+          width: '100%'
+      });
       Galleria.run('.galleria');
     </script>
   </div>
@@ -78,11 +86,23 @@
         </li>
         <li class="list-group-item">
           Here is the structure for big image and thumb nail:
-          <pre><code>
-            <a href="big.png">
-              <img src="thumb.phg"/>
-            </a>
-          </code></pre>
+          <pre>
+&lt;a href="big.png">
+  &lt;img src="thumb.phg"/>
+&lt;/a>   </pre>
+        </li>
+        <li class="list-group-item">
+          The gallery height and width could be set by using 
+          <strong>Galleria.configure</strong> function.
+          <pre>
+Galleria.configure({
+    // both height and width could set by number
+    // in pixel.
+    height: 400,
+    // Width could use percentage in string format.
+    //width: 500
+    width: '100%'
+});</pre>
         </li>
       </ul>
     </div>
