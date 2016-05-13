@@ -1,0 +1,77 @@
+<html>
+<head>
+  <title>Demo the video.js simple case</title>
+
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+  <link rel='stylesheet' href='/bower_components/video.js/dist/video-js.css'/>
+
+  <script src='/bower_components/video.js/dist/video.js'></script>
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+</head>
+
+<body>
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="">Video.js Demo Page</h1> 
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+  <div class="col-md-4">
+    <h2>Customize Form</h2>
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Remember me
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-default">Sign in</button>
+        </div>
+      </div>
+    </form> 
+  </div>
+
+  <div class="col-md-8">
+
+    <h2>Minimum Requirement for HTML 5 player</h2>
+
+    <video id="my-video" class="video-js" controls preload="auto" width="640" height="264"
+    poster="http://vjs.zencdn.net/v/oceans.png" data-setup="{}">
+      <source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a web browser that
+        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+      </p>
+    </video>
+  </div>
+
+  </div>
+</div>
+</body>
+
+</htmli>
