@@ -9,6 +9,37 @@
   <script src='/bower_components/video.js/dist/video.js'></script>
   <script src='/bower_components/jquery/dist/jquery.min.js'></script>
   <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+<script>
+jQuery(document).ready(function($) {
+  $('#preview').on('click', function() {
+
+    // get the source, width, height
+    var source = $('#inputSource').val();
+    var width = $('#inputWidth').val();
+    console.log(width);
+    var height = $('#inputHeight').val();
+
+    // preparing the video tag.
+    var video = '<video ' +
+      '    id="my-video" class="video-js" ' +
+      '    controls preload="auto" width="' + width + '" ' +
+      '    height="' + height + '" ' +
+      '    poster="http://vjs.zencdn.net/v/oceans.png" ' +
+      '    data-setup="{}">' +
+      '  <source src="' + source + '" type="video/mp4">' +
+      '</video>';
+
+    // replace the "#the-video" div.
+    $('#the-video').html(video);
+
+    // we need destroy the existing video.js object.
+    var player = videojs('my-video').dispose();
+    // load video.js by id of the video tag.
+    videojs("my-video", {}, function() {
+    });
+  });
+});
+</script>
 </head>
 
 <body>
