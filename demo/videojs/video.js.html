@@ -20,17 +20,19 @@ jQuery(document).ready(function($) {
     var height = $('#inputHeight').val();
 
     // preparing the video tag.
-    var video = '<video ' +
-      '    id="my-video" class="video-js" ' +
-      '    controls preload="auto" width="' + width + '" ' +
-      '    height="' + height + '" ' +
-      '    poster="http://vjs.zencdn.net/v/oceans.png" ' +
-      '    data-setup="{}">' +
-      '  <source src="' + source + '" type="video/mp4">' +
+    var video = '<video \n' +
+      '    id="my-video" class="video-js" \n' +
+      '    controls preload="auto" width="' + width + '" \n' +
+      '    height="' + height + '" \n' +
+      '    poster="http://vjs.zencdn.net/v/oceans.png" \n' +
+      '    data-setup="{}">\n' +
+      '  <source src="' + source + '" type="video/mp4">\n' +
       '</video>';
 
     // replace the "#the-video" div.
     $('#the-video').html(video);
+    var code = String(video).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    $('#embed-code').html(code);
 
     // we need destroy the existing video.js object.
     var player = videojs('my-video').dispose();
@@ -113,6 +115,9 @@ jQuery(document).ready(function($) {
     </div>
   </div>
 
+  <div>
+  Embed Code:
+  <pre><code id="embed-code"></code></pre>
   </div>
 </div>
 </body>
