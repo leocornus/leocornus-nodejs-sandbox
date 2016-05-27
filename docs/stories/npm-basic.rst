@@ -29,6 +29,17 @@ We need using the following command to signup and login::
   $ npm adduser
   $ npm login
 
+update packages
+---------------
+
+the easy way to update packages::
+
+  $ npm update
+
+some time re install the package will find the latest version::
+
+  $ npm install PACKAG-NAME
+
 Manually add a tag
 ------------------
 
