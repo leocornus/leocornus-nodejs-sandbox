@@ -54,7 +54,24 @@ jQuery(document).ready(function($) {
     </div>
   </div>
 
-  <div class="row">
+  <!-- nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#preview" aria-controls="preview" role="tab"
+         data-toggle="tab"
+      >Preview</a>
+    </li>
+    <li role="presentation">
+      <a href="#embedcode" aria-controls="embedcode" role="tab"
+         data-toggle="tab"
+      >Embed Code</a>
+    </li>
+  </ul>
+
+  <!-- tab panes -->
+<div class="tab-content">
+
+  <div class="row tab-pane active" id="preview" role="tabpanel">
 
   <div class="col-md-4">
     <h2>Customization Form</h2>
@@ -114,12 +131,17 @@ jQuery(document).ready(function($) {
     </video>
     </div>
   </div>
-  </div> <!-- end of row -->
+  </div> <!-- end of row preview -->
 
-  <div>
-  Embed Code:
-  <pre><code id="embed-code"></code></pre>
+  <div class="tab-pane" id="embedcode" role="tabpanel">
+    <div>
+    <h2>Embed Code:</h2>
+    <pre><code id="embed-code"></code></pre>
+    </div>
   </div>
+
+</div> <!-- end of tab-content->
+
 </div>
 </body>
 
