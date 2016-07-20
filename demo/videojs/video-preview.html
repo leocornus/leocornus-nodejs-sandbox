@@ -1,0 +1,153 @@
+<html>
+<head>
+  <title>Demo Video Preview Plugin</title>
+
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+  <link rel='stylesheet' href='/bower_components/video.js/dist/video-js.css'/>
+
+  <script src='/bower_components/video.js/dist/video.js'></script>
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+
+  <script src='/src/jquery/video-preview.js'></script>
+<script>
+jQuery(document).ready(function($) {
+
+  $('#previewtab').videoPreview();
+
+  $('#preview').on('click', function() {
+
+    // get the source, width, height
+    var source = $('#inputSource').val();
+    var width = $('#inputWidth').val();
+    console.log(width);
+    var height = $('#inputHeight').val();
+
+    // preparing the video tag.
+    var video = '<video \n' +
+      '    id="my-video" class="video-js" \n' +
+      '    controls preload="auto" width="' + width + '" \n' +
+      '    height="' + height + '" \n' +
+      '    poster="http://vjs.zencdn.net/v/oceans.png" \n' +
+      '    data-setup="{}">\n' +
+      '  <source src="' + source + '" type="video/mp4">\n' +
+      '</video>';
+
+    // replace the "#the-video" div.
+    $('#the-video').html(video);
+    var code = String(video).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    $('#embed-code').html(code);
+
+    // we need destroy the existing video.js object.
+    var player = videojs('my-video').dispose();
+    // load video.js by id of the video tag.
+    videojs("my-video", {}, function() {
+    });
+  });
+});
+</script>
+</head>
+
+<body>
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="">videoPreview jQuery Plugin Demo Page</h1> 
+      </div>
+    </div>
+  </div>
+
+  <!-- nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#previewtab" aria-controls="previewtab" role="tab"
+         data-toggle="tab"
+      >Preview</a>
+    </li>
+    <li role="presentation">
+      <a href="#embedcode" aria-controls="embedcode" role="tab"
+         data-toggle="tab"
+      >Embed Code</a>
+    </li>
+  </ul>
+
+  <!-- tab panes -->
+<div class="tab-content">
+
+  <div class="row tab-pane active" id="previewtab" role="tabpanel">
+
+  <div class="col-md-4">
+    <h2>Customization Form</h2>
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="inputSource" class="col-sm-2 control-label">Source</label>
+        <div class="col-sm-10">
+          <input type="url" class="form-control" id="inputSource" 
+                 placeholder="Media Source"
+                 value="http://vjs.zencdn.net/v/oceans.mp4">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputWidth" class="col-sm-2 control-label">
+          Width
+        </label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" id="inputWidth" 
+                 placeholder="Media Width" value="640">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputHeight" class="col-sm-2 control-label">
+          Height
+        </label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" id="inputHeight" 
+                 placeholder="Media Height" value="264">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="button" id="preview" class="btn btn-default">
+          Preview
+          </button>
+        </div>
+      </div>
+    </form> 
+  </div>
+
+  <div class="col-md-8">
+
+    <h2>Minimum Requirement for HTML 5 player</h2>
+
+    <div id="the-video">
+    <video id="my-video" class="video-js" controls preload="auto" width="640" height="264"
+    poster="http://vjs.zencdn.net/v/oceans.png" data-setup="{}">
+      <source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a web browser that
+        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+      </p>
+    </video>
+    </div>
+  </div>
+  </div> <!-- end of row previewtab -->
+
+  <div class="tab-pane" id="embedcode" role="tabpanel">
+    <div>
+    <h2>Embed Code:</h2>
+    <pre><code id="embed-code"></code></pre>
+    </div>
+  </div>
+
+</div> <!-- end of tab-content->
+
+</div>
+</body>
+
+</html>
