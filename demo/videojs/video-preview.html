@@ -16,35 +16,6 @@ jQuery(document).ready(function($) {
 
   $('#previewtab').videoPreview();
 
-  $('#preview').on('click', function() {
-
-    // get the source, width, height
-    var source = $('#inputSource').val();
-    var width = $('#inputWidth').val();
-    console.log(width);
-    var height = $('#inputHeight').val();
-
-    // preparing the video tag.
-    var video = '<video \n' +
-      '    id="my-video" class="video-js" \n' +
-      '    controls preload="auto" width="' + width + '" \n' +
-      '    height="' + height + '" \n' +
-      '    poster="http://vjs.zencdn.net/v/oceans.png" \n' +
-      '    data-setup="{}">\n' +
-      '  <source src="' + source + '" type="video/mp4">\n' +
-      '</video>';
-
-    // replace the "#the-video" div.
-    $('#the-video').html(video);
-    var code = String(video).replace(/&/g, '&amp;').replace(/</g, '&lt;')
-    $('#embed-code').html(code);
-
-    // we need destroy the existing video.js object.
-    var player = videojs('my-video').dispose();
-    // load video.js by id of the video tag.
-    videojs("my-video", {}, function() {
-    });
-  });
 });
 </script>
 </head>
