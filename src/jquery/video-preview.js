@@ -17,6 +17,7 @@
     function Plugin(element, options) {
         // the DOM element.
         this.element = element;
+        this.$element = $(element);
         // extend mthod will merge object contents.
         this.settings = $.extend({}, defaults, options);
         this._defatuls = defaults;
@@ -32,10 +33,78 @@
          */
         init: function() {
             var self = this;
-            var $element = $(this.element);
 
             var previewHtml = self.buildCustomizeForm();
-            $element.html(previewHtml);
+            self.$element.html(previewHtml);
+
+            self.buildVideoTag();
+        },
+
+        /**
+         * preview video.
+         */
+        buildVideoTag: function() {
+
+            var videoHtml = this.buildVideoHtml();
+
+            // replace the "#the-video" div.
+            this.$element.find('#the-video').html(videoHtml);
+
+            // preparing the embed code.
+            var code = String(videoHtml).replace(/&/g, '&amp;').
+                       replace(/</g, '&lt;')
+            $('#embed-code').html(code);
+
+            //// we need destroy the existing video.js object.
+            //var player = videojs('my-video').dispose();
+            //// load video.js by id of the video tag.
+            //videojs("my-video", {}, function() {
+            //});
+        },
+
+        /**
+         * get video source.
+         */
+        getVideoSource: function() {
+            return this.$element.find('#inputSource').val();
+        },
+
+        /**
+         * get video source.
+         */
+        getVideoWidth: function() {
+            return this.$element.find('#inputWidth').val();
+        },
+
+        /**
+         * get video source.
+         */
+        getVideoHeight: function() {
+            return this.$element.find('#inputHeight').val();
+        },
+
+        /**
+         * build video html tag
+         */
+        buildVideoHtml: function() {
+
+            // get the source, width, height
+            var source = this.getVideoSource();
+            var width = this.getVideoWidth();
+            var height = this.getVideoHeight();
+
+            // preparing the video tag.
+            var videoHtml = 
+              '<video \n' +
+              '  id="my-video" class="video-js" \n' +
+              '  controls preload="auto" width="' + width + '" \n' +
+              '  height="' + height + '" \n' +
+              '  poster="http://vjs.zencdn.net/v/oceans.png" \n' +
+              '  data-setup="{}">\n' +
+              '  <source src="' + source + '" type="video/mp4">\n' +
+              '</video>';
+
+            return videoHtml;
         },
 
         /**
