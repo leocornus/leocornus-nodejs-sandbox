@@ -78,64 +78,6 @@ jQuery(document).ready(function($) {
 
   <div class="row tab-pane active" id="previewtab" role="tabpanel">
 
-  <div class="col-md-4">
-    <h2>Customization Form</h2>
-
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label for="inputSource" class="col-sm-2 control-label">Source</label>
-        <div class="col-sm-10">
-          <input type="url" class="form-control" id="inputSource" 
-                 placeholder="Media Source"
-                 value="http://vjs.zencdn.net/v/oceans.mp4">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="inputWidth" class="col-sm-2 control-label">
-          Width
-        </label>
-        <div class="col-sm-6">
-          <input type="number" class="form-control" id="inputWidth" 
-                 placeholder="Media Width" value="640">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="inputHeight" class="col-sm-2 control-label">
-          Height
-        </label>
-        <div class="col-sm-6">
-          <input type="number" class="form-control" id="inputHeight" 
-                 placeholder="Media Height" value="264">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button type="button" id="preview" class="btn btn-default">
-          Preview
-          </button>
-        </div>
-      </div>
-    </form> 
-  </div>
-
-  <div class="col-md-8">
-
-    <h2>Minimum Requirement for HTML 5 player</h2>
-
-    <div id="the-video">
-    <video id="my-video" class="video-js" controls preload="auto" width="640" height="264"
-    poster="http://vjs.zencdn.net/v/oceans.png" data-setup="{}">
-      <source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
-      <p class="vjs-no-js">
-        To view this video please enable JavaScript, and consider upgrading to a web browser that
-        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-      </p>
-    </video>
-    </div>
-  </div>
   </div> <!-- end of row previewtab -->
 
   <div class="tab-pane" id="embedcode" role="tabpanel">
