@@ -36,7 +36,7 @@
 
             var previewHtml = self.buildCustomizeForm();
             self.$element.html(previewHtml);
-
+            self.hookEvents();
             self.buildVideoTag();
         },
 
@@ -54,12 +54,20 @@
             var code = String(videoHtml).replace(/&/g, '&amp;').
                        replace(/</g, '&lt;')
             $('#embed-code').html(code);
+        },
 
-            //// we need destroy the existing video.js object.
-            //var player = videojs('my-video').dispose();
-            //// load video.js by id of the video tag.
-            //videojs("my-video", {}, function() {
-            //});
+        /**
+         * update the video tag.
+         */
+        updateVideoTag: function() {
+            var self = this;
+
+            self.buildVideoTag();
+
+            // we need destroy the existing video.js object.
+            var player = videojs('my-video').dispose();
+            // load video.js by id of the video tag.
+            videojs("my-video", {}, function() {});
         },
 
         /**
@@ -112,6 +120,7 @@
          * class from bootstrap
          */
         buildCustomizeForm: function() {
+
             var self = this;
 
             // build the input form groups. 
@@ -144,6 +153,21 @@
               '</div>';
 
             return formHtml;
+        },
+
+        /**
+         * hoot events.
+         */
+        hookEvents: function() {
+
+            var self = this;
+
+            // hook the click event for preview button.
+            // this happens after thhe form html is append to 
+            // parent element.
+            self.$element.find('#preview').on('click', function() {
+                self.updateVideoTag();
+            });
         },
 
         /**
