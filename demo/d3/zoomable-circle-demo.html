@@ -67,6 +67,13 @@ var svg = d3.select("body").append("svg")
     .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
 var data_json = 'data/flare.json';
+// we could save teh data in MediaWiki. here some format.
+// If we save JSON file as a binary file (media) in wiki,
+// we could use this format:
+//data_json = 'http://example.com/wiki/images/d/dc/Test-flare.json';
+// If we save JSON file as source code (need under the name space User or MediaWiki),
+// we could use this format:
+//data_json = 'http://example.com/wiki/index.php?title=User:Seanchen/Test.json&action=raw';
 d3.json(data_json, function(error, root) {
   if (error) return console.error(error);
 
