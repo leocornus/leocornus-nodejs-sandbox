@@ -6,13 +6,80 @@
   <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
   <link rel='stylesheet' href='/bower_components/video.js/dist/video-js.css'/>
 
-  <script src='/bower_components/video.js/dist/video.js'></script>
+  <link href="/bower_components/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
+
+  <script src="/bower_components/jsoneditor/dist/jsoneditor.min.js"></script>
   <script src='/bower_components/jquery/dist/jquery.min.js'></script>
   <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+  <script src='/bower_components/d3/d3.js'></script>
+  <script src='/bower_components/d3-cloud/build/d3.layout.cloud.js'></script>
 
-  <script src='/src/jquery/video-preview.js'></script>
+  <script src='/src/d3/d3-preview.js'></script>
 <script>
 jQuery(document).ready(function($) {
+
+    // create the JSON editor
+    var container = document.getElementById("jsoneditor");
+    var options = {};
+    var editor = new JSONEditor(container, options);
+
+    // get ready a list of words.
+    var theWords = [
+        "Hello", "world", "normally", "you", "want", 
+        "more", "words", "than", "this", "apple", 'peach', 
+        "pear", "cat", "ant", "mouse", "does", "that", 
+        "enough", "how", "many"]
+        // what does the map function do?
+        .map(function(d) {
+            return {
+                text: d, 
+                // the range of Math.random is between 0 (inclusive)
+                // and 1 (exclusive).
+                size: 5 + Math.random() * 45, 
+                test: "haha"
+            };
+        });
+
+    // set to JSON editor.
+    editor.set(theWords);
+
+    // fill color?
+    var fill = d3.scale.category20();
+    // orientation, direction
+    var orientations = 5;
+
+    var layout = d3.layout.cloud()
+        .size([553, 286])
+        .words(theWords)
+        // numerical padding for each word.
+        // What's the unit for padding?
+        // less padding will fit in more words.
+        .padding(1)
+        .rotate(function() { return ~~(Math.random() * orientations) * 90; })
+        .font("Impact")
+        .fontSize(function(d) { return d.size; })
+        .on("end", draw);
+    
+    layout.start();
+    
+    function draw(words) {
+      d3.select("#d3preview").append("svg")
+          .attr("width", layout.size()[0])
+          .attr("height", layout.size()[1])
+        .append("g")
+          .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+        .selectAll("text")
+          .data(words)
+        .enter().append("text")
+          .style("font-size", function(d) { return d.size + "px"; })
+          .style("font-family", "Impact")
+          .style("fill", function(d, i) { return fill(i); })
+          .attr("text-anchor", "middle")
+          .attr("transform", function(d) {
+            return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+          })
+          .text(function(d) { return d.text; });
+    }
 
 });
 </script>
@@ -57,7 +124,7 @@ jQuery(document).ready(function($) {
           Data in JSON format
         </div>
         <div class="panel-body">
-          <h3>JSON</h3>
+          <div id="jsoneditor" style="height:460px"></div>
         </div>
       </div>
     </div>
@@ -67,8 +134,7 @@ jQuery(document).ready(function($) {
         <div class="panel-heading">
           D3 Visual Data
         </div>
-        <div class="panel-body">
-          <div id="d3preview">Preview</div>
+        <div class="panel-body" id="d3preview">
         </div>
       </div>
     </div>
