@@ -10,7 +10,8 @@
     var pluginVideoPreview = "videoPreview";
     // se the default alue.
     var defaults = {
-            desc : "Video Preview jQuery plugin"
+        desc : "Video Preview jQuery plugin",
+        embedCodeTag: 'embedCode'
     };
 
     // the plugin constructor.
@@ -53,7 +54,7 @@
             // preparing the embed code.
             var code = String(videoHtml).replace(/&/g, '&amp;').
                        replace(/</g, '&lt;')
-            $('#embed-code').html(code);
+            $('#' + this.settings.embedCodeTag).html(code);
         },
 
         /**
