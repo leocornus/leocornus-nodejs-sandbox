@@ -39,6 +39,7 @@
     "d3-cloud": "~1.2.1",
     "lightbox2": "~2.8.2",
     "arm-galleria": "~1.4.3",
-    "video.js": "~5.10.2"
+    "video.js": "~5.10.2",
+    "jsoneditor": "~5.5.7"
   }
 }
