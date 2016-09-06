@@ -23,7 +23,7 @@ jQuery(document).ready(function($) {
     var options = {};
     var editor = new JSONEditor(container, options);
 
-    // get ready a list of words.
+    // get ready a list of words as the initial data.
     var theWords = [
         "Hello", "world", "normally", "you", "want", 
         "more", "words", "than", "this", "apple", 'peach', 
@@ -40,13 +40,13 @@ jQuery(document).ready(function($) {
             };
         });
 
-    // set to JSON editor.
+    // set initial data to JSON editor.
     editor.set(theWords);
 
     // fill color?
     var fill = d3.scale.category20();
     // orientation, direction
-    var orientations = 5;
+    var orientations = 8;
 
     var layout = d3.layout.cloud()
         .size([553, 286])
@@ -55,7 +55,7 @@ jQuery(document).ready(function($) {
         // What's the unit for padding?
         // less padding will fit in more words.
         .padding(1)
-        .rotate(function() { return ~~(Math.random() * orientations) * 90; })
+        .rotate(function() { return ~~(Math.random() * orientations) * 45; })
         .font("Impact")
         .fontSize(function(d) { return d.size; })
         .on("end", draw);
@@ -123,8 +123,10 @@ jQuery(document).ready(function($) {
         <div class="panel-heading">
           Data in JSON format
         </div>
-        <div class="panel-body">
-          <div id="jsoneditor" style="height:460px"></div>
+        <!-- data in JSON Editor -->
+        <div id="jsoneditor" style="height:460px"></div>
+        <div class="panel-footer">
+          <button id="updatePreview">Preview</button>
         </div>
       </div>
     </div>
@@ -134,7 +136,7 @@ jQuery(document).ready(function($) {
         <div class="panel-heading">
           D3 Visual Data
         </div>
-        <div class="panel-body" id="d3preview">
+        <div class="no-panel-body" id="d3preview">
         </div>
       </div>
     </div>
