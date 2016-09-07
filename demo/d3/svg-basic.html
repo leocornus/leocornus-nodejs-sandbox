@@ -169,6 +169,17 @@ $('body').keydown(function(event) {
     }
 });
 
+// timer function!
+var everySecond = window.setInterval(flashPosition, 1000);
+
+function flashPosition() {
+    var $theBox = $("svg.circle");
+    var position = $theBox.position();
+    var width = $theBox.width();
+    var height = $theBox.height();
+    $theBox.css({"top": "+=14px"});
+}
+
 </script>
 </body>
 </html>
