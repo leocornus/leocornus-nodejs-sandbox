@@ -1,0 +1,101 @@
+<html>
+<head>
+  <title>SVG Scratch Pad</title>
+
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+  <link rel='stylesheet' href='/bower_components/video.js/dist/video-js.css'/>
+
+  <link href="/bower_components/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
+
+  <script src="/bower_components/jsoneditor/dist/jsoneditor.min.js"></script>
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+  <script src='/bower_components/d3/d3.js'></script>
+  <script src='/bower_components/d3-cloud/build/d3.layout.cloud.js'></script>
+</head>
+
+<body>
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="">SVG Scratch Pad</h1> 
+      </div>
+    </div>
+  </div>
+
+  <!-- nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#controltab" aria-controls="controltab" role="tab"
+         data-toggle="tab"
+      >Control</a>
+    </li>
+    <li role="presentation">
+      <a href="#memos" aria-controls="memos" role="tab"
+         data-toggle="tab"
+      >Memos</a>
+    </li>
+  </ul>
+
+  <!-- tab panes -->
+<div class="tab-content">
+
+  <div class="row tab-pane active" id="controltab" role="tabpanel">
+    <div class="col-md-6">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          Control Panel
+        </div>
+        <!-- data in JSON Editor -->
+        <div id="jsoneditor" style="height:460px"></div>
+        <div class="panel-footer">
+          <button id="updatePreview">Reload</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          Visual Data Preview
+        </div>
+        <div class="no-panel-body" id="svgpreview">
+        </div>
+      </div>
+    </div>
+  </div> <!-- end of row controltab -->
+
+  <div class="tab-pane" id="memos" role="tabpanel">
+    <div>
+    <h2>Design and Development Memos</h2>
+    <div class="panel panel-info">
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-warning">
+          <strong>Dependences</strong>: d3, d3-cloud, jQuery
+          <br/>
+          Bootstrap is optional.
+        </li>
+        <li class="list-group-item">
+          Math.random will return range between 0 and 1.
+          It will include 0 but NOT include 1.
+        </li>
+        <li class="list-group-item list-group-item-danger">
+          Q: what is the effecient way to control the size of 
+          the word cloud?
+        </li>
+      </ul>
+    </div>
+    </div>
+  </div>
+</div> <!-- end of tab-content -->
+
+</div>
+</body>
+
+<script>
+
+</script>
+
+</html>
