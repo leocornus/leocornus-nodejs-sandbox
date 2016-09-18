@@ -72,4 +72,16 @@ describe('JavaScript String Prototype Testing Specs', function() {
         expect(typeof result).toBe('object');
         expect(result.length).toBe(3);
     });
+
+    it('Testing the fromCharCode function', function() {
+
+        var letters = [];
+        // loop the char code.
+        for(var i = 65; i <= 90; i ++) {
+            letters.push(String.fromCharCode(i));
+        }
+        // verify now.
+        expect(letters[0]).toBe('A');
+        expect(letters[1]).toBe('B');
+    });
 });

@@ -13,6 +13,7 @@ module.exports = function(config) {
       'src/jquery/entry.js',
       'src/jquery/mw-sdk.js',
       'test/jquery/**/*.js',
+      'test/js-core/**/*.js',
       // load the html fixtures.
       'test/jquery/fixtures/*.html'
     ],
