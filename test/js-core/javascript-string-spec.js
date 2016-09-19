@@ -67,14 +67,26 @@ describe('JavaScript String Prototype Testing Specs', function() {
 
         it('Split by regular express', function() {
             // split works for both string and regex separator
-            var source = 'tesing, again, split';
+            var source = 'testing, again, split';
+            // we could use the regular expression as the separator.
             var result = source.split(/,\s*/);
             // result is a type of array, array is a type of object.
             expect(typeof result).toBe('object');
             expect(result.length).toBe(3);
+            expect(result[0]).toBe('testing');
         });
 
-        it('split source by new line \n', function() {
+        it('split source by new line \\n', function() {
+
+            // get ready a String with new line in it.
+            var source = 'testing a string with \n in the middle' +
+                '\nadd one more line';
+            // we are using the regular string as the separator.
+            var result = source.split('\n');
+            expect(typeof result).toBe('object');
+            expect(result.length).toBe(3);
+            expect(result[0]).toBe('testing a string with ');
+            expect(result[2]).toBe('add one more line');
         });
     });
 
