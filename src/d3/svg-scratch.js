@@ -7,13 +7,10 @@ jQuery(document).ready(function($) {
 
         // remove the existing svg.
         //$('#thesvg').remove(); 
-        drawCharacterInCircle('J');
-        drawCharacterInCircle('E');
-        drawCharacterInCircle('S');
-        drawCharacterInCircle('S');
-        drawCharacterInCircle('I');
-        drawCharacterInCircle('C');
-        drawCharacterInCircle('A');
+        // loop the char code.
+        for(var i = 65; i <= 90; i ++) {
+            drawCharacterInCircle(String.fromCharCode(i));
+        }
 
         //var previewdiv = d3.select('#svgpreview');
         //// append the svg.
