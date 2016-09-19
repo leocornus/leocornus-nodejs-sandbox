@@ -63,25 +63,33 @@ describe('JavaScript String Prototype Testing Specs', function() {
 
     });
 
-    it('Testing the split function', function() {
+    describe('Testing the split function', function() {
 
-        // split works for both string and regex separator
-        var source = 'tesing, again, split';
-        var result = source.split(/,\s*/);
-        // result is a type of array, array is a type of object.
-        expect(typeof result).toBe('object');
-        expect(result.length).toBe(3);
+        it('Split by regular express', function() {
+            // split works for both string and regex separator
+            var source = 'tesing, again, split';
+            var result = source.split(/,\s*/);
+            // result is a type of array, array is a type of object.
+            expect(typeof result).toBe('object');
+            expect(result.length).toBe(3);
+        });
+
+        it('split source by new line \n', function() {
+        });
     });
 
-    it('Testing the fromCharCode function', function() {
+    describe('Testing the fromCharCode function', function() {
 
-        var letters = [];
-        // loop the char code.
-        for(var i = 65; i <= 90; i ++) {
-            letters.push(String.fromCharCode(i));
-        }
-        // verify now.
-        expect(letters[0]).toBe('A');
-        expect(letters[1]).toBe('B');
+        it('char code for alphabet letters', function() {
+
+            var letters = [];
+            // loop the char code.
+            for(var i = 65; i <= 90; i ++) {
+                letters.push(String.fromCharCode(i));
+            }
+            // verify now.
+            expect(letters[0]).toBe('A');
+            expect(letters[1]).toBe('B');
+        });
     });
 });
