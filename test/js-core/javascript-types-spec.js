@@ -84,5 +84,27 @@ describe('Testing JavaScript types', function() {
             expect(typeof aArray[2]).toBe('number');
             expect(typeof aArray[4]).toBe('object');
         });
+
+        /**
+         * try to define an object by using JSON format.
+         */
+        it('define a simple object', function() {
+
+            // simple object.
+            var anObject = {
+              a: 'abc',
+              b: 123,
+              // the ending item should NOT have separator.
+              c: 'cde'
+            };
+
+            // type should be an object.
+            expect(typeof anObject).toBe('object');
+            // inspect the values.
+            expect(anObject.a).toBe('abc');
+            expect(anObject.b).toBe(123);
+            // get keys of the object.
+            expect(Object.keys(anObject)).toEqual(['a', 'b', 'c']);
+        });
     });
 });
