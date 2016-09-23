@@ -73,13 +73,13 @@ function drawCharacterInCircle(character, options) {
         r: "97",
         fill: "yellow",
         stroke: "navy",
-        strokeWidth: "6"
+        stroke_width: "6"
       },
       text: {
         x: "40",
         y: "160",
         fill: "red",
-        fontSize: "190"
+        font_size: "190"
       }
     };
     var options = defaultOps;
@@ -102,19 +102,41 @@ function drawCharacterInCircle(character, options) {
     svg.attr('viewBox', '0 0 200 200');
 
     // append the circle.
-    var circle = svg.append('circle');
-    circle.attr("cx", options.circle.cx);
-    circle.attr("cy", options.circle.cy);
-    circle.attr("r", options.circle.r);
-    circle.attr("fill", options.circle.fill);
-    circle.attr("stroke", options.circle.stroke);
-    circle.attr("stroke-width", options.circle.strokeWidth);
+    drawSvgElement(svg, 'circle', 
+                   {'attrs':options.circle,
+                    'styles':{}});
+    //var circle = svg.append('circle');
+    //circle.attr("cx", options.circle.cx);
+    //circle.attr("cy", options.circle.cy);
+    //circle.attr("r", options.circle.r);
+    //circle.attr("fill", options.circle.fill);
+    //circle.attr("stroke", options.circle.stroke);
+    //circle.attr("stroke-width", options.circle.strokeWidth);
 
     // append the text.
-    var text = svg.append('text');
-    text.attr('x', options.text.x);
-    text.attr('y', options.text.y);
-    text.attr('font-size', options.text.fontSize);
-    text.attr('fill', options.text.fill);
+    var text = drawSvgElement(svg, 'text', 
+                              {'attrs':options.text,
+                               'styles':{}});
+    //var text = svg.append('text');
+    //text.attr('x', options.text.x);
+    //text.attr('y', options.text.y);
+    //text.attr('font-size', options.text.fontSize);
+    //text.attr('fill', options.text.fill);
     text.text(character);
+}
+
+/**
+ * draw a svg element.
+ */
+function drawSvgElement(dist, elementName, options) {
+
+    var element = dist.append(elementName);
+    for(var attr in options.attrs) {
+        element.attr(attr.replace(/_/g, '-'), options.attrs[attr]);
+    }
+    for(var style in options.styles) {
+        element.style(style, options.styles[style]);
+    }
+
+    return element;
 }
