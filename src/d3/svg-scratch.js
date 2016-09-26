@@ -24,6 +24,7 @@ jQuery(document).ready(function($) {
         x: "40",
         y: "160",
         fill: "red",
+        font_family: '"Lucida Console", Courier, monospace',
         font_size: "190"
       }
     };
