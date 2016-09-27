@@ -23,21 +23,28 @@ jQuery(document).ready(function($) {
         }
       },
       circle: {
-        cx: "100",
-        cy: "100",
-        r: "97",
-        fill: "yellow",
-        stroke: "navy",
-        stroke_width: "6"
+        attrs: {
+          cx: "100",
+          cy: "100",
+          r: "97",
+          fill: "yellow",
+          stroke: "navy",
+          stroke_width: "6"
+        },
+        styles: {}
       },
       text: {
-        x: "40",
-        y: "160",
-        fill: "red",
-        font_family: '"Lucida Console", Courier, monospace',
-        font_size: "190"
+        attrs: {
+          x: "40",
+          y: "160",
+          fill: "red",
+          font_family: '"Lucida Console", Courier, monospace',
+          font_size: "190"
+        },
+        styles: {}
       }
     };
+
     // load the JSON editor
     var container = document.getElementById('jsoneditor');
     var editor = new JSONEditor(container, {});
@@ -65,10 +72,11 @@ jQuery(document).ready(function($) {
         // remove the existing svg.
         //$('#thesvg').remove(); 
         // loop the char code.
-        for(var i = 65; i <= 90; i ++) {
-            drawCharacterInCircle(String.fromCharCode(i),
-                                  editor.get());
-        }
+        //for(var i = 65; i <= 90; i ++) {
+        //    drawCharacterInCircle(String.fromCharCode(i),
+        //                          editor.get());
+        //}
+        drawCharacterInCircle(getRandomChar(), editor.get());
     });
 });
 
@@ -82,6 +90,18 @@ function drawGameBoard() {
     var gameBoard = preview.append("svg");
     // set id.
     gameBoard.attr('id', 'alphabet-rain');
+}
+
+/**
+ * randomly return a char code.
+ */
+function getRandomChar() {
+
+    // 65 to 90 for now.
+    var min = Math.ceil(65);
+    var max = Math.floor(91);
+    var code = Math.floor(Math.random() * (max - min)) + 65;
+    return String.fromCharCode(code);
 }
 
 /**
@@ -101,13 +121,9 @@ function drawCharacterInCircle(character, options) {
     svg.attr('id', 'thesvg');
 
     // append the circle.
-    drawSvgElement(svg, 'circle', 
-                   {'attrs':options.circle,
-                    'styles':{}});
+    drawSvgElement(svg, 'circle', options.circle);
     // append the text.
-    var text = drawSvgElement(svg, 'text', 
-                              {'attrs':options.text,
-                               'styles':{}});
+    var text = drawSvgElement(svg, 'text', options.text);
     text.text(character);
 }
 
