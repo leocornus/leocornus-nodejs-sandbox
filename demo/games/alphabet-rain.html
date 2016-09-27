@@ -65,7 +65,7 @@
         <!-- data in JSON Editor -->
         <div id="jsoneditor" style="height:460px"></div>
         <div class="panel-footer">
-          <button id="updatePreview">Reload</button>
+          <button id="drawGameBoard">Game Board</button>
           <button id="drawing">Drawing</button>
         </div>
       </div>
@@ -74,9 +74,19 @@
     <div class="col-md-6">
       <div class="panel panel-success">
         <div class="panel-heading">
-          Visual Data Preview
+          The Game
         </div>
-        <div class="no-panel-body" id="svgpreview">
+        <!-- this panel-body div will be the game board. -->
+        <!-- We have to set position here, so the child svg -->
+        <!-- element could use absolute postion. -->
+        <div class="panel-body" id="svgpreview"
+             style="height:500px; border: 0px black solid;
+                    position: relative;
+                    padding: 0px"
+        >
+        </div>
+        <div class="panel-footer">
+          messaging
         </div>
       </div>
     </div>
@@ -96,11 +106,13 @@
     <div class="panel panel-info">
       <ul class="list-group">
         <li class="list-group-item list-group-item-warning">
-          Game board design, layout, logo, branding, 
+          <p class="h4">Game board design</p>
+          layout, logo, branding, 
           message displaying, counting, etc.
         </li>
         <li class="list-group-item list-group-item-warning">
           <p class="h4">The rain dorp strategy...</p>
+          Border caculation<br/>
           When to show up?<br/>
           How fast it drop?<br/>
           When to disapear?
