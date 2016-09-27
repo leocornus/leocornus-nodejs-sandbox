@@ -4,13 +4,23 @@
 jQuery(document).ready(function($) {
 
     var defaultOps = {
+      gameBoard: {
+        id: 'alphabet-rain',
+        width: '400px',
+        height: '600px'
+      },
       svg: {
-        width: "32px",
-        height: "32px",
-        top: "0",
-        left: "0",
-        position: "relative",
-        border: "1px solid purple"
+        styles: {
+          width: "32px",
+          height: "32px",
+          top: "0",
+          left: "0",
+          position: "relative",
+          border: "1px solid purple"
+        }, 
+        attrs: {
+          viewBox: '0 0 200 200'
+        }
       },
       circle: {
         cx: "100",
@@ -33,6 +43,23 @@ jQuery(document).ready(function($) {
     var editor = new JSONEditor(container, {});
     editor.set(defaultOps);
 
+    // calculate the game board:
+    var gameBoard = d3.select('#svgpreview');
+    var $gameBoard = $('#svgpreview');
+    console.log($gameBoard.offset());
+
+    // draw the game board.
+    $('#drawGameBoard').click(function() {
+
+        var previewdiv = d3.select('#svgpreview');
+        var specs = editor.get();
+        // do we need remove the existing one?
+        $('#' + specs.gameBoard.id).remove();
+        drawSvgElement(previewdiv, 'svg', 
+                       {'attrs': specs.gameBoard,
+                        'styles': {}});
+    });
+
     $('#drawing').click(function() {
 
         // remove the existing svg.
@@ -46,6 +73,18 @@ jQuery(document).ready(function($) {
 });
 
 /**
+ * build the game board.
+ */
+function drawGameBoard() {
+
+    // draw the game board...
+    var preview = d3.select('#svgpreview');
+    var gameBoard = preview.append("svg");
+    // set id.
+    gameBoard.attr('id', 'alphabet-rain');
+}
+
+/**
  * try to builde the svg with a circle and text inside the circle.
  * here are the HTML code.
  *   <svg>
@@ -57,42 +96,18 @@ function drawCharacterInCircle(character, options) {
 
     var previewdiv = d3.select('#svgpreview');
     // append the svg.
-    var svg = previewdiv.append("svg");
+    var svg = drawSvgElement(previewdiv, 'svg', options.svg);
+    //var svg = previewdiv.append("svg");
     svg.attr('id', 'thesvg');
-
-    // set the style for this svg.
-    svg.style("width", options.svg.width);
-    svg.style("height", options.svg.height);
-    svg.style("top", options.svg.top);
-    svg.style("left", options.svg.left);
-    svg.style("position", options.svg.position);
-    svg.style("border", options.svg.border); 
-
-    // once we set up view box, childen element
-    // will be 
-    svg.attr('viewBox', '0 0 200 200');
 
     // append the circle.
     drawSvgElement(svg, 'circle', 
                    {'attrs':options.circle,
                     'styles':{}});
-    //var circle = svg.append('circle');
-    //circle.attr("cx", options.circle.cx);
-    //circle.attr("cy", options.circle.cy);
-    //circle.attr("r", options.circle.r);
-    //circle.attr("fill", options.circle.fill);
-    //circle.attr("stroke", options.circle.stroke);
-    //circle.attr("stroke-width", options.circle.strokeWidth);
-
     // append the text.
     var text = drawSvgElement(svg, 'text', 
                               {'attrs':options.text,
                                'styles':{}});
-    //var text = svg.append('text');
-    //text.attr('x', options.text.x);
-    //text.attr('y', options.text.y);
-    //text.attr('font-size', options.text.fontSize);
-    //text.attr('fill', options.text.fill);
     text.text(character);
 }
 
