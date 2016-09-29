@@ -104,4 +104,16 @@ describe('JavaScript String Prototype Testing Specs', function() {
             expect(letters[1]).toBe('B');
         });
     });
+
+    describe('Testing the string to int function', function() {
+
+        it('parse pixle to integer', function() {
+
+            var width = '123px';
+            // the function parseInt will only retain the leading
+            // numbers and discards all the rest.
+            var number = parseInt(width);
+            expect(number).toBe(123);
+        });
+    });
 });
