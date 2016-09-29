@@ -81,10 +81,21 @@ jQuery(document).ready(function($) {
         drawCharacterInCircle(getRandomChar(), specs);
     });
 
+    // dropping task id
+    var droppingId = 0;
+
     $('#start-dropping').click(function() {
 
         // start dropping rain
-        var dropping = window.setInterval(droppingRain, 500);
+        droppingId = droppingId > 0 ? droppingId :
+                     window.setInterval(droppingRain, 500);
+    });
+
+    $('#stop-dropping').click(function() {
+
+        window.clearInterval(droppingId);
+        // reset the droppingId to 0;
+        droppingId = 0;
     });
 });
 
