@@ -93,13 +93,27 @@ jQuery(document).ready(function($) {
  */
 function droppingRain() {
 
+    // get the game board height.
+    var boardHeight = $('#svgpreview').innerHeight();
+
     // get all svg with match id patterns:
     $("svg[id^='letter-']").each(function(index) {
         // the object this will be the DOM element.
         var $svg = $(this);
+        // get the position in the game board.
+        var currentTop = parseInt($svg.css('top'));
         // the dropping space for each dropping.
-        var step = $svg.height();
-        $svg.css({"top": "+=16px"});
+        var pace = $svg.height();
+
+        // caculate the new top position.
+        var newTop = currentTop + pace / 2;
+        if (newTop + pace >= boardHeight) {
+            // it will drop out of game board, remove it.
+            $svg.remove();
+        } else {
+            // move to the new position.
+            $svg.css({"top": newTop + "px"});
+        }
     });
 }
 
