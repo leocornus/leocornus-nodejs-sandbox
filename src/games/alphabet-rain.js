@@ -104,10 +104,17 @@ jQuery(document).ready(function($) {
 
         var theKey = event.key.toUpperCase();
         var selector = "svg[id^='letter-" + theKey + "-']";
-        $(selector).each(function(index) {
-            // remove it to kill
-            $(this).remove();
-        });
+        // here is how we check 
+        // if the selector has matched elements
+        if($(selector).length > 0) {
+            // kill the first one only.
+            $(selector)[0].remove();
+            // kill all matches.
+            //$(selector).each(function(index) {
+            //    // remove it to kill
+            //    $(this).remove();
+            //});
+        }
     });
 });
 
