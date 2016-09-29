@@ -97,6 +97,17 @@ jQuery(document).ready(function($) {
         // reset the droppingId to 0;
         droppingId = 0;
     });
+
+    // handle the keydown event to kill those rain drops.
+    $('body').keydown(function(event) {
+
+        var theKey = event.key.toUpperCase();
+        var selector = "svg[id^='letter-" + theKey + "-']";
+        $(selector).each(function(index) {
+            // remove it to kill
+            $(this).remove();
+        });
+    });
 });
 
 /**
