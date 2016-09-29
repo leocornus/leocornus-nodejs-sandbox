@@ -139,11 +139,15 @@ function drawGameBoard() {
 function drawCharacterInCircle(character, options) {
 
     var previewdiv = d3.select('#svgpreview');
-    console.log(options.svg.styles.width);
+    //console.log(options.svg.styles.width);
     // append the svg.
     var svg = drawSvgElement(previewdiv, 'svg', options.svg);
     //var svg = previewdiv.append("svg");
-    svg.attr('id', 'thesvg');
+    // id should have this format.
+    //   letter-[x]-[style.left]
+    var theId = 'letter-' + character + '-' +
+                options.svg.styles.left;
+    svg.attr('id', theId);
 
     // append the circle.
     drawSvgElement(svg, 'circle', options.circle);
