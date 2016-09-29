@@ -86,9 +86,10 @@ jQuery(document).ready(function($) {
 
     $('#start-dropping').click(function() {
 
+        var specs = editor.get();
         // start dropping rain
         droppingId = droppingId > 0 ? droppingId :
-                     window.setInterval(droppingRain, 500);
+                     window.setInterval(droppingRain, 500, specs);
     });
 
     $('#stop-dropping').click(function() {
@@ -113,7 +114,7 @@ jQuery(document).ready(function($) {
 /**
  * dropping task
  */
-function droppingRain() {
+function droppingRain(specs) {
 
     // get the game board height.
     var boardHeight = $('#svgpreview').innerHeight();
@@ -137,6 +138,10 @@ function droppingRain() {
             $svg.css({"top": newTop + "px"});
         }
     });
+
+    // draw a letter after moving rain drops.
+    specs = setRandomLeft(specs);
+    drawCharacterInCircle(getRandomChar(), specs);
 }
 
 /**
