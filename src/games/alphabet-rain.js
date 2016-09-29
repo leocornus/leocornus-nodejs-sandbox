@@ -84,9 +84,24 @@ jQuery(document).ready(function($) {
     $('#start-dropping').click(function() {
 
         // start dropping rain
-        
+        var dropping = window.setInterval(droppingRain, 500);
     });
 });
+
+/**
+ * dropping task
+ */
+function droppingRain() {
+
+    // get all svg with match id patterns:
+    $("svg[id^='letter-']").each(function(index) {
+        // the object this will be the DOM element.
+        var $svg = $(this);
+        // the dropping space for each dropping.
+        var step = $svg.height();
+        $svg.css({"top": "+=16px"});
+    });
+}
 
 /**
  * get random left.
