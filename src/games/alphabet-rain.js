@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
           height: "32px",
           top: "0",
           left: "0",
-          position: "relative",
+          position: "absolute",
           border: "1px solid purple"
         }, 
         attrs: {
@@ -76,20 +76,32 @@ jQuery(document).ready(function($) {
         //    drawCharacterInCircle(String.fromCharCode(i),
         //                          editor.get());
         //}
-        drawCharacterInCircle(getRandomChar(), editor.get());
+        var specs = editor.get();
+        specs = setRandomLeft(specs);
+        drawCharacterInCircle(getRandomChar(), specs);
+    });
+
+    $('#start-dropping').click(function() {
+
+        // start dropping rain
+        
     });
 });
 
 /**
- * build the game board.
+ * get random left.
  */
-function drawGameBoard() {
+function setRandomLeft(specs) {
 
-    // draw the game board...
-    var preview = d3.select('#svgpreview');
-    var gameBoard = preview.append("svg");
-    // set id.
-    gameBoard.attr('id', 'alphabet-rain');
+    // find the inner width of the game board.
+    var $preview = $('#svgpreview');
+    var innerWidth = $preview.innerWidth();
+    var charWidth = parseInt(specs.svg.styles.width);
+    var max = innerWidth - charWidth;
+    var left = Math.floor(Math.random() * max);
+    specs.svg.styles.left = left;
+
+    return specs;
 }
 
 /**
@@ -105,6 +117,18 @@ function getRandomChar() {
 }
 
 /**
+ * build the game board.
+ */
+function drawGameBoard() {
+
+    // draw the game board...
+    var preview = d3.select('#svgpreview');
+    var gameBoard = preview.append("svg");
+    // set id.
+    gameBoard.attr('id', 'alphabet-rain');
+}
+
+/**
  * try to builde the svg with a circle and text inside the circle.
  * here are the HTML code.
  *   <svg>
@@ -115,6 +139,7 @@ function getRandomChar() {
 function drawCharacterInCircle(character, options) {
 
     var previewdiv = d3.select('#svgpreview');
+    console.log(options.svg.styles.width);
     // append the svg.
     var svg = drawSvgElement(previewdiv, 'svg', options.svg);
     //var svg = previewdiv.append("svg");
