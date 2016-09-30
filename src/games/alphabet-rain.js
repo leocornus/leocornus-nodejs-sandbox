@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
           top: "0",
           left: "0",
           position: "absolute",
-          border: "1px solid purple"
+          border: "0px solid purple"
         }, 
         attrs: {
           viewBox: '0 0 200 200'
