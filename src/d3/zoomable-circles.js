@@ -1,21 +1,18 @@
 jQuery(document).ready(function($) {
 
     var container = document.getElementById('jsoneditor');
+    // load the JSON editor
     var editor = new JSONEditor(container, {});
 
     $.getJSON('ops-d3-chart/data/flare.json', function(data) {
-        // TODO: read from the file.
+        // TODO: read from the file and set data to JSON editor.
         editor.set(data);
+        circleChart(20, 500, editor.get());
     });
 
-    // load the JSON editor
 
-    var $gameBoard = $('#svgpreview');
-    console.log($gameBoard.offset());
-    circleChart(20, 500, 'ops-d3-chart/data/flare.json');
-
-    $('#reolad').click(function() {
-        circleChart(20, 500, 'ops-d3-chart/data/flare.json');
+    $('#reload').click(function() {
+        circleChart(20, 500, editor.get());
     });
 });
 
@@ -51,10 +48,11 @@ function circleChart(margin, diameter, dataFile) {
         .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
     // request JSON file and process its data (root variable)
-    d3.json(dataFile, function(error, root) {
-        if (error) return console.error(error);
+    //d3.json(dataFile, function(error, root) {
+    //    if (error) return console.error(error);
 
         // process JSON data in pack layout to get positions of each node
+        var root = dataFile;
         var focus = root,
             nodes = pack.nodes(root),
             view;
@@ -179,7 +177,7 @@ function circleChart(margin, diameter, dataFile) {
                     });
             });
         }
-    });
+    //});
 
     d3.select(self.frameElement).style("height", diameter + "px");
 }
