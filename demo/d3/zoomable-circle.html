@@ -1,0 +1,176 @@
+<html>
+<head>
+  <title>Data Visualization: Zoomable Circles</title>
+
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+  <link rel='stylesheet' href='/bower_components/video.js/dist/video-js.css'/>
+
+  <link href="/bower_components/jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
+
+  <script src="/bower_components/jsoneditor/dist/jsoneditor.min.js"></script>
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+  <script src='/bower_components/d3/d3.js'></script>
+
+  <script src='/src/d3/zoomable-circles.js'></script>
+</head>
+
+<body>
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="">Data Visualization: Zoomable Circles</h1> 
+      </div>
+    </div>
+  </div>
+
+  <!-- nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#controltab" aria-controls="controltab" role="tab"
+         data-toggle="tab"
+      >Control</a>
+    </li>
+
+    <li role="presentation">
+      <a href="#design" aria-controls="design" role="tab"
+         data-toggle="tab"
+      >Design</a>
+    </li>
+
+    <li role="presentation">
+      <a href="#memos" aria-controls="memos" role="tab"
+         data-toggle="tab"
+      >Memos</a>
+    </li>
+  </ul>
+
+  <!-- tab panes -->
+<div class="tab-content">
+
+  <div class="row tab-pane active" id="controltab" role="tabpanel">
+    <div class="col-md-6">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          Control Panel
+        </div>
+
+<!-- accordion panel group -->
+<div class="panel-group" id="accordion" role"tablist">
+
+  <!-- Strategy -->
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a role="button" 
+           data-toggle="collapse" data-parent="#accordion" 
+           href="#collapseTwo" 
+           aria-expanded="true" aria-controls="collapseTwo">
+          <span class="glyphicon glyphicon-menu-down" 
+                 aria-hidden="true"></span>
+          Control Size
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse in" 
+         role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        The control form.
+      </div>
+    </div>
+  </div>
+
+  <!-- Rain drop -->
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" 
+           data-toggle="collapse" data-parent="#accordion" 
+           href="#collapseOne" 
+           aria-expanded="false" aria-controls="collapseOne">
+          <span class="glyphicon glyphicon-menu-right" 
+                 aria-hidden="true"></span>
+          Setup Data in JSON
+        </a>
+       </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse" 
+         role="tabpanel" aria-labelledby="headingOne">
+      <div class="no-panel-body">
+        <!-- data in JSON Editor -->
+        <div id="jsoneditor" style="height:460px"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+        <div class="panel-footer">
+          <button id="reload">Reload</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          The Zoomable Circles 
+        </div>
+        <!-- this panel-body div will be the game board. -->
+        <!-- We have to set position here, so the child svg -->
+        <!-- element could use absolute postion. -->
+        <div class="panel-body" id="svgpreview"
+             style="height:500px; border: 0px black solid;
+                    position: relative;
+                    padding: 0px"
+        >
+        </div>
+        <div class="panel-footer">
+          messaging
+        </div>
+      </div>
+    </div>
+  </div> <!-- end of row controltab -->
+
+  <!-- Design tab content -->
+  <div class="tab-pane" id="design" role="tabpanel">
+    <div>
+    <h2>Design Ideas</h2>
+    <div class="panel panel-info">
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-warning">
+          <p class="h4">Control Panel Design</p>
+          layout, logo, branding, 
+          message displaying, counting, etc.
+        </li>
+      </ul>
+    </div>
+    </div>
+  </div>
+
+  <div class="tab-pane" id="memos" role="tabpanel">
+    <div>
+    <h2>Design and Development Memos</h2>
+    <div class="panel panel-info">
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-warning">
+          <strong>Dependences</strong>: d3, d3-cloud, jQuery
+          <br/>
+          Bootstrap is optional.
+        </li>
+      </ul>
+    </div>
+    </div>
+  </div>
+</div> <!-- end of tab-content -->
+
+</div>
+</body>
+
+<script>
+
+</script>
+
+</html>
