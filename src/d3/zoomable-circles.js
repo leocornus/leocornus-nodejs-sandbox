@@ -1,12 +1,14 @@
 jQuery(document).ready(function($) {
 
-    // TODO: read from the file.
-    var defaultData = {};
-
-    // load the JSON editor
     var container = document.getElementById('jsoneditor');
     var editor = new JSONEditor(container, {});
-    editor.set(defaultData);
+
+    $.getJSON('ops-d3-chart/data/flare.json', function(data) {
+        // TODO: read from the file.
+        editor.set(data);
+    });
+
+    // load the JSON editor
 
     var $gameBoard = $('#svgpreview');
     console.log($gameBoard.offset());
