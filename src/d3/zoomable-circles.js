@@ -108,8 +108,8 @@ function circleChart(margin, diameter, dataFile) {
         .attr("preserveAspectRatio", "xMidYMid meet")
         .append("image")
         .attr("xlink:href", function(d) {
-            return d.imgUrl ? d.imgUrl : null;}
-        )
+            return d.imgUrl ? d.imgUrl : null;
+        })
         .attr("height", "100%")
         .attr("width", "100%");
 
@@ -158,16 +158,16 @@ function circleChart(margin, diameter, dataFile) {
             .duration(d3.event.altKey ? 7500 : 750)
             .tween("zoom", function(d) {
                 var i = d3.interpolateZoom(view, 
-                    [focus.x, focus.y, focus.r * 2 + margin]);
+                         [focus.x, focus.y, focus.r * 2 + margin]);
                 return function(t) {
-                    zoomTo(i(t)); 
+                    zoomTo(i(t));
                 };
             });
 
         transition.selectAll("text")
             .filter(function(d) {
-                return d.parent === focus || 
-                       this.style.display === "inline" || 
+                return d.parent === focus ||
+                       this.style.display === "inline" ||
                        d.parent === focus0;
             })
             .style("fill-opacity", function(d) {
@@ -195,7 +195,8 @@ function circleChart(margin, diameter, dataFile) {
     function zoomTo(v) {
 
         var k = diameter / v[2]; 
-        var view = v;
+        // view is global variable here.
+        view = v;
 
         node.attr("transform", function(d) {
             return "translate(" + (d.x - v[0]) * k + "," + 
