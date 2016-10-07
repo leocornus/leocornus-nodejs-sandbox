@@ -4,14 +4,19 @@ jQuery(document).ready(function($) {
     // load the JSON editor
     var editor = new JSONEditor(container, {});
 
+    // jQuery getJSON will read the file from a Web resources.
     $.getJSON('ops-d3-chart/data/flare.json', function(data) {
-        // TODO: read from the file and set data to JSON editor.
+        // set data to JSON editor.
         editor.set(data);
+        // build the circles...
         circleChart(20, 500, editor.get());
     });
 
-
+    // rebuild the circles.
     $('#reload').click(function() {
+        // remove the existing one.
+        $('#svgpreview').empty();
+        // rebuild the circles.
         circleChart(20, 500, editor.get());
     });
 });
