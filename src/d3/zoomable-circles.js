@@ -10,6 +10,9 @@ jQuery(document).ready(function($) {
         editor.set(data);
         // build the circles...
         circleChart(20, 500, editor.get());
+        //console.log(JSON.stringify(data));
+        // update the JSON source code
+        $('#jsonstring').html(JSON.stringify(data));
     });
 
     // rebuild the circles.
@@ -19,6 +22,7 @@ jQuery(document).ready(function($) {
         // rebuild the circles.
         circleChart(20, 500, editor.get());
         // update the JSON source code.
+        $('#jsonstring').html(JSON.stringify(editor.get()));
     });
 });
 
