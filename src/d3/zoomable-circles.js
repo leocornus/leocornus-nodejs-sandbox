@@ -5,7 +5,7 @@ jQuery(document).ready(function($) {
     var editor = new JSONEditor(container, {});
 
     // jQuery getJSON will read the file from a Web resources.
-    $.getJSON('ops-d3-chart/data/flare.json', function(data) {
+    $.getJSON('data/simple-zoomable-circle.json', function(data) {
         // set data to JSON editor.
         editor.set(data);
         // build the circles...
@@ -18,6 +18,7 @@ jQuery(document).ready(function($) {
         $('#svgpreview').empty();
         // rebuild the circles.
         circleChart(20, 500, editor.get());
+        // update the JSON source code.
     });
 });
 
