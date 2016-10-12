@@ -12,7 +12,8 @@ jQuery(document).ready(function($) {
         circleChart(20, 500, editor.get());
         //console.log(JSON.stringify(data));
         // update the JSON source code
-        $('#jsonstring').html(JSON.stringify(data));
+        $('#jsonstring').html(JSON.stringify(data).
+                              replace(/,/g, ',\n'));
     });
 
     // rebuild the circles.
@@ -22,7 +23,8 @@ jQuery(document).ready(function($) {
         // rebuild the circles.
         circleChart(20, 500, editor.get());
         // update the JSON source code.
-        $('#jsonstring').html(JSON.stringify(editor.get()));
+        $('#jsonstring').html(JSON.stringify(editor.get()).
+                              replace(/,/g, ',\n'));
     });
 });
 
@@ -176,7 +178,7 @@ function circleChart(margin, diameter, dataFile) {
                        d.parent === focus0;
             })
             .style("fill-opacity", function(d) {
-                return d.parent === focus ? 1 : 0;
+                return d.parent === focus ? 1 : 0.5;
             })
             .each("start", function(d) {
                 if (d.parent === focus) 
@@ -190,7 +192,7 @@ function circleChart(margin, diameter, dataFile) {
         // logos are opaque at root level only
         transition.selectAll("use")
             .style("opacity", function(d) {
-                return focus.depth === 0 ? 1 : 0.4;
+                return focus.depth === 0 ? 1 : 0.8;
             });
     }
 
@@ -249,7 +251,8 @@ function circleChart(margin, diameter, dataFile) {
             var x = transformInfo.translate[0] - (width / 2);
             //var y = transformInfo.translate[1] - 
             //    (height / 2) - parentTransform.translate[1];
-            var y = transformInfo.translate[1] - (height / 2);
+            var y = transformInfo.translate[1] + 
+                    ((d.r * k) / 1);
             //var y = - 20.0 - (height / 2);
             // set new transform translation
             d3.select(this)
