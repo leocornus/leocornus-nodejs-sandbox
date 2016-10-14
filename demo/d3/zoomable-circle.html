@@ -14,6 +14,36 @@
 
   <script src='/src/d3/zoomable-circles.js'></script>
   <link href="ops-d3-chart/css/chart.css" rel="stylesheet">
+
+  <style>
+.panel-heading.accordion-toggle:after {
+    /* symbol for "opening" panels */
+    font-family:'Glyphicons Halflings';
+    /* essential for enabling glyphicon */
+    content:"\e114";
+    /* adjust as needed, taken from bootstrap.css */
+    float: right;
+    position: relative;
+    bottom: 23px;
+    font-size: 15pt;
+    /* adjust as needed */
+    color: grey;
+    /* adjust as needed */
+}
+.panel-heading.accordion-toggle.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content:"\e080";
+    /* adjust as needed, taken from bootstrap.css */
+}
+
+.panel-heading:hover {
+    cursor: pointer;
+}
+
+.panel-heading:hover h4 {
+    text-decoration: underline;
+}
+  </style>
 </head>
 
 <body>
@@ -62,16 +92,12 @@
 
   <!-- Strategy -->
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingTwo">
+    <div class="panel-heading accordion-toggle" 
+         data-toggle="collapse" data-parent="#accordion" 
+         data-target="#collapseTwo"
+         role="tab" id="headingTwo">
       <h4 class="panel-title">
-        <a role="button" 
-           data-toggle="collapse" data-parent="#accordion" 
-           href="#collapseTwo" 
-           aria-expanded="true" aria-controls="collapseTwo">
-          <span class="glyphicon glyphicon-chevron-down" 
-                 aria-hidden="true"></span>
-          Control Size
-        </a>
+        Control Size
       </h4>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse in" 
@@ -84,16 +110,12 @@
 
   <!-- Rain drop -->
   <div class="panel panel-default">
-    <div class="panel-heading" role="tab" id="headingOne">
+    <div class="panel-heading accordion-toggle collapsed" 
+         data-toggle="collapse" data-parent="#accordion" 
+         data-target="#collapseOne"
+         role="tab" id="headingOne">
       <h4 class="panel-title">
-        <a class="collapsed" role="button" 
-           data-toggle="collapse" data-parent="#accordion" 
-           href="#collapseOne" 
-           aria-expanded="false" aria-controls="collapseOne">
-          <span class="glyphicon glyphicon-chevron-right" 
-                 aria-hidden="true"></span>
-          Setup Data in JSON
-        </a>
+        Setup Data in JSON
        </h4>
     </div>
     <div id="collapseOne" class="panel-collapse collapse" 
