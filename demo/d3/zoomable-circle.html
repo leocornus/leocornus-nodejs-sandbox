@@ -13,7 +13,6 @@
   <script src='/bower_components/d3/d3.js'></script>
 
   <script src='/src/d3/zoomable-circles.js'></script>
-  <link href="ops-d3-chart/css/chart.css" rel="stylesheet">
 
   <style>
 .panel-heading.accordion-toggle:after {
@@ -42,6 +41,33 @@
 
 .panel-heading:hover h4 {
     text-decoration: underline;
+}
+
+/**
+ * styles needed for zoomable circles.
+ */
+.node {
+    cursor: pointer;
+}
+
+.node:hover {
+    stroke: #000;
+    stroke-width: 1.5px;
+}
+
+.node--leaf {
+    fill: white;
+}
+
+.label {
+    font: 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-anchor: middle;
+    font-weight: bold;
+    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+}
+
+.label, .node--root, .node--leaf, use {
+    pointer-events: none;
 }
   </style>
 </head>
