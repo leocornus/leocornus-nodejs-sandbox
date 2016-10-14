@@ -97,13 +97,25 @@
          data-target="#collapseTwo"
          role="tab" id="headingTwo">
       <h4 class="panel-title">
-        Control Size
+        Examples 
       </h4>
     </div>
     <div id="collapseTwo" class="panel-collapse collapse in" 
          role="tabpanel" aria-labelledby="headingTwo">
       <div class="panel-body">
-        The control form.
+        <span class="h4">Choose an example:
+          <select id="example">
+            <option value="data/simple-zoomable-circle.json">
+              Simple Circles
+            </option>
+            <option value="data/simple-org-chart-circle.json">
+              Simple Organization Chart
+            </option>
+            <option value="ops-d3-chart/data/flare.json">
+              OPSpedia Overview
+            </option>
+          </select>
+        </span>
       </div>
     </div>
   </div>
@@ -115,7 +127,7 @@
          data-target="#collapseOne"
          role="tab" id="headingOne">
       <h4 class="panel-title">
-        Setup Data in JSON
+        Tweak Data in JSON
        </h4>
     </div>
     <div id="collapseOne" class="panel-collapse collapse" 

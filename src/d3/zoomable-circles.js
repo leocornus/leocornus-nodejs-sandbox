@@ -3,17 +3,15 @@ jQuery(document).ready(function($) {
     var container = document.getElementById('jsoneditor');
     // load the JSON editor
     var editor = new JSONEditor(container, {});
+    // get the URL to JSON file.
+    var dataUrl = $('#example').val();
+    // initially load the data.
+    loadData(dataUrl, editor);
 
-    // jQuery getJSON will read the file from a Web resources.
-    $.getJSON('data/simple-zoomable-circle.json', function(data) {
-        // set data to JSON editor.
-        editor.set(data);
-        // build the circles...
-        circleChart(20, 500, editor.get());
-        //console.log(JSON.stringify(data));
-        // update the JSON source code
-        $('#jsonstring').html(JSON.stringify(data).
-                              replace(/,/g, ',\n'));
+    // change examples .
+    $('#example').change(function() {
+        dataUrl = $(this).val();
+        loadData(dataUrl, editor);
     });
 
     // rebuild the circles.
@@ -27,6 +25,28 @@ jQuery(document).ready(function($) {
                               replace(/,/g, ',\n'));
     });
 });
+
+/**
+ * load data from the given url, set it to JSON editor and load
+ * the zoomable circles.
+ */
+function loadData(dataUrl, jsonEditor) {
+
+    // jQuery getJSON will read the file from a Web resources.
+    $.getJSON(dataUrl, function(data) {
+    //$.getJSON('data/simple-zoomable-circle.json', function(data) {
+        // set data to JSON editor.
+        jsonEditor.set(data);
+        // remove the existing one.
+        $('#svgpreview').empty();
+        // build the circles...
+        circleChart(20, 500, jsonEditor.get());
+        //console.log(JSON.stringify(data));
+        // update the JSON source code
+        $('#jsonstring').html(JSON.stringify(data).
+                              replace(/,/g, ',\n'));
+    });
+}
 
 /** 
  * Creates a zoomable circle chart based on data within a provided JSON file.
@@ -252,7 +272,7 @@ function circleChart(margin, diameter, dataFile) {
             //var y = transformInfo.translate[1] - 
             //    (height / 2) - parentTransform.translate[1];
             var y = transformInfo.translate[1] + 
-                    ((d.r * k) / 1);
+                    ((d.r * k) / 1.25);
             //var y = - 20.0 - (height / 2);
             // set new transform translation
             d3.select(this)
