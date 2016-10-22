@@ -11,6 +11,7 @@
   <script src='/bower_components/jquery/dist/jquery.min.js'></script>
   <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
   <script src='/bower_components/d3/d3.js'></script>
+  <script src='/bower_components/clipboard/dist/clipboard.min.js'></script>
 
   <script src='/src/d3/zoomable-circles.js'></script>
   <script src='/src/d3/zoomable-circles-demo.js'></script>
@@ -222,8 +223,14 @@
           Bootstrap is optional.
         </li>
         <li class="list-group-item list-group-item-success">
-          <strong>List JSON string here</strong>:<br/>
-          <pre id="jsonstring"></pre>
+          <strong>List JSON string here</strong> 
+          <button type="button" class="btn btn-default" id="copybtn"
+                  data-clipboard-target="#jsonstring" aria-label="Left Align">
+            <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
+            Copy to clipboard
+          </button>
+          <br/>
+          <textarea rows="8" class="form-control" id="jsonstring"></textarea>
         </li>
       </ul>
     </div>
