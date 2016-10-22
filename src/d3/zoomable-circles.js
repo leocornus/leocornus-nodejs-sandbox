@@ -7,7 +7,7 @@
  * @param {string} dataFile is the path to the JSON file containing data to be 
  * populated in the chart
  */
-function circleChart(margin, diameter, dataFile) {
+function circleChart(selector, margin, diameter, dataFile) {
 
     // TODO: how to visually show the color range?
     // map domain -1 to 5 to color range of hsl(152,80%,80%) 
@@ -27,7 +27,7 @@ function circleChart(margin, diameter, dataFile) {
 
     // append <g> to <svg> to the <body>
     // crate the container circle as SVG element.
-    var svg = d3.select("#svgpreview").append("svg")
+    var svg = d3.select(selector).append("svg")
         .attr("width", diameter)
         .attr("height", diameter)
         .style("margin", "auto")
@@ -116,7 +116,7 @@ function circleChart(margin, diameter, dataFile) {
     // according to zoom (active circle)
     var node = svg.selectAll("circle,text,use");
 
-    d3.select("#svgpreview")
+    d3.select(selector)
         // update background color.
         .style("background", color(-1))
         .on("click", function() { zoom(root); });

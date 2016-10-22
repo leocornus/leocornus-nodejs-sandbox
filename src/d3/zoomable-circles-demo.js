@@ -21,10 +21,14 @@ jQuery(document).ready(function($) {
         // remove the existing one.
         $('#svgpreview').empty();
         // rebuild the circles.
-        circleChart(20, 500, editor.get());
+        circleChart("#svgpreview", 20, 500, editor.get());
         // update the JSON source code.
         $('#jsonstring').html(JSON.stringify(editor.get()).
                               replace(/,/g, ',\n'));
+    });
+
+    // load the circles in full screen, using modal for now.
+    $('#fullscreen').click(function() {
     });
 });
 
@@ -42,7 +46,7 @@ function loadData(dataUrl, jsonEditor) {
         // remove the existing one.
         $('#svgpreview').empty();
         // build the circles...
-        circleChart(20, 500, jsonEditor.get());
+        circleChart("#svgpreview", 20, 500, jsonEditor.get());
         //console.log(JSON.stringify(data));
         // update the JSON source code
         $('#jsonstring').html(JSON.stringify(data).
