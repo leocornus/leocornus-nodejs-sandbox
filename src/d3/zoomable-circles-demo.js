@@ -29,6 +29,12 @@ jQuery(document).ready(function($) {
 
     // load the circles in full screen, using modal for now.
     $('#fullscreen').click(function() {
+        $('#svgfullscreen').empty();
+        // rebuild the circles.
+        circleChart("#svgfullscreen", 20, 800, editor.get());
+        // update the JSON source code.
+        $('#jsonstring').html(JSON.stringify(editor.get()).
+                              replace(/,/g, ',\n'));
     });
 });
 
