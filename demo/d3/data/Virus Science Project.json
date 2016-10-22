@@ -1,0 +1,74 @@
+{"name":"Virus Science Project October 2016",
+"children":[
+  {"name":"The Copying problem",
+   "children":[
+      {"name":"Host",
+       "children":[
+          {"name":"Where virus come from?",
+           "children":[{"name":"from somewhere",
+              "size":66000,
+              "imgUrl":"https://upload.wikimedia.org/wikipedia/commons/5/50/Niveau_5.svg"}]},
+
+          {"name":"What virus effect? Why?",
+           "children":[{"name":"effect many things.",
+              "size":66000,
+              "imgUrl":"https://upload.wikimedia.org/wikipedia/commons/5/50/Niveau_5.svg"}]}
+       ]
+      },
+
+      {"name":"Transmission",
+       "children":[
+          {"name":"Why virus target you?",
+           "children":[{"name":"from somewhere",
+              "size":66000,
+              "imgUrl":"https://upload.wikimedia.org/wikipedia/commons/5/50/Niveau_5.svg"}]},
+
+          {"name":"What lifestyle choices",
+           "children":[{"name":"effect many things.",
+              "size":66000,
+              "imgUrl":"https://upload.wikimedia.org/wikipedia/commons/5/50/Niveau_5.svg"}]},
+          {"name":"How they effected?",
+           "children":[{"name":"describe.",
+              "size":66000,
+              "imgUrl":"https://upload.wikimedia.org/wikipedia/commons/5/50/Niveau_5.svg"}]}
+       ]
+      },
+
+      {"name":"Symptoms",
+       "children":[
+          {"name":"How damaged system impact others",
+           "children":[{"name":"from somewhere",
+              "size":66000,
+              "imgUrl":"https://upload.wikimedia.org/wikipedia/commons/5/50/Niveau_5.svg"}]}
+       ]
+      },
+
+      {"name":"Treatment",
+       "children":[
+          {"name":"What's the health lifestyle choices?",
+           "children":[{"name":"from somewhere",
+              "size":66000,
+              "imgUrl":"https://upload.wikimedia.org/wikipedia/commons/5/50/Niveau_5.svg"}]}
+       ]
+      },
+
+      {"name":"Personal Connection",
+       "children":[
+          {"name":"What's the health lyfestyle choices?",
+           "children":[{"name":"from somewhere",
+              "size":66000,
+              "imgUrl":"https://upload.wikimedia.org/wikipedia/commons/5/50/Niveau_5.svg"}]}
+       ]
+      },
+
+      {"name":"Other Things",
+       "children":[
+          {"name":"What's the health lyfestyle choices?",
+           "children":[{"name":"from somewhere",
+              "size":66000,
+              "imgUrl":"https://upload.wikimedia.org/wikipedia/commons/5/50/Niveau_5.svg"}]}
+       ]
+      }
+    ]
+  }
+]}
