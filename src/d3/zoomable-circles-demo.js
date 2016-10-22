@@ -30,8 +30,9 @@ jQuery(document).ready(function($) {
     // load the circles in full screen, using modal for now.
     $('#fullscreen').click(function() {
         $('#svgfullscreen').empty();
+        var diameter = $('#fullscreenSize').val();
         // rebuild the circles.
-        circleChart("#svgfullscreen", 20, 800, editor.get());
+        circleChart("#svgfullscreen", 10, diameter, editor.get());
         // update the JSON source code.
         $('#jsonstring').html(JSON.stringify(editor.get()).
                               replace(/,/g, ',\n'));
