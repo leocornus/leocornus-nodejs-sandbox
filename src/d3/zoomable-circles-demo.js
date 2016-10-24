@@ -28,7 +28,9 @@ jQuery(document).ready(function($) {
     });
 
     // load the circles in full screen, using modal for now.
-    $('#fullscreen').click(function() {
+    //$('#fullscreen').click(function() {
+    $('#fullScreenModal').on('show.bs.modal', function(e) {
+
         $('#svgfullscreen').empty();
         var diameter = $('#fullscreenSize').val();
         // rebuild the circles.

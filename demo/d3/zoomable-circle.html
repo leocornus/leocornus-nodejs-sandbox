@@ -174,11 +174,14 @@
 
         <div class="panel-footer">
           <button id="reload">Reload</button>
-          <button id="fullscreen" data-toggle="modal" data-target=".bs-example-modal-lg">Full Screen</button>
+          <button id="fullscreen" data-toggle="modal" 
+                  data-target="#fullScreenModal">Full Screen</button>
           Set full screen diameter: <input type="number" class="form-control-inline" id="fullscreenSize"
                  value="700">
 
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+<div class="modal fade bs-example-modal-lg" tabindex="-1" 
+     id="fullScreenModal"
+     role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
