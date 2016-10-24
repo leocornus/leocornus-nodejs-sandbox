@@ -39,6 +39,11 @@ jQuery(document).ready(function($) {
         $('#jsonstring').html(JSON.stringify(editor.get()).
                               replace(/,/g, ',\n'));
     });
+
+    // remove the preview svg when closing the modal.
+    $('#fullScreenModal').on('hidden.bs.modal', function(e) {
+        $('#svgfullscreen').empty();
+    });
 });
 
 /**
