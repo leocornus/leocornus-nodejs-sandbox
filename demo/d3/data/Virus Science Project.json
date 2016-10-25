@@ -7,6 +7,7 @@
           {"name":"Where virus come from?",
            "children":[{"name":"from somewhere",
               "size":66000,
+              "imgRatio":1.5,
               "imgUrl":"https://upload.wikimedia.org/wikipedia/commons/5/50/Niveau_5.svg"}]},
 
           {"name":"What virus effect? Why?",

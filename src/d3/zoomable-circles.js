@@ -78,11 +78,11 @@ function circleChart(selector, margin, diameter, dataFile) {
         .attr("viewBox", function(d) {
               // viewBox sized to display entire image 
               // in fixed size parent svg
-              var w = d.imgWidth ? d.imgWidth : 65;
-              var h = d.imgHeight ? d.imgHeight : 65;
+              var w = d.imgWidth ? d.imgWidth : 100;
+              var h = d.imgHeight ? d.imgHeight : 100;
               return "0 0 " + w + " " + h;
         })
-        .attr("preserveAspectRatio", "xMidYMid meet")
+        .attr("preserveAspectRatio", "xMaxYMax meet")
         .append("image")
         .attr("xlink:href", function(d) {
             return d.imgUrl ? d.imgUrl : null;
@@ -184,8 +184,16 @@ function circleChart(selector, margin, diameter, dataFile) {
         });
 
         svg.selectAll("use")
-            .attr("width", function(d) { return d.r * k; })
-            .attr("height", function(d) { return d.r * k; });
+            .attr("width", function(d) { 
+
+                var ratio = d.imgRatio ? d.imgRatio : 1;
+                return d.r * k * ratio; 
+            })
+            .attr("height", function(d) {
+
+                var ratio = d.imgRatio ? d.imgRatio : 1;
+                return d.r * k * ratio; 
+            });
 
         var transformInfo;
         // get all <use> and for each move it to <circle> centre
