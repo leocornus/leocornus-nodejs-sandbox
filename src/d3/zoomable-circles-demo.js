@@ -44,6 +44,14 @@ jQuery(document).ready(function($) {
     $('#fullScreenModal').on('hidden.bs.modal', function(e) {
         $('#svgfullscreen').empty();
     });
+
+    // load the full page to show current circles.
+    $('#fullpage').on('click', function(e) {
+
+        var filePath = $('#example').val();
+        var url = 'zoomable-circle-full.html?data=' + filePath;
+        window.location.href = url;
+    });
 });
 
 /**
