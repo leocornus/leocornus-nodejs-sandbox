@@ -52,6 +52,11 @@ jQuery(document).ready(function($) {
         var url = 'zoomable-circle-full.html?data=' + filePath;
         window.location.href = url;
     });
+
+    $('#iconFullscreen').click(function() {
+
+        toggleFullScreen(document.getElementById('svgpreview'));
+    });
 });
 
 /**
@@ -75,3 +80,28 @@ function loadData(dataUrl, jsonEditor) {
                               replace(/,/g, ',\n'));
     });
 }
+
+// show full screen mode, like F11
+//toggleFullScreen();
+var toggleFullScreen = function toggleFullScreen(elm) {
+
+    if ((document.fullScreenElement && 
+         document.fullScreenElement !== null) ||    
+        (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+        if (elm.requestFullScreen) {  
+            elm.requestFullScreen();  
+        } else if (elm.mozRequestFullScreen) {  
+            elm.mozRequestFullScreen();  
+        } else if (elm.webkitRequestFullScreen) {  
+          elm.webkitRequestFullScreen();  
+      }  
+    } else {  
+        if (document.cancelFullScreen) {  
+          document.cancelFullScreen();  
+        } else if (document.mozCancelFullScreen) {  
+          document.mozCancelFullScreen();  
+        } else if (document.webkitCancelFullScreen) {  
+          document.webkitCancelFullScreen();  
+        }  
+    }  
+};
