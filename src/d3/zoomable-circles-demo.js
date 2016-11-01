@@ -55,6 +55,7 @@ jQuery(document).ready(function($) {
 
     $('#iconFullscreen').click(function() {
 
+        // show full screen
         toggleFullScreen(document.getElementById('svgpreview'));
     });
 });
