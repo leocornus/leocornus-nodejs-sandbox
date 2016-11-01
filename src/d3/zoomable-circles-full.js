@@ -3,12 +3,13 @@ jQuery(document).ready(function($) {
     var filePath = getUrlParameter('data');
     var diameter = getUrlParameter('diameter');
     // set the default diameter to 700px.
-    // TODO: check the screen size (height or width, amaller one).
+    // check the screen size (height or width, amaller one).
+    var defaultDiameter = Math.min(screen.width, screen.height) - 100;
     // automatically set the diameter based on the screen size.
-    diameter = diameter === undefined ? 700 : diameter;
-    $('#svgfull').html('file: ' + filePath);
+    diameter = diameter === undefined ? defaultDiameter : diameter;
+    //$('#svgfull').html('file: ' + filePath);
     $.getJSON(filePath, function(data) {
-        circleChart('#svgfull', 10, diameter, data);
+        circleChart('#svgfull', 20, diameter, data);
     });
 });
 
@@ -26,4 +27,28 @@ var getUrlParameter = function getUrlParameter(sParam) {
                 true : sParameterName[1];
         }
     }
+};
+
+// show full screen mode, like F11
+//toggleFullScreen();
+var toggleFullScreen = function toggleFullScreen() {
+    if ((document.fullScreenElement && 
+         document.fullScreenElement !== null) ||    
+        (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+        if (document.documentElement.requestFullScreen) {  
+            document.documentElement.requestFullScreen();  
+        } else if (document.documentElement.mozRequestFullScreen) {  
+            document.documentElement.mozRequestFullScreen();  
+        } else if (document.documentElement.webkitRequestFullScreen) {  
+          document.body.webkitRequestFullScreen();  
+      }  
+    } else {  
+        if (document.cancelFullScreen) {  
+          document.cancelFullScreen();  
+        } else if (document.mozCancelFullScreen) {  
+          document.mozCancelFullScreen();  
+        } else if (document.webkitCancelFullScreen) {  
+          document.webkitCancelFullScreen();  
+        }  
+    }  
 };
