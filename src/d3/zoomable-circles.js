@@ -14,7 +14,7 @@ function circleChart(selector, margin, diameter, dataFile) {
     // to hsl(228,30%,40%)
     var color = d3.scale.linear()
         .domain([-1, 5])
-        .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
+        .range(["hsl(199,80%,80%)", "hsl(228,30%,40%)"])
         .interpolate(d3.interpolateHcl);
 
     // TODO: What's pack layout?
