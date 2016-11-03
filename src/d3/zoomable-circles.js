@@ -7,7 +7,7 @@
  * @param {string} dataFile is the path to the JSON file containing data to be 
  * populated in the chart
  */
-function circleChart(selector, margin, diameter, dataFile) {
+function circleChart(selector, margin, diameter, jsonData) {
 
     // TODO: how to visually show the color range?
     // map domain -1 to 5 to color range of hsl(152,80%,80%) 
@@ -42,7 +42,7 @@ function circleChart(selector, margin, diameter, dataFile) {
 
     // process JSON data in pack layout to 
     // get positions of each node
-    var root = dataFile;
+    var root = jsonData;
     var focus = root;
     // TODO: pack nodes function?
     var nodes = pack.nodes(root);
