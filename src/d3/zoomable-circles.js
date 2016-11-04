@@ -9,12 +9,23 @@
  */
 function circleChart(selector, margin, diameter, jsonData) {
 
+    // get the circle data from the data source.
+    // check if the data source has different format.
+    var circleData = 'data' in jsonData ? jsonData.data : jsonData;
+    // set default value for global attributes.
+    var colorRange = ["hsl(199,80%,80%)", "hsl(228,30%,40%)"];
+    var imgRatio = 1;
+    if ('attributes' in jsonData) {
+        colorRange = jsonData.attributes.colorRange;
+        imgRatio = jsonData.attributes.imgRatio;
+    }
+
     // TODO: how to visually show the color range?
     // map domain -1 to 5 to color range of hsl(152,80%,80%) 
     // to hsl(228,30%,40%)
     var color = d3.scale.linear()
         .domain([-1, 5])
-        .range(["hsl(199,80%,80%)", "hsl(228,30%,40%)"])
+        .range(colorRange)
         .interpolate(d3.interpolateHcl);
 
     // TODO: What's pack layout?
@@ -42,7 +53,7 @@ function circleChart(selector, margin, diameter, jsonData) {
 
     // process JSON data in pack layout to 
     // get positions of each node
-    var root = jsonData;
+    var root = circleData;
     var focus = root;
     // TODO: pack nodes function?
     var nodes = pack.nodes(root);
