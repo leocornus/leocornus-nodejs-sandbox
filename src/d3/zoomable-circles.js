@@ -234,6 +234,15 @@ function circleChart(selector, margin, diameter, jsonData) {
                 d3.transform(d3.select(this).attr("transform"));
             //var parentTransform = 
             // d3.transform(d3.select(this.parent).attr("transform"));
+            if(d.name === 'Ubuntu') {
+                // d.r is the radius of the circle, half of the diameter
+                console.log("max=" + d.r * 2 * k);
+                // if d.r * 2 * k > diameter / 2,
+                // that's the moment, when the solo circle is show up.
+                console.log(view);
+                console.log(i);
+                console.log("k=" + k);
+            }
 
             var height = d3.select(this).attr("height");
             var width = d3.select(this).attr("width");
@@ -241,7 +250,7 @@ function circleChart(selector, margin, diameter, jsonData) {
             //var y = transformInfo.translate[1] - 
             //    (height / 2) - parentTransform.translate[1];
             var y = transformInfo.translate[1] + 
-                    ((d.r * k) / 1.25);
+                    ((d.r * k) / 1.5);
             //var y = - 20.0 - (height / 2);
             // set new transform translation
             d3.select(this)
