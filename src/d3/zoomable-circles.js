@@ -14,9 +14,15 @@ function circleChart(selector, margin, diameter, jsonData) {
     var circleData = 'data' in jsonData ? jsonData.data : jsonData;
     // set default value for global attributes.
     var colorRange = ["hsl(199,80%,80%)", "hsl(228,30%,40%)"];
+    // the color for leaf fill background. default is white.
+    var leafFill = "white";
+    // the default image ratio.
     var imgRatio = 1;
     if ('attributes' in jsonData) {
-        colorRange = jsonData.attributes.colorRange;
+        colorRange = 'colorRange' in jsonData.attributes ?
+                     jsonData.attributes.colorRange : colorRange;
+        leafFill = 'leafFill' in jsonData.attributes ?
+                     jsonData.attributes.leafFill : leafFill;
         imgRatio = jsonData.attributes.imgRatio;
     }
 
@@ -71,7 +77,7 @@ function circleChart(selector, margin, diameter, jsonData) {
                    "node node--leaf" : "node node--root"; 
         })
         .style("fill", function(d) {
-            return d.children ? color(d.depth) : null; 
+            return d.children ? color(d.depth) : leafFill; 
         })
         .on("click", function(d) {
             if (focus !== d) zoom(d), d3.event.stopPropagation();
