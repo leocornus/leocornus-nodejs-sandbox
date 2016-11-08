@@ -77,7 +77,16 @@ function circleChart(selector, margin, diameter, jsonData) {
                    "node node--leaf" : "node node--root"; 
         })
         .style("fill", function(d) {
-            return d.children ? color(d.depth) : leafFill; 
+
+            if (d.children) {
+                // if ccurrent node has children, 
+                // we will set the filling color based on 
+                // the calculation result from color range.
+                return color(d.depth);
+            } else {
+                // return the fill color for leaf.
+                return 'leafFill' in d ? d.leafFill : leafFill;
+            }
         })
         .on("click", function(d) {
             if (focus !== d) zoom(d), d3.event.stopPropagation();
