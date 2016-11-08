@@ -3,7 +3,7 @@
     "description":"World War II Total Deaths based on wikipedia page",
     "colorRange": ["white", "hsl(228,30%,40%)"],
     "leafFill": "lightgrey",
-    "imgRatio": 1,
+    "imgRatio": 1.2,
     "diameter": 500
   },
   "data":{

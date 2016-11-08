@@ -22,8 +22,9 @@ function circleChart(selector, margin, diameter, jsonData) {
         colorRange = 'colorRange' in jsonData.attributes ?
                      jsonData.attributes.colorRange : colorRange;
         leafFill = 'leafFill' in jsonData.attributes ?
-                     jsonData.attributes.leafFill : leafFill;
-        imgRatio = jsonData.attributes.imgRatio;
+                   jsonData.attributes.leafFill : leafFill;
+        imgRatio = 'imgRatio' in jsonData.attributes ?
+                   jsonData.attributes.imgRatio : imgRatio;
     }
 
     // TODO: how to visually show the color range?
@@ -212,12 +213,12 @@ function circleChart(selector, margin, diameter, jsonData) {
         svg.selectAll("use")
             .attr("width", function(d) { 
 
-                var ratio = d.imgRatio ? d.imgRatio : 1;
+                var ratio = d.imgRatio ? d.imgRatio : imgRatio;
                 return d.r * k * ratio; 
             })
             .attr("height", function(d) {
 
-                var ratio = d.imgRatio ? d.imgRatio : 1;
+                var ratio = d.imgRatio ? d.imgRatio : imgRatio;
                 return d.r * k * ratio; 
             });
 
