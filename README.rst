@@ -1,7 +1,5 @@
 |travis|_ |npm-version|_ |npm-license|_
 
-|nodei|_
-
 It is very simple to get started with JavaScript programming.
 
 :install:
@@ -53,6 +51,8 @@ The learning TODO list:
 - webpack to pack js files, css files, etc.
 - javascript code coverage
 - integration with codecov.io
+
+|nodei|_
 
 .. |travis| image:: https://api.travis-ci.org/leocornus/leocornus-nodejs-sandbox.png
 .. _travis: https://travis-ci.org/leocornus/leocornus-nodejs-sandbox
