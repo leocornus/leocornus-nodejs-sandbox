@@ -38,9 +38,39 @@ jQuery(document).ready(function($) {
       success: function(data) {
           var total = data.length;
           console.log(data);
+          var docs = data.docs;
+          var results = $('#result-list');
+          results.html('');
+          var colQueue = [];
+          for(i = 0; i < docs.length; i++) {
+              var acronym = docs[i];
+              var panel = buildAcronymPanel(acronym);
+              colQueue.push(panel);
+              // i count from 0
+              // 6 acronyms for a row
+              var ready2Row = (i + 1) % 6;
+              if(ready2Row == 0) {
+                  results.append('<div class="row">' +
+                      colQueue.join("") + '</div>');
+                  // reset the queue.
+                  colQueue = [];
+              }
+          }
       }
     });
 });
+
+// utility function to build the panel for a project.
+function buildAcronymPanel(project) {
+
+    var panel = '<div class="col-sm-2">' + 
+        '<h2><a href="' + project['url'] + '">' +
+        project['title'] + '</a></h2>' +
+        '<p>' + project['description'] + '</p>' + 
+        '</div>';
+    return panel;
+}
+
     </script>
   </head>
 
@@ -84,7 +114,8 @@ jQuery(document).ready(function($) {
       </div>
 
       <!-- Example row of columns -->
-      <div class="row" id="result-list">
+      <div class="container container-fluid" id="result-list">
+      <div class="row">
         <div class="col-md-4">
           <h2>Heading</h2>
           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
@@ -100,6 +131,7 @@ jQuery(document).ready(function($) {
           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
+      </div>
       </div>
 
       <hr>
