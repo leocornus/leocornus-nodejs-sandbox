@@ -1,4 +1,4 @@
-<html ng-app="ssDemo">
+<html no-ng-app="ssDemo">
   <head>
     <title>Demo Special Search Page</title>
 
@@ -16,13 +16,29 @@
     <script src='/src/jquery/searchStrap.js'></script>
     <script>
 // this will replace the code in controller.js
-var simpleTest = angular.module('ssDemo', []);
+//var simpleTest = angular.module('ssDemo', []);
 
-    $('#search-div').searchStrap({
-        searchUrl: 'http://gsddtovsdvap014.cihs.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
-        //searchUrl: '/advancedsearch',
-        itemsPerPage: 5,
-        searchButton: 'sizing-addon'
+jQuery(document).ready(function($) {
+
+    var thefacet = {
+         facetField: ['site', 'keywords', 'authors']
+    }; 
+
+    $.ajax({
+      url: 'http://gsddtovsdvap014.cihs.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
+      method: 'GET',
+      dataType: 'json',
+      data: {
+          term: '',
+          start: 1,
+          perPage: 30,
+          facet: JSON.stringify(thefacet),
+          fq: 'site: wiki AND keywords: Acronyms' 
+      },
+      success: function(data) {
+          var total = data.length;
+          console.log(data);
+      }
     });
 });
     </script>
@@ -32,38 +48,41 @@ var simpleTest = angular.module('ssDemo', []);
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 class="float-center">OPS Acronyms</h1>
+        <h1>
+          <img src="https://www.ontario.ca/img/favicon.png" alt="..." class="img-rounded">
+          OPS Acronyms
+        </h1>
         <p>The following is a partial list of acronyms used throughout the <a href="http://intra.net.gov.on.ca/wiki/Ontario_Public_Service">Ontario Public Service</a>. This list is incomplete, and you can help!
         </p>
-
-        <!-- Search bar -->
-        <div class="container container-fluid bar-search bg-muted">
-        <div class="row" id="search-bar">
-          <div class="col-md-2">
-          </div>
-
-          <div class="col-md-8">
-            <div class="input-group input-group-lg"
-                 role="group" aria-label="...">
-              <span class="input-group-addon">
-                <i class="fa fa-search text-primary"></i>
-              </span>
-              <input type="text" class="form-control"
-                     placeholder="Find Acronyms"
-                     id="search-input"
-                     aria-describedby="sizing-addon"/>
-            </div>
-          </div>
-
-          <div class="col-md-2">
-          </div>
-        </div>
-        </div>
 
       </div>
     </div>
 
     <div class="container">
+      <!-- Search bar -->
+      <div class="container container-fluid bar-search bg-muted">
+      <div class="row" id="search-bar">
+        <div class="col-md-2">
+        </div>
+
+        <div class="col-md-8">
+          <div class="input-group input-group-lg"
+               role="group" aria-label="...">
+            <span class="input-group-addon">
+              <i class="fa fa-search text-primary"></i>
+            </span>
+            <input type="text" class="form-control"
+                   placeholder="Find Acronyms"
+                   id="search-input"
+                   aria-describedby="sizing-addon"/>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+        </div>
+      </div>
+      </div>
+
       <!-- Example row of columns -->
       <div class="row" id="result-list">
         <div class="col-md-4">
