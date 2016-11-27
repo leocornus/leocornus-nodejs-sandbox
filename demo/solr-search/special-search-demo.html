@@ -20,6 +20,20 @@
 
 jQuery(document).ready(function($) {
 
+    specialSearch();
+
+    $('#search-input').keyup(function(event) {
+        var term = $(this).val();
+        if(term.length > 1 || term.length == 0) {
+            specialSearch(term);
+        }
+    });
+});
+
+function specialSearch(searchTerm) {
+
+    var searchTerm = typeof searchTerm == 'undefined' ? '' : searchTerm
+
     var thefacet = {
          facetField: ['site', 'keywords', 'authors']
     }; 
@@ -29,7 +43,7 @@ jQuery(document).ready(function($) {
       method: 'GET',
       dataType: 'json',
       data: {
-          term: '',
+          term: searchTerm,
           start: 1,
           perPage: 30,
           facet: JSON.stringify(thefacet),
@@ -56,9 +70,18 @@ jQuery(document).ready(function($) {
                   colQueue = [];
               }
           }
+
+          // check if we missed anything...
+          if(colQueue.length > 0) {
+
+              // append to the last row.
+              results.append('<div class="row">' +
+                  colQueue.join(" ") +
+                  '</div>');
+          }
       }
     });
-});
+}
 
 // utility function to build the panel for a project.
 function buildAcronymPanel(project) {
