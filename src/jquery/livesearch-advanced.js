@@ -24,7 +24,7 @@
            {label: 'All', value: ''},
            {label: 'Current Section', value: 'site: wiki'},
            {label: 'Custom Section', value: 'site: custom'},
-           {label: 'User Profile', value: 'site: User Profile'},
+           {label: 'User Profile', value: 'site: "User Profile"'},
            {label: 'Tickets', value: 'site: Tickets'}
         ],
 
