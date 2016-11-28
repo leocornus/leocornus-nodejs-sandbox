@@ -37,10 +37,11 @@
         this.element = element;
         this.$element = $(element);
         // merge the facet options.
-        var facet = $.extend({}, defaults.facet, options.facet);
-        options.facet = facet;
+        //var facet = $.extend({}, defaults.facet, options.facet);
+        //options.facet = facet;
         // extend mthod will merge object contents.
-        this.settings = $.extend({}, defaults, options);
+        // the first param is set recursive merge or not!
+        this.settings = $.extend(false, {}, defaults, options);
         this._defatuls = defaults;
         this._name = pluginSearchStrap;
         this.init();
