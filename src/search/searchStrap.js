@@ -27,6 +27,9 @@
             facetField: ['site', 'authors', 'keywords']
         },
 
+        // the filter query
+        fq: "site: wiki AND keywords: Acronyms",
+
         // jQuery selector for the the search result section.
         resultSelector: '#search-result'
     };
