@@ -1,4 +1,7 @@
 /**
+ * NOTE: MOVED to new location sre/search/searchStrap.js.
+ * on November 28, 2016
+ *
  * jQuery plugin to present a simple search function.
  *
  *   jQuery('#searn-input-id').searchStrap();
