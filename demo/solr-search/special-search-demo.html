@@ -13,21 +13,33 @@
     <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
     <script src='/bower_components/angular/angular.min.js'></script>
 
-    <script src='/src/jquery/searchStrap.js'></script>
+    <script src='/src/search/searchStrap.js'></script>
     <script>
 // this will replace the code in controller.js
 //var simpleTest = angular.module('ssDemo', []);
 
 jQuery(document).ready(function($) {
 
-    specialSearch();
-
-    $('#search-input').keyup(function(event) {
-        var term = $(this).val();
-        if(term.length > 1 || term.length == 0) {
-            specialSearch(term);
-        }
+    $('#search-input').searchStrap({
+        searchUrl: 'http://gsddtovsdvap014.cihs.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
+        //searchUrl: '/advancedsearch',
+        itemsPerPage: 5,
+        // we don't need search button here.
+        //searchButton: 'sizing-addon',
+        facet: {
+            facetField: ['authors']
+        },
+        fq: 'site: wiki AND keywords: Acronyms' 
     });
+
+    //specialSearch();
+
+    //$('#search-input').keyup(function(event) {
+    //    var term = $(this).val();
+    //    if(term.length > 1 || term.length == 0) {
+    //        specialSearch(term);
+    //    }
+    //});
 });
 
 function specialSearch(searchTerm) {
@@ -48,6 +60,7 @@ function specialSearch(searchTerm) {
           perPage: 30,
           facet: JSON.stringify(thefacet),
           fq: 'site: wiki AND keywords: Acronyms' 
+          //fq: 'keywords: "User Profile"' 
       },
       success: function(data) {
           var total = data.length;

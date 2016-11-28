@@ -142,7 +142,8 @@
                 start: searchQuery.start,
                 perPage: self.settings.itemsPerPage,
                 // facet
-                facet: JSON.stringify(self.settings.facet)
+                facet: JSON.stringify(self.settings.facet),
+                fq: self.settings.fq
             };
 
             $.ajax({
