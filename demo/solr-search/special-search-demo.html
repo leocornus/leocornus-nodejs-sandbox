@@ -23,12 +23,13 @@ jQuery(document).ready(function($) {
     $('#search-input').searchStrap({
         searchUrl: 'http://gsddtovsdvap014.cihs.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
         //searchUrl: '/advancedsearch',
-        itemsPerPage: 5,
+        itemsPerPage: 30,
         // we don't need search button here.
         //searchButton: 'sizing-addon',
         facet: {
             facetField: ['authors']
-        }
+        },
+        resultSelector: '#result-list'
     });
 
     //specialSearch();

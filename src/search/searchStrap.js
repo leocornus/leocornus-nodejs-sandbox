@@ -31,7 +31,11 @@
         fq: "site: wiki AND keywords: Acronyms",
 
         // jQuery selector for the the search result section.
-        resultSelector: '#search-result'
+        resultSelector: '#search-result',
+
+        // set the template for search result.
+        // available templates: 2Columns, AcronymsList
+        resultTemplate: '2Columns'
     };
 
     // the plugin constructor.
