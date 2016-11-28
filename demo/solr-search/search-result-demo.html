@@ -1,0 +1,181 @@
+<html ng-app="uiDemo">
+  <head>
+    <title>Demo Search Result Page</title>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+    <link rel='stylesheet' href='/bower_components/jquery-ui/themes/base/jquery-ui.css'/>
+    <link rel='stylesheet' href='/bower_components/jquery-ui-bootstrap/jquery.ui.theme.css'/>
+
+    <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='/bower_components/jquery-ui/jquery-ui.min.js'></script>
+    <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src='/bower_components/angular/angular.min.js'></script>
+
+    <script src='/src/jquery/livesearch-advanced.js'></script>
+    <script src='/src/search/searchStrap.js'></script>
+    <script>
+// this will replace the code in controller.js
+var simpleTest = angular.module('uiDemo', []);
+
+jQuery(document).ready(function($) {
+    $('#query-right').liveSearch({
+        searchResult: {
+            url: '/demo/jquery/search-result-demo.html',
+            queryName: 'searchterm'
+        },
+        maxItems : 6,
+        filterOptions: [
+            {label: 'Current Blog', value: 'site: current'},
+            {label: 'All Blogs', value: ''},
+            {label: 'All Wiki', value: 'site: wiki'},
+            {label: 'Tickets', value: 'site: "tickets"'}
+        ]
+    });
+
+    $('#search-input').searchStrap({
+        searchUrl: 'http://gsddtovsdvap014.cihs.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
+        //searchUrl: '/advancedsearch',
+        itemsPerPage: 5,
+        searchButton: 'sizing-addon',
+        facet: {
+            facetField: ['site']
+        }
+    });
+});
+    </script>
+
+    <style>
+    .list-group-item {
+        border: 0px;
+    }
+
+    .panel-custom {
+        border: 0px;
+    }
+
+    .panel-custom .panel-footer{
+        background: #FFF;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- page header -->
+      <div class="page-header">
+        <div class="row">
+          <div class="col-md-7">
+            <h1 class="">Search Result Demo Page</h1> 
+          </div>
+
+          <div class="col-md-5" style="border: 0px red solid">
+            <h1>
+              <div class="input-group"
+                   role="group" aria-label="...">
+                <input class="form-control"
+                       placeholder="Search All"
+                       id="query-right"/>
+              </div>
+            </h1>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search bar -->
+      <div class="container container-fluid bar-search bg-muted">
+      <div class="row" id="search-bar">
+        <div class="col-md-2">
+        </div>
+
+        <div class="col-md-8">
+          <div class="input-group"
+               role="group" aria-label="...">
+            <input type="text" class="form-control"
+                   placeholder="Find something"
+                   id="search-input"
+                   aria-describedby="sizing-addon"/>
+            <span class="input-group-btn">
+              <button class="btn btn-default"
+                 type="button"
+                 id="sizing-addon">
+                <i class="fa fa-search text-primary"></i>
+                Search
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+        </div>
+      </div>
+      <p></p>
+      </div>
+
+      <!-- search result -->
+      <div class="container container-fluid bar-search bg-muted">
+      <div class="row" id="search-result"> 
+
+      <div class="col-md-8">
+        <div class="panel panel-info panel-custom">
+          <div class="panel-heading">
+            Current Search:
+          </div>
+
+          <div class="panel-body">
+            Sort by dropdown<br/>
+            Page 4 of 345 Results
+          </div>
+
+        <ul class="list-group">
+          <li class="list-group-item">
+
+            <div class="media">  
+              <div class="media-left">
+                <span class="text-info fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-file-text-o fa-stack-1x fa-inverse"></i>
+                </span>
+              </div>
+
+              <div class="media-body">
+                <h4 class="media-heading">
+                  <a href="http://url6.6.com" style="padding: 0;">
+                    Title 6 title!
+                  </a>
+                </h4>
+                <small class="text-muted">undefined</small>
+                <p class="media-description">
+one one one   one one one one one, one one one one one one one one, one one one one one one one one, one one one one one one one one    
+                </p>
+              </div>
+            </div>
+
+          </li>
+        </ul>
+          
+          <div class="panel-footer panel-footer-custom">
+            pagination
+          </div>
+        </div>
+      </div> <!-- col-8 -->
+
+      <div class="col-md-4">
+        <div class="panel panel-success panel-custom">
+          <div class="panel-heading">
+            Search Filters
+          </div>
+
+          <div class="panel-body">
+            LIST OF FILTERS.
+            <p></p>
+            In Tag Cloud
+          </div>
+      </div> <!-- col-4 -->
+
+      </div> <!-- search result row -->
+      </div>
+
+    </div>
+  </body>
+</html>
