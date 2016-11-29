@@ -27,6 +27,7 @@ jQuery(document).ready(function($) {
         itemsPerPage: 18,
         // we don't need search button here.
         fq: 'site: wiki AND keywords: Acronyms',
+        //fq: 'keywords: "User Profile"',
         //searchButton: 'sizing-addon',
         facet: {
             facetField: ['authors']
@@ -34,69 +35,6 @@ jQuery(document).ready(function($) {
         resultSelector: '#result-list',
         resultTemplate: 'AcronymsList',
         autoReload: false
-    });
-
-    //specialSearch();
-
-    //$('#search-input').keyup(function(event) {
-    //    var term = $(this).val();
-    //    if(term.length > 1 || term.length == 0) {
-    //        specialSearch(term);
-    //    }
-    //});
-});
-
-function specialSearch(searchTerm) {
-
-    var searchTerm = typeof searchTerm == 'undefined' ? '' : searchTerm
-
-    var thefacet = {
-         facetField: ['site', 'keywords', 'authors']
-    }; 
-
-    $.ajax({
-      url: 'http://gsddtovsdvap014.cihs.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
-      method: 'GET',
-      dataType: 'json',
-      data: {
-          term: searchTerm,
-          start: 1,
-          perPage: 30,
-          facet: JSON.stringify(thefacet),
-          fq: 'site: wiki AND keywords: Acronyms' 
-          //fq: 'keywords: "User Profile"' 
-      },
-      success: function(data) {
-          var total = data.length;
-          console.log(data);
-          var docs = data.docs;
-          var results = $('#result-list');
-          results.html('');
-          var colQueue = [];
-          for(i = 0; i < docs.length; i++) {
-              var acronym = docs[i];
-              var panel = buildAcronymPanel(acronym);
-              colQueue.push(panel);
-              // i count from 0
-              // 6 acronyms for a row
-              var ready2Row = (i + 1) % 6;
-              if(ready2Row == 0) {
-                  results.append('<div class="row">' +
-                      colQueue.join("") + '</div>');
-                  // reset the queue.
-                  colQueue = [];
-              }
-          }
-
-          // check if we missed anything...
-          if(colQueue.length > 0) {
-
-              // append to the last row.
-              results.append('<div class="row">' +
-                  colQueue.join(" ") +
-                  '</div>');
-          }
-      }
     });
 }
 
