@@ -211,20 +211,28 @@
 
             // update the brwoser url to
             // reflect the search input field
-            this.updateBrowserUrl(query);
+            this.updateBrowserUrl(query, true);
         },
 
         /**
          * update the url on browser
          */
-        updateBrowserUrl: function(searchQuery) {
+        updateBrowserUrl: function(searchQuery, reload) {
 
+            var reload =
+                typeof reload === 'undefined' ? false : true;
             // build the new url.
             url = '?' + this.settings.queryName + 
                   '=' + encodeURIComponent(searchQuery.term) +
                   '&start=' + searchQuery.start;
-            //
-            window.history.pushState('', 'testing', url);
+
+            // the push state will keep the url in history,
+            // so the back will remember it.
+            if (reload) {
+                window.location.href = url;
+            } else {
+                window.history.pushState('', 'testing', url);
+            }
         },
 
         /**
