@@ -27,7 +27,7 @@
             facetField: ['site', 'authors', 'keywords']
         },
 
-        // the filter query
+        // the filter query, using Solr query syntax.
         fq: "site: wiki AND keywords: Acronyms",
 
         // jQuery selector for the the search result section.
@@ -226,11 +226,24 @@
             // calculate the total pages.
             var totalPages = Math.ceil(total / currentQuery.perPage);
 
-            // build the simple result page.
-            var $result = 
-                //this.build2ColumnResult(data.docs, currentQuery, 
-                this.buildAcronymsList(data.docs, currentQuery, 
+            // build the result page based on the result template.
+            var $result;
+            switch(self.settings.resultTemplate) {
+                case '2Columns':
+                    $result =
+                        self.build2ColumnResult(data.docs, 
+                            currentQuery, 
                             total, currentPage, totalPages);
+                    break;
+                case 'AcronymsList':
+                    $result = this.buildAcronymsList(data.docs, 
+                            currentQuery, 
+                            total, currentPage, totalPages);
+                    break;
+                default:
+                    // do nothing for now.
+                    break;
+            }
 
             // TODO: hook events:
             // hook click event for all available pages on 
