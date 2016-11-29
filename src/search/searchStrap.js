@@ -333,6 +333,16 @@
         buildAcronymsList: function(docs, currentQuery, total, 
                                     currentPage, totalPages) {
 
+            var end = currentQuery.start + currentQuery.perPage - 1;
+            end = end > total ? total : end;
+            var resultSummary= 
+                'Page <strong>' + currentPage + '</strong>' +
+                ' Showing [<strong>' + currentQuery.start +
+                '</strong> - <strong>' + end +
+                '</strong>] of <strong>' +
+                total + '</strong> total results';
+            $('#search-info').html(resultSummary);
+
             // build a 6 columns to show 
             var result = $(this.settings.resultSelector);
             result.html("");
@@ -416,7 +426,7 @@
                 ' Showing [<strong>' + currentQuery.start + 
                 '</strong> - <strong>' + end + 
                 '</strong>] of <strong>' +
-                total + '</strong> total results';
+                total + '</strong> total results' +
                 '</div>';
 
             // using list group for search result.
