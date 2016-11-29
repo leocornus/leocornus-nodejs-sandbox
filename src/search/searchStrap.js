@@ -217,7 +217,8 @@
 
             // build the simple result page.
             var $result = 
-                this.build2ColumnResult(data.docs, currentQuery, 
+                //this.build2ColumnResult(data.docs, currentQuery, 
+                this.buildAcronymsList(data.docs, currentQuery, 
                             total, currentPage, totalPages);
 
             // TODO: hook events:
@@ -255,7 +256,10 @@
         build2ColumnResult: function(docs, currentQuery, total, 
                                      currentPage, totalPages) {
 
-            // build the current search panel
+            // build the current search panel, which will include
+            //  - infomaiont bar
+            //  - list of items.
+            //  - pagination
             var $currentSearch = 
                 this.buildCurrentSearchPanel(docs, currentQuery, 
                         total, currentPage, totalPages);
@@ -273,6 +277,56 @@
             $result.html('').append($leftCol).append($rightCol);
 
             return $result;
+        },
+
+        /**
+         * build the Acronyms list, which will have 6 columns
+         */
+        buildAcronymsList: function(docs, currentQuery, total, 
+                                    currentPage, totalpages) {
+
+            // build a 6 columns to show 
+            var result = $(this.settings.resultSelector);
+            result.html("");
+            var colQueue =[];
+            for(i = 0; i < docs.length; i++) {
+                var acronym = docs[i];
+                var panel = this.buildAcronymPanel(acronym);
+                colQueue.push(panel);
+                // i count from 0
+                // 6 acronyms for a row
+                var ready2Row = (i + 1) % 6;
+                if(ready2Row == 0) {
+                    result.append('<div class="row">' +
+                        colQueue.join("") + '</div>');
+                    // reset the queue.
+                    colQueue = [];
+                }
+            }
+
+            // check if we missed anything...
+            if(colQueue.length > 0) {
+
+                // append to the last row.
+                result.append('<div class="row">' +
+                    colQueue.join(" ") +
+                    '</div>');
+            }
+
+            return result;
+        },
+
+        /**
+         * build acronym panel.
+         */
+        buildAcronymPanel: function(acronym) {
+
+           var panel = '<div class="col-sm-2">' + 
+               '<h2><a href="' + acronym['url'] + '">' +
+               acronym['title'] + '</a></h2>' +
+               '<p>' + acronym['description'] + '</p>' + 
+               '</div>';
+           return panel;
         },
 
         /**
