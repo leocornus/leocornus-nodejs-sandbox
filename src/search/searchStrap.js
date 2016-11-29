@@ -69,17 +69,24 @@
         init: function() {
 
             var self = this;
+
             // we will get search term from query
             var paramName = self.settings.queryName;
             var queryParams = self.getUrlVars();
+
             // set to empty string if no query parameter found.
             var searchTerm = paramName in queryParams ?
                              queryParams[paramName] : '';
             searchTerm = decodeURIComponent(searchTerm);
             this.$element.val(searchTerm);
 
+            // set the start to 1 if we could not find it.
+            var start = 'start' in queryParams ?
+                        queryParams['start'] : 1;
+
             // prepare the query to perform the initial search
-            var searchQuery = this.prepareSearchQuery(searchTerm, 1);
+            var searchQuery =
+                this.prepareSearchQuery(searchTerm, start);
             self.search(searchQuery);
 
             // hook the click event to search button.
@@ -138,7 +145,7 @@
          * only handle search term and pagination now.
          * TODO: Will add field query soon.
          *
-         * default start item is 1.
+         * default start item is 1, as Solr counts from 1
          */
         prepareSearchQuery: function(term, start) {
 
@@ -198,10 +205,12 @@
 
             var term = this.$element.val();
             // prepare the query to perform the initial search
+            // this is a new search, reset start to 1
             var query = this.prepareSearchQuery(term, 1);
             this.search(query);
 
-            // update the brwoser url.
+            // update the brwoser url to
+            // reflect the search input field
             this.updateBrowserUrl(query);
         },
 
@@ -212,7 +221,8 @@
 
             // build the new url.
             url = '?' + this.settings.queryName + 
-                  '=' + encodeURIComponent(searchQuery.term);
+                  '=' + encodeURIComponent(searchQuery.term) +
+                  '&start=' + searchQuery.start;
             //
             window.history.pushState('', 'testing', url);
         },
@@ -783,6 +793,7 @@
             var query = 
                 this.prepareSearchQuery(term, start);
             this.search(query);
+            this.updateBrowserUrl(query);
         }
     });
 
