@@ -37,7 +37,12 @@
 
         // set the template for search result.
         // available templates: 2Columns, AcronymsList
-        resultTemplate: '2Columns'
+        resultTemplate: '2Columns',
+
+        // refresh / reload the search result list automatically.
+        // this is basically hook the keyup event.
+        // default is false,
+        autoReload: false
     };
 
     // the plugin constructor.
@@ -91,16 +96,19 @@
                 }
             });
 
-            // kook the key up event.
-            self.$element.on('keyup', function(event) {
+            if(self.settings.autoReload) {
+                // kook the key up event.
+                self.$element.on('keyup', function(event) {
 
-                var term = $(this).val();
-                if (term.length >= 0) {
-                    // prepare the query to perform the initial search
-                    var query = self.prepareSearchQuery(term, 1);
-                    self.search(query);
-                }
-            });
+                    var term = $(this).val();
+                    if (term.length >= 0) {
+                        // prepare the query to perform 
+                        // the initial search
+                        var query = self.prepareSearchQuery(term, 1);
+                        self.search(query);
+                    }
+                });
+            }
         },
 
         /**
