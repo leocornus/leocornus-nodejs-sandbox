@@ -28,7 +28,9 @@
         },
 
         // the filter query, using Solr query syntax.
-        fq: "site: wiki AND keywords: Acronyms",
+        // for example: "site: wiki AND keywords: Acronyms"
+        // default is empy
+        fq: '',
 
         // jQuery selector for the the search result section.
         resultSelector: '#search-result',
