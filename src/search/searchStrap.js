@@ -88,6 +88,17 @@
                     self.handleButtonClick();
                 }
             });
+
+            // kook the key up event.
+            self.$element.on('keyup', function(event) {
+
+                var term = $(this).val();
+                if (term.length >= 0) {
+                    // prepare the query to perform the initial search
+                    var query = self.prepareSearchQuery(term, 1);
+                    self.search(query);
+                }
+            });
         },
 
         /**
@@ -283,11 +294,16 @@
          * build the Acronyms list, which will have 6 columns
          */
         buildAcronymsList: function(docs, currentQuery, total, 
-                                    currentPage, totalpages) {
+                                    currentPage, totalPages) {
 
             // build a 6 columns to show 
             var result = $(this.settings.resultSelector);
             result.html("");
+
+            // build the pagination bar.
+            var pagination = 
+                this.buildPaginationDots(currentPage, totalPages);
+            //result.append('<div>' + pagination + '</div>');
             var colQueue =[];
             for(i = 0; i < docs.length; i++) {
                 var acronym = docs[i];
@@ -312,6 +328,9 @@
                     colQueue.join(" ") +
                     '</div>');
             }
+
+            // add the pagination at the bottom too.
+            result.append('<div>' + pagination + '</div>');
 
             return result;
         },
