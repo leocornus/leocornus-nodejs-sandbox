@@ -1,6 +1,9 @@
 /**
+ * **************************
  * NOTE: MOVED to new location sre/search/searchStrap.js.
  * on November 28, 2016
+ * Check the new location for update.
+ * *****************************
  *
  * jQuery plugin to present a simple search function.
  *
