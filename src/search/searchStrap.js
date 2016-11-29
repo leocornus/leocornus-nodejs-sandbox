@@ -47,6 +47,7 @@
 
     // the plugin constructor.
     function Plugin(element, options) {
+
         // the DOM element.
         this.element = element;
         this.$element = $(element);
@@ -70,8 +71,11 @@
             var self = this;
             // we will get search term from query
             var paramName = self.settings.queryName;
-            var searchTerm =
-                decodeURIComponent(this.getUrlVars()[paramName]);
+            var queryParams = self.getUrlVars();
+            // set to empty string if no query parameter found.
+            var searchTerm = paramName in queryParams ?
+                             queryParams[paramName] : '';
+            searchTerm = decodeURIComponent(searchTerm);
             this.$element.val(searchTerm);
 
             // prepare the query to perform the initial search
@@ -97,7 +101,7 @@
             });
 
             if(self.settings.autoReload) {
-                // kook the key up event.
+                // hook the key up event for the input field.
                 self.$element.on('keyup', function(event) {
 
                     var term = $(this).val();
