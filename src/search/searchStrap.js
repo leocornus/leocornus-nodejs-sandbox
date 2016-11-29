@@ -346,7 +346,9 @@
                     total + '</strong> total results';
             } else {
                 // no result found
-                resultSummary = '<strong>No results containing all your search terms were found.</strong>';
+                resultSummary =
+                    '<strong>No results containing ' +
+                    'all your search terms were found.</strong>';
             }
             $('#search-info').html(resultSummary);
 
@@ -355,7 +357,7 @@
             result.html("");
 
             // build the pagination bar.
-            var pagination = total <= 0 ? '' :
+            var pagination = totalPages <= 1 ? '' :
                 this.buildPaginationDots(currentPage, totalPages);
             //result.append('<div>' + pagination + '</div>');
             var colQueue =[];
