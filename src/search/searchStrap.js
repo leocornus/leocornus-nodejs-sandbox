@@ -333,14 +333,21 @@
         buildAcronymsList: function(docs, currentQuery, total, 
                                     currentPage, totalPages) {
 
-            var end = currentQuery.start + currentQuery.perPage - 1;
-            end = end > total ? total : end;
-            var resultSummary= 
-                'Page <strong>' + currentPage + '</strong>' +
-                ' Showing [<strong>' + currentQuery.start +
-                '</strong> - <strong>' + end +
-                '</strong>] of <strong>' +
-                total + '</strong> total results';
+            var resultSummary = '';
+            if(total > 0) {
+                var end = currentQuery.start +
+                          currentQuery.perPage - 1;
+                end = end > total ? total : end;
+                resultSummary =
+                    'Page <strong>' + currentPage + '</strong>' +
+                    ' Showing [<strong>' + currentQuery.start +
+                    '</strong> - <strong>' + end +
+                    '</strong>] of <strong>' +
+                    total + '</strong> total results';
+            } else {
+                // no result found
+                resultSummary = '<strong>No results containing all your search terms were found.</strong>';
+            }
             $('#search-info').html(resultSummary);
 
             // build a 6 columns to show 
@@ -348,7 +355,7 @@
             result.html("");
 
             // build the pagination bar.
-            var pagination = 
+            var pagination = total <= 0 ? '' :
                 this.buildPaginationDots(currentPage, totalPages);
             //result.append('<div>' + pagination + '</div>');
             var colQueue =[];
