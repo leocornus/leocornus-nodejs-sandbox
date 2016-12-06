@@ -38,6 +38,13 @@
         // set the template for search result.
         // available templates: 2Columns, AcronymsList
         resultTemplate: '2Columns',
+        // set the function to build the HTML for each item.
+        panelFunction: function(item) {
+            // define the default function for each item.
+            var panel = '<h2><a href="' + item['url'] + '">' +
+                item['title'] + '</a></h2>';
+            return panel;
+        },
 
         // refresh / reload the search result list automatically.
         // this is basically hook the keyup event.
@@ -268,7 +275,7 @@
                             total, currentPage, totalPages);
                     break;
                 case 'AcronymsList':
-                    $result = this.buildAcronymsList(data.docs, 
+                    $result = self.buildAcronymsList(data.docs, 
                             currentQuery, 
                             total, currentPage, totalPages);
                     break;
@@ -371,7 +378,8 @@
             var colQueue =[];
             for(i = 0; i < docs.length; i++) {
                 var acronym = docs[i];
-                var panel = this.buildAcronymPanel(acronym);
+                //var panel = this.buildAcronymPanel(acronym);
+                var panel = this.settings.panelFunction(acronym);
                 colQueue.push(panel);
                 // i count from 0
                 // 6 acronyms for a row
