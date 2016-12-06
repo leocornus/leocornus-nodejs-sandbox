@@ -375,7 +375,7 @@
                 colQueue.push(panel);
                 // i count from 0
                 // 6 acronyms for a row
-                var ready2Row = (i + 1) % 6;
+                var ready2Row = (i + 1) % 4;
                 if(ready2Row == 0) {
                     result.append('<div class="row">' +
                         colQueue.join("") + '</div>');
@@ -404,10 +404,19 @@
          */
         buildAcronymPanel: function(acronym) {
 
-           var panel = '<div class="col-sm-2">' + 
+           // try to remove some wiki markups.
+           var desc = acronym['description'];
+           // replace wiki syntax.
+           var text = desc
+              .replace(/.*may refer to:/g, '')
+              .replace(/\[http.*/g, '')
+              .replace(/\[\[Category:.*/g, '')
+              .replace(/[\]\[\']/g, '');
+
+           var panel = '<div class="col-sm-3">' + 
                '<h2><a href="' + acronym['url'] + '">' +
                acronym['title'] + '</a></h2>' +
-               '<p>' + acronym['description'] + '</p>' + 
+               '<p>' + text + '</p>' + 
                '</div>';
            return panel;
         },
