@@ -411,12 +411,15 @@
               .replace(/.*may refer to:/g, '')
               .replace(/\[http.*/g, '')
               .replace(/\[\[Category:.*/g, '')
-              .replace(/[\]\[\']/g, '');
+              .replace(/[\]\[\']/g, '')
+              .replace(/\*/, '<ul><li>')
+              .replace(/\*/g, '</li><li>');
 
            var panel = '<div class="col-sm-3">' + 
-               '<h2><a href="' + acronym['url'] + '">' +
+               '<h2 class="text-center">' +
+               '<a href="' + acronym['url'] + '">' +
                acronym['title'] + '</a></h2>' +
-               '<p>' + text + '</p>' + 
+               '<p>' + text + '</li></ul></p>' + 
                '</div>';
            return panel;
         },
