@@ -34,7 +34,7 @@ jQuery(document).ready(function($) {
         },
         resultSelector: '#result-list',
         resultTemplate: 'AcronymsList',
-        panelFunction: simpleColumnBuilder,
+        panelFunction: acronymPanelStripper,
         autoReload: false
     });
 });
@@ -45,6 +45,31 @@ var simpleColumnBuilder = function(item) {
         '<h2><a href="' + item['url'] + '">' +
         item['title'] + '</a></h2>' +
         '<p>' + item['description'] + '</p>' + 
+        '</div>';
+    return panel;
+};
+
+/**
+ * builder function to strip out all wiki syntax.
+ */
+var acronymPanelStripper = function(acronym) {
+
+    // try to remove some wiki markups.
+    var desc = acronym['description'];
+    // replace wiki syntax.
+    var text = desc
+       .replace(/.*may refer to:/g, '')
+       .replace(/\[http.*/g, '')
+       .replace(/\[\[Category:.*/g, '')
+       .replace(/[\]\[\']/g, '')
+       .replace(/\*/, '<ul><li>')
+       .replace(/\*/g, '</li><li>');
+
+    var panel = '<div class="col-sm-3">' + 
+        '<h2 class="text-center">' +
+        '<a href="' + acronym['url'] + '">' +
+        acronym['title'] + '</a></h2>' +
+        '<p>' + text + '</li></ul></p>' + 
         '</div>';
     return panel;
 };
