@@ -271,6 +271,7 @@
                 (currentQuery.start - 1) / currentQuery.perPage + 1;
             // calculate the total pages.
             var totalPages = Math.ceil(total / currentQuery.perPage);
+
             // build the pagination bar.
             var pagination = totalPages <= 1 ? '' :
                 self.buildPaginationDots(currentPage, totalPages);
@@ -286,7 +287,7 @@
                 $result =
                     self.build2ColumnResult(data.docs, 
                         currentQuery, 
-                        total, currentPage, totalPages);
+                        total, currentPage, totalPages, pagination);
             }
 
             // TODO: hook events:
@@ -322,7 +323,7 @@
          *   - facets label and facets values in tag cloud.
          */
         build2ColumnResult: function(docs, currentQuery, total, 
-                                     currentPage, totalPages) {
+                          currentPage, totalPages, pagination) {
 
             // build the current search panel, which will include
             //  - infomaiont bar
@@ -330,7 +331,7 @@
             //  - pagination
             var $currentSearch = 
                 this.buildCurrentSearchPanel(docs, currentQuery, 
-                        total, currentPage, totalPages);
+                        total, currentPage, totalPages, pagination);
             // build the search filter panel.
             var $searchFilter = this.buildSearchFilterPanel();
 
@@ -441,7 +442,7 @@
          * build the current search panel.
          */
         buildCurrentSearchPanel: function(docs, currentQuery,
-            total, currentPage, totalPages) {
+            total, currentPage, totalPages, pagination) {
 
             var self = this;
 
@@ -479,9 +480,6 @@
                 $ul.append(liHtml);
             });
 
-            // build the pagination bar.
-            var pagination = 
-                this.buildPaginationDots(currentPage, totalPages);
             // panel footer, pagination nav bar.
             var footer = 
                 '<div class="panel-footer panel-footer-custom">' +
