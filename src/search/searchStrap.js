@@ -37,7 +37,8 @@
 
         // set the template for search result.
         // available templates: 2Columns, AcronymsList
-        resultTemplate: '2Columns',
+        // empty will means using the default.
+        resultTemplate: null,
         // set the function to build the HTML for each item.
         // we could NOT use prototype function here. 
         // we could set to use default prototype function by live this 
@@ -49,6 +50,8 @@
         //        item['title'] + '</a></h2>';
         //    return panel;
         //},
+        // builders: paginagion, summary, result list, 
+        // filters, facets
 
         // refresh / reload the search result list automatically.
         // this is basically hook the keyup event.
@@ -271,21 +274,16 @@
 
             // build the result page based on the result template.
             var $result;
-            switch(self.settings.resultTemplate) {
-                case '2Columns':
-                    $result =
-                        self.build2ColumnResult(data.docs, 
-                            currentQuery, 
-                            total, currentPage, totalPages);
-                    break;
-                case 'AcronymsList':
-                    $result = self.buildAcronymsList(data.docs, 
-                            currentQuery, 
-                            total, currentPage, totalPages);
-                    break;
-                default:
-                    // do nothing for now.
-                    break;
+            if (self.settings.resultTemplate) {
+                $result = self.buildAcronymsList(data.docs, 
+                        currentQuery, 
+                        total, currentPage, totalPages);
+            } else {
+                // using the default template.
+                $result =
+                    self.build2ColumnResult(data.docs, 
+                        currentQuery, 
+                        total, currentPage, totalPages);
             }
 
             // TODO: hook events:
