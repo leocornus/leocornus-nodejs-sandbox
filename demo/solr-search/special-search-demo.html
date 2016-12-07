@@ -62,14 +62,14 @@ var acronymPanelStripper = function(acronym) {
        .replace(/\[http.*/g, '')
        .replace(/\[\[Category:.*/g, '')
        .replace(/[\]\[\']/g, '')
-       .replace(/\*/, '<ul><li>')
-       .replace(/\*/g, '</li><li>');
+       .replace(/\*/, '<li class="list-group-item">')
+       .replace(/\*/g, '</li><li class="list-group-item">');
 
     var panel = '<div class="col-sm-3">' + 
         '<h2 class="text-center">' +
         '<a href="' + acronym['url'] + '">' +
         acronym['title'] + '</a></h2>' +
-        '<p>' + text + '</li></ul></p>' + 
+        '<p><ul class="list-group">' + text + '</li></ul></p>' + 
         '</div>';
     return panel;
 };
