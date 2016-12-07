@@ -39,12 +39,16 @@
         // available templates: 2Columns, AcronymsList
         resultTemplate: '2Columns',
         // set the function to build the HTML for each item.
-        panelFunction: function(item) {
-            // define the default function for each item.
-            var panel = '<h2><a href="' + item['url'] + '">' +
-                item['title'] + '</a></h2>';
-            return panel;
-        },
+        // we could NOT use prototype function here. 
+        // we could set to use default prototype function by live this 
+        // options to empty (null), then we could use the default builder 
+        // function.
+        //panelFunction: function(item) {
+        //    // define the default function for each item.
+        //    var panel = '<h2><a href="' + item['url'] + '">' +
+        //        item['title'] + '</a></h2>';
+        //    return panel;
+        //},
 
         // refresh / reload the search result list automatically.
         // this is basically hook the keyup event.
