@@ -271,13 +271,16 @@
                 (currentQuery.start - 1) / currentQuery.perPage + 1;
             // calculate the total pages.
             var totalPages = Math.ceil(total / currentQuery.perPage);
+            // build the pagination bar.
+            var pagination = totalPages <= 1 ? '' :
+                self.buildPaginationDots(currentPage, totalPages);
 
             // build the result page based on the result template.
             var $result;
             if (self.settings.resultTemplate) {
-                $result = self.buildAcronymsList(data.docs, 
-                        currentQuery, 
-                        total, currentPage, totalPages);
+                $result = self.settings.resultTemplate(data.docs, 
+                        currentQuery, total, 
+                        currentPage, totalPages, pagination);
             } else {
                 // using the default template.
                 $result =
