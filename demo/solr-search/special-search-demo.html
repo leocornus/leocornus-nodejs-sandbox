@@ -200,42 +200,36 @@ var buildAcronymsCircles = function(docs, currentQuery, total,
     var circles =[];
     for(i = 0; i < docs.length; i++) {
         var acronym = docs[i];
-        var circle = '{' +
-          '"name":"title",' +
-          '"children":[{' +
-          '  "name":"title",' +
-          '  "children":[{' +
-          '    "name":"' + acronym['title'] + '",' +
-          '    "size":' + 1000 * (i + 1) + ',' +
-          '    "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"' +
-          '  }]'+
-          '}]'+
-          '}';
+        var circle = {
+          "name":acronym['title'],
+          "children":[{
+              "name": acronym['title'],
+              "size": 1000 * (i + 1),
+              "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+          }]
+        };
         circles.push(circle);
     }
     // get ready the json data for the zoomable circle.
-    var jsonData = '{' +
-          '"attributes": {' +
-          '  "title": "3 Equal size circles",' +
-          '  "description": "Data example to show the data structure",' +
-          '  "colorRange": [' +
-          '    "green",' +
-          '    "green"' +
-          '  ],' +
-          '  "leafFill": "lightgrey"' +
-          '},' +
-          '"data": {' +
-          '  "name":"This will NOT show anywhere!",' +
-          //'  "children":[{' +
-          //'    "name":"How many found",' +
-          '    "children":[' + circles.join(',') + ']' +
-          //'  }]' +
-          '}' +
-        '}';
-    var theData = JSON.parse(jsonData);
-    $('#jsonstring').html(JSON.stringify(theData, null, 2));
-    $('#circles').zoomableCircles({}, theData);
-    console.log(theData);
+    var jsonData = {
+          "attributes": {
+            "title": "3 Equal size circles",
+            "description": "Data example to show the data structure",
+            "colorRange": [
+              "white"
+            ],
+            "leafFill": "green"
+          },
+          "data": {
+            "name":"This will NOT show anywhere!",
+            "children":[{
+              "name":"How many found",
+              "children": circles
+            }]
+          }
+        };
+    $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
+    $('#circles').zoomableCircles({}, jsonData);
 
     // add the pagination at the bottom too.
     result.append('<div>' + pagination + '</div>');
