@@ -14,6 +14,9 @@
     <script src='/bower_components/angular/angular.min.js'></script>
 
     <script src='/src/search/searchStrap.js'></script>
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src='https://cdn.rawgit.com/leocornus/leocornus-visualdata/v0.0.6/src/zoomable-circles.js'></script>
     <script>
 // this will replace the code in controller.js
 //var simpleTest = angular.module('ssDemo', []);
@@ -24,7 +27,7 @@ jQuery(document).ready(function($) {
         //searchUrl: 'http://gsddtovsdvap014.cihs.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
         searchUrl: 'http://intra.net.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
         //searchUrl: '/advancedsearch',
-        itemsPerPage: 18,
+        itemsPerPage: 12,
         // we don't need search button here.
         fq: 'site: wiki AND keywords: Acronyms',
         //fq: 'keywords: "User Profile"',
@@ -33,7 +36,7 @@ jQuery(document).ready(function($) {
             facetField: ['authors']
         },
         resultSelector: '#result-list',
-        //resultTemplate: buildAcronymsList,
+        resultTemplate: buildAcronymsCircles,
         panelFunction: acronymPanelStripper,
         autoReload: false
     });
@@ -133,6 +136,74 @@ var acronymPanelStripper = function(acronym) {
         '<p><ul class="list-group">' + text + '</li></ul></p>' + 
         '</div>';
     return panel;
+};
+
+/**
+ * build the Acronyms in zoomable circles. 
+ */
+var buildAcronymsCircles = function(docs, currentQuery, total, 
+                            currentPage, totalPages, pagination) {
+
+    var resultSummary = '';
+    if(total > 0) {
+        var end = currentQuery.start +
+                  currentQuery.perPage - 1;
+        end = end > total ? total : end;
+        resultSummary =
+            'Page <strong>' + currentPage + '</strong>' +
+            ' Showing [<strong>' + currentQuery.start +
+            '</strong> - <strong>' + end +
+            '</strong>] of <strong>' +
+            total + '</strong> total results';
+    } else {
+        // no result found
+        resultSummary =
+            '<strong>No results containing ' +
+            'all your search terms were found.</strong>';
+    }
+    $('#search-info').html(resultSummary);
+
+    var result = $("#result-list");
+    result.html("");
+    result.append('<div id="circles"></div>');
+
+    // get ready the data.
+    var circles =[];
+    for(i = 0; i < docs.length; i++) {
+        var acronym = docs[i];
+        var circle = {
+          "name":acronym['title'],
+          "children":[{
+            "name":acronym['title'],
+            "size": 1000 * (i + 1),
+            "imgRatio":1,
+            "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+          }]
+        };
+        circles.push(circle);
+    }
+    // get ready the json data for the zoomable circle.
+    var jsonData = {
+          "attributes": {
+            "title": "3 Equal size circles",
+            "description": "Data example to show the data structure",
+            "colorRange": [
+              "white",
+              "green"
+            ],
+            "leafFill": "lightgrey"
+          },
+          "data": {
+            "name":"This will NOT show anywhere!",
+            "children":circles
+          }
+        };
+    $('#circles').zoomableCircles({}, jsonData);
+
+    // add the pagination at the bottom too.
+    result.append('<div>' + pagination + '</div>');
+
+    return result;
 };
     </script>
   </head>
