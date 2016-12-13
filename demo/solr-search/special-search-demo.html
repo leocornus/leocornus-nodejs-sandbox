@@ -67,7 +67,6 @@ jQuery(document).ready(function($) {
         },
         resultSelector: '#result-list',
         resultTemplate: buildAcronymsCircles,
-        panelFunction: acronymPanelStripper,
         autoReload: false
     });
 });
@@ -199,14 +198,18 @@ var buildAcronymsCircles = function(docs, currentQuery, total,
 
     // get ready the data.
     var circles =[];
+    var color = d3.scale.linear().domain([0, docs.length])
+        .range(["green", "red"])
+        .interpolate(d3.interpolateHcl);
     for(i = 0; i < docs.length; i++) {
         var acronym = docs[i];
         var circle = {
           "name":acronym['title'],
           "children":[{
               "name": acronym['title'],
-              "size": 1000,
-              "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+              "size": 1000 * (i + 1),
+              "leafFill": color(i),
+              "imgUrl": ""
           }]
         };
         circles.push(circle);
