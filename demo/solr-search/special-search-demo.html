@@ -57,7 +57,7 @@ jQuery(document).ready(function($) {
         searchUrl: 'http://intra.net.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
         //searchUrl: '/advancedsearch',
         // magic numbers: 3, 7, 19, 37
-        itemsPerPage: 37,
+        itemsPerPage: 107,
         // we don't need search button here.
         fq: 'site: wiki AND keywords: Acronyms',
         //fq: 'keywords: "User Profile"',
@@ -199,14 +199,14 @@ var buildAcronymsCircles = function(docs, currentQuery, total,
     // get ready the data.
     var circles =[];
     var color = d3.scale.linear().domain([0, docs.length])
-        .range(["green", "red"])
+        .range(["blue", "yellow"])
         .interpolate(d3.interpolateHcl);
     for(i = 0; i < docs.length; i++) {
         var acronym = docs[i];
         var circle = {
-          "name":acronym['title'],
+          "name": i + "",
           "children":[{
-              "name": acronym['title'],
+              "name": i + "",
               "size": 1000 * (i + 1),
               "leafFill": color(i),
               "imgUrl": ""
@@ -255,6 +255,7 @@ var buildAcronymsCircles = function(docs, currentQuery, total,
     </div>
 
     <div class="container">
+
       <!-- Search bar -->
       <div class="container container-fluid bg-muted">
       <div class="row" id="search-bar">

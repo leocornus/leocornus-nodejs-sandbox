@@ -29,5 +29,3 @@ Server side data structure
 --------------------------
 
 Need some examples for server side data structures.
-
-
