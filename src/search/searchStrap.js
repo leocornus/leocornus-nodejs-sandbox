@@ -92,7 +92,13 @@
             var searchTerm = paramName in queryParams ?
                              queryParams[paramName] : '';
             searchTerm = decodeURIComponent(searchTerm);
+            // set the initial value for input box
             this.$element.val(searchTerm);
+            // trigger the propertychange event. 
+            // some function depends on this event.
+            // e.g., the clear button using Bootstrap feedback icon
+            // will depen on this event.
+            this.$element.trigger('propertychange');
 
             // set the start to 1 if we could not find it.
             var start = 'start' in queryParams ?
