@@ -1,0 +1,201 @@
+{
+  "attributes": {
+    "title": "3 Equal size circles",
+    "description": "Data example to show the data structure",
+    "colorRange": [
+      "white",
+      "green"
+    ],
+    "leafFill": "lightgrey"
+  },
+  "data": {
+    "name": "This will NOT show anywhere!",
+    "children": [
+      {
+        "name": "How many found",
+        "children": [
+          {
+            "name": "title",
+            "children": [
+              {
+                "name": "title",
+                "children": [
+                  {
+                    "name": "Preload:REV acronym",
+                    "size": 1000,
+                    "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "title",
+            "children": [
+              {
+                "name": "title",
+                "children": [
+                  {
+                    "name": "OHT",
+                    "size": 2000,
+                    "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "title",
+            "children": [
+              {
+                "name": "title",
+                "children": [
+                  {
+                    "name": "MTC",
+                    "size": 3000,
+                    "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "title",
+            "children": [
+              {
+                "name": "title",
+                "children": [
+                  {
+                    "name": "ONR",
+                    "size": 4000,
+                    "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "title",
+            "children": [
+              {
+                "name": "title",
+                "children": [
+                  {
+                    "name": "DIOC",
+                    "size": 5000,
+                    "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "title",
+            "children": [
+              {
+                "name": "title",
+                "children": [
+                  {
+                    "name": "OPERB",
+                    "size": 6000,
+                    "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "title",
+            "children": [
+              {
+                "name": "title",
+                "children": [
+                  {
+                    "name": "GFPB",
+                    "size": 7000,
+                    "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "title",
+            "children": [
+              {
+                "name": "title",
+                "children": [
+                  {
+                    "name": "LFPB",
+                    "size": 8000,
+                    "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "title",
+            "children": [
+              {
+                "name": "title",
+                "children": [
+                  {
+                    "name": "LMAC",
+                    "size": 9000,
+                    "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "title",
+            "children": [
+              {
+                "name": "title",
+                "children": [
+                  {
+                    "name": "NFPPB",
+                    "size": 10000,
+                    "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "title",
+            "children": [
+              {
+                "name": "title",
+                "children": [
+                  {
+                    "name": "OFPMC",
+                    "size": 11000,
+                    "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "title",
+            "children": [
+              {
+                "name": "title",
+                "children": [
+                  {
+                    "name": "OFTB",
+                    "size": 12000,
+                    "imgUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Cartoonmmm.jpg"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
