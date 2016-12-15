@@ -45,12 +45,36 @@
 .label, .node--root, .node--leaf, use {
     pointer-events: none;
 }
+
+/**
+ * for the input clear button.
+ */
+::-ms-clear {
+  display: none;
+}
+
+.form-control-clear {
+  z-index: 10;
+  pointer-events: auto;
+  cursor: pointer;
+}
   </style>
     <script>
 // this will replace the code in controller.js
 //var simpleTest = angular.module('ssDemo', []);
 
 jQuery(document).ready(function($) {
+
+$('.has-clear input[type="text"]').on('input propertychange', function() {
+  var $this = $(this);
+  var visible = Boolean($this.val());
+  $this.siblings('.form-control-clear').toggleClass('hidden', !visible);
+}).trigger('propertychange');
+
+$('.form-control-clear').click(function() {
+  $(this).siblings('input[type="text"]').val('')
+    .trigger('propertychange').focus();
+});
 
     $('#search-input').searchStrap({
         //searchUrl: 'http://gsddtovsdvap014.cihs.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
@@ -268,10 +292,15 @@ var buildAcronymsCircles = function(docs, currentQuery, total,
             <span class="input-group-addon">
               <i class="fa fa-search text-primary"></i>
             </span>
-            <input type="text" class="form-control"
-                   placeholder="Find Acronyms"
-                   id="search-input"
-                   aria-describedby="sizing-addon"/>
+            <div class="form-group form-group-lg has-feedback has-clear">
+              <input type="text" class="form-control"
+                     placeholder="Find Acronyms"
+                     id="search-input"
+                     aria-describedby="sizing-addon"/>
+              <span class="form-control-clear text-warning
+                           glyphicon glyphicon-remove
+                           form-control-feedback hidden"></span>
+            </div>
           </div>
           <div class="text-muted text-center h4" id="search-info">
             <h2>Loading...</h2>
