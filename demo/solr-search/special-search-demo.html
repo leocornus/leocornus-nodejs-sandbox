@@ -267,7 +267,7 @@ var buildAcronymsCircles = function(docs, currentQuery, total,
 
   <body>
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div class="jumbotron" style="padding-bottom:0px">
       <div class="container">
         <h1>
           <img src="https://www.ontario.ca/img/favicon.png" alt="..." class="img-rounded">
@@ -275,7 +275,11 @@ var buildAcronymsCircles = function(docs, currentQuery, total,
         </h1>
         <p>The following is a partial list of acronyms used throughout the <a href="http://intra.net.gov.on.ca/wiki/Ontario_Public_Service">Ontario Public Service</a>. This list is incomplete, and you can help!
         </p>
-
+<ul class="nav nav-pills">
+  <li role="presentation" class="active"><a href="#">Search</a></li>
+  <li role="presentation"><a href="/wiki/">Search Tips</a></li>
+  <li role="presentation"><a href="/wiki/Category:Acronyms">Create New</a></li>
+</ul>
       </div>
     </div>
 

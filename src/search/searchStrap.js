@@ -29,7 +29,7 @@
 
         // the filter query, using Solr query syntax.
         // for example: "site: wiki AND keywords: Acronyms"
-        // default is empy
+        // default is empty
         fq: '',
 
         // jQuery selector for the the search result section.
