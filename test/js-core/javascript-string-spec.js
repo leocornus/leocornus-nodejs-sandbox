@@ -59,6 +59,14 @@ describe('JavaScript String Prototype Testing Specs', function() {
             var result = source.match(/om/g);
             // we should find 2 match.
             expect(result.length).toBe(2);
+            // without the g flag, it will return the first match
+            // and some additional properties: such as input and
+            // index.
+            var matches = source.match(/om/i);
+            expect(matches.length).toBe(1);
+            expect(matches[0]).toBe('om');
+            expect(matches['index']).toBe(1);
+            expect(matches['input']).toBe(source);
         });
 
     });
