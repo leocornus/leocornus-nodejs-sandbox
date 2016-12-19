@@ -58,14 +58,18 @@ function addJwplayerShortcode() {
     // get ready the search regular express  pattern.
     // we will find all matches.
     var config = /config=http.*(\/internal\/.*\/config\.xml)"/;
+    var dimension = /width="(\d+)" height="(\d+)"/;
     var newVal = '';
 
     if(englishInput.length > 0) {
         var oldVal = englishInput.attr('orig');
         var result = config.exec(oldVal);
         if(result && result.length > 1) {
+            var wAndH = dimension.exec(oldVal);
             // replace the domain.
-            newVal = '[jwplayer file="https://new.domain/mds/legacy' + result[1] + '" lang="en"]';
+            newVal = '[jwplayer file="https://new.domain/mds/legacy' +
+                     result[1] + '" lang="en" width="' + wAndH[1] + 
+                     '" height="' + wAndH[2] + '"]';
             englishInput.val(newVal);
         }
     }
@@ -73,8 +77,12 @@ function addJwplayerShortcode() {
         var oldVal = frenchInput.attr('orig');
         var result = config.exec(oldVal);
         if(result && result.length > 1) {
+            var wAndH = dimension.exec(oldVal);
             // replace the domain.
-            newVal = '[jwplayer file="https://new.domain/mds/legacy' + result[1] + '" lang="fr"]';
+            newVal = '[jwplayer file="https://new.domain/mds/legacy' +
+                     result[1] + '" lang="fr" width="' + wAndH[1] + 
+                     '" height="' + wAndH[2] + '"]';
+            // replace the domain.
             frenchInput.val(newVal);
         }
     }
