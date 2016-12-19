@@ -63,7 +63,7 @@ function addJwplayerShortcode() {
     if(englishInput.length > 0) {
         var oldVal = englishInput.attr('orig');
         var result = config.exec(oldVal);
-        if(result.length > 1) {
+        if(result && result.length > 1) {
             // replace the domain.
             newVal = '[jwplayer file="https://new.domain/mds/legacy' + result[1] + '" lang="en"]';
             englishInput.val(newVal);
@@ -72,7 +72,7 @@ function addJwplayerShortcode() {
     if(frenchInput.length > 0) {
         var oldVal = frenchInput.attr('orig');
         var result = config.exec(oldVal);
-        if(result.length > 1) {
+        if(result && result.length > 1) {
             // replace the domain.
             newVal = '[jwplayer file="https://new.domain/mds/legacy' + result[1] + '" lang="fr"]';
             frenchInput.val(newVal);
