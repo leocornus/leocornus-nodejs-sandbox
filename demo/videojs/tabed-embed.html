@@ -57,22 +57,26 @@ function addJwplayerShortcode() {
     var frenchInput= jQuery("form[name='myform_fr'] input[name='mytext_fr']");
     // get ready the search regular express  pattern.
     // we will find all matches.
-    var config = /config=(http.*config\.xml)"/;
+    var config = /config=http.*(\/internal\/.*\/config\.xml)"/;
     var newVal = '';
 
     if(englishInput.length > 0) {
         var oldVal = englishInput.attr('orig');
         var result = config.exec(oldVal);
-        // replace the domain.
-        newVal = '[jwplayer file="' + result[1] + '" lang="en"]';
-        englishInput.val(newVal);
+        if(result.length > 1) {
+            // replace the domain.
+            newVal = '[jwplayer file="https://new.domain/mds/legacy' + result[1] + '" lang="en"]';
+            englishInput.val(newVal);
+        }
     }
     if(frenchInput.length > 0) {
         var oldVal = frenchInput.attr('orig');
         var result = config.exec(oldVal);
-        // replace the domain.
-        newVal = '[jwplayer file="' + result[1] + '" lang="fr"]';
-        frenchInput.val(newVal);
+        if(result.length > 1) {
+            // replace the domain.
+            newVal = '[jwplayer file="https://new.domain/mds/legacy' + result[1] + '" lang="fr"]';
+            frenchInput.val(newVal);
+        }
     }
 }
 
@@ -173,7 +177,7 @@ function replaceEmbedCode(fromPlayer, toPlayer) {
 
           <div class="row_right">
             <form name="myform_fr">
-              <input type="text" name="mytext_fr" value="<object width=&quot;400&quot; height=&quot;300&quot; classid=&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000&quot; id=&quot;mds2325&quot; class=&quot;mdsvideo&quot;><param name=&quot;movie&quot; value=&quot;http://www.media.gov.on.ca/player/5.1.818/player.swf?config=http://www.media.gov.on.ca/internal/5ff96c18fba293a0/fr/config.xml&quot;></param><param name=&quot;allowfullscreen&quot; value=&quot;true&quot;></param><param name=&quot;allowscriptaccess&quot; value=&quot;always&quot;></param><param name=&quot;wmode&quot; value=&quot;transparent&quot;></param><embed src=&quot;http://www.media.gov.on.ca/player/5.1.818/player.swf?config=http://www.media.gov.on.ca/5ff96c18fba293a0/fr/config.xml&amp;amp;image=http://www.media.gov.on.ca&quot; width=&quot;400&quot; height=&quot;300&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot; wmode=&quot;transparent&quot; type=&quot;application/x-shockwave-flash&quot;  class=&quot;mdsvideo&quot;></embed></object><p class=&quot;mdsvideo&quot;></p>" class="copybox">
+              <input type="text" name="mytext_fr" value="<object width=&quot;400&quot; height=&quot;300&quot; classid=&quot;clsid:D27CDB6E-AE6D-11cf-96B8-444553540000&quot; id=&quot;mds2325&quot; class=&quot;mdsvideo&quot;><param name=&quot;movie&quot; value=&quot;http://www.media.gov.on.ca/player/5.1.818/player.swf?config=http://www.media.gov.on.ca/5ff96c18fba293a0/fr/config.xml&quot;></param><param name=&quot;allowfullscreen&quot; value=&quot;true&quot;></param><param name=&quot;allowscriptaccess&quot; value=&quot;always&quot;></param><param name=&quot;wmode&quot; value=&quot;transparent&quot;></param><embed src=&quot;http://www.media.gov.on.ca/player/5.1.818/player.swf?config=http://www.media.gov.on.ca/5ff96c18fba293a0/fr/config.xml&amp;amp;image=http://www.media.gov.on.ca&quot; width=&quot;400&quot; height=&quot;300&quot; allowscriptaccess=&quot;always&quot; allowfullscreen=&quot;true&quot; wmode=&quot;transparent&quot; type=&quot;application/x-shockwave-flash&quot;  class=&quot;mdsvideo&quot;></embed></object><p class=&quot;mdsvideo&quot;></p>" class="copybox">
               <input onclick="javascript:copyToClipboard('myform_fr.mytext_fr')" type="button" value="select french embed code" class="copyclipboard">
             </form>
           </div>
