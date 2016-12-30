@@ -20,8 +20,10 @@ jQuery(document).ready(function($) {
         $(this).css('background', 'red');
         $(this).animate({width: "200px"});
     }, function() {
-        $(this).animate({width: "14px"});
-        $(this).css('background', '');
+        $(this).animate({width: "14px"}, 'normal', 'linear', 
+                        function() {
+            $(this).css('background', '');
+        });
     });
 });
     </script>
