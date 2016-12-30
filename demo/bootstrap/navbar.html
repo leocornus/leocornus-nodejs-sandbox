@@ -16,11 +16,13 @@
 
 jQuery(document).ready(function($) {
 
+    var boardcastWidth = $('#boardcast').css('width');
+    console.log(boardcastWidth);
     $('#boardcast').hover(function() {
         $(this).css('background', 'red');
-        $(this).animate({width: "200px"});
+        $(this).animate({width: "200px"}, 'slow');
     }, function() {
-        $(this).animate({width: "14px"}, 'normal', 'linear', 
+        $(this).animate({width: boardcastWidth}, 'slow', 'linear', 
                         function() {
             $(this).css('background', '');
         });
@@ -50,12 +52,10 @@ jQuery(document).ready(function($) {
             <li><a href="#contact">Contact</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#message">
+            <li><a href="#message" id="boardcast">
               <span class="glyphicon glyphicon-bullhorn 
                            text-success"
-                    id="boardcast"
-              ></span>
-            </a></li>
+              ></span></a></li>
             <li><a href="#profile">Profile</a></li>
           </ul>
         </div><!--/.nav-collapse -->
