@@ -19,7 +19,13 @@ jQuery(document).ready(function($) {
     var boardcastWidth = $('#boardcast').css('width');
     console.log(boardcastWidth);
     $('#boardcast').hover(function() {
-        $('#themessage').animate({opacity: 1}, 'slow');
+        // set the target position.
+        var target = {
+            opacity: 1,
+            width: "400px",
+            fontSize: "1em"
+        };
+        $('#themessage').animate(target, 'slow');
     });
 
     $('#boardcastone').hover(function() {
@@ -41,7 +47,8 @@ jQuery(document).ready(function($) {
     background: grey;
     top: 50px;
     left: 800px;
-    width: 400px;
+    width: 0px;
+    font-size: 0px;
     z-index: 2000;
 }
     </style>
