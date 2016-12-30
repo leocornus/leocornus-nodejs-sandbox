@@ -28,6 +28,15 @@ jQuery(document).ready(function($) {
         $('#themessage').animate(target, 'slow');
     });
 
+    $('#close-message').click(function() {
+        var target = {
+            opacity: 0,
+            width: "0px",
+            fontSize: "0px"
+        };
+        $('#themessage').animate(target, 'slow');
+    });
+
     $('#boardcastone').hover(function() {
         $(this).css('background', 'red');
         $('#themessage').animate({opacity: 1}, 'slow');
@@ -37,6 +46,7 @@ jQuery(document).ready(function($) {
             $(this).css('background', '');
         });
     });
+
 });
     </script>
 
@@ -55,6 +65,7 @@ jQuery(document).ready(function($) {
   </head>
   <body style="padding-top: 50px">
 <div id="themessage" class="message">
+<button class="pull-right" id="close-message">Close</button>
 <p>
 timeline 13 projects 2146 tickets 4745  commits my tickets actions commit	comment	author	uat	prod commit	comment	author	uat	prod filter by search:   
 </p>
