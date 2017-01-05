@@ -84,9 +84,10 @@ $('.form-control-clear').click(function() {
         searchUrl: 'http://intra.net.gov.on.ca/wp-admin/admin-ajax.php?callback=?&action=opspedia_advanced_search',
         //searchUrl: '/advancedsearch',
         // magic numbers: 3, 7, 19, 37
-        itemsPerPage: 107,
+        itemsPerPage: 31,
         // we don't need search button here.
-        fq: 'site: wiki AND keywords: Acronyms',
+        fq: 'site: revenue AND keywords: "Staffing Announcements"',
+        //fq: 'site: wiki AND keywords: Acronyms',
         //fq: 'keywords: "User Profile"',
         //searchButton: 'sizing-addon',
         facet: {
@@ -126,6 +127,7 @@ var simpleColumnBuilder = function(item) {
   <li role="presentation">
     <a href="/wiki/Category:Acronyms"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Create New</a>
   </li>
+  <li class="pull-right" role="presentation"><a href="/wiki/"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> How we build this page</a></li>
 </ul>
       </div>
     </div>
