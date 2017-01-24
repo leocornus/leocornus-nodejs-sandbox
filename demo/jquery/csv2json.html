@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CSV to JSON demo</title>
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-header"><h1>CSV to JSON Demo</h1></div>
+
+  <div>
+    <div class="input-group input-group-lg"
+         role="group" aria-label="...">
+      <span class="input-group-addon">
+        <i class="fa fa-search text-primary"></i>
+        Path to CSV file:
+      </span>
+      <div class="form-group form-group-lg has-feedback has-clear">
+        <input type="text" class="form-control"
+               value="intranet-size.txt"
+               placeholder="Find Acronyms"
+               id="search-input"
+               aria-describedby="sizing-addon"/>
+        <span class="form-control-clear text-primary
+                     glyphicon glyphicon-remove
+                     form-control-feedback hidden"></span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" id="search-bar">
+    <div class="col-md-5">
+    Source CSV:<br/>
+    <textarea style="width:100%" id="csvstring" rows="30"></textarea>
+    </div>
+
+    <div class="col-md-2">
+      <button>Load</button><br/>
+      <button>2 JSON</button>
+    </div>
+
+    <div class="col-md-5">
+    JSON:<br/>
+    <textarea style="width:100%" id="jsonstring" rows="30"></textarea>
+    </div>
+  </div>
+</div>
+ 
+<script>
+
+</script>
+ 
+</body>
+</html>
