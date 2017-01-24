@@ -8,6 +8,7 @@
 
   <script src='/bower_components/jquery/dist/jquery.min.js'></script>
   <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
 
 </head>
 <body>
@@ -27,7 +28,7 @@
         <input type="text" class="form-control"
                value="intranet-size.txt"
                placeholder="Find Acronyms"
-               id="search-input"
+               id="source-file"
                aria-describedby="sizing-addon"/>
         <span class="form-control-clear text-primary
                      glyphicon glyphicon-remove
@@ -43,8 +44,8 @@
     </div>
 
     <div class="col-md-2">
-      <button>Load</button><br/>
-      <button>2 JSON</button>
+      <button id="load">Load</button><br/>
+      <button id="convert">2 JSON</button>
     </div>
 
     <div class="col-md-5">
@@ -55,6 +56,67 @@
 </div>
  
 <script>
+
+jQuery(document).ready(function($) {
+
+    $('#load').on('click', function() {
+
+        //alert('loading');
+        var source = $('#source-file').val();
+        $.ajax({
+            type: "GET",
+            url: source,
+            dataType: "text",
+            success: function(data) {
+                $('#csvstring').val(data);
+            }
+        });
+    });
+
+    $('#convert').on('click', function() {
+
+        // read the csv.
+        var origin = $('#csvstring').val();
+        var originLines = origin.split(/\r\n|\n/);
+        // array for each circle:
+        var circles = [];
+        var color = d3.scale.linear().domain([0, originLines.length])
+            .range(["blue", "yellow"])
+            .interpolate(d3.interpolateHcl);
+        //alert(originLines.length);
+        for(var i = 0; i < originLines.length; i++) {
+            var row = originLines[i].split(',');
+            var circle = {
+              "name": row[1],
+              "children":[{
+                "name": row[1],
+                "size": parseInt(row[0].trim()),
+                "leafFill": color(i),
+                "imgUrl": ''
+              }]
+            };
+
+            circles.push(circle);
+        }
+
+        var jsonData = {
+          "attributes": {
+            "title": "3 Equal size circles",
+            "description": "Data example to show the data structure",
+            "colorRange": [
+              "white"
+            ],
+            "leafFill": "green"
+          },
+          "data": {
+            "name":"This will NOT show anywhere!",
+            "children": circles
+          }
+        };
+
+        $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
+    });
+});
 
 </script>
  
