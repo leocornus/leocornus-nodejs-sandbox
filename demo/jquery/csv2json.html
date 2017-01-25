@@ -85,9 +85,10 @@ jQuery(document).ready(function($) {
             var row = originLines[i].split(',');
             // skip the empty row.
             if(row.length <= 1) continue;
-            var id = parseInt(row[0].trim());
-            var path = row[1].trim().slice(0, -1);
-            rows.push([id, path]);
+            var id = parseInt(row[1].trim());
+            //var path = row[1].trim().slice(0, -1);
+            var size = parseInt(row[0].trim());
+            rows.push([id, size]);
         }
 
         $('#jsonstring').html(JSON.stringify(rows, null, 2));

@@ -1,0 +1,127 @@
+<!-- MOVED to new location demo/solr-search -->
+<html ng-app="grepDemo">
+  <head>
+    <title>Demo jQuery grep</title>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+    <link rel='stylesheet' href='/bower_components/jquery-ui/themes/base/jquery-ui.css'/>
+    <link rel='stylesheet' href='/bower_components/jquery-ui-bootstrap/jquery.ui.theme.css'/>
+
+    <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='/bower_components/jquery-ui/jquery-ui.min.js'></script>
+    <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src='/bower_components/angular/angular.min.js'></script>
+
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src='https://cdn.rawgit.com/leocornus/leocornus-visualdata/v0.0.6/src/zoomable-circles.js'></script>
+
+    <script>
+// this will replace the code in controller.js
+var simpleTest = angular.module('grepDemo', []);
+
+jQuery(document).ready(function($) {
+
+   $.ajax({
+       type: "GET",
+       url: 'data/intranet-size-2017.json',
+       dataType: "json",
+       success: function(data) {
+           console.log(data.length);
+       }
+   });
+});
+    </script>
+
+    <style>
+    .list-group-item {
+        border: 0px;
+    }
+
+    .panel-custom {
+        border: 0px;
+    }
+
+    .panel-custom .panel-footer{
+        background: #FFF;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- page header -->
+      <div class="page-header">
+        <h1 class="">jQuery grep Demo Page</h1> 
+      </div>
+
+      <!-- Search bar -->
+      <div class="container container-fluid bar-search bg-muted">
+      <div class="row" id="search-bar">
+        <div class="col-md-2">
+        </div>
+
+        <div class="col-md-8">
+          <div class="input-group"
+               role="group" aria-label="...">
+            <input type="text" class="form-control"
+                   placeholder="Find something"
+                   id="search-input"
+                   aria-describedby="sizing-addon"/>
+            <span class="input-group-btn">
+              <button class="btn btn-default"
+                 type="button"
+                 id="sizing-addon">
+                <i class="fa fa-search text-primary"></i>
+                Search
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+        </div>
+      </div>
+      <p></p>
+      </div>
+
+      <!-- search result -->
+      <div class="container container-fluid bar-search bg-muted">
+      <div class="row" id="search-result"> 
+
+      <div class="col-md-8">
+        <div class="panel panel-info panel-custom">
+          <div class="panel-heading">
+            Current Search:
+          </div>
+
+          <div class="panel-body">
+            Sort by dropdown<br/>
+            Page 4 of 345 Results
+          </div>
+
+          <div class="panel-footer panel-footer-custom">
+           happy footer 
+          </div>
+        </div>
+      </div> <!-- col-8 -->
+
+      <div class="col-md-4">
+        <div class="panel panel-success panel-custom">
+          <div class="panel-heading">
+            Search Filters
+          </div>
+
+          <div class="panel-body">
+            LIST OF FILTERS.
+            <p></p>
+            In Tag Cloud
+          </div>
+      </div> <!-- col-4 -->
+
+      </div> <!-- search result row -->
+      </div>
+
+    </div>
+  </body>
+</html>
