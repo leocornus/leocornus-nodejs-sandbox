@@ -164,9 +164,6 @@ jQuery(document).ready(function($) {
      */
     function buildSitesSummary(sites, colors) {
 
-        var summary = $("#summary");
-        summary.html('');
-
         var items = [];
         var total = 0;
         for(i = 0; i < sites.length; i++) {
@@ -186,20 +183,23 @@ name + '</a>' +
             items.push(item);
         }
 
+        var groupHeading = 
+'  <li class="list-group-item">' +
+'      <span class="badge">Total size: ' + total + 'KB</span>' +
+'<strong>' + sites.length + '</strong> Sites' +
+'  </li>';
         var group = 
 '<ul class="list-group">' +
-'  <li class="list-group-item">' +
-'      <span class="badge">Total size: ' + total + 'KB</span>' +
-'<strong>' + sites.length + '</strong> Sites' +
-'  </li>' +
 items.join('\n') +
-'  <li class="list-group-item">' +
-'      <span class="badge">Total size: ' + total + 'KB</span>' +
-'<strong>' + sites.length + '</strong> Sites' +
-'  </li>' +
 '</ul>';
 
-        summary.append(group);
+        var summary = $("#summary");
+        summary.html(group);
+        var summaryHeading = 
+'Found <span class="badge">' + sites.length + '</span> Sites' +
+'<span class="badge pull-right">Total size: ' + total + 'KB</span>';
+        var heading = $('#summary-heading');
+        heading.html(summaryHeading);
     }
 
     /**
@@ -321,7 +321,7 @@ items.join('\n') +
       <div class="col-md-4">
         <div class="panel panel-success panel-no-custom">
           <div class="panel-heading" id="summary-heading">
-            Found <strong>111</strong> Sites,
+            Found <span class="badge">111</span> Sites
             <span class="badge pull-right">Total size: 234KB</span>
           </div>
 
