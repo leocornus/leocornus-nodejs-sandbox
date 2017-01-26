@@ -110,16 +110,26 @@ jQuery(document).ready(function($) {
     $('#search-button').on('click', function() {
 
         var term = $('#search-input').val();
-            console.log(term);
+        handleSearch(term);
+    });
+
+
+    /**
+     * perform search again and rebuild the zoomable circle.
+     * TODO: add animation
+     */
+    function handleSearch(searchTerm) {
+
+        //console.log(searchTerm);
         // perform search.
         var sites = $.grep(intranets, function(site, i) {
-            //return site[1].includes(term);
-            var index = site[1].indexOf(term);
-            return index > -1;
+            return site[1].includes(searchTerm);
+            //var index = site[1].indexOf(term);
+            //return index > -1;
         });
 
         buildZoomableCircles(sites);
-    });
+    }
 
     /**
      * utility function to build zoomable circles.
