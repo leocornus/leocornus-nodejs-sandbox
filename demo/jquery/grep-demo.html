@@ -102,6 +102,11 @@ jQuery(document).ready(function($) {
             });
             if(i >= 0) intranets[i].push(theSize);
         });
+        // sort the intranets.
+        intranets = intranets.sort(function(a, b) {
+            // sort by size of the site.
+            return b[2] - a[2];
+        });
         // scale colors.
         var colors = scaleColors(["blue", "yellow"], 
                                  intranets.length);
@@ -307,10 +312,6 @@ items.join('\n') +
 
       <div class="col-md-8">
         <div class="panel panel-info panel-custom">
-          <div class="panel-heading">
-            Current Search:
-          </div>
-
           <div class="panel-body" id="result">
             Sort by dropdown<br/>
             Page 4 of 345 Results
