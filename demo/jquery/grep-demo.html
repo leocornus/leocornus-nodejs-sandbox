@@ -193,8 +193,9 @@ name + '</a>' +
 '<strong>' + sites.length + '</strong> Sites' +
 '  </li>' +
 items.join('\n') +
-'  <li class="list-group-item pull-right">' +
-'      <span class="badge">Total: 14</span>' +
+'  <li class="list-group-item">' +
+'      <span class="badge">Total size: ' + total + 'KB</span>' +
+'<strong>' + sites.length + '</strong> Sites' +
 '  </li>' +
 '</ul>';
 
@@ -319,11 +320,13 @@ items.join('\n') +
 
       <div class="col-md-4">
         <div class="panel panel-success panel-no-custom">
-          <div class="panel-heading">
-            Summary 
+          <div class="panel-heading" id="summary-heading">
+            Found <strong>111</strong> Sites,
+            <span class="badge pull-right">Total size: 234KB</span>
           </div>
 
-          <div class="panel-body" id="summary" style="height: 500px">
+          <div class="panel-body" id="summary" 
+               style="height: 500px; overflow-y: scroll">
 <ul class="list-group">
   <li class="list-group-item">
       <span class="badge">Size</span>
