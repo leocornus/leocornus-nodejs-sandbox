@@ -107,6 +107,7 @@ jQuery(document).ready(function($) {
                                  intranets.length);
         //console.log(intranets);
         buildZoomableCircles(intranets, colors);
+        buildSitesSummary(intranets, colors);
     });
 
     // hook the click function.
@@ -144,7 +145,7 @@ jQuery(document).ready(function($) {
         // scale colors.
         var colors = scaleColors(["blue", "yellow"], sites.length);
         buildZoomableCircles(sites, colors);
-        //buildSitesSummary(sites, colors);
+        buildSitesSummary(sites, colors);
     }
 
     /**
@@ -279,23 +280,36 @@ jQuery(document).ready(function($) {
             Sort by dropdown<br/>
             Page 4 of 345 Results
           </div>
-
-          <div class="panel-footer panel-footer-custom">
-           happy footer 
-          </div>
         </div>
       </div> <!-- col-8 -->
 
       <div class="col-md-4">
-        <div class="panel panel-success panel-custom">
+        <div class="panel panel-success panel-no-custom">
           <div class="panel-heading">
-            Search Filters
+            Summary 
           </div>
 
-          <div class="panel-body">
-            LIST OF FILTERS.
-            <p></p>
-            In Tag Cloud
+          <div class="panel-body" id="summary" style="height: 500px">
+<ul class="list-group">
+  <li class="list-group-item">
+      <span class="badge">Size</span>
+      Intranet Site
+  </li>
+  <li class="list-group-item" >
+      <span class="badge" style="background: blue">14</span>
+      <span class="glyphicon glyphicon-stop"
+            style="background: blue"></span>
+      <a href="http://intra.net.gov.on.ca/cac">CAC</a>
+  </li>
+  <li class="list-group-item">
+      <span class="badge">14KB</span>
+        <a href="http://intra.net.gov.on.ca/cac">CAC</a>
+  </li>
+  <li class="list-group-item pull-right">
+      <span class="badge">Total: 14</span>
+  </li>
+</ul>
+            
           </div>
       </div> <!-- col-4 -->
 
