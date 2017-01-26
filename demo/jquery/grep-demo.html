@@ -102,8 +102,12 @@ jQuery(document).ready(function($) {
             });
             if(i >= 0) intranets[i].push(theSize);
         });
+        // scale colors.
+        var colors = d3.scale.linear().domain([0, intranets.length])
+            .range(["blue", "yellow"])
+            .interpolate(d3.interpolateHcl);
         //console.log(intranets);
-        buildZoomableCircles(intranets);
+        buildZoomableCircles(intranets, colors);
     });
 
     // hook the click function.
@@ -138,14 +142,27 @@ jQuery(document).ready(function($) {
             //return index > -1;
         });
 
-        buildZoomableCircles(sites);
-        //buildSitesSummary(sites);
+        // scale colors.
+        var colors = d3.scale.linear().domain([0, sites.length])
+            .range(["blue", "yellow"])
+            .interpolate(d3.interpolateHcl);
+
+        buildZoomableCircles(sites, colors);
+        //buildSitesSummary(sites, colors);
+    }
+    
+    /**
+     * utility function to build the summary.
+     */
+    function buildSitesSummary(sites, colors) {
+
+        //nothing for now...
     }
 
     /**
      * utility function to build zoomable circles.
      */
-    function buildZoomableCircles(sites) {
+    function buildZoomableCircles(sites, colors) {
 
         var result = $("#result");
         result.html("");
@@ -153,9 +170,6 @@ jQuery(document).ready(function($) {
 
         // get ready the data.
         var circles =[];
-        var color = d3.scale.linear().domain([0, sites.length])
-            .range(["blue", "yellow"])
-            .interpolate(d3.interpolateHcl);
         for(i = 0; i < sites.length; i++) {
             var site = sites[i];
             var size = site[2];
@@ -167,7 +181,7 @@ jQuery(document).ready(function($) {
               "children":[{
                   "name": site[1],
                   "size": site[2],
-                  "leafFill": color(i),
+                  "leafFill": colors(i),
                   "imgUrl": ""
               }]
             };
