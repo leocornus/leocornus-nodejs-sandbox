@@ -113,6 +113,15 @@ jQuery(document).ready(function($) {
         handleSearch(term);
     });
 
+    // hook the keypress evetn.
+    $('#search-input').on('keypress', function(event) {
+
+        //console.log(event);
+        // only handle the enter key.
+        if(event.keyCode == 13) {
+            handleSearch($(this).val());
+        }
+    });
 
     /**
      * perform search again and rebuild the zoomable circle.
