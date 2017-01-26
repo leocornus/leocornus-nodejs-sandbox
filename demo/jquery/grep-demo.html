@@ -103,9 +103,8 @@ jQuery(document).ready(function($) {
             if(i >= 0) intranets[i].push(theSize);
         });
         // scale colors.
-        var colors = d3.scale.linear().domain([0, intranets.length])
-            .range(["blue", "yellow"])
-            .interpolate(d3.interpolateHcl);
+        var colors = scaleColors(["blue", "yellow"], 
+                                 intranets.length);
         //console.log(intranets);
         buildZoomableCircles(intranets, colors);
     });
@@ -143,12 +142,20 @@ jQuery(document).ready(function($) {
         });
 
         // scale colors.
-        var colors = d3.scale.linear().domain([0, sites.length])
-            .range(["blue", "yellow"])
-            .interpolate(d3.interpolateHcl);
-
+        var colors = scaleColors(["blue", "yellow"], sites.length);
         buildZoomableCircles(sites, colors);
         //buildSitesSummary(sites, colors);
+    }
+
+    /**
+     * utility function to scale colors.
+     * colorRance will be like: ["blue", "yellow"]
+     */
+    function scaleColors(colorRange, size) {
+
+        return d3.scale.linear().domain([0, size])
+            .range(colorRange)
+            .interpolate(d3.interpolateHcl);
     }
     
     /**
