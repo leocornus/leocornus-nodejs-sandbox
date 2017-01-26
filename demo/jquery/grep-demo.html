@@ -136,7 +136,7 @@ jQuery(document).ready(function($) {
             .range(["blue", "yellow"])
             .interpolate(d3.interpolateHcl);
         for(i = 0; i < sites.length; i++) {
-            var site = intranets[i];
+            var site = sites[i];
             var size = site[2];
             // set name to empty if size is too small
             // less than 200MB.
