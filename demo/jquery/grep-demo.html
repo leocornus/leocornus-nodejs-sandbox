@@ -119,6 +119,7 @@ jQuery(document).ready(function($) {
         //console.log(event);
         // only handle the enter key.
         if(event.keyCode == 13) {
+            // this is binded to dom element.
             handleSearch($(this).val());
         }
     });
@@ -138,6 +139,7 @@ jQuery(document).ready(function($) {
         });
 
         buildZoomableCircles(sites);
+        //buildSitesSummary(sites);
     }
 
     /**
