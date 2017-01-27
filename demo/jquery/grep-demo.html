@@ -108,7 +108,7 @@ jQuery(document).ready(function($) {
             return b[2] - a[2];
         });
         // scale colors.
-        var colors = scaleColors(["blue", "yellow"], 
+        var colors = scaleColors(["#FF4900", "#14cc46"], 
                                  intranets.length);
         //console.log(intranets);
         buildZoomableCircles(intranets, colors);
@@ -148,7 +148,7 @@ jQuery(document).ready(function($) {
         });
 
         // scale colors.
-        var colors = scaleColors(["blue", "yellow"], sites.length);
+        var colors = scaleColors(["#FF4900", "#14cc46"], sites.length);
         buildZoomableCircles(sites, colors);
         buildSitesSummary(sites, colors);
     }
@@ -159,9 +159,13 @@ jQuery(document).ready(function($) {
      */
     function scaleColors(colorRange, size) {
 
-        return d3.scale.linear().domain([0, size])
-            .range(colorRange)
-            .interpolate(d3.interpolateHcl);
+        //return d3.scale.linear().domain([0, size])
+        //    .range(colorRange)
+        //    .interpolate(d3.interpolateHcl);
+        //return d3.scale.category10();
+        return d3.scale.category20();
+        //return d3.scale.category20b();
+        //return d3.scale.category20c();
     }
     
     /**
