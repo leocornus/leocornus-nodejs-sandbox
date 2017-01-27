@@ -183,7 +183,7 @@ jQuery(document).ready(function($) {
             var item = 
 '<li class="list-group-item" >' +
 '  <span class="badge" style="background: ' + colors(i) + '">' +
-size + 'KB</span>' +
+readablizeBytes(size * 1024) + '</span>' +
 '  <span class="glyphicon glyphicon-stop"' +
 '        style="color: ' + colors(i) + '"></span>' +
 '  <a href="http://intra.net.gov.on.ca/' + name + '">' + 
@@ -206,7 +206,8 @@ items.join('\n') +
         summary.html(group);
         var summaryHeading = 
 'Found <span class="badge">' + sites.length + '</span> Sites' +
-'<span class="badge pull-right">Total size: ' + total + 'KB</span>';
+'<span class="badge pull-right">Total size: ' + 
+readablizeBytes(total * 1024) + '</span>';
         var heading = $('#summary-heading');
         heading.html(summaryHeading);
     }
@@ -227,7 +228,8 @@ items.join('\n') +
             var size = site[2];
             // set name to empty if size is too small
             // less than 200MB.
-            var name = size > 2000000 ? site[1] : '';
+            // we have sorted the site by size.
+            var name = i < Math.min(sites.length / 2, 10) ? site[1] : '';
             var circle = {
               "name": name,
               "children":[{
@@ -254,7 +256,17 @@ items.join('\n') +
                 "children": circles
               }
             };
-        $('#circles').zoomableCircles({}, jsonData);
+        $('#circles').zoomableCircles({"diameter":600, "margin":5}, jsonData);
+    }
+
+    /**
+     * utility function to show readable size.
+     */
+    function readablizeBytes(bytes) {
+
+        var s = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
+        var e = Math.floor(Math.log(bytes) / Math.log(1024));
+        return (bytes / Math.pow(1024, e)).toFixed(2) + " " + s[e];
     }
 });
     </script>
@@ -315,12 +327,8 @@ items.join('\n') +
       <div class="row" id="search-result"> 
 
       <div class="col-md-8">
-        <div class="panel panel-info panel-custom">
-          <div class="panel-body" id="result">
-            Sort by dropdown<br/>
-            Page 4 of 345 Results
+          <div id="result">
           </div>
-        </div>
       </div> <!-- col-8 -->
 
       <div class="col-md-4">
