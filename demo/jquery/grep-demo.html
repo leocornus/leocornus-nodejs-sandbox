@@ -74,6 +74,9 @@ jQuery(document).ready(function($) {
     searchTerm = decodeURIComponent(searchTerm);
     $('#search-input').val(searchTerm);
 
+    // Internet Explorer 6-11
+    var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
     // using when to have multipile ajax call.
     $.when(
         // get the list name.
@@ -82,7 +85,7 @@ jQuery(document).ready(function($) {
             url: 'data/intranet-path.json',
             dataType: "json",
             success: function(data) {
-                console.log(data.length);
+                //console.log(data.length);
                 intranets = data;
             }
         }),
@@ -92,7 +95,7 @@ jQuery(document).ready(function($) {
             url: 'data/intranet-size-2017.json',
             dataType: "json",
             success: function(data) {
-                console.log(data.length);
+                //console.log(data.length);
                 sizes = data;
             }
         })
@@ -100,14 +103,26 @@ jQuery(document).ready(function($) {
 
         //console.log(intranets);
         // append the size to intanets list.
-        sizes.forEach(function(size) {
+        //sizes.forEach(function(size) {
+        $.each(sizes, function(index, size) {
             var id = size[0];
             var theSize = size[1];
-            // it will return -1, if no match found.
-            var i = intranets.findIndex(function(one) {
-                return one[0] === id;
-            });
+            var i = -1;
+            if(isIE) {
+                for(var n = 0; n < intranets.length; n++) {
+                    if(intranets[n][0] === id) {
+                        i = n;
+                        break;
+                    }
+                } 
+            } else {
+                // it will return -1, if no match found.
+                i = intranets.findIndex(function(one) {
+                    return one[0] === id;
+                });
+            }
             if(i >= 0) intranets[i].push(theSize);
+            //console.log(intranets[i]);
         });
         // sort the intranets.
         intranets = intranets.sort(function(a, b) {
@@ -153,9 +168,9 @@ jQuery(document).ready(function($) {
         //console.log(searchTerm);
         // perform search.
         var sites = $.grep(intranets, function(site, i) {
-            return site[1].includes(searchTerm);
-            //var index = site[1].indexOf(term);
-            //return index > -1;
+            //return site[1].includes(searchTerm);
+            var index = site[1].indexOf(searchTerm);
+            return index > -1;
         });
 
         // scale colors.
