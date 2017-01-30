@@ -198,7 +198,7 @@ name + '</a>' +
 '<strong>' + sites.length + '</strong> Sites' +
 '  </li>';
         var group = 
-'<ul class="list-group">' +
+'<ul class="list-group" style="margin: 0px">' +
 items.join('\n') +
 '</ul>';
 
@@ -339,7 +339,8 @@ readablizeBytes(total * 1024) + '</span>';
           </div>
 
           <div class="panel-body" id="summary" 
-               style="height: 500px; overflow-y: scroll">
+               style="max-height: 500px; overflow-y: auto;
+                      padding: 0px">
 <ul class="list-group">
   <li class="list-group-item">
       <span class="badge">Size</span>
