@@ -41,6 +41,10 @@
     "lightbox2": "~2.8.2",
     "arm-galleria": "~1.4.3",
     "video.js": "~5.10.2",
-    "jsoneditor": "~5.5.7"
+    "jsoneditor": "~5.5.7",
+    "leocornus-visualdata": "^0.0.7"
+  },
+  "resolutions": {
+    "font-awesome": "~4.7.0"
   }
 }
