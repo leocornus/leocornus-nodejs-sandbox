@@ -247,11 +247,12 @@ readablizeBytes(total * 1024) + '</span>';
         result.html("");
         result.append('<div id="circles"></div>');
 
-        // get ready the data.
-        var circles =[];
+        // get ready group circles first.
+        var groupCircles = {};
         for(i = 0; i < sites.length; i++) {
             var site = sites[i];
             var size = site[3];
+            // build the leaf circle.
             // set name to empty if size is too small
             // less than 200MB.
             // we have sorted the site by size.
@@ -265,15 +266,37 @@ readablizeBytes(total * 1024) + '</span>';
                   "imgUrl": ""
               }]
             };
-            circles.push(circle);
+
+            // check the gorup.
+            var group = site[2];
+            if(Object.keys(groupCircles).indexOf(group) > -1) {
+                groupCircles[group].push(circle);
+            } else {
+                groupCircles[group] = [];
+                groupCircles[group].push(circle);
+            }
+
+            //circles.push(circle);
+            console.log(groupCircles);
         }
+
+        var circles =[];
+        var groups = Object.keys(groupCircles);
+        groups.forEach(function(group) {
+            var groupCircle = {
+                "name":group,
+                "children":groupCircles[group]
+            };
+            circles.push(groupCircle);
+        });
+
         // get ready the json data for the zoomable circle.
         var jsonData = {
               "attributes": {
                 "title": "3 Equal size circles",
                 "description": "Data example to show the data structure",
                 "colorRange": [
-                  "white"
+                  "white", "lightgrey"
                 ],
                 "leafFill": "green"
               },
