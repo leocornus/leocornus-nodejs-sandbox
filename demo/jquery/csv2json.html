@@ -46,7 +46,8 @@
     <div class="col-md-2">
       <button id="load">Load</button><br/>
       <button id="convert">2 JSON</button><br/>
-      <button id="toarray">JSON Array</button>
+      <button id="toarray">JSON Array</button><br/>
+      <button id="addgroup">Add Group</button>
     </div>
 
     <div class="col-md-5">
@@ -75,6 +76,51 @@ jQuery(document).ready(function($) {
         });
     });
 
+    $('#addgroup').on('click', function() {
+
+        var source = $('#source-file').val();
+        $.ajax({
+            type: "GET",
+            url: source,
+            dataType: "json",
+            success: function(data) {
+                var sites = data;
+                for(var i = 0; i < sites.length; i++) {
+                    var site = sites[i];
+                    var name = site[1];
+                    if(name.startsWith('mnr') || 
+                       name.startsWith('natural')) {
+                        site.push('MNRF');
+                    }else if(name.startsWith('mgcs') || 
+                       name.startsWith('serviceontario')) {
+                        site.push('MGCS');
+                    }else if(name.startsWith('omafra') || 
+                       name.startsWith('digitalomafra')) {
+                        site.push('OMAFRA');
+                    }else if(name.startsWith('fin') || 
+                       name.startsWith('rev') ||
+                       name.startsWith('stevecheng')) {
+                        site.push('MOF');
+                    } else if(name.startsWith('mag')) {
+                        site.push('MAG');
+                    } else if(name.startsWith('moh')) {
+                        site.push('MOHLTC');
+                    } else if(name.startsWith('mcscs') ||
+                              name.startsWith('MCSCS')) {
+                        site.push('MCSCS');
+                    } else if(name.startsWith('tbs')) {
+                        site.push('TBS');
+                    } else if(name.startsWith('mcss')) {
+                        site.push('MCSS');
+                    } else {
+                        site.push('Personal');
+                    }
+                }
+                $('#jsonstring').html(JSON.stringify(sites, null, 2));
+            }
+        });
+    });
+
     $('#toarray').on('click', function() {
         // read the csv from the source.
         var origin = $('#csvstring').val();
@@ -86,9 +132,10 @@ jQuery(document).ready(function($) {
             // skip the empty row.
             if(row.length <= 1) continue;
             var id = parseInt(row[1].trim());
+            //var id = row[1].trim();
             //var path = row[1].trim().slice(0, -1);
             var size = parseInt(row[0].trim());
-            rows.push([id, size]);
+            rows.push({id: id, size: size});
         }
 
         $('#jsonstring').html(JSON.stringify(rows, null, 2));
