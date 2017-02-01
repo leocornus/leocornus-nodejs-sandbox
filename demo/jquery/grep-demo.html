@@ -174,7 +174,7 @@ jQuery(document).ready(function($) {
         });
 
         // scale colors.
-        var colors = scaleColors(["#FF4900", "#14cc46"], sites.length);
+        var colors = scaleColors();
         buildZoomableCircles(sites, colors);
         buildSitesSummary(sites, colors);
     }
@@ -212,7 +212,7 @@ jQuery(document).ready(function($) {
 readablizeBytes(size * 1024) + '</span>' +
 '  <span class="glyphicon glyphicon-stop"' +
 '        style="color: ' + colors(i) + '"></span>' +
-'  <a href="http://intra.net.gov.on.ca/' + name + '">' + 
+'  <a href="/' + name + '">' + 
 name + '</a>' +
 '</li>';
             items.push(item);
@@ -260,7 +260,7 @@ readablizeBytes(total * 1024) + '</span>';
               "name": name,
               "children":[{
                   "name": site[1],
-                  "size": site[2],
+                  "size": size,
                   "leafFill": colors(i),
                   "imgUrl": ""
               }]
