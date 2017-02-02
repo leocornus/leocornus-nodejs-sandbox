@@ -85,39 +85,46 @@ jQuery(document).ready(function($) {
             dataType: "json",
             success: function(data) {
                 var sites = data;
-                for(var i = 0; i < sites.length; i++) {
-                    var site = sites[i];
-                    var name = site[1];
-                    if(name.startsWith('mnr') || 
-                       name.startsWith('natural')) {
-                        site.push('MNRF');
-                    }else if(name.startsWith('mgcs') || 
-                       name.startsWith('serviceontario')) {
-                        site.push('MGCS');
-                    }else if(name.startsWith('omafra') || 
-                       name.startsWith('digitalomafra')) {
-                        site.push('OMAFRA');
-                    }else if(name.startsWith('fin') || 
-                       name.startsWith('rev') ||
-                       name.startsWith('stevecheng')) {
-                        site.push('MOF');
-                    } else if(name.startsWith('mag')) {
-                        site.push('MAG');
-                    } else if(name.startsWith('moh')) {
-                        site.push('MOHLTC');
-                    } else if(name.startsWith('mcscs') ||
-                              name.startsWith('MCSCS')) {
-                        site.push('MCSCS');
-                    } else if(name.startsWith('tbs')) {
-                        site.push('TBS');
-                    } else if(name.startsWith('mcss')) {
-                        site.push('MCSS');
-                    } else if(name.startsWith('mcys')) {
-                        site.push('MCYS');
-                    } else {
-                        site.push('Personal');
-                    }
-                }
+                sites = groupSites(sites);
+                //for(var i = 0; i < sites.length; i++) {
+                //    var site = sites[i];
+                //    var name = site[1];
+                //    if(name.startsWith('mnr') || 
+                //       name.startsWith('natural')) {
+                //        site.push('MNRF');
+                //    }else if(name.startsWith('mgcs') || 
+                //       name.startsWith('serviceontario')) {
+                //        site.push('MGCS');
+                //    }else if(name.startsWith('cac') || 
+                //       name.startsWith('cyssc') ||
+                //       name.startsWith('its') ||
+                //       name.startsWith('gsic') ||
+                //       name.startsWith('iit')) {
+                //        site.push('Clusters');
+                //    }else if(name.startsWith('omafra') || 
+                //       name.startsWith('digitalomafra')) {
+                //        site.push('OMAFRA');
+                //    }else if(name.startsWith('fin') || 
+                //       name.startsWith('rev') ||
+                //       name.startsWith('stevecheng')) {
+                //        site.push('MOF');
+                //    } else if(name.startsWith('mag')) {
+                //        site.push('MAG');
+                //    } else if(name.startsWith('moh')) {
+                //        site.push('MOHLTC');
+                //    } else if(name.startsWith('mcscs') ||
+                //              name.startsWith('MCSCS')) {
+                //        site.push('MCSCS');
+                //    } else if(name.startsWith('tbs')) {
+                //        site.push('TBS');
+                //    } else if(name.startsWith('mcss')) {
+                //        site.push('MCSS');
+                //    } else if(name.startsWith('mcys')) {
+                //        site.push('MCYS');
+                //    } else {
+                //        site.push('Personal');
+                //    }
+                //}
                 $('#jsonstring').html(JSON.stringify(sites, null, 2));
             }
         });
@@ -193,6 +200,51 @@ jQuery(document).ready(function($) {
         $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
     });
 });
+
+function groupSites(sites) {
+
+    var rules = [ 
+      [/^mnr/, 'MNRF'], 
+      [/^natural/, 'MNRF'], 
+      [/^fin/, 'MOF'], 
+      [/^rev/, 'MOF'], 
+      [/^stevecheng/, 'MOF'], 
+      [/^mgcs/, 'MGCS'], 
+      [/^serviceontario/, 'MGCS'], 
+      [/^omafra/, 'OMAFRA'], 
+      [/^digitalomafra/, 'OMAFRA'], 
+      [/^mag/, 'MAG'], 
+      [/^moh/, 'MOHLTC'], 
+      [/^mcscs/, 'MCSCS'], 
+      [/^MCSCS/, 'MCSCS'], 
+      [/^mcys/, 'MCYS'], 
+      [/^mcss/, 'MCSS'], 
+      [/^tbs/, 'TBS'], 
+      [/^cac/, 'Cluster'], 
+      [/^its/, 'Cluster'], 
+      [/^cyssc/, 'Cluster'], 
+      [/^gsic/, 'Cluster'], 
+      [/^iit/, 'Cluster'], 
+      [/^its/, 'Cluster'] 
+    ];
+
+    for(var i = 0; i < sites.length; i ++) {
+        var site = sites[i];
+        var name = site[1];
+        // set the default group
+        var group = 'Personal';
+        for( var n = 0; n < rules.length; n ++) {
+            var rule = rules[n];
+            if(rule[0].test(name)) {
+                group = rule[1];
+                break;
+            }
+        }
+        site.push(group);
+    }
+
+    return sites;
+}
 
 </script>
  
