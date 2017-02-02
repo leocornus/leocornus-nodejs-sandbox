@@ -7,6 +7,7 @@
   ["^mgcs", "MGCS"], 
   ["^serviceontario", "MGCS"], 
   ["^omafra", "OMAFRA"], 
+  ["^OMAFRA", "OMAFRA"], 
   ["^digitalomafra", "OMAFRA"], 
   ["^mag", "MAG"], 
   ["^moh", "MOHLTC"], 
@@ -15,10 +16,15 @@
   ["^mcys", "MCYS"], 
   ["^mcss", "MCSS"], 
   ["^tbs", "TBS"], 
+  ["^openon", "TBS"], 
+  ["^greenoffice", "TBS"], 
   ["^cac", "Clusters"], 
   ["^its", "Clusters"], 
   ["^cyssc", "Clusters"], 
   ["^gsic", "Clusters"], 
   ["^iit", "Clusters"], 
-  ["^its", "Clusters"] 
+  ["^its", "Clusters"],
+  ["^topical", "Programs"],
+  ["^tops", "Programs"],
+  ["^\/", "Groups"]
 ]
