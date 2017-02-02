@@ -79,6 +79,7 @@ var simpleTest = angular.module('grepDemo', []);
 jQuery(document).ready(function($) {
 
     var intranets;
+    var rules;
     var sizes;
 
     // get query parameters.
@@ -101,6 +102,16 @@ jQuery(document).ready(function($) {
             success: function(data) {
                 //console.log(data.length);
                 intranets = data;
+            }
+        }),
+        // get the rules for group.
+        $.ajax({
+            type: "GET",
+            url: 'data/intranet-path-rules.json',
+            dataType: "json",
+            success: function(data) {
+                //console.log(data);
+                rules = data;
             }
         }),
         // load the size.
@@ -135,14 +146,32 @@ jQuery(document).ready(function($) {
                     return one[0] === id;
                 });
             }
-            if(i >= 0) intranets[i].push(theSize);
-            //console.log(intranets[i]);
+            if(i >= 0) {
+                intranets[i].push(theSize);
+                //console.log(intranets[i]);
+
+                // try to find the match group for the Intranet path.
+                // TODO: multipile size will be different!
+                var path = intranets[i][1];
+                // set the default group
+                var group = 'Personal';
+                for( var n = 0; n < rules.length; n ++) {
+                    var rule = rules[n];
+                    var condition = RegExp(rule[0]);
+                    if(condition.test(path)) {
+                        group = rule[1];
+                        break;
+                    }
+                }
+                intranets[i].push(group);
+            }
         });
         // sort the intranets.
         intranets = intranets.sort(function(a, b) {
             // sort by size of the site.
             return b[2] - a[2];
         });
+        console.log(intranets);
         //// scale colors.
         //var colors = scaleColors(["#FF4900", "#14cc46"], 
         //                         intranets.length);
