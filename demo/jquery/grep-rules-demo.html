@@ -209,17 +209,29 @@ jQuery(document).ready(function($) {
     function handleSearch(searchTerm) {
 
         //console.log(searchTerm);
-        // perform search.
-        var sites = $.grep(intranets, function(site, i) {
-            //return site[1].includes(searchTerm);
-            var index = site[1].indexOf(searchTerm);
-            return index > -1;
-        });
+        var sites;
+        if(searchTerm.startsWith('cat:')) {
+            term = searchTerm.split(':')[1];
+            // perform search.
+            sites = $.grep(intranets, function(site, i) {
+                //return site[1].includes(searchTerm);
+                return site[3] === term;
+            });
+        } else {
+            // perform search.
+            sites = $.grep(intranets, function(site, i) {
+                //return site[1].includes(searchTerm);
+                var index = site[1].indexOf(searchTerm);
+                return index > -1;
+            });
+        }
 
         // scale colors.
         var colors = scaleColors();
         buildZoomableCircles(sites, colors);
-        //buildSitesSummary(sites, colors);
+        if(searchTerm.length > 0) {
+            buildSitesSummary(sites, colors);
+        }
     }
 
     /**
