@@ -289,40 +289,39 @@ readablizeBytes(total * 1024) + '</span>';
         var items = [];
         var total = 0;
         var groups = Object.keys(groupSites);
+        var gArray = [];
         groups.forEach(function(group, index) {
-            sites = groupSites[group];
-            var groupTotal = 0;
-            for(i = 0; i < sites.length; i++) {
-                var site = sites[i];
-                var size = site[2];
-                groupTotal = groupTotal + size;
-                var name = site[1];
-            }
+            var sites = groupSites[group]['sites'];
+            var groupTotal = groupSites[group]['total'];
             total = total + groupTotal;
+            gArray.push([group, groupTotal]);
+        });
+        // sort by group total size.
+        gArray = gArray.sort(function(a, b) {
+            return b[1] - a[1];
+        });
+        gArray.forEach(function(group, index) {
+            var groupName = group[0];
+            var groupTotal = group[1];
             var item = 
 '<li class="list-group-item" >' +
 '  <span class="badge" style="background: ' + colors(index) + '">' +
 readablizeBytes(groupTotal * 1024) + '</span>' +
 '  <span class="glyphicon glyphicon-stop"' +
 '        style="color: ' + colors(index) + '"></span>' +
-'  <a href="/' + group + '">' + 
-group + '</a>' +
+'  <a href="?search_term=cat:' + groupName + '">' + 
+groupName + '</a>' +
 '</li>';
             items.push(item);
         });
 
-        var groupHeading = 
-'  <li class="list-group-item">' +
-'      <span class="badge">Total size: ' + total + 'KB</span>' +
-'<strong>' + sites.length + '</strong> Sites' +
-'  </li>';
         var group = 
 '<ul class="list-group" style="margin: 0px">' +
 items.join('\n') +
 '</ul>';
-
         var summary = $("#summary");
         summary.html(group);
+
         var summaryHeading = 
 'Found <span class="badge">' + groups.length + '</span> Groups' +
 '<span class="badge pull-right">Total size: ' + 
@@ -365,10 +364,13 @@ readablizeBytes(total * 1024) + '</span>';
             if(Object.keys(groupCircles).indexOf(group) < 0 ) {
                 // no group exist! create new one.
                 groupCircles[group] = [];
-                groupSites[group] = [];
+                groupSites[group] = {};
+                groupSites[group]['sites'] = [];
+                groupSites[group]['total'] = 0;
             }
             groupCircles[group].push(circle);
-            groupSites[group].push(site);
+            groupSites[group]['sites'].push(site);
+            groupSites[group]['total'] += size;
 
             //circles.push(circle);
             //console.log(groupCircles);
