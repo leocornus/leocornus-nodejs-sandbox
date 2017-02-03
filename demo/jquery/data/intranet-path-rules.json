@@ -12,7 +12,8 @@
   ["^mci", "MCI"],
   ["^mah", "MAH"],
   ["^mirr", "MIRR"],
+  ["^(lrc|gis)", "LRC"],
   ["^(tbs|openon|greenoffice)", "TBS"], 
   ["^(cac|its|cyssc|iit|gsic)", "Clusters"], 
-  ["^(\/|topical|tops)", "Groups"]
+  ["^(\/|topical|tops|webcomm)", "Groups"]
 ]
