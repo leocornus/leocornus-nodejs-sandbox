@@ -84,10 +84,10 @@ jQuery(document).ready(function($) {
 
     // get query parameters.
     var queryParams = getUrlVars();
-    var searchTerm = 'search_term' in queryParams ?
-                     queryParams['search_term'] : '';
+    var searchTerm = 'group' in queryParams ?
+                     queryParams['group'] : '';
     searchTerm = decodeURIComponent(searchTerm);
-    $('#search-input').val(searchTerm);
+    //$('#search-input').val(searchTerm);
 
     // Internet Explorer 6-11
     var isIE = /*@cc_on!@*/false || !!document.documentMode;
@@ -211,12 +211,13 @@ jQuery(document).ready(function($) {
         //console.log(searchTerm);
         var sites;
         if(searchTerm.startsWith('cat:')) {
-            term = searchTerm.split(':')[1];
+            var term = searchTerm.split(':')[1];
             // perform search.
             sites = $.grep(intranets, function(site, i) {
                 //return site[1].includes(searchTerm);
                 return site[3] === term;
             });
+            updateBanner(term);
         } else {
             // perform search.
             sites = $.grep(intranets, function(site, i) {
@@ -224,6 +225,7 @@ jQuery(document).ready(function($) {
                 var index = site[1].indexOf(searchTerm);
                 return index > -1;
             });
+            updateBanner('');
         }
 
         // scale colors.
@@ -232,6 +234,21 @@ jQuery(document).ready(function($) {
         if(searchTerm.length > 0) {
             buildSitesSummary(sites, colors);
         }
+    }
+
+    /**
+     * update the message on banner.
+     */
+    function updateBanner(group) {
+
+        var banner = '<a href="?group=">All groups</a>';
+
+        if(group.length > 0) {
+            banner = banner +
+            ' > Sites for ' + group;
+        }
+
+        $('#banner').html(banner);
     }
 
     /**
@@ -273,11 +290,6 @@ name + '</a>' +
             items.push(item);
         }
 
-        var groupHeading = 
-'  <li class="list-group-item">' +
-'      <span class="badge">Total size: ' + total + 'KB</span>' +
-'<strong>' + sites.length + '</strong> Sites' +
-'  </li>';
         var group = 
 '<ul class="list-group" style="margin: 0px">' +
 items.join('\n') +
@@ -286,7 +298,7 @@ items.join('\n') +
         var summary = $("#summary");
         summary.html(group);
         var summaryHeading = 
-'Found <span class="badge">' + sites.length + '</span> Sites' +
+'Found <span class="badge">' + sites.length + '</span> Sites ' +
 '<span class="badge pull-right">Total size: ' + 
 readablizeBytes(total * 1024) + '</span>';
         var heading = $('#summary-heading');
@@ -321,7 +333,7 @@ readablizeBytes(total * 1024) + '</span>';
 readablizeBytes(groupTotal * 1024) + '</span>' +
 '  <span class="glyphicon glyphicon-stop"' +
 '        style="color: ' + colors(index) + '"></span>' +
-'  <a href="?search_term=cat:' + groupName + '">' + 
+'  <a href="?group=cat:' + groupName + '">' + 
 groupName + '</a>' +
 '</li>';
             items.push(item);
@@ -475,21 +487,9 @@ readablizeBytes(total * 1024) + '</span>';
         </div>
 
         <div class="col-md-8">
-          <div class="input-group"
-               role="group" aria-label="...">
-            <input type="text" class="form-control"
-                   placeholder="Find something"
-                   id="search-input"
-                   aria-describedby="search-button"/>
-            <span class="input-group-btn">
-              <button class="btn btn-primary"
-                 type="button"
-                 id="search-button">
-                <i class="fa fa-search"></i>
-                Search
-              </button>
-            </span>
-          </div>
+          <h2 id="banner">
+            <a href="?group=">All groups</a>
+          </h2>
         </div>
 
         <div class="col-md-2">
