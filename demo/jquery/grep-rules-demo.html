@@ -387,11 +387,17 @@ readablizeBytes(total * 1024) + '</span>';
 '<li role="presentation" class="' + active + '">'+ 
 '<a id="all" href="?group=">All</a></li>';
         tabs.push(allTab);
+        var include = false;
         //groups.forEach(function(group, index) {
         for(var i = 0; i < groups.length; i ++) {
             var group = groups[i];
             var groupName = group[0];
-            active = (term === groupName) ? 'active' : '';
+            // reset active we shall only have one active.
+            active = "";
+            if(term === groupName) {
+                include = true;
+                active = "active";
+            }
             // build the navgation tabs.
             var tab = 
 '<li role="presentation" class="' + active + '">'+ 
@@ -399,6 +405,15 @@ readablizeBytes(total * 1024) + '</span>';
 groupName + '</a></li>';
             tabs.push(tab);
             if(i >= maxTab) break;
+        }
+        if(!include && term.length > 0) {
+            // we did not find the term in groups.
+            // build the tailing tab for the search term.
+            var tab = 
+'<li role="presentation" class="active">'+ 
+'<a id="' + term + '" href="?group=cat:' + term + '">' + 
+term + '</a></li>';
+            tabs.push(tab);
         }
 
         $('#group-nav').html(tabs.join('\n'));
