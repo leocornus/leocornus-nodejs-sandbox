@@ -376,7 +376,7 @@ readablizeBytes(total * 1024) + '</span>';
     /**
      * utility function to build group nav bar.
      */
-    function buildGroupNav(term) {
+    function buildGroupNav(term, maxTab=12) {
 
         // tabs for navigation.
         var tabs = [];
@@ -387,7 +387,9 @@ readablizeBytes(total * 1024) + '</span>';
 '<li role="presentation" class="' + active + '">'+ 
 '<a id="all" href="?group=">All</a></li>';
         tabs.push(allTab);
-        groups.forEach(function(group, index) {
+        //groups.forEach(function(group, index) {
+        for(var i = 0; i < groups.length; i ++) {
+            var group = groups[i];
             var groupName = group[0];
             active = (term === groupName) ? 'active' : '';
             // build the navgation tabs.
@@ -396,7 +398,8 @@ readablizeBytes(total * 1024) + '</span>';
 '<a id="' + groupName + '" href="?group=cat:' + groupName + '">' + 
 groupName + '</a></li>';
             tabs.push(tab);
-        });
+            if(i >= maxTab) break;
+        }
 
         $('#group-nav').html(tabs.join('\n'));
     }
