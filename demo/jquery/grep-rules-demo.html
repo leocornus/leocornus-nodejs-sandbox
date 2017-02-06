@@ -246,7 +246,7 @@ jQuery(document).ready(function($) {
                 //return site[1].includes(searchTerm);
                 return site[3] === term;
             });
-            updateBanner(term);
+            buildGroupNav(term);
         } else {
             // perform search.
             sites = $.grep(intranets, function(site, i) {
@@ -254,7 +254,7 @@ jQuery(document).ready(function($) {
                 var index = site[1].indexOf(searchTerm);
                 return index > -1;
             });
-            updateBanner('');
+            buildGroupNav('');
         }
 
         // scale colors.
@@ -342,8 +342,6 @@ readablizeBytes(total * 1024) + '</span>';
         var total = 0;
         // items for summary list.
         var items = [];
-        // tabs for navigation.
-        var tabs = [];
         groups.forEach(function(group, index) {
             var groupName = group[0];
             var groupTotal = group[1];
@@ -358,13 +356,6 @@ readablizeBytes(groupTotal * 1024) + '</span>' +
 groupName + '</a>' +
 '</li>';
             items.push(item);
-
-            // build the navgation tabs.
-            var tab = 
-'<li role="presentation"><a id="' + groupName + 
-'" href="?group=cat:' + groupName + '">' + 
-groupName + '</a></li>';
-            tabs.push(tab);
         });
 
         var group = 
@@ -380,8 +371,33 @@ items.join('\n') +
 readablizeBytes(total * 1024) + '</span>';
         var heading = $('#summary-heading');
         heading.html(summaryHeading);
+    }
 
-        // set group name.
+    /**
+     * utility function to build group nav bar.
+     */
+    function buildGroupNav(term) {
+
+        // tabs for navigation.
+        var tabs = [];
+
+        // setup the tab for all first.
+        var active = (term === '') ? 'active' : '';
+        var allTab =
+'<li role="presentation" class="' + active + '">'+ 
+'<a id="all" href="?group=">All</a></li>';
+        tabs.push(allTab);
+        groups.forEach(function(group, index) {
+            var groupName = group[0];
+            active = (term === groupName) ? 'active' : '';
+            // build the navgation tabs.
+            var tab = 
+'<li role="presentation" class="' + active + '">'+ 
+'<a id="' + groupName + '" href="?group=cat:' + groupName + '">' + 
+groupName + '</a></li>';
+            tabs.push(tab);
+        });
+
         $('#group-nav').html(tabs.join('\n'));
     }
 
