@@ -337,6 +337,9 @@ readablizeBytes(groupTotal * 1024) + '</span>' +
 groupName + '</a>' +
 '</li>';
             items.push(item);
+
+            // build the navgation tabs.
+           
         });
 
         var group = 
@@ -483,17 +486,20 @@ readablizeBytes(total * 1024) + '</span>';
       <!-- Search bar -->
       <div class="container container-fluid bar-search bg-muted">
       <div class="row" id="search-bar">
-        <div class="col-md-2">
-        </div>
-
-        <div class="col-md-8">
-          <h2 id="banner">
-            <a href="?group=">All groups</a>
-          </h2>
-        </div>
-
-        <div class="col-md-2">
-        </div>
+        <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="#">All sites</a></li>
+          <li role="presentation"><a href="#">MGCS</a></li>
+          <li role="presentation"><a href="#">Clusters</a></li>
+          <li role="presentation"><a href="#">Personal</a></li>
+          <li role="presentation"><a href="#">MNRF</a></li>
+          <li role="presentation"><a href="#">MOF</a></li>
+          <li role="presentation"><a href="#">TBS</a></li>
+          <li role="presentation"><a href="#">MCSCS</a></li>
+          <li role="presentation"><a href="#">OMAFRA</a></li>
+          <li role="presentation"><a href="#">MAG</a></li>
+          <li role="presentation"><a href="#">MOHLTC</a></li>
+          <li role="presentation"><a href="#">MCSS</a></li>
+        </ul>
       </div>
       <p></p>
       </div>

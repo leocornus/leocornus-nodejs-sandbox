@@ -4,7 +4,7 @@
   ["^(mgcs|serviceontario|diversity)", "MGCS"], 
   ["^(omafra|OMAFRA|digitalomafra|debstark)", "OMAFRA"], 
   ["^mag", "MAG"], 
-  ["^moh", "MOHLTC"], 
+  ["^(moh|majamilosevic)", "MOHLTC"], 
   ["^(mcscs|MCSCS)", "MCSCS"], 
   ["^mcys", "MCYS"], 
   ["^mcss", "MCSS"], 
