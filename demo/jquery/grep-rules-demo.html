@@ -266,21 +266,6 @@ jQuery(document).ready(function($) {
     }
 
     /**
-     * update the message on banner.
-     */
-    function updateBanner(group) {
-
-        var banner = '<a href="?group=">All groups</a>';
-
-        if(group.length > 0) {
-            banner = banner +
-            ' > Sites for ' + group;
-        }
-
-        $('#banner').html(banner);
-    }
-
-    /**
      * utility function to scale colors.
      * colorRance will be like: ["blue", "yellow"]
      */
