@@ -365,6 +365,7 @@ readablizeBytes(total * 1024) + '</span>';
 
         // tabs for navigation.
         var tabs = [];
+        var moreTabs = [];
 
         // setup the tab for all first.
         var active = (term === '') ? 'active' : '';
@@ -380,7 +381,8 @@ readablizeBytes(total * 1024) + '</span>';
             // reset active we shall only have one active.
             active = "";
             if(term === groupName) {
-                include = true;
+                // the active tab in cluded in limit?
+                include = (i < maxTab);
                 active = "active";
             }
             // build the navgation tabs.
@@ -388,9 +390,14 @@ readablizeBytes(total * 1024) + '</span>';
 '<li role="presentation" class="' + active + '">'+ 
 '<a id="' + groupName + '" href="?group=cat:' + groupName + '">' + 
 groupName + '</a></li>';
-            tabs.push(tab);
-            if(i >= maxTab) break;
+            if(i >= maxTab) {
+                moreTabs.push(tab);
+            } else {
+                tabs.push(tab);
+            }
         }
+
+        // handle the tailing tab.
         if(!include && term.length > 0) {
             // we did not find the term in groups.
             // build the tailing tab for the search term.
@@ -400,6 +407,20 @@ groupName + '</a></li>';
 term + '</a></li>';
             tabs.push(tab);
         }
+
+        // add the more... dropdown.
+        var moreTab = 
+'<li role="presentation" class="dropdown pull-right">' +
+'  <a class="dropdown-toggle" data-toggle="dropdown" ' +
+'     href="#" role="button" aria-haspopup="true" ' +
+'     aria-expanded="false">' +
+'    More ...<span class="caret"></span>' +
+'  </a>' +
+'  <ul class="dropdown-menu">' +
+moreTabs.join('\n') +
+'  </ul>' +
+'</li>';
+        tabs.push(moreTab);
 
         $('#group-nav').html(tabs.join('\n'));
     }
@@ -539,9 +560,6 @@ term + '</a></li>';
           <li role="presentation"><a href="#">TBS</a></li>
           <li role="presentation"><a href="#">MCSCS</a></li>
           <li role="presentation"><a href="#">OMAFRA</a></li>
-          <li role="presentation"><a href="#">MAG</a></li>
-          <li role="presentation"><a href="#">MOHLTC</a></li>
-          <li role="presentation"><a href="#">MCSS</a></li>
         </ul>
       </div>
       <p></p>
