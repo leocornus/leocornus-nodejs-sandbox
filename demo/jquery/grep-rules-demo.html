@@ -81,8 +81,8 @@ jQuery(document).ready(function($) {
     var intranets;
     var rules;
     var sizes;
-    // story the sites by gorups.
-    var groupSites = {};
+    // store groups in format [group, total, [site, site]].
+    var groups = [];
 
     // get query parameters.
     var queryParams = getUrlVars();
@@ -129,6 +129,8 @@ jQuery(document).ready(function($) {
     ).then(function() {
 
         //console.log(intranets);
+        // store the sites by gorups.
+        var groupSites = {};
         // append the size to intanets list.
         //sizes.forEach(function(size) {
         $.each(sizes, function(index, size) {
@@ -167,17 +169,17 @@ jQuery(document).ready(function($) {
                     }
                 }
                 intranets[i].push(group);
+                // store the sites in group.
+                if(Object.keys(groupSites).indexOf(group) < 0) {
+                    // no group exist yet! create new one.
+                    groupSites[group] = {};
+                    groupSites[group]['sites'] = [];
+                    groupSites[group]['total'] = 0;
+                }
+                // add the site to group
+                groupSites[group]['sites'].push(intranets[i]);
+                groupSites[group]['total'] += theSize;
             }
-            // store the sites in group.
-            if(Object.keys(groupSites).indexOf(group) < 0) {
-                // no group exist yet! create new one.
-                groupSites[group] = {};
-                groupSites[group]['sites'] = [];
-                groupSites[group]['total'] = 0;
-            }
-            // add the site to group
-            groupSites[group]['sites'].push(intranets[i]);
-            groupSites[group]['total'] += theSize;
         });
 
         // sort the intranets.
@@ -186,6 +188,19 @@ jQuery(document).ready(function($) {
             return b[2] - a[2];
         });
         //console.log(intranets);
+
+        // get ready the groups.
+        Object.keys(groupSites).forEach(function(group, index) {
+            var sites = groupSites[group]['sites'];
+            var groupTotal = groupSites[group]['total'];
+            groups.push([group, groupTotal, sites]);
+        });
+        // sort by group total size.
+        groups = groups.sort(function(a, b) {
+            return b[1] - a[1];
+        });
+        console.log(groups);
+
         //// scale colors.
         //var colors = scaleColors(["#FF4900", "#14cc46"], 
         //                         intranets.length);
@@ -322,28 +337,17 @@ readablizeBytes(total * 1024) + '</span>';
     /**
      * utility function to build the group summary.
      */
-    function buildGroupSitesSummary(groupSites, colors) {
+    function buildGroupSitesSummary(colors) {
 
         var total = 0;
-        var groups = Object.keys(groupSites);
-        var gArray = [];
-        groups.forEach(function(group, index) {
-            var sites = groupSites[group]['sites'];
-            var groupTotal = groupSites[group]['total'];
-            total = total + groupTotal;
-            gArray.push([group, groupTotal]);
-        });
-        // sort by group total size.
-        gArray = gArray.sort(function(a, b) {
-            return b[1] - a[1];
-        });
         // items for summary list.
         var items = [];
         // tabs for navigation.
         var tabs = [];
-        gArray.forEach(function(group, index) {
+        groups.forEach(function(group, index) {
             var groupName = group[0];
             var groupTotal = group[1];
+            total = total + groupTotal;
             var item = 
 '<li class="list-group-item" >' +
 '  <span class="badge" style="background: ' + colors(index) + '">' +
@@ -448,7 +452,7 @@ readablizeBytes(total * 1024) + '</span>';
             };
         $('#circles').zoomableCircles({"diameter":600, "margin":5}, jsonData);
         if(groups.length > 1) {
-            buildGroupSitesSummary(groupSites, colors);
+            buildGroupSitesSummary(colors);
         }
     }
 
