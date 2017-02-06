@@ -81,6 +81,8 @@ jQuery(document).ready(function($) {
     var intranets;
     var rules;
     var sizes;
+    // story the sites by gorups.
+    var groupSites = {};
 
     // get query parameters.
     var queryParams = getUrlVars();
@@ -133,6 +135,7 @@ jQuery(document).ready(function($) {
             var id = size[0];
             var theSize = size[1];
             var i = -1;
+            // find the correct site for the size.
             if(isIE) {
                 for(var n = 0; n < intranets.length; n++) {
                     if(intranets[n][0] === id) {
@@ -165,13 +168,24 @@ jQuery(document).ready(function($) {
                 }
                 intranets[i].push(group);
             }
+            // store the sites in group.
+            if(Object.keys(groupSites).indexOf(group) < 0) {
+                // no group exist yet! create new one.
+                groupSites[group] = {};
+                groupSites[group]['sites'] = [];
+                groupSites[group]['total'] = 0;
+            }
+            // add the site to group
+            groupSites[group]['sites'].push(intranets[i]);
+            groupSites[group]['total'] += theSize;
         });
+
         // sort the intranets.
         intranets = intranets.sort(function(a, b) {
             // sort by size of the site.
             return b[2] - a[2];
         });
-        console.log(intranets);
+        //console.log(intranets);
         //// scale colors.
         //var colors = scaleColors(["#FF4900", "#14cc46"], 
         //                         intranets.length);
@@ -310,7 +324,6 @@ readablizeBytes(total * 1024) + '</span>';
      */
     function buildGroupSitesSummary(groupSites, colors) {
 
-        var items = [];
         var total = 0;
         var groups = Object.keys(groupSites);
         var gArray = [];
@@ -324,6 +337,10 @@ readablizeBytes(total * 1024) + '</span>';
         gArray = gArray.sort(function(a, b) {
             return b[1] - a[1];
         });
+        // items for summary list.
+        var items = [];
+        // tabs for navigation.
+        var tabs = [];
         gArray.forEach(function(group, index) {
             var groupName = group[0];
             var groupTotal = group[1];
@@ -339,7 +356,11 @@ groupName + '</a>' +
             items.push(item);
 
             // build the navgation tabs.
-           
+            var tab = 
+'<li role="presentation"><a id="' + groupName + 
+'" href="?group=cat:' + groupName + '">' + 
+groupName + '</a></li>';
+            tabs.push(tab);
         });
 
         var group = 
@@ -355,6 +376,9 @@ items.join('\n') +
 readablizeBytes(total * 1024) + '</span>';
         var heading = $('#summary-heading');
         heading.html(summaryHeading);
+
+        // set group name.
+        $('#group-nav').html(tabs.join('\n'));
     }
 
     /**
@@ -368,7 +392,6 @@ readablizeBytes(total * 1024) + '</span>';
 
         // get ready group circles first.
         var groupCircles = {};
-        var groupSites = {};
         for(i = 0; i < sites.length; i++) {
             var site = sites[i];
             var size = site[2];
@@ -391,13 +414,8 @@ readablizeBytes(total * 1024) + '</span>';
             if(Object.keys(groupCircles).indexOf(group) < 0 ) {
                 // no group exist! create new one.
                 groupCircles[group] = [];
-                groupSites[group] = {};
-                groupSites[group]['sites'] = [];
-                groupSites[group]['total'] = 0;
             }
             groupCircles[group].push(circle);
-            groupSites[group]['sites'].push(site);
-            groupSites[group]['total'] += size;
 
             //circles.push(circle);
             //console.log(groupCircles);
@@ -429,7 +447,9 @@ readablizeBytes(total * 1024) + '</span>';
               }
             };
         $('#circles').zoomableCircles({"diameter":600, "margin":5}, jsonData);
-        buildGroupSitesSummary(groupSites, colors);
+        if(groups.length > 1) {
+            buildGroupSitesSummary(groupSites, colors);
+        }
     }
 
     /**
@@ -486,7 +506,7 @@ readablizeBytes(total * 1024) + '</span>';
       <!-- Search bar -->
       <div class="container container-fluid bar-search bg-muted">
       <div class="row" id="search-bar">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" id="group-nav">
           <li role="presentation" class="active"><a href="#">All sites</a></li>
           <li role="presentation"><a href="#">MGCS</a></li>
           <li role="presentation"><a href="#">Clusters</a></li>
