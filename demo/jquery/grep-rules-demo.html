@@ -361,8 +361,9 @@ readablizeBytes(total * 1024) + '</span>';
     /**
      * utility function to build group nav bar.
      */
-    function buildGroupNav(term, maxTab=12) {
+    function buildGroupNav(term, maxTab=7) {
 
+        var colors = scaleColors();
         // tabs for navigation.
         var tabs = [];
         var moreTabs = [];
@@ -371,9 +372,13 @@ readablizeBytes(total * 1024) + '</span>';
         var active = (term === '') ? 'active' : '';
         var allTab =
 '<li role="presentation" class="' + active + '">'+ 
-'<a id="all" href="?group=">All</a></li>';
+'<a id="all" href="?group=">All' +
+'  <span class="badge" style="background: ' + colors(0) + '">' +
+intranets.length + '</span>' +
+'</a></li>';
         tabs.push(allTab);
         var include = false;
+        var tailingTab = '';
         //groups.forEach(function(group, index) {
         for(var i = 0; i < groups.length; i ++) {
             var group = groups[i];
@@ -389,24 +394,24 @@ readablizeBytes(total * 1024) + '</span>';
             var tab = 
 '<li role="presentation" class="' + active + '">'+ 
 '<a id="' + groupName + '" href="?group=cat:' + groupName + '">' + 
-groupName + '</a></li>';
+groupName + 
+'  <span class="badge" style="background: ' + colors(i + 1) + '">' +
+group[2].length + '</span>' +
+'</a></li>';
             if(i >= maxTab) {
+                // add to dropdown for extra tab.
                 moreTabs.push(tab);
+                if(active === "active") {
+                    // this will be the tailing tab.
+                    tailingTab = tab;
+                }
             } else {
                 tabs.push(tab);
             }
         }
 
         // handle the tailing tab.
-        if(!include && term.length > 0) {
-            // we did not find the term in groups.
-            // build the tailing tab for the search term.
-            var tab = 
-'<li role="presentation" class="active">'+ 
-'<a id="' + term + '" href="?group=cat:' + term + '">' + 
-term + '</a></li>';
-            tabs.push(tab);
-        }
+        tabs.push(tailingTab);
 
         // add the more... dropdown.
         var moreTab = 
