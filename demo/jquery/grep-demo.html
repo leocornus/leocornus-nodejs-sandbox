@@ -282,6 +282,7 @@ readablizeBytes(total * 1024) + '</span>';
                 "children": circles
               }
             };
+        $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
         $('#circles').zoomableCircles({"diameter":600, "margin":5}, jsonData);
     }
 
@@ -414,6 +415,10 @@ readablizeBytes(total * 1024) + '</span>';
 </ul>
             
           </div>
+          <div class="panel-footer">
+            <textarea style="width:100%" id="jsonstring" rows="2"></textarea>
+          </div>
+        </div>
       </div> <!-- col-4 -->
 
       </div> <!-- search result row -->
