@@ -220,7 +220,7 @@ jQuery(document).ready(function($) {
             var item = 
 '<li class="list-group-item" >' +
 '  <span class="badge" style="background: ' + colors(i) + '">' +
-readablizeBytes(size * 1024) + '</span>' +
+readablizeBytes(size) + '</span>' +
 '  <span class="glyphicon glyphicon-stop"' +
 '        style="color: ' + colors(i) + '"></span>' +
 '  <a href="/' + name + '">' + 
@@ -244,7 +244,7 @@ items.join('\n') +
         var summaryHeading = 
 'Found <span class="badge">' + sites.length + '</span> Sites' +
 '<span class="badge pull-right">Total size: ' + 
-readablizeBytes(total * 1024) + '</span>';
+readablizeBytes(total) + '</span>';
         var heading = $('#summary-heading');
         heading.html(summaryHeading);
     }
