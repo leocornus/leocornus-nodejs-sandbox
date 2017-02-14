@@ -215,8 +215,8 @@ jQuery(document).ready(function($) {
     $('#search-button').on('click', function() {
 
         var term = $('#search-input').val();
-        window.location.href = '?search_term=' + term;
-        //handleSearch(term);
+        //window.location.href = '?search_term=' + term;
+        handleSearch(term);
     });
 
     // hook the keypress evetn.
@@ -226,8 +226,8 @@ jQuery(document).ready(function($) {
         // only handle the enter key.
         if(event.keyCode == 13) {
             // this is binded to dom element.
-            window.location.href = '?search_term=' + $(this).val();
-            //handleSearch($(this).val());
+            //window.location.href = '?search_term=' + $(this).val();
+            handleSearch($(this).val());
         }
     });
 
@@ -576,6 +576,20 @@ moreTabs.join('\n') +
               <li role="presentation"><a href="#">MCSS</a></li>
             </ul>
           </li>
+        </ul>
+      </div>
+      <div class="row" id="year-row">
+        <ul class="nav nav-tabs" id="group-nav">
+          <li role="presentation" class="active"><a href="#">2017</a></li>
+          <li role="presentation"><a href="#">2016</a></li>
+          <li role="presentation"><a href="#">2015</a></li>
+          <li role="presentation"><a href="#">2014</a></li>
+          <li role="presentation"><a href="#">2013</a></li>
+          <li role="presentation"><a href="#">2012</a></li>
+          <li role="presentation"><a href="#">2011</a></li>
+          <li role="presentation"><a href="#">2010</a></li>
+          <li role="presentation"><a href="#">2009</a></li>
+          <li role="presentation"><a href="#">2008</a></li>
         </ul>
       </div>
       <p></p>
