@@ -47,7 +47,10 @@
       <button id="load">Load</button><br/>
       <button id="convert">2 JSON</button><br/>
       <button id="toarray">JSON Array</button><br/>
-      <button id="addgroup">Add Group</button>
+      <button id="addgroup">Add Group</button><br/>
+      <input type="text" id="year"/>
+      <button id="toyeararray">To Array</button><br/>
+      <button id="merge">Merge</button><br/>
     </div>
 
     <div class="col-md-5">
@@ -150,6 +153,103 @@ jQuery(document).ready(function($) {
         $('#jsonstring').html(JSON.stringify(rows, null, 2));
     });
 
+    $('#toyeararray').on('click', function() {
+        // read the csv from the source.
+        var origin = $('#csvstring').val();
+        var year = $('#year').val();
+        // split new lines.
+        var originLines = origin.split(/\r\n|\n/);
+        var rows = [];
+        for(var i = 0; i < originLines.length; i++) {
+            if(originLines[i].indexOf('-' + year) < 0) {
+                // skip the row which NOT match the year.
+                continue;
+            }
+            var row = originLines[i].split('=');
+            // skip the empty row.
+            if(row.length <= 1) continue;
+
+            var size = parseInt(row[1].trim());
+            // skip those empty folder.
+            //if(size < 40) continue;
+            //var id = row[1].trim();
+            //var path = row[1].trim().slice(0, -1);
+            var idYear = row[0].trim().split('-');
+            var id = parseInt(idYear[0].trim());
+            rows.push([id, size]);
+        }
+
+        $('#jsonstring').html(JSON.stringify(rows, null, 2));
+    });
+
+    /**
+     */
+    $('#merge').on('click', function() {
+
+        var formidable, group, sizes;
+        // read the csv from the source
+        $.when(
+            // get the list name.
+            $.ajax({
+                type: "GET",
+                url: 'data/intranet-size-formidable.json',
+                dataType: "json",
+                success: function(data) {
+                    //console.log(data.length);
+                    formidable = data;
+                }
+            }),
+            // get the rules for group.
+            $.ajax({
+                type: "GET",
+                url: 'data/intranet-size-group.json',
+                dataType: "json",
+                success: function(data) {
+                    //console.log(data);
+                    group = data;
+                }
+            }),
+            // load the size.
+            $.ajax({
+                type: "GET",
+                url: 'data/intranet-size-2017.json',
+                dataType: "json",
+                success: function(data) {
+                    //console.log(data.length);
+                    sizes = data;
+                }
+            })
+        ).then(function() {
+            //console.log(formidable);
+            $.each(sizes, function(index, size) {
+                var id = size[0];
+                var theSize = size[1];
+                console.log(id + ' - ' + theSize);
+                var i = -1;
+                // looking for formidable.
+                i = formidable.findIndex(function(one) {
+                    return one[0] === id;
+                });
+                if(i > -1) {
+                    // add the size from formidable.
+                    theSize += formidable[i][1];
+                    console.log(id + ' - formidable - ' + theSize);
+                }
+                // looking for group
+                i = -1;
+                i = group.findIndex(function(one) {
+                    return one[0] === id;
+                });
+                if(i > -1) {
+                    // add the size from group.
+                    theSize += group[i][1];
+                    console.log(id + ' - group - ' + theSize);
+                }
+                sizes[index][1] = theSize;
+            });
+            $('#jsonstring').html(JSON.stringify(sizes, null, 2));
+        });
+    });
 
     // convert the CSV string to zoomable circle json format.
     $('#convert').on('click', function() {
