@@ -504,7 +504,7 @@ moreTabs.join('\n') +
               }
             };
         $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
-        $('#circles').zoomableCircles({"diameter":300, "margin":5}, jsonData);
+        $('#circles').zoomableCircles({"diameter":600, "margin":5}, jsonData);
         $('#circles').fadeIn(2000);
         if(groups.length > 1) {
             buildGroupSitesSummary(colors);
@@ -545,10 +545,39 @@ moreTabs.join('\n') +
     $('#2008').on('click', function() {
     
         // try fade out the svg image.
-        $('#circles').fadeOut(2000, function () {
-            $('#circles').fadeIn(5000);
-        });
+        //$('#circles').fadeOut(2000, function () {
+        //    $('#circles').fadeIn(5000);
+        //});
+        fadeYear(2008);
     });
+
+    /**
+     * function to play all years data.
+     */
+    function fadeYear(year) {
+
+        var fileUrl = 'data/intranet-size-' + year + '.json';
+        $('#circles').fadeOut(2000, function() {
+            $('circles').html("");
+        });
+        $.ajax({
+            type: "GET",
+            url: fileUrl,
+            dataType: "json",
+            success: function(data) {
+                //console.log(data.length);
+                sizes = data;
+                // mergedata.
+                mergeData();
+                handleSearch("");
+                setTimeout(function() {
+                    if (year < 2017) {
+                        fadeYear(year + 1);
+                    }
+                }, 5000);
+            }
+        });
+    }
 });
     </script>
 
