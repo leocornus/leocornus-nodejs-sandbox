@@ -437,7 +437,7 @@ moreTabs.join('\n') +
 
         var result = $("#result");
         result.html("");
-        result.append('<div id="circles"></div>');
+        result.append('<div id="circles" style="display: none"></div>');
 
         // get ready group circles first.
         var groupCircles = {};
@@ -497,6 +497,7 @@ moreTabs.join('\n') +
             };
         $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
         $('#circles').zoomableCircles({"diameter":600, "margin":5}, jsonData);
+        $('#circles').fadeIn(2000);
         if(groups.length > 1) {
             buildGroupSitesSummary(colors);
         }
@@ -529,6 +530,17 @@ moreTabs.join('\n') +
 
         return vars;
     }
+
+    /**
+     * quick try for the animation.
+     */
+    $('#2008').on('click', function() {
+    
+        // try fade out the svg image.
+        $('#circles').fadeOut(2000, function () {
+            $('#circles').fadeIn(5000);
+        });
+    });
 });
     </script>
 
@@ -580,16 +592,16 @@ moreTabs.join('\n') +
       </div>
       <div class="row" id="year-row">
         <ul class="nav nav-tabs" id="group-nav">
-          <li role="presentation" class="active"><a href="#">2017</a></li>
-          <li role="presentation"><a href="#">2016</a></li>
-          <li role="presentation"><a href="#">2015</a></li>
-          <li role="presentation"><a href="#">2014</a></li>
-          <li role="presentation"><a href="#">2013</a></li>
-          <li role="presentation"><a href="#">2012</a></li>
-          <li role="presentation"><a href="#">2011</a></li>
-          <li role="presentation"><a href="#">2010</a></li>
+          <li role="presentation" id="2008"><a href="">2008</a></li>
           <li role="presentation"><a href="#">2009</a></li>
-          <li role="presentation"><a href="#">2008</a></li>
+          <li role="presentation"><a href="#">2010</a></li>
+          <li role="presentation"><a href="#">2011</a></li>
+          <li role="presentation"><a href="#">2012</a></li>
+          <li role="presentation"><a href="#">2013</a></li>
+          <li role="presentation"><a href="#">2014</a></li>
+          <li role="presentation"><a href="#">2015</a></li>
+          <li role="presentation"><a href="#">2016</a></li>
+          <li role="presentation" class="active"><a href="#">2017</a></li>
         </ul>
       </div>
       <p></p>
