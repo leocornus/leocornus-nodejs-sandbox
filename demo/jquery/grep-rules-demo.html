@@ -79,6 +79,7 @@ var simpleTest = angular.module('grepDemo', []);
 jQuery(document).ready(function($) {
 
     var intranets;
+    var pathes;
     var rules;
     var sizes;
     // store groups in format [group, total, [site, site]].
@@ -103,7 +104,7 @@ jQuery(document).ready(function($) {
             dataType: "json",
             success: function(data) {
                 //console.log(data.length);
-                intranets = data;
+                pathes = data;
             }
         }),
         // get the rules for group.
@@ -136,7 +137,7 @@ jQuery(document).ready(function($) {
         ////console.log(intranets);
         //buildZoomableCircles(intranets, colors);
         //buildSitesSummary(intranets, colors);
-        handleSearch(searchTerm);
+        handleSearch(2017, searchTerm);
     });
 
 
@@ -145,7 +146,7 @@ jQuery(document).ready(function($) {
 
         var term = $('#search-input').val();
         //window.location.href = '?search_term=' + term;
-        handleSearch(term);
+        handleSearch(2017, term);
     });
 
     // hook the keypress evetn.
@@ -156,7 +157,7 @@ jQuery(document).ready(function($) {
         if(event.keyCode == 13) {
             // this is binded to dom element.
             //window.location.href = '?search_term=' + $(this).val();
-            handleSearch($(this).val());
+            handleSearch(2017, $(this).val());
         }
     });
 
@@ -165,7 +166,12 @@ jQuery(document).ready(function($) {
      */
     function mergeData() {
 
-        //console.log(intranets);
+        // reset intranets and groups
+        intranets = [];
+        groups = [];
+
+        console.log('Merge data pathes');
+        console.log(pathes[0]);
         // store the sites by gorups.
         var groupSites = {};
         // append the size to intanets list.
@@ -176,25 +182,26 @@ jQuery(document).ready(function($) {
             var i = -1;
             // find the correct site for the size.
             if(isIE) {
-                for(var n = 0; n < intranets.length; n++) {
-                    if(intranets[n][0] === id) {
+                for(var n = 0; n < pathes.length; n++) {
+                    if(pathes[n][0] === id) {
                         i = n;
                         break;
                     }
                 } 
             } else {
                 // it will return -1, if no match found.
-                i = intranets.findIndex(function(one) {
+                i = pathes.findIndex(function(one) {
                     return one[0] === id;
                 });
             }
             if(i >= 0) {
-                intranets[i].push(theSize);
+                //intranets[i].push(theSize);
                 //console.log(intranets[i]);
 
                 // try to find the match group for the Intranet path.
                 // TODO: multipile size will be different!
-                var path = intranets[i][1];
+                var path = pathes[i][1];
+                // === decide the group.
                 // set the default group
                 var group = 'Personal';
                 for( var n = 0; n < rules.length; n ++) {
@@ -205,7 +212,9 @@ jQuery(document).ready(function($) {
                         break;
                     }
                 }
-                intranets[i].push(group);
+                //intranets[i].push(group);
+                var theSite = [id, path, theSize, group];
+                intranets.push(theSite);
                 // store the sites in group.
                 if(Object.keys(groupSites).indexOf(group) < 0) {
                     // no group exist yet! create new one.
@@ -214,7 +223,7 @@ jQuery(document).ready(function($) {
                     groupSites[group]['total'] = 0;
                 }
                 // add the site to group
-                groupSites[group]['sites'].push(intranets[i]);
+                groupSites[group]['sites'].push(theSite);
                 groupSites[group]['total'] += theSize;
             }
         });
@@ -224,7 +233,8 @@ jQuery(document).ready(function($) {
             // sort by size of the site.
             return b[2] - a[2];
         });
-        //console.log(intranets);
+        console.log('Merge data');
+        console.log(intranets[0]);
 
         // get ready the groups.
         Object.keys(groupSites).forEach(function(group, index) {
@@ -243,10 +253,11 @@ jQuery(document).ready(function($) {
      * perform search again and rebuild the zoomable circle.
      * TODO: add animation
      */
-    function handleSearch(searchTerm) {
+    function handleSearch(year, searchTerm) {
 
-        //console.log(searchTerm);
-        var sites;
+        console.log('year=' + year);
+        console.log(intranets[0]);
+        var sites = [];
         if(searchTerm.startsWith('cat:')) {
             var term = searchTerm.split(':')[1];
             // perform search.
@@ -267,7 +278,7 @@ jQuery(document).ready(function($) {
 
         // scale colors.
         var colors = scaleColors();
-        buildZoomableCircles(sites, colors);
+        buildZoomableCircles(sites, colors, year);
         if(searchTerm.length > 0) {
             buildSitesSummary(sites, colors);
         }
@@ -441,11 +452,12 @@ moreTabs.join('\n') +
     /**
      * utility function to build zoomable circles.
      */
-    function buildZoomableCircles(sites, colors) {
+    function buildZoomableCircles(sites, colors, year) {
 
         var result = $("#result");
         result.html("");
-        result.append('<div id="circles" style="display: none"></div>');
+        var id = 'circles' + year;
+        result.append('<div id="' + id + '" style="display: none"></div>');
 
         // get ready group circles first.
         var groupCircles = {};
@@ -479,8 +491,8 @@ moreTabs.join('\n') +
         }
 
         var circles = [];
-        var groups = Object.keys(groupCircles);
-        groups.forEach(function(group) {
+        var theGroups = Object.keys(groupCircles);
+        theGroups.forEach(function(group) {
             var groupCircle = {
                 "name":group,
                 "children":groupCircles[group]
@@ -504,9 +516,9 @@ moreTabs.join('\n') +
               }
             };
         $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
-        $('#circles').zoomableCircles({"diameter":600, "margin":5}, jsonData);
-        $('#circles').fadeIn(2000);
-        if(groups.length > 1) {
+        $('#' + id).zoomableCircles({"diameter":600, "margin":5}, jsonData);
+        $('#' + id).fadeIn(2000);
+        if(theGroups.length > 1) {
             buildGroupSitesSummary(colors);
         }
     }
@@ -557,8 +569,8 @@ moreTabs.join('\n') +
     function fadeYear(year) {
 
         var fileUrl = 'data/intranet-size-' + year + '.json';
-        $('#circles').fadeOut(2000, function() {
-            $('circles').html("");
+        $('#circles' + year).fadeOut(3000, function() {
+            //$('#circles').html("");
         });
         $.ajax({
             type: "GET",
@@ -569,12 +581,12 @@ moreTabs.join('\n') +
                 sizes = data;
                 // mergedata.
                 mergeData();
-                handleSearch("");
+                handleSearch(year, "");
                 setTimeout(function() {
                     if (year < 2017) {
                         fadeYear(year + 1);
                     }
-                }, 5000);
+                }, 3000);
             }
         });
     }
