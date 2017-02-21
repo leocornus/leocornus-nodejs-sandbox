@@ -137,7 +137,7 @@ jQuery(document).ready(function($) {
         ////console.log(intranets);
         //buildZoomableCircles(intranets, colors);
         //buildSitesSummary(intranets, colors);
-        handleSearch(searchTerm);
+        handleSearch(2017, searchTerm);
     });
 
 
@@ -146,7 +146,7 @@ jQuery(document).ready(function($) {
 
         var term = $('#search-input').val();
         //window.location.href = '?search_term=' + term;
-        handleSearch(term);
+        handleSearch(2017, term);
     });
 
     // hook the keypress evetn.
@@ -157,7 +157,7 @@ jQuery(document).ready(function($) {
         if(event.keyCode == 13) {
             // this is binded to dom element.
             //window.location.href = '?search_term=' + $(this).val();
-            handleSearch($(this).val());
+            handleSearch(2017, $(this).val());
         }
     });
 
@@ -253,7 +253,7 @@ jQuery(document).ready(function($) {
      * perform search again and rebuild the zoomable circle.
      * TODO: add animation
      */
-    function handleSearch(searchTerm) {
+    function handleSearch(year, searchTerm) {
 
         console.log(intranets[0]);
         var sites = [];
@@ -277,7 +277,7 @@ jQuery(document).ready(function($) {
 
         // scale colors.
         var colors = scaleColors();
-        buildZoomableCircles(sites, colors);
+        buildZoomableCircles(sites, colors, year);
         if(searchTerm.length > 0) {
             buildSitesSummary(sites, colors);
         }
@@ -451,13 +451,11 @@ moreTabs.join('\n') +
     /**
      * utility function to build zoomable circles.
      */
-    function buildZoomableCircles(sites, colors) {
+    function buildZoomableCircles(sites, colors, year) {
 
         var result = $("#result");
-        var id = 'circles';
-        $('#' + id).fadeOut(2000, function() {
-        });
-        result.html("");
+        var id = 'circles' + year;
+        var oldId = 'circles' + (--year);
         result.append('<div id="' + id + '" style="display: none"></div>');
 
         // get ready group circles first.
@@ -518,7 +516,13 @@ moreTabs.join('\n') +
             };
         $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
         $('#' + id).zoomableCircles({"diameter":600, "margin":5}, jsonData);
-        $('#' + id).fadeIn(3000);
+        //setTimeout(function() {
+        //    $('#' + id).fadeIn(3000);
+        //}, 2000);
+        $('#' + oldId).fadeOut(2000, function() {
+            result.remove("#" + oldId);
+            $('#' + id).fadeIn(3000);
+        });
         if(theGroups.length > 1) {
             buildGroupSitesSummary(colors);
         }
@@ -558,7 +562,7 @@ moreTabs.join('\n') +
     $('#2008').on('click', function() {
     
         // try fade out the svg image.
-        $('#circles').fadeOut(2000);
+        $('#circles2017').fadeOut(2000);
         setTimeout(function() {
             fadeYear(2008);
         }, 2000);
@@ -579,7 +583,7 @@ moreTabs.join('\n') +
                 sizes = data;
                 // mergedata.
                 mergeData();
-                handleSearch("");
+                handleSearch(year, "");
                 setTimeout(function() {
                     if (year < 2017) {
                         fadeYear(year + 1);
