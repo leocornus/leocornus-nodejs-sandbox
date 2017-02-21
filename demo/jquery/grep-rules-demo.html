@@ -130,14 +130,16 @@ jQuery(document).ready(function($) {
     ).then(function() {
 
         mergeData();
-
         //// scale colors.
         //var colors = scaleColors(["#FF4900", "#14cc46"], 
         //                         intranets.length);
         ////console.log(intranets);
         //buildZoomableCircles(intranets, colors);
         //buildSitesSummary(intranets, colors);
+        $('#result').html('');
         handleSearch(2017, searchTerm);
+        buildYear(2008);
+        showCircles(2017);
     });
 
 
@@ -147,6 +149,7 @@ jQuery(document).ready(function($) {
         var term = $('#search-input').val();
         //window.location.href = '?search_term=' + term;
         handleSearch(2017, term);
+        showCircles(2017);
     });
 
     // hook the keypress evetn.
@@ -158,6 +161,7 @@ jQuery(document).ready(function($) {
             // this is binded to dom element.
             //window.location.href = '?search_term=' + $(this).val();
             handleSearch(2017, $(this).val());
+            showCircles(2017);
         }
     });
 
@@ -455,7 +459,6 @@ moreTabs.join('\n') +
 
         var result = $("#result");
         var id = 'circles' + year;
-        var oldId = 'circles' + (--year);
         result.append('<div id="' + id + '" style="display: none"></div>');
 
         // get ready group circles first.
@@ -519,10 +522,10 @@ moreTabs.join('\n') +
         //setTimeout(function() {
         //    $('#' + id).fadeIn(3000);
         //}, 2000);
-        $('#' + oldId).fadeOut(2000, function() {
-            result.remove("#" + oldId);
-            $('#' + id).fadeIn(3000);
-        });
+        //$('#' + oldId).fadeOut(2000, function() {
+        //    result.remove("#" + oldId);
+        //    $('#' + id).fadeIn(3000);
+        //});
         if(theGroups.length > 1) {
             buildGroupSitesSummary(colors);
         }
@@ -562,16 +565,45 @@ moreTabs.join('\n') +
     $('#2008').on('click', function() {
     
         // try fade out the svg image.
-        $('#circles2017').fadeOut(2000);
-        setTimeout(function() {
-            fadeYear(2008);
-        }, 2000);
+        $('#circles2017').fadeOut(200);
+        //setTimeout(function() {
+        //    fadeYear(2008);
+        //}, 2000);
+
+        var show = function(stopYear, year, callback) {
+
+            $('#circles' + year).fadeIn(3000, function() {
+                callback();
+            });
+        };
+
+        // sync call to keep sequence:
+        var stopYear = 2018;
+        if (stopYear > 0) {
+            var loop = function(stopYear, year, show, loopDone) {
+                show(stopYear, year, function() {
+                    // loop in the next year.
+                    if(++year < stopYear) {
+                        var oldYear = year - 1;
+                        $('#circles' + oldYear).fadeOut(2000);
+                        setTimeout(function() {
+                            loop(stopYear, year, show, loopDone);
+                        }, 3000);
+                    } else {
+                        // do nothing.
+                    }
+                });
+            };
+            loop(stopYear, 2008, show, function(){});
+        } else {
+            // do nothing.
+        }
     });
 
     /**
      * function to play all years data.
      */
-    function fadeYear(year) {
+    function buildYear(year) {
 
         var fileUrl = 'data/intranet-size-' + year + '.json';
         $.ajax({
@@ -584,13 +616,19 @@ moreTabs.join('\n') +
                 // mergedata.
                 mergeData();
                 handleSearch(year, "");
-                setTimeout(function() {
-                    if (year < 2017) {
-                        fadeYear(year + 1);
-                    }
-                }, 3000);
+                if (year < 2016) {
+                    buildYear(year + 1);
+                }
             }
         });
+    }
+
+    /**
+     * function to show circles for a year
+     */
+    function showCircles(year) {
+
+        $('#circles' + year).fadeIn(3000);
     }
 });
     </script>
