@@ -508,13 +508,19 @@ moreTabs.join('\n') +
                 "title": "3 Equal size circles",
                 "description": "Data example to show the data structure",
                 "colorRange": [
-                  "white", "lightgrey"
+                  //"white","gainsboro", "silver"
+                  "white","#f8f9fa", "lightgrey"
                 ],
                 "leafFill": "green"
               },
               "data": {
                 "name":"This will NOT show anywhere!",
-                "children": circles
+                "children": [
+                  {
+                    "name":"All OPSpedia sites for year " + year,
+                    "children": circles
+                  }
+                ]
               }
             };
         $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
@@ -578,26 +584,23 @@ moreTabs.join('\n') +
         };
 
         // sync call to keep sequence:
-        var stopYear = 2018;
-        if (stopYear > 0) {
-            var loop = function(stopYear, year, show, loopDone) {
-                show(stopYear, year, function() {
-                    // loop in the next year.
-                    if(++year < stopYear) {
-                        var oldYear = year - 1;
-                        $('#circles' + oldYear).fadeOut(2000);
-                        setTimeout(function() {
-                            loop(stopYear, year, show, loopDone);
-                        }, 3000);
-                    } else {
-                        // do nothing.
-                    }
-                });
-            };
-            loop(stopYear, 2008, show, function(){});
-        } else {
-            // do nothing.
-        }
+        // define the loop, 
+        var loop = function(stopYear, year, show, loopDone) {
+            show(stopYear, year, function() {
+                // loop in the next year.
+                if(++year < stopYear) {
+                    var oldYear = year - 1;
+                    $('#circles' + oldYear).fadeOut(3000);
+                    setTimeout(function() {
+                        loop(stopYear, year, show, loopDone);
+                    }, 3000);
+                } else {
+                    // do nothing.
+                }
+            });
+        };
+        // start the sequenced loop, sync loop
+        loop(2018, 2008, show, function(){});
     });
 
     /**
@@ -701,12 +704,24 @@ moreTabs.join('\n') +
       <div class="row" id="search-result"> 
 
       <div class="col-md-8">
-          <div id="result" style="border: 0px solid black;text-align: center">
+        <div id="result" style="border: 0px solid black;text-align: center">
 <h2 align="center">
 <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>Loading...
 <span class="sr-only">Loading...</span>
 </h2>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
           </div>
+          <div class="col-md-6">
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                <span>45% Complete</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div> <!-- col-8 -->
 
       <div class="col-md-4">
