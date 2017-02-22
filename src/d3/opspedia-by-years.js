@@ -61,6 +61,7 @@ jQuery(document).ready(function($) {
         $('#result').html('');
         $('#summary').html('');
         handleSearch(2017, searchTerm);
+        // build circles year by year.
         buildYear(2008);
         showCircles(2017);
     });
@@ -533,7 +534,7 @@ moreTabs.join('\n') +
     /**
      * quick try for the animation.
      */
-    $('#2008').on('click', function() {
+    $('#play').on('click', function() {
     
         // try fade out the svg image.
         $('#circles2017').fadeOut(200);
