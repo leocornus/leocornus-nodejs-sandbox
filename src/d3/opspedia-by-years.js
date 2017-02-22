@@ -291,7 +291,7 @@ groupName + '</a>' +
         // add the list group to panel body.
         var group = 
 '<div class="panel-body" id="group' + year + '"' +
-'      style="max-height: 500px; overflow-y: auto; padding: 0px">' + 
+'      style="max-height: 580px; overflow-y: auto; padding: 0px">' + 
 '<ul class="list-group" style="margin: 0px">' +
 items.join('\n') +
 '</ul>' +
@@ -557,11 +557,13 @@ moreTabs.join('\n') +
                 // loop in the next year.
                 if(++year < stopYear) {
                     var oldYear = year - 1;
-                    $('#group' + oldYear).fadeOut(3000);
-                    $('#circles' + oldYear).fadeOut(3000);
+                    setTimeout(function(){
+                        $('#group' + oldYear).fadeOut(2000);
+                        $('#circles' + oldYear).fadeOut(2000);
+                    }, 4000);
                     setTimeout(function() {
                         loop(stopYear, year, show, loopDone);
-                    }, 3000);
+                    }, 6000);
                 } else {
                     // do nothing.
                 }
