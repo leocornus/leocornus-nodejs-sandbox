@@ -1,0 +1,203 @@
+<!-- MOVED to new location demo/solr-search -->
+<html ng-app="grepDemo">
+  <head>
+    <title>OPSpedia by Years</title>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+    <link rel='stylesheet' href='/bower_components/jquery-ui/themes/base/jquery-ui.css'/>
+    <link rel='stylesheet' href='/bower_components/jquery-ui-bootstrap/jquery.ui.theme.css'/>
+
+    <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='/bower_components/jquery-ui/jquery-ui.min.js'></script>
+    <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src='/bower_components/angular/angular.min.js'></script>
+
+    <script src="/bower_components/d3/d3.min.js"></script>
+    <script src='/bower_components/leocornus-visualdata/src/zoomable-circles.js'></script>
+    <script src='/src/d3/opspedia-by-years.js'></script>
+
+<style>
+/**
+ * styles needed for zoomable circles.
+ */
+.node {
+    cursor: pointer;
+}
+
+.node:hover {
+    stroke: #000;
+    stroke-width: 1.5px;
+}
+
+.node--leaf {
+    fill: grey;
+}
+
+.label {
+    font: 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-anchor: middle;
+    font-weight: bold;
+    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+}
+
+.label, .node--root, .node--leaf, use {
+    pointer-events: none;
+}
+
+/**
+ * for the input clear button.
+ */
+::-ms-clear {
+  display: none;
+}
+
+.form-control-clear {
+  z-index: 10;
+  pointer-events: auto;
+  cursor: pointer;
+}
+  </style>
+    <script>
+// this will replace the code in controller.js
+var simpleTest = angular.module('grepDemo', []);
+
+/**
+ * ========================= NOTE:
+ *
+ * this demo page will try to show the size of Intranet sites by 
+ * groups. 
+ * All intranet pathes are stored in file:
+ *   data/intranet-path.json
+ * The group is set based on the rules defined in file 
+ *   data/intranet-path-rules.json
+ * The size of each Intranet site is still stored in file:
+ *   data/intranet-size.json
+ *
+ */
+    </script>
+
+    <style>
+    .list-group-item {
+        border: 0px;
+    }
+
+    .panel-custom {
+        border: 0px;
+    }
+
+    .panel-custom .panel-footer{
+        background: #FFF;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- page header -->
+      <div class="page-header">
+        <h1 class="">OPSpedia by Years</h1> 
+      </div>
+
+      <!-- Search bar -->
+      <div class="container container-fluid bar-search bg-muted">
+      <div class="row" id="search-bar">
+        <ul class="nav nav-tabs" id="group-nav">
+          <li role="presentation" class="active"><a href="#">All sites</a></li>
+          <li role="presentation"><a href="#">MGCS</a></li>
+          <li role="presentation"><a href="#">Clusters</a></li>
+          <li role="presentation"><a href="#">Personal</a></li>
+          <li role="presentation"><a href="#">MNRF</a></li>
+          <li role="presentation"><a href="#">MOF</a></li>
+          <li role="presentation"><a href="#">TBS</a></li>
+          <li role="presentation"><a href="#">MCSCS</a></li>
+          <li role="presentation"><a href="#">OMAFRA</a></li>
+          <li role="presentation" class="dropdown pull-right">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              More ...<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li role="presentation"><a href="#">MAG</a></li>
+              <li role="presentation"><a href="#">MOHLTC</a></li>
+              <li role="presentation"><a href="#">MCSS</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="row" id="year-row">
+        <ul class="nav nav-tabs" id="group-nav">
+          <li role="presentation" id="2008"><a href="">2008</a></li>
+          <li role="presentation"><a href="#">2009</a></li>
+          <li role="presentation"><a href="#">2010</a></li>
+          <li role="presentation"><a href="#">2011</a></li>
+          <li role="presentation"><a href="#">2012</a></li>
+          <li role="presentation"><a href="#">2013</a></li>
+          <li role="presentation"><a href="#">2014</a></li>
+          <li role="presentation"><a href="#">2015</a></li>
+          <li role="presentation"><a href="#">2016</a></li>
+          <li role="presentation" class="active"><a href="#">2017</a></li>
+        </ul>
+      </div>
+      <p></p>
+      </div>
+
+      <!-- search result -->
+      <div class="container container-fluid bar-search bg-muted">
+      <div class="row" id="search-result"> 
+
+      <div class="col-md-8">
+        <div id="result" style="border: 0px solid black;text-align: center">
+<h2 align="center">
+<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>Loading...
+<span class="sr-only">Loading...</span>
+</h2>
+        </div>
+      </div> <!-- col-8 -->
+
+      <div class="col-md-4">
+        <div class="panel panel-success panel-no-custom">
+          <div class="panel-heading" id="summary-heading">
+            Found <span class="badge">111</span> Sites
+            <span class="badge pull-right">Total size: 234KB</span>
+          </div>
+
+          <div class="panel-body" id="summary" 
+               style="max-height: 500px; overflow-y: auto;
+                      padding: 0px">
+<h3 align="center">
+<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>Loading...
+<span class="sr-only">Loading...</span>
+</h3>
+<ul class="list-group">
+  <li class="list-group-item">
+      <span class="badge">Size</span>
+      Intranet Site
+  </li>
+  <li class="list-group-item" >
+      <span class="badge" style="background: blue">14</span>
+      <span class="glyphicon glyphicon-stop"
+            style="color: blue"></span>
+      <a href="http://intra.net.gov.on.ca/cac">CAC</a>
+  </li>
+  <li class="list-group-item">
+      <span class="badge">14KB</span>
+        <a href="http://intra.net.gov.on.ca/cac">CAC</a>
+  </li>
+  <li class="list-group-item pull-right">
+      <span class="badge">Total: 14</span>
+  </li>
+</ul>
+            
+          </div>
+          <div class="panel-footer">
+            <textarea style="width:100%" id="jsonstring" rows="2"></textarea>
+          </div>
+        </div>
+      </div> <!-- col-4 -->
+
+      </div> <!-- search result row -->
+      </div>
+
+    </div>
+  </body>
+</html>
