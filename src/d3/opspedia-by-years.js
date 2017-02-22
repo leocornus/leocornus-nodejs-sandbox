@@ -301,7 +301,8 @@ items.join('\n') +
         // preparing the heading message.
         var summaryHeading = 
 '<div class="panel-heading">' +
-  'Found <span class="badge">' + groups.length + '</span> Groups' +
+  'OPSpedia Year <span class="badge">' + year + '</span><br/>' +
+  '<span class="badge">' + groups.length + '</span> Groups' +
   '<span class="badge pull-right">Total size: ' + 
   readablizeBytes(total) + '</span>' +
 '</div>';
@@ -472,7 +473,7 @@ moreTabs.join('\n') +
                 "name":"This will NOT show anywhere!",
                 "children": [
                   {
-                    "name":"All OPSpedia sites for year " + year,
+                    "name":"OPSpedia Year " + year + " - " + readablizeBytes(totalSize),
                     "children": circles
                   }
                 ]
@@ -549,6 +550,10 @@ moreTabs.join('\n') +
             $('#circles' + year).fadeIn(3000, function() {
                 callback();
             });
+
+            // toggle the active for year nav.
+            $('#year-nav li.active').removeClass('active');
+            $('#year-nav li#' + year).addClass('active');
         };
 
         // sync call to keep sequence:
