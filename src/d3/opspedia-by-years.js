@@ -59,6 +59,7 @@ jQuery(document).ready(function($) {
         //buildZoomableCircles(intranets, colors);
         //buildSitesSummary(intranets, colors);
         $('#result').html('');
+        $('#summary').html('');
         handleSearch(2017, searchTerm);
         buildYear(2008);
         showCircles(2017);
@@ -190,7 +191,7 @@ jQuery(document).ready(function($) {
                 //return site[1].includes(searchTerm);
                 return site[3] === term;
             });
-            buildGroupNav(term);
+            //buildGroupNav(term);
         } else {
             // perform search.
             sites = $.grep(intranets, function(site, i) {
@@ -198,7 +199,7 @@ jQuery(document).ready(function($) {
                 var index = site[1].indexOf(searchTerm);
                 return index > -1;
             });
-            buildGroupNav('');
+            //buildGroupNav('');
         }
 
         // scale colors.
@@ -266,7 +267,7 @@ readablizeBytes(total) + '</span>';
     /**
      * utility function to build the group summary.
      */
-    function buildGroupSitesSummary(colors) {
+    function buildGroupSitesSummary(colors, year) {
 
         var total = 0;
         // items for summary list.
@@ -287,19 +288,32 @@ groupName + '</a>' +
             items.push(item);
         });
 
+        // add the list group to panel body.
         var group = 
+'<div class="panel-body" id="group' + year + '"' +
+'      style="max-height: 500px; overflow-y: auto; padding: 0px">' + 
 '<ul class="list-group" style="margin: 0px">' +
 items.join('\n') +
-'</ul>';
-        var summary = $("#summary");
-        summary.html(group);
+'</ul>' +
+'</div>';
 
+        // preparing the heading message.
         var summaryHeading = 
-'Found <span class="badge">' + groups.length + '</span> Groups' +
-'<span class="badge pull-right">Total size: ' + 
-readablizeBytes(total) + '</span>';
-        var heading = $('#summary-heading');
-        heading.html(summaryHeading);
+'<div class="panel-heading">' +
+  'Found <span class="badge">' + groups.length + '</span> Groups' +
+  '<span class="badge pull-right">Total size: ' + 
+  readablizeBytes(total) + '</span>' +
+'</div>';
+
+        var groupPanel = 
+'<div class="panel panel-success panel-no-custom"' +
+'     style="display:none"' +
+'     id="group' + year + '">' +
+summaryHeading + group +
+'</div>';
+
+        var summary = $("#summary");
+        summary.append(groupPanel);
     }
 
     /**
@@ -475,7 +489,7 @@ moreTabs.join('\n') +
         //    $('#' + id).fadeIn(3000);
         //});
         if(theGroups.length > 1) {
-            buildGroupSitesSummary(colors);
+            buildGroupSitesSummary(colors, year);
         }
     }
 
@@ -523,12 +537,14 @@ moreTabs.join('\n') +
     
         // try fade out the svg image.
         $('#circles2017').fadeOut(200);
+        $('#group2017').fadeOut(200);
         //setTimeout(function() {
         //    fadeYear(2008);
         //}, 2000);
 
         var show = function(stopYear, year, callback) {
 
+            $('#group' + year).fadeIn(3000);
             $('#circles' + year).fadeIn(3000, function() {
                 callback();
             });
@@ -541,6 +557,7 @@ moreTabs.join('\n') +
                 // loop in the next year.
                 if(++year < stopYear) {
                     var oldYear = year - 1;
+                    $('#group' + oldYear).fadeOut(3000);
                     $('#circles' + oldYear).fadeOut(3000);
                     setTimeout(function() {
                         loop(stopYear, year, show, loopDone);
@@ -583,5 +600,6 @@ moreTabs.join('\n') +
     function showCircles(year) {
 
         $('#circles' + year).fadeIn(3000);
+        $('#group' + year).fadeIn(3000);
     }
 });
