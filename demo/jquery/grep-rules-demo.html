@@ -463,9 +463,13 @@ moreTabs.join('\n') +
 
         // get ready group circles first.
         var groupCircles = {};
+        // total size
+        var totalSize = 0;
+        var maxSize = 93570042126;
         for(i = 0; i < sites.length; i++) {
             var site = sites[i];
             var size = site[2];
+            totalSize = totalSize + size;
             // set name to empty if size is too small
             // less than 200MB.
             // we have sorted the site by size.
@@ -480,7 +484,7 @@ moreTabs.join('\n') +
               }]
             };
 
-            // check the gorup.
+            // check the gorup and push the circle to proper group
             var group = site[3];
             if(Object.keys(groupCircles).indexOf(group) < 0 ) {
                 // no group exist! create new one.
@@ -501,6 +505,19 @@ moreTabs.join('\n') +
             };
             circles.push(groupCircle);
         });
+        // add the place holder circle.
+        var holderSize = maxSize - totalSize;
+        if(holderSize > 0) {
+            circles.push({
+              "name": name,
+              "children":[{
+                         "name": "hold",
+                         "size": holderSize,
+                         "leafFill": "lightgrey",
+                         "imgUrl": ""
+                      }]
+            });
+        }
 
         // get ready the json data for the zoomable circle.
         var jsonData = {
@@ -509,7 +526,8 @@ moreTabs.join('\n') +
                 "description": "Data example to show the data structure",
                 "colorRange": [
                   //"white","gainsboro", "silver"
-                  "white","#f8f9fa", "lightgrey"
+                  //"white","#f8f9fa", "lightgrey"
+                  "white", "lightgrey","#f8f9fa"
                 ],
                 "leafFill": "green"
               },
@@ -524,6 +542,8 @@ moreTabs.join('\n') +
               }
             };
         $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
+        // set the diameter based on the total size.
+        var diameter = scaleDiameter(totalSize);
         $('#' + id).zoomableCircles({"diameter":600, "margin":5}, jsonData);
         //setTimeout(function() {
         //    $('#' + id).fadeIn(3000);
@@ -535,6 +555,15 @@ moreTabs.join('\n') +
         if(theGroups.length > 1) {
             buildGroupSitesSummary(colors);
         }
+    }
+
+    /**
+     * utility function to get a scale diameter for the given size.
+     * 
+     */
+    function scaleDiameter(size) {
+
+        console.log("size = " + size);
     }
 
     /**
