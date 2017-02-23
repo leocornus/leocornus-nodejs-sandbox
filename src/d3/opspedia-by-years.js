@@ -98,8 +98,8 @@ jQuery(document).ready(function($) {
         intranets = [];
         groups = [];
 
-        console.log('Merge data pathes');
-        console.log(pathes[0]);
+        //console.log('Merge data pathes');
+        //console.log(pathes[0]);
         // store the sites by gorups.
         var groupSites = {};
         // append the size to intanets list.
@@ -107,52 +107,57 @@ jQuery(document).ready(function($) {
         $.each(sizes, function(index, size) {
             var id = size[0];
             var theSize = size[1];
-            var i = -1;
-            // find the correct site for the size.
-            if(isIE) {
-                for(var n = 0; n < pathes.length; n++) {
-                    if(pathes[n][0] === id) {
-                        i = n;
-                        break;
-                    }
-                } 
-            } else {
-                // it will return -1, if no match found.
-                i = pathes.findIndex(function(one) {
-                    return one[0] === id;
-                });
-            }
-            if(i >= 0) {
-                //intranets[i].push(theSize);
-                //console.log(intranets[i]);
+            if(theSize > 10240) {
+                var i = -1;
+                // find the correct site for the size.
+                if(isIE) {
+                    for(var n = 0; n < pathes.length; n++) {
+                        if(pathes[n][0] === id) {
+                            i = n;
+                            break;
+                        }
+                    } 
+                } else {
+                    // it will return -1, if no match found.
+                    i = pathes.findIndex(function(one) {
+                        return one[0] === id;
+                    });
+                }
+                if(i >= 0) {
+                    //intranets[i].push(theSize);
+                    //console.log(intranets[i]);
 
-                // try to find the match group for the Intranet path.
-                // TODO: multipile size will be different!
-                var path = pathes[i][1];
-                // === decide the group.
-                // set the default group
-                var group = 'Personal';
-                for( var n = 0; n < rules.length; n ++) {
-                    var rule = rules[n];
-                    var condition = RegExp(rule[0]);
-                    if(condition.test(path)) {
-                        group = rule[1];
-                        break;
+                    // try to find the match group for the 
+                    // Intranet path.
+                    // TODO: multipile size will be different!
+                    var path = pathes[i][1];
+                    // === decide the group.
+                    // set the default group
+                    var group = 'Personal';
+                    for( var n = 0; n < rules.length; n ++) {
+                        var rule = rules[n];
+                        var condition = RegExp(rule[0]);
+                        if(condition.test(path)) {
+                            group = rule[1];
+                            break;
+                        }
                     }
+                    //intranets[i].push(group);
+                    var theSite = [id, path, theSize, group];
+                    intranets.push(theSite);
+                    // store the sites in group.
+                    if(Object.keys(groupSites).indexOf(group) < 0) {
+                        // no group exist yet! create new one.
+                        groupSites[group] = {};
+                        groupSites[group]['sites'] = [];
+                        groupSites[group]['total'] = 0;
+                    }
+                    // add the site to group
+                    groupSites[group]['sites'].push(theSite);
+                    groupSites[group]['total'] += theSize;
                 }
-                //intranets[i].push(group);
-                var theSite = [id, path, theSize, group];
-                intranets.push(theSite);
-                // store the sites in group.
-                if(Object.keys(groupSites).indexOf(group) < 0) {
-                    // no group exist yet! create new one.
-                    groupSites[group] = {};
-                    groupSites[group]['sites'] = [];
-                    groupSites[group]['total'] = 0;
-                }
-                // add the site to group
-                groupSites[group]['sites'].push(theSite);
-                groupSites[group]['total'] += theSize;
+            } else {
+                // skip small size site.
             }
         });
 
@@ -161,8 +166,8 @@ jQuery(document).ready(function($) {
             // sort by size of the site.
             return b[2] - a[2];
         });
-        console.log('Merge data');
-        console.log(intranets[0]);
+        //console.log('Merge data');
+        //console.log(intranets[0]);
 
         // get ready the groups.
         Object.keys(groupSites).forEach(function(group, index) {
@@ -183,7 +188,7 @@ jQuery(document).ready(function($) {
      */
     function handleSearch(year, searchTerm) {
 
-        console.log(intranets[0]);
+        //console.log(intranets[0]);
         var sites = [];
         if(searchTerm.startsWith('cat:')) {
             var term = searchTerm.split(':')[1];
@@ -271,11 +276,13 @@ readablizeBytes(total) + '</span>';
     function buildGroupSitesSummary(colors, year) {
 
         var total = 0;
+        var siteTotal = 0;
         // items for summary list.
         var items = [];
         groups.forEach(function(group, index) {
             var groupName = group[0];
             var groupTotal = group[1];
+            siteTotal = siteTotal + group[2].length;
             total = total + groupTotal;
             var item = 
 '<li class="list-group-item" >' +
@@ -302,7 +309,8 @@ items.join('\n') +
         var summaryHeading = 
 '<div class="panel-heading">' +
   'OPSpedia Year <span class="badge">' + year + '</span><br/>' +
-  '<span class="badge">' + groups.length + '</span> Groups' +
+  '<span class="badge">' + groups.length + '</span> Groups ' +
+  '<span class="badge">' + siteTotal + '</span> Sites' +
   '<span class="badge pull-right">Total size: ' + 
   readablizeBytes(total) + '</span>' +
 '</div>';
@@ -407,6 +415,10 @@ moreTabs.join('\n') +
         for(i = 0; i < sites.length; i++) {
             var site = sites[i];
             var size = site[2];
+            if(size < 10240) {
+                // site is not ready.
+                continue;
+            }
             totalSize = totalSize + size;
             // set name to empty if size is too small
             // less than 200MB.
