@@ -411,7 +411,7 @@ moreTabs.join('\n') +
         var groupCircles = {};
         // total size
         var totalSize = 0;
-        var maxSize = 93570042126;
+        var maxSize = 101420689474;
         for(i = 0; i < sites.length; i++) {
             var site = sites[i];
             var size = site[2];
@@ -457,7 +457,30 @@ moreTabs.join('\n') +
         });
         // add the place holder circle.
         var holderSize = maxSize - totalSize;
-        if(holderSize > 0) {
+        if(holderSize > totalSize) {
+            var holderAmount = holderSize / totalSize;
+            for(var i = 0; i < holderAmount - 1; i++) {
+                circles.push({
+                  "name": name,
+                  "children":[{
+                             "name": "hold",
+                             "size": totalSize * (i + 1),
+                             "leafFill": "lightgrey",
+                             "imgUrl": ""
+                          }]
+                });
+            }
+            var marginSize = maxSize - totalSize * holderAmount;
+            circles.push({
+              "name": name,
+              "children":[{
+                         "name": "hold",
+                         "size": marginSize,
+                         "leafFill": "lightgrey",
+                         "imgUrl": ""
+                      }]
+            });
+        } else if (holderSize > 0) {
             circles.push({
               "name": name,
               "children":[{
