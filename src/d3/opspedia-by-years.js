@@ -553,7 +553,7 @@ moreTabs.join('\n') +
 
             // toggle the active for year nav.
             $('#year-nav li.active').removeClass('active');
-            $('#year-nav li#' + year).addClass('active');
+            $('#year-nav li#year' + year).addClass('active');
         };
 
         // sync call to keep sequence:
@@ -577,6 +577,31 @@ moreTabs.join('\n') +
         };
         // start the sequenced loop, sync loop
         loop(2018, 2008, show, function(){});
+    });
+
+    /**
+     * handle a single year
+     */
+    $('li[id^="year"]').on('click', function() {
+        // find out current year
+        var year = $(this).attr('id');
+        // find out the active year
+        var activeYear = $('#year-nav li.active').attr('id');
+        if(year == activeYear) {
+            return;
+        }
+        var newYear = year.split('year')[1];
+        var oldYear = activeYear.split('year')[1];
+
+        $('#group' + oldYear).fadeOut(2000);
+        $('#circles' + oldYear).fadeOut(2000);
+        setTimeout(function() {
+            // toggle the active for year nav.
+            $('#year-nav li.active').removeClass('active');
+            $('#year-nav li#' + year).addClass('active');
+            $('#group' + newYear).fadeIn(2000);
+            $('#circles' + newYear).fadeIn(2000);
+        }, 2000);
     });
 
     /**
