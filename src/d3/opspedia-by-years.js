@@ -62,7 +62,7 @@ jQuery(document).ready(function($) {
         $('#summary').html('');
         handleSearch(2017, searchTerm);
         // build circles year by year.
-        buildYear(2008);
+        buildYear(2009);
         showCircles(2017);
     });
 
@@ -611,7 +611,7 @@ moreTabs.join('\n') +
             });
         };
         // start the sequenced loop, sync loop
-        loop(2018, 2008, show, function(){});
+        loop(2018, 2009, show, function(){});
     });
 
     /**
