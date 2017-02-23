@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>D3 scale demo page</title>
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+
+  <script src='/bower_components/d3/d3.js'></script>
+  <script src='/bower_components/d3-cloud/build/d3.layout.cloud.js'></script>
+
+  <script src='/bower_components/angular/angular.min.js'></script>
+
+  <script>
+jQuery(document).ready(function($) {
+
+    var sequenceNumber = d3.scale.linear()
+                  .domain([0, 1])
+                  .range([100, 500]);
+    //console.log(color(0.1));
+    for(i = -10; i <11; i++) {
+        var numberLi = 
+            '<li class="list-group-item">' +
+            'index = ' + i + ' - ' + sequenceNumber(i) + '</li>';
+        $('#color-group').append(numberLi);
+    }
+});
+  </script>
+</head>
+<body>
+  <div class="container">
+    <!-- page header -->
+    <div class="page-header">
+      <div class="row">
+        <div class="col-md-7">
+          <h1 class="">D3 Scale Demo</h1> 
+        </div>
+
+        <div class="col-md-5" style="border: 0px red solid">
+          <h1>
+            <div class="input-group"
+                 role="group" aria-label="...">
+              <input class="form-control"
+                     placeholder="Search All"
+                     id="query-right"/>
+            </div>
+          </h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search bar -->
+    <div class="container container-fluid bar-search bg-muted">
+    <div class="row" id="search-bar">
+      <div class="col-md-8">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            Memos and Questions
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-warning">
+              <strong>Dependences</strong>: d3, d3-cloud, jQuery
+              <br/>
+              Bootstrap is optional.
+            </li>
+            <li class="list-group-item">
+              Math.random will return range between 0 and 1.
+              It will include 0 but NOT include 1.
+            </li>
+            <li class="list-group-item list-group-item-danger">
+              Q: what is the effecient way to control the size of 
+              the word cloud?
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            Color scale linear
+          </div>
+          <div class="panel-body" id="color-scale"
+               style="padding: 10px 0px 0px 0px;">
+            <ul class="list-group" id="color-group">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</body>
+</html>
