@@ -34,8 +34,8 @@
             viewId: VIEW_ID,
             dateRanges: [
               {
-                startDate: '7daysAgo',
-                endDate: 'today'
+                startDate: '2013-02-25',
+                endDate: '2013-02-25'
               }
             ],
             metrics: [
@@ -45,7 +45,26 @@
               {
                 expression: 'ga:pageviews'
               }
+            ],
+            dimensions: [
+              {
+                name: 'ga:pagePath'
+              }
             ]
+            // ,
+            // dimensionFilterClauses: [{
+            //   operator: "OR",
+            //   filters: [
+            //     {
+            //       dimensionName: "ga:pagePath",
+            //       not: false,
+            //       operator: "REGEXP",
+            //       expressions: [
+            //         "^/(mnr|naturalresources)"
+            //       ]
+            //     }
+            //   ]
+            // }]
           }
         ]
       }
