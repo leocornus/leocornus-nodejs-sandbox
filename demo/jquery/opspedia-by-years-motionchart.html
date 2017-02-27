@@ -1,0 +1,89 @@
+<!-- MOVED to new location demo/solr-search -->
+<html ng-app="grepDemo">
+  <head>
+    <title>OPSpedia by Years</title>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+    <link rel='stylesheet' href='/bower_components/jquery-ui/themes/base/jquery-ui.css'/>
+    <link rel='stylesheet' href='/bower_components/jquery-ui-bootstrap/jquery.ui.theme.css'/>
+
+    <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='/bower_components/jquery-ui/jquery-ui.min.js'></script>
+    <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src='/bower_components/angular/angular.min.js'></script>
+
+    <script src="/bower_components/d3/d3.min.js"></script>
+    <script src='/bower_components/leocornus-visualdata/src/zoomable-circles.js'></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src='/src/d3/opspedia-by-years-motionchart.js'></script>
+
+<style>
+</style>
+    <script>
+// this will replace the code in controller.js
+var simpleTest = angular.module('grepDemo', []);
+
+/**
+ * ========================= NOTE:
+ *
+ */
+google.load("visualization", "1", {packages:["motionchart"]});
+google.setOnLoadCallback(drawChart);
+
+function drawChart() {
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Year');
+  data.addColumn('date', 'Date');
+  data.addColumn('number', 'Total Sites');
+  data.addColumn('number', 'Size in GB');
+
+  data.addRows([
+    ['2009',  new Date (2009,11,31), 124, 1691722597],
+    ['2010',  new Date (2010,11,31), 227, 3053605202],
+    ['2011',  new Date (2011,11,31), 381, 12806987720],
+    ['2012',  new Date (2012,11,31), 493, 21647548632],
+    ['2013',  new Date (2013,11,31), 567, 34056269734],
+    ['2014',  new Date (2014,11,31), 600, 52320735808],
+    ['2015',  new Date (2015,11,31), 644, 74867799882],
+    ['2016',  new Date (2016,11,31), 658, 93569985761],
+    ['2017',  new Date (2017,11,31), 1152, 101420689474]
+  ]);
+
+  var container = document.getElementById('motionchart');
+  var chart = new google.visualization.MotionChart(container);
+
+  chart.draw(data, {width: 700, height:500});
+}
+    </script>
+
+    <style>
+    .list-group-item {
+        border: 0px;
+    }
+
+    .panel-custom {
+        border: 0px;
+    }
+
+    .panel-custom .panel-footer{
+        background: #FFF;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- page header -->
+      <div class="page-header">
+        <h1 class="">OPSpedia by Years Motion Chart</h1> 
+      </div>
+
+      <!-- motion chart-->
+      <div class="container container-fluid bar-search bg-muted">
+        <div id="motionchart"></div>
+      </div>
+
+    </div>
+  </body>
+</html>
