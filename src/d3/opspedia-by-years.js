@@ -212,7 +212,7 @@ jQuery(document).ready(function($) {
         var colors = scaleColors();
         buildZoomableCircles(sites, colors, year);
         if(searchTerm.length > 0) {
-            buildSitesSummary(sites, colors);
+            buildSitesSummary(sites, colors, year);
         }
     }
 
@@ -234,7 +234,7 @@ jQuery(document).ready(function($) {
     /**
      * utility function to build the summary.
      */
-    function buildSitesSummary(sites, colors) {
+    function buildSitesSummary(sites, colors, year) {
 
         var items = [];
         var total = 0;
@@ -256,18 +256,29 @@ name + '</a>' +
         }
 
         var group = 
+'<div class="panel-body" id="group' + year + '"' +
+'      style="max-height: 580px; overflow-y: auto; padding: 0px">' + 
 '<ul class="list-group" style="margin: 0px">' +
 items.join('\n') +
-'</ul>';
+'</ul>' +
+'</div>';
 
-        var summary = $("#summary");
-        summary.html(group);
         var summaryHeading = 
+'<div class="panel-heading">' +
 'Found <span class="badge">' + sites.length + '</span> Sites ' +
 '<span class="badge pull-right">Total size: ' + 
-readablizeBytes(total) + '</span>';
-        var heading = $('#summary-heading');
-        heading.html(summaryHeading);
+readablizeBytes(total) + '</span>' +
+'</div>';
+
+        var groupPanel = 
+'<div class="panel panel-success panel-no-custom"' +
+'     style="display:none"' +
+'     id="group' + year + '">' +
+summaryHeading + group +
+'</div>';
+
+        var summary = $("#summary");
+        summary.append(groupPanel);
     }
 
     /**
@@ -402,6 +413,110 @@ moreTabs.join('\n') +
      * utility function to build zoomable circles.
      */
     function buildZoomableCircles(sites, colors, year) {
+
+        var result = $("#result");
+        var id = 'circles' + year;
+        result.append('<div id="' + id + '" style="display: none"></div>');
+
+        var circles = [];
+        // total size
+        var totalSize = 0;
+        var biggestSize = sites[0][2];
+        var maxSize = 101420689474;
+        for(i = 0; i < sites.length; i++) {
+            var site = sites[i];
+            var size = site[2];
+            if(size < 10240) {
+                // site is not ready.
+                continue;
+            }
+            totalSize = totalSize + size;
+            // set name to empty if size is too small
+            // less than 200MB.
+            // we have sorted the site by size.
+            var name = i < Math.min(sites.length / 2, 10) ? site[1] : '';
+            var circle = {
+              "name": name,
+              "children":[{
+                  "name": site[1],
+                  "size": size,
+                  "leafFill": colors(i),
+                  "imgUrl": ""
+              }]
+            };
+
+            circles.push(circle);
+            //console.log(groupCircles);
+        }
+
+        // add the place holder circle.
+        var holderSize = maxSize - totalSize;
+        if(holderSize > biggestSize) {
+            var holderAmount = holderSize / biggestSize;
+            for(var i = 0; i < holderAmount - 1; i++) {
+                circles.push({
+                  "name": name,
+                  "children":[{
+                             "name": "hold",
+                             "size": biggestSize * (i + 1),
+                             "leafFill": "lightgrey",
+                             "imgUrl": ""
+                          }]
+                });
+            }
+            var marginSize = maxSize - biggestSize * holderAmount;
+            circles.push({
+              "name": name,
+              "children":[{
+                         "name": "hold",
+                         "size": marginSize,
+                         "leafFill": "lightgrey",
+                         "imgUrl": ""
+                      }]
+            });
+        } else if (holderSize > 0) {
+            circles.push({
+              "name": name,
+              "children":[{
+                         "name": "hold",
+                         "size": holderSize,
+                         "leafFill": "lightgrey",
+                         "imgUrl": ""
+                      }]
+            });
+        }
+
+        // get ready the json data for the zoomable circle.
+        var jsonData = {
+              "attributes": {
+                "title": "3 Equal size circles",
+                "description": "Data example to show the data structure",
+                "colorRange": [
+                  //"white","gainsboro", "silver"
+                  //"white","#f8f9fa", "lightgrey"
+                  "white", "lightgrey","#f8f9fa"
+                ],
+                "leafFill": "green"
+              },
+              "data": {
+                "name":"This will NOT show anywhere!",
+                "children": [
+                  {
+                    "name":"OPSpedia Year " + year + " - " + readablizeBytes(totalSize),
+                    "children": circles
+                  }
+                ]
+              }
+            };
+        $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
+        $('#' + id).zoomableCircles({"diameter":600, "margin":5}, jsonData);
+        buildSitesSummary(sites, colors, year);
+    }
+
+    /**
+     * utility function to build zoomable circles.
+     */
+    function buildZoomableGroupCircles(sites, colors, year) {
 
         var result = $("#result");
         var id = 'circles' + year;
