@@ -1,0 +1,74 @@
+<html>
+<head>
+    <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <style>
+.tooltips {
+  position: relative;
+  display: inline;
+}
+.tooltips span {
+  position: absolute;
+  width:140px;
+  color: #FFFFFF;
+  background: #000000;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  /*visibility: hidden;*/
+  opacity: 0;
+  border-radius: 6px;
+  top: 500px;
+}
+.tooltips span:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  /*left: 50%;*/
+  margin-left: -8px;
+  width: 0; height: 0;
+  border-bottom: 8px solid #000000;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+}
+div:hover.tooltips span {
+  visibility: visible;
+  opacity: 0.8;
+  top: 30px;
+  left: 50%;
+  margin-left: -76px;
+  z-index: 999;
+}
+  </style>
+
+  <script>
+jQuery(document).ready(function($) {
+
+    var showProperty = {
+      visibility: "visible",
+      opacity: 0.8,
+      top: "30px",
+      left: "50%",
+      "margin-left": "-76px",
+      "z-index": 999
+    };
+    $('div.tooltips > span').animate(showProperty, 'slow', 
+                                     function() {
+        setTimeout(function() {
+            // set the tooltips to disappear
+            $('div.tooltips > span').animate({opacity: 0}, 'slow');
+        }, 2000);
+    });
+});
+  </script>
+</head>
+<body>
+some other content placed here and there 
+some other content placed here and there 
+some other content placed here and there 
+<div class="tooltips">CSS Tooltips<span>Tooltip</span></div>
+some other content placed here and there 
+some other content placed here and there 
+some other content placed here and there 
+some other content placed here and there 
+</body>
+</html>
