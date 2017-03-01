@@ -109,25 +109,46 @@ span.tip:after.success {
   </style>
 
   <script>
+function getCookie(name) {
+
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
 jQuery(document).ready(function($) {
 
-    var showProperty = {
-      visibility: "visible",
-      opacity: 0.8,
-      top: "30px",
-      left: "50%",
-      "margin-left": "-76px",
-      "z-index": 999
-    };
-    //var selector = "div.tooltips > span";
-    var selector = "span.tip";
-    $(selector).animate(showProperty, 'slow', 
-                                     function() {
-        setTimeout(function() {
-            // set the tooltips to disappear
-            $(selector).animate({opacity: 0}, 'slow');
-        }, 2000);
-    });
+    // define the cookie name: tooltip-tracker
+    // get cookie value in the tooltip icon,
+    var tracker = $('div.ab-item').attr('tooltip-tracker');
+    // get the cookie value from browser
+    var trackerCookie = getCookie('tooltip-tracker');
+    console.log(trackerCookie);
+    if((typeof trackerCookie != 'undefined') && 
+       (tracker === trackerCookie)) {
+        // compare the two, if same do nothing...
+    } else {
+        // if different, reset the cookie and show tooltip
+        document.cookie = "tooltip-tracker=" + tracker;
+
+        var showProperty = {
+          visibility: "visible",
+          opacity: 0.8,
+          top: "30px",
+          left: "50%",
+          "margin-left": "-76px",
+          "z-index": 999
+        };
+        //var selector = "div.tooltips > span";
+        var selector = "span.tip";
+        $(selector).animate(showProperty, 'slow', 
+                                         function() {
+            setTimeout(function() {
+                // set the tooltips to disappear
+                $(selector).animate({opacity: 0}, 'slow');
+            }, 2000);
+        });
+    }
 });
   </script>
 </head>
@@ -148,6 +169,6 @@ some other content placed here and there
 
 some other content placed here and there 
 some other content placed here and there 
-some other content placed here and there <div class="ab-item">Tooltip news<span class="tip">OPSpedia has new updates</span></div>
+some other content placed here and there <div class="ab-item" tooltip-tracker="abcdeslsjh">Tooltip news<span class="tip">OPSpedia has new updates</span></div>
 </body>
 </html>
