@@ -57,6 +57,37 @@ span.tip {
 	font-weight: 400;	
 	font-style: bold;
 	font-size: 14px;
+	color: #31708f;
+	/*text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);*/
+	text-align: center;
+	border: 4px solid #bce8f1;
+	background: #d9edf7;
+	text-indent: 0px;
+}
+span.tip:after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -8px;
+  width: 0; height: 0;
+  border-bottom: 10px solid #bce8f1;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+}
+span.tip.success {
+  position: absolute;
+  width:240px;
+  height: 30px;
+  line-height: 30px;
+  /*visibility: hidden;*/
+  opacity: 0;
+  border-radius: 6px;
+  top: 500px;
+	font-family: 'Alegreya SC', Georgia, serif;
+	font-weight: 400;	
+	font-style: bold;
+	font-size: 14px;
 	color: #3c763d;
 	/*text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);*/
 	text-align: center;
@@ -64,7 +95,7 @@ span.tip {
 	background: #dff0d8;
 	text-indent: 0px;
 }
-span.tip:after {
+span.tip:after.success {
   content: '';
   position: absolute;
   bottom: 100%;
