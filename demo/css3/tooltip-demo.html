@@ -46,27 +46,34 @@ div:hover.tooltips span {
 }
 span.tip {
   position: absolute;
-  width:140px;
-  color: #FFFFFF;
-  background: #000000;
+  width:240px;
   height: 30px;
   line-height: 30px;
-  text-align: center;
   /*visibility: hidden;*/
   opacity: 0;
   border-radius: 6px;
   top: 500px;
+	font-family: 'Alegreya SC', Georgia, serif;
+	font-weight: 400;	
+	font-style: bold;
+	font-size: 14px;
+	color: #3c763d;
+	/*text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);*/
+	text-align: center;
+	border: 4px solid #d6e9c6;
+	background: #dff0d8;
+	text-indent: 0px;
 }
 span.tip:after {
   content: '';
   position: absolute;
   bottom: 100%;
-  /*left: 50%;*/
+  left: 50%;
   margin-left: -8px;
   width: 0; height: 0;
-  border-bottom: 8px solid #000000;
-  border-right: 8px solid transparent;
-  border-left: 8px solid transparent;
+  border-bottom: 10px solid #d6e9c6;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
 }
   </style>
 
@@ -110,6 +117,6 @@ some other content placed here and there
 
 some other content placed here and there 
 some other content placed here and there 
-some other content placed here and there <div class="ab-item">Tooltip news<span class="tip">ddd</span></div>
+some other content placed here and there <div class="ab-item">Tooltip news<span class="tip">OPSpedia has new updates</span></div>
 </body>
 </html>
