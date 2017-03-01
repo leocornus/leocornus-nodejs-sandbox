@@ -119,17 +119,21 @@ function getCookie(name) {
 jQuery(document).ready(function($) {
 
     // define the cookie name: tooltip-tracker
+    var cookieName = 'tooltip-tracker';
     // get cookie value in the tooltip icon,
-    var tracker = $('div.ab-item').attr('tooltip-tracker');
+    var tracker = $('div.ab-item').attr(cookieName);
     // get the cookie value from browser
-    var trackerCookie = getCookie('tooltip-tracker');
+    //var trackerCookie = getCookie('tooltip-tracker');
+    var allCookies = "; " + document.cookie;
+    var parts = allCookies.split("; " + cookieName + "=");
+    var trackerCookie = parts.pop().split(";").shift();
     console.log(trackerCookie);
     if((typeof trackerCookie != 'undefined') && 
        (tracker === trackerCookie)) {
         // compare the two, if same do nothing...
     } else {
         // if different, reset the cookie and show tooltip
-        document.cookie = "tooltip-tracker=" + tracker;
+        document.cookie = cookieName + "=" + tracker;
 
         var showProperty = {
           visibility: "visible",
@@ -169,6 +173,6 @@ some other content placed here and there
 
 some other content placed here and there 
 some other content placed here and there 
-some other content placed here and there <div class="ab-item" tooltip-tracker="abcdeslsjh">Tooltip news<span class="tip">OPSpedia has new updates</span></div>
+some other content placed here and there <div class="ab-item" tooltip-tracker="aibcdeslsjh">Tooltip news<span class="tip">OPSpedia has new updates</span></div>
 </body>
 </html>

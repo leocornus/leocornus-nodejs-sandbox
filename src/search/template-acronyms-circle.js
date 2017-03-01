@@ -38,7 +38,7 @@ var buildAcronymsCircles = function(docs, currentQuery, total,
           "name": i + "",
           "children":[{
               "name": i + "",
-              "size": 1000 * (i + 1),
+              "size": 1000 + i,
               "leafFill": color(i),
               "imgUrl": ""
           }]
