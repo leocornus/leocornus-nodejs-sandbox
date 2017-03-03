@@ -9,6 +9,8 @@ A sandbox and playground to learn Node.js and have fun!
 It is very simple to get started with JavaScript programming.
 
 ```bash
+$ git clone https://github.com/leocornus/leocornus-nodejs-sandbox.git
+$ cd leocornus-nodejs-sandbox
 $ npm install
 $ npm test
 $ npm run unit-test
