@@ -2,7 +2,7 @@
 
 A sandbox and playground to learn Node.js and have fun!
 
-[![travis status][travis-image]][travis-url][![npm version][npm-image]][npm-url] [![npm license][license-image]][npm-url] [![downloads][downloads-image]][npm-url]
+[![travis status][travis-image][travis-url]][![npm version][npm-image]][npm-url] [![npm license][license-image]][npm-url] [![downloads][downloads-image]][npm-url]
 
 ## Quick Start
 
