@@ -84,15 +84,27 @@ jQuery(document).ready(function($) {
     /**
      * function to draw the google pie charts.
      */
-    function buildPieChart(sites, options) {
+    function buildPieChart(sites, options, filter) {
 
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(function() {
             // get ready data.
             var pies = [];
             pies.push(['Site', 'Media Size']);
-            for(i = 0; i < sites.length; i++) {
-                pies.push([sites[i][1], sites[i][2]]);
+            if(filter === undefined) {
+                // we will show all sites.
+                for(i = 0; i < sites.length; i++) {
+                    pies.push([sites[i][1], sites[i][2]]);
+                }
+            } else {
+                // set the condition.
+                var condition = RegExp(filter);
+                for(i = 0; i < sites.length; i++) {
+                    var path = sites[i][1];
+                    if(condition.test(path)) {
+                        pies.push([sites[i][1], sites[i][2]]);
+                    }
+                }
             }
             //console.log(pies);
             var data = google.visualization.arrayToDataTable(pies);
@@ -103,7 +115,11 @@ jQuery(document).ready(function($) {
                   height: 600,
                   width: 750,
                   is3D: true,
-                  pieHole: 0.4
+                  pieHole: 0.4,
+                  chartArea: {
+                    height: '80%',
+                    width: '80%'
+                  }
                 };
             }
             var piechart = document.getElementById('chartpreview');
@@ -118,6 +134,7 @@ jQuery(document).ready(function($) {
 
         // get the source, width, height
         var title = $('#inputTitle').val();
+        var filter = $('#inputFilter').val();
         var width = $('#inputWidth').val();
         //console.log(width);
         var height = $('#inputHeight').val();
@@ -133,7 +150,7 @@ jQuery(document).ready(function($) {
           }
         };
 
-        buildPieChart(intranets, options);
+        buildPieChart(intranets, options, filter);
     });
 });
 </script>
@@ -178,6 +195,14 @@ jQuery(document).ready(function($) {
           <input type="url" class="form-control" id="inputTitle" 
                  placeholder="Chart Title"
                  value="OPSpedia Media Size">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputFilter" class="col-sm-2 control-label">Filter</label>
+        <div class="col-sm-10">
+          <input type="url" class="form-control" id="inputFilter" 
+                 placeholder="Sites filter, leave it empty to show all"
+                 value="">
         </div>
       </div>
 
