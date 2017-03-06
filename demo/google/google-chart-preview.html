@@ -151,6 +151,13 @@ jQuery(document).ready(function($) {
         };
 
         buildPieChart(intranets, options, filter);
+
+        // prepare the shortcode.
+        var theCode = 
+          '[opspedia-media-size title="' + title + 
+          '" filter="' + filter + '" width=' + width +
+          ' height=' + height + ']';
+        $('#embed-code').html(theCode);
     });
 });
 </script>
