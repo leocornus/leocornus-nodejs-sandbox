@@ -17,6 +17,8 @@
     <script src="/bower_components/d3/d3.min.js"></script>
     <script src='/bower_components/leocornus-visualdata/src/zoomable-circles.js'></script>
 
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <style>
 /**
  * styles needed for zoomable circles.
@@ -64,6 +66,10 @@ var simpleTest = angular.module('grepDemo', []);
 
 jQuery(document).ready(function($) {
 
+    /**
+     * intranets will be array, each item will be an array of 3:
+     *  [id, name, size];
+     */
     var intranets;
     var sizes;
 
@@ -177,6 +183,7 @@ jQuery(document).ready(function($) {
         var colors = scaleColors();
         buildZoomableCircles(sites, colors);
         buildSitesSummary(sites, colors);
+        buildPieChart(sites);
     }
 
     /**
@@ -287,6 +294,31 @@ readablizeBytes(total) + '</span>';
     }
 
     /**
+     * function to draw the google pie charts.
+     */
+    function buildPieChart(sites) {
+
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(function() {
+            // get ready data.
+            var pies = [];
+            pies.push(['Site', 'Media Size']);
+            for(i = 0; i < sites.length; i++) {
+                pies.push([sites[i][1], sites[i][2]]);
+            }
+            console.log(pies);
+            var data = google.visualization.arrayToDataTable(pies);
+            var options = {
+              title: 'OPSpedia Size',
+              pieHole: 0.4
+            };
+            var piechart = document.getElementById('piechart');
+            var chart = new google.visualization.PieChart(piechart);
+            chart.draw(data, options);
+        });
+    }
+
+    /**
      * utility function to show readable size.
      */
     function readablizeBytes(bytes) {
@@ -377,6 +409,8 @@ readablizeBytes(total) + '</span>';
 <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>Loading...
 <span class="sr-only">Loading...</span>
 </h2>
+          </div>
+          <div id="piechart" style="width: 700px; height: 500px;">
           </div>
       </div> <!-- col-8 -->
 
