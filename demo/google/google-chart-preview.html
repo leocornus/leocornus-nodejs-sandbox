@@ -84,7 +84,7 @@ jQuery(document).ready(function($) {
     /**
      * function to draw the google pie charts.
      */
-    function buildPieChart(sites) {
+    function buildPieChart(sites, options) {
 
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(function() {
@@ -94,18 +94,22 @@ jQuery(document).ready(function($) {
             for(i = 0; i < sites.length; i++) {
                 pies.push([sites[i][1], sites[i][2]]);
             }
-            console.log(pies);
+            //console.log(pies);
             var data = google.visualization.arrayToDataTable(pies);
-            var options = {
-              title: 'OPSpedia Size',
-              height: 600,
-              width: 750,
-              is3D: true,
-              pieHole: 0.4
-            };
+            if(options === undefined) {
+                // the default options.
+                options = {
+                  title: 'OPSpedia Size',
+                  height: 600,
+                  width: 750,
+                  is3D: true,
+                  pieHole: 0.4
+                };
+            }
             var piechart = document.getElementById('chartpreview');
             //$("#chartpreview").width(750).height(500);
             var chart = new google.visualization.PieChart(piechart);
+            //console.log(options);
             chart.draw(data, options);
         });
     }
@@ -117,8 +121,19 @@ jQuery(document).ready(function($) {
         var width = $('#inputWidth').val();
         //console.log(width);
         var height = $('#inputHeight').val();
+        var options = {
+          title: title,
+          height: height,
+          width: width,
+          is3D: true,
+          pieHole: 0.4,
+          chartArea: {
+            height: '80%',
+            width: '80%'
+          }
+        };
 
-        //buildPieChart(intranets, options);
+        buildPieChart(intranets, options);
     });
 });
 </script>
