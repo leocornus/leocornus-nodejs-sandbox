@@ -12,10 +12,6 @@ It is very simple to get started with JavaScript programming.
 $ git clone https://github.com/leocornus/leocornus-nodejs-sandbox.git
 $ cd leocornus-nodejs-sandbox
 $ npm install
-$ npm test
-$ npm run unit-test
-$ npm run e2e-test
-$ npm run wdio-test 
 $ npm run express-app
 ```
 
