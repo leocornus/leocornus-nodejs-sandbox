@@ -124,7 +124,8 @@ jQuery(document).ready(function($) {
             }
             var piechart = document.getElementById('chartpreview');
             //$("#chartpreview").width(750).height(500);
-            var chart = new google.visualization.PieChart(piechart);
+            //var chart = new google.visualization.PieChart(piechart);
+            var chart = new google.visualization.ColumnChart(piechart);
             //console.log(options);
             chart.draw(data, options);
         });
