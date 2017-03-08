@@ -1,0 +1,222 @@
+<html>
+<head>
+  <title>Google Charts Preview simple case</title>
+
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+  <link rel='stylesheet' href='/bower_components/video.js/dist/video-js.css'/>
+
+  <script src='/bower_components/video.js/dist/video.js'></script>
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script>
+jQuery(document).ready(function($) {
+
+    var intranets;
+    // Internet Explorer 6-11
+    var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+    // using when to have multipile ajax call.
+    $.when(
+        // get the list name.
+        $.ajax({
+            type: "GET",
+            url: 'data/2013-02-25.json',
+            dataType: "json",
+            success: function(data) {
+                //console.log(data.length);
+                intranets = data;
+            }
+        })
+    ).then(function() {
+        buildPieChart(intranets);
+    });
+
+    /**
+     * function to draw the google pie charts.
+     */
+    function buildPieChart(sites, options, filter) {
+
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(function() {
+            // get ready data.
+            var pies = [];
+            pies.push(['Path', 'Pageviews']);
+            if(filter === undefined) {
+                // we will show all sites.
+                for(i = 0; i < sites.length; i++) {
+                    pies.push([sites[i][0], sites[i][2]]);
+                }
+            } else {
+                // set the condition.
+                var condition = RegExp(filter);
+                for(i = 0; i < sites.length; i++) {
+                    var path = sites[i][0];
+                    if(condition.test(path)) {
+                        pies.push([sites[i][0], sites[i][2]]);
+                    }
+                }
+            }
+            //console.log(pies);
+            var data = google.visualization.arrayToDataTable(pies);
+            if(options === undefined) {
+                // the default options.
+                options = {
+                  title: 'OPSpedia Traffic',
+                  height: 600,
+                  width: 750,
+                  // using 3D pie as default.
+                  is3D: true,
+                  chartArea: {
+                    height: '80%',
+                    width: '80%'
+                  }
+                };
+            }
+            var piechart = document.getElementById('chartpreview');
+            //$("#chartpreview").width(750).height(500);
+            var chart = new google.visualization.PieChart(piechart);
+            //var chart = new google.visualization.ColumnChart(piechart);
+            //console.log(options);
+            chart.draw(data, options);
+        });
+    }
+
+    $('#preview').on('click', function() {
+
+        // get the source, width, height
+        var title = $('#inputTitle').val();
+        var filter = $('#inputFilter').val();
+        var width = $('#inputWidth').val();
+        //console.log(width);
+        var height = $('#inputHeight').val();
+        var options = {
+          title: title,
+          height: height,
+          width: width,
+          is3D: true,
+          pieHole: 0.4,
+          chartArea: {
+            height: '80%',
+            width: '80%'
+          }
+        };
+
+        buildPieChart(intranets, options, filter);
+
+        // prepare the shortcode.
+        var theCode = 
+          '[opspedia-daily-traffic title="' + title + 
+          '" filter="' + filter + '" width=' + width +
+          ' height=' + height + ']';
+        $('#embed-code').html(theCode);
+    });
+});
+</script>
+</head>
+
+<body>
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="">Google Charts Demo Page</h1> 
+      </div>
+    </div>
+  </div>
+
+  <!-- nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#previewtab" aria-controls="previewtab" role="tab"
+         data-toggle="tab"
+      >Preview</a>
+    </li>
+    <li role="presentation">
+      <a href="#embedcode" aria-controls="embedcode" role="tab"
+         data-toggle="tab"
+      >Embed Code</a>
+    </li>
+  </ul>
+
+  <!-- tab panes -->
+<div class="tab-content">
+
+  <div class="row tab-pane active" id="previewtab" role="tabpanel">
+
+  <div class="col-md-4">
+    <h2>Customization Form</h2>
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="inputTitle" class="col-sm-2 control-label">Title</label>
+        <div class="col-sm-10">
+          <input type="url" class="form-control" id="inputTitle" 
+                 placeholder="Chart Title"
+                 value="OPSpedia Media Size">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputFilter" class="col-sm-2 control-label">Filter</label>
+        <div class="col-sm-10">
+          <input type="url" class="form-control" id="inputFilter" 
+                 placeholder="Sites filter, leave it empty to show all"
+                 value="">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputWidth" class="col-sm-2 control-label">
+          Width
+        </label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" id="inputWidth" 
+                 placeholder="Chart Width" value="640">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputHeight" class="col-sm-2 control-label">
+          Height
+        </label>
+        <div class="col-sm-6">
+          <input type="number" class="form-control" id="inputHeight" 
+                 placeholder="Chart Height" value="264">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="button" id="preview" class="btn btn-default">
+          Preview
+          </button>
+        </div>
+      </div>
+    </form> 
+  </div>
+
+  <div class="col-md-8">
+
+    <h2>Here is the chart you will get</h2>
+
+    <div id="chartpreview">
+    </div>
+  </div>
+  </div> <!-- end of row previewtab -->
+
+  <div class="tab-pane" id="embedcode" role="tabpanel">
+    <div>
+    <h2>Embed Code:</h2>
+    <pre><code id="embed-code"></code></pre>
+    </div>
+  </div>
+
+</div> <!-- end of tab-content->
+
+</div>
+</body>
+
+</html>
