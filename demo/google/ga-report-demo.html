@@ -82,8 +82,8 @@
       var aRow = rows[i];
       // page has structure: [path, sessions, pageviews]
       pages.push([aRow.dimensions[0],
-                  aRow.metrics[0].values[0],
-                  aRow.metrics[0].values[1]]);
+                  parseInt(aRow.metrics[0].values[0]),
+                  parseInt(aRow.metrics[0].values[1])]);
     }
     // sort the pages by pageviews..
     pages = pages.sort(function(a, b) {
