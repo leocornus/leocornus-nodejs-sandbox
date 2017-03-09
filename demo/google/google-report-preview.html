@@ -45,9 +45,11 @@ jQuery(document).ready(function($) {
             // get ready data.
             var pies = [];
             pies.push(['Path', 'Pageviews']);
+            var totalPageviews = 0;
             if(filter === undefined) {
                 // we will show all sites.
                 for(i = 0; i < sites.length; i++) {
+                    totalPageviews = totalPageviews + sites[i][2]; 
                     pies.push([sites[i][0], sites[i][2]]);
                 }
             } else {
@@ -56,6 +58,7 @@ jQuery(document).ready(function($) {
                 for(i = 0; i < sites.length; i++) {
                     var path = sites[i][0];
                     if(condition.test(path)) {
+                        totalPageviews = totalPageviews + sites[i][2]; 
                         pies.push([sites[i][0], sites[i][2]]);
                     }
                 }
@@ -81,6 +84,10 @@ jQuery(document).ready(function($) {
             var chart = new google.visualization.PieChart(piechart);
             //var chart = new google.visualization.ColumnChart(piechart);
             //console.log(options);
+            // add summary to title
+            options.title = options.title + " - " + 
+                            totalPageviews + " Pageviews on " +
+                            pies.length + " Pages";
             chart.draw(data, options);
         });
     }
