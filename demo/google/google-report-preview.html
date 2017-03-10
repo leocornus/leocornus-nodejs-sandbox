@@ -16,6 +16,7 @@
 jQuery(document).ready(function($) {
 
     var intranets;
+    var rules;
     // Internet Explorer 6-11
     var isIE = /*@cc_on!@*/false || !!document.documentMode;
 
@@ -24,19 +25,77 @@ jQuery(document).ready(function($) {
         // get the list name.
         $.ajax({
             type: "GET",
-            url: 'data/2013-02-25.json',
+            //url: 'data/2013-02-25.json',
+            url: 'data/week-2017-02-29.json',
             dataType: "json",
             success: function(data) {
                 //console.log(data.length);
                 intranets = data;
             }
+        }),
+        // get the rules for group.
+        $.ajax({
+            type: "GET",
+            url: 'data/intranet-path-rules.json',
+            dataType: "json",
+            success: function(data) {
+                //console.log(data);
+                rules = data;
+            }
         })
     ).then(function() {
-        buildPieChart(intranets);
+        var gs = classifySites(intranets, rules);
+        buildPieChart(gs);
     });
 
     /**
+     * utility function to arrange path by groups rules.
+     */
+    function classifySites(sites, groupRules) {
+
+        // using Object
+        var groups = {};
+        console.log("group Rules:");
+        console.log(groupRules);
+        // set the default group to Other.
+        var group = 'Other';
+        for(var i = 0; i < sites.length; i ++) {
+            var sitePath = sites[i][0];
+            var siteSessions = sites[i][1];
+            var sitePageviews = sites[i][2];
+
+            // set the default group to Other.
+            var group = 'Other';
+            // find the group based on sitePath.
+            for(var n = 0; n < groupRules.length; n++) {
+                var condition = RegExp(groupRules[n][0]);
+                if(condition.test(sitePath)) {
+                    // find match, assign the group
+                    group = groupRules[n][1];
+                    break;
+                }
+            }
+            if(Object.keys(groups).indexOf(group) < 0) {
+                groups[group] = [group, 0, 0];
+            }
+            // calculate the total
+            groups[group][1] = groups[group][1] + siteSessions;
+            groups[group][2] = groups[group][2] + sitePageviews;
+        }
+        groups = Object.values(groups);
+        console.log(groups);
+        // sort by pageviews.
+        groups = groups.sort(function(a, b) {
+            return b[2] - a[2];
+        });
+
+        return groups;
+    }
+
+    /**
      * function to draw the google pie charts.
+     * sites is an arry of site with the following structure:
+     *  [path, sessions, pageviews]
      */
     function buildPieChart(sites, options, filter) {
 
