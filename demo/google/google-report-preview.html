@@ -26,7 +26,9 @@ jQuery(document).ready(function($) {
         $.ajax({
             type: "GET",
             //url: 'data/2013-02-25.json',
-            url: 'data/week-2017-02-29.json',
+            url: 'data/2017-03-08.json',
+            //url: 'data/week-2017-02-19.json',
+            //url: 'data/week-2017-02-26.json',
             dataType: "json",
             success: function(data) {
                 //console.log(data.length);
@@ -46,6 +48,7 @@ jQuery(document).ready(function($) {
     ).then(function() {
         var gs = classifySites(intranets, rules);
         buildPieChart(gs);
+        //buildPieChart(intranets);
     });
 
     /**
@@ -140,8 +143,8 @@ jQuery(document).ready(function($) {
             }
             var piechart = document.getElementById('chartpreview');
             //$("#chartpreview").width(750).height(500);
-            var chart = new google.visualization.PieChart(piechart);
-            //var chart = new google.visualization.ColumnChart(piechart);
+            //var chart = new google.visualization.PieChart(piechart);
+            var chart = new google.visualization.ColumnChart(piechart);
             //console.log(options);
             // add summary to title
             options.title = options.title + " - " + 

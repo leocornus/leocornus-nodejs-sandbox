@@ -26,7 +26,7 @@ var x = d3.scale.linear()
 var y = d3.scale.sqrt()
     .range([0, radius]);
 
-var color = d3.scale.category20c();
+var color = d3.scale.category20();
 
 var partition = d3.layout.partition()
     .value(function(d) { return d.size; });
@@ -43,7 +43,8 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + width / 2 + "," + (height / 2) + ")");
 
-d3.json("data/sunburst-flare.json", function(error, root) {
+//d3.json("data/sunburst-flare.json", function(error, root) {
+d3.json("../google/data/2017-03-08-sunburst.json", function(error, root) {
   if (error) throw error;
 
   svg.selectAll("path")

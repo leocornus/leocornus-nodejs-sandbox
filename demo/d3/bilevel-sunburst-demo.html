@@ -57,7 +57,7 @@ var arc = d3.svg.arc()
     .innerRadius(function(d) { return radius / 3 * d.depth; })
     .outerRadius(function(d) { return radius / 3 * (d.depth + 1) - 1; });
 
-d3.json("data/sunburst-flare.json", function(error, root) {
+d3.json("../google/data/2017-03-08-sunburst.json", function(error, root) {
   if (error) throw error;
 
   // Compute the initial layout on the entire tree to sum sizes.
