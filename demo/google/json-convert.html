@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>JSON convert demo</title>
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-header"><h1>JSON convert Demo</h1></div>
+
+  <div>
+    <div class="input-group input-group-lg"
+         role="group" aria-label="...">
+      <span class="input-group-addon">
+        <i class="fa fa-search text-primary"></i>
+        Path to JSON file: </span>
+      <div class="form-group form-group-lg has-feedback has-clear">
+        <input type="text" class="form-control"
+               value="data/2017-03-08.json"
+               placeholder="Find Acronyms"
+               id="source-file"
+               aria-describedby="sizing-addon"/>
+        <span class="form-control-clear text-primary
+                     glyphicon glyphicon-remove
+                     form-control-feedback hidden"></span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row" id="search-bar">
+    <div class="col-md-5">
+    Source JSON:<br/>
+    <textarea style="width:100%" id="sourcestring" rows="30"></textarea>
+    </div>
+
+    <div class="col-md-2">
+      <button id="load">Load</button><br/>
+      <button id="convert">convert JSON</button><br/>
+      <button id="toarray">JSON Array</button><br/>
+      <button id="addgroup">Add Group</button><br/>
+      <input type="text" id="year"/>
+      <button id="toyeararray">To Array</button><br/>
+      <button id="merge">Merge</button><br/>
+    </div>
+
+    <div class="col-md-5">
+    Result JSON:<br/>
+    <textarea style="width:100%" id="jsonstring" rows="30"></textarea>
+    </div>
+  </div>
+</div>
+ 
+<script>
+
+jQuery(document).ready(function($) {
+
+    var groupRules;
+
+    // just load the csv from source file.
+    $('#load').on('click', function() {
+
+        //alert('loading');
+        var source = $('#source-file').val();
+        $.ajax({
+            type: "GET",
+            url: source,
+            dataType: "json",
+            success: function(data) {
+                $('#sourcestring').val(JSON.stringify(data, null, 2));
+            }
+        });
+
+        // load group rules.
+        $.ajax({
+            type: "GET",
+            url: 'data/intranet-path-rules.json',
+            dataType: "json",
+            success: function(data) {
+                //console.log(data);
+                groupRules = data;
+            }
+        });
+    });
+
+    // convert the CSV string to zoomable circle json format.
+    $('#convert').on('click', function() {
+
+        // read the json.
+        var pathes = JSON.parse($('#sourcestring').val());
+        // array for each circle:
+        var groups = {}; // decide by group rules.
+        //alert(originLines.length);
+        for(var i = 0; i < pathes.length; i++) {
+            // each path has sturcture:
+            // [page_path, sessions, pagevies]
+            var pagePath = pathes[i][0];
+            var pageSessions = pathes[i][1];
+            var pagePageviews = pathes[i][2];
+
+            // find the site for this page.
+            //var pattern = /^\/(.*)\//;
+            var pattern = /^\/([a-z0-9\-]*)\//;
+            var site = '/';
+            var result = pattern.exec(pagePath);
+            if(result != null) {
+                // find some match.
+                site = result[1];
+            }
+
+            // find the group and site for this page path.
+            // set the default group.
+            var group = 'Other Sites';
+            for(var n = 0; n < groupRules.length; n++) {
+                var condition = RegExp(groupRules[n][0]);
+                if(condition.test(pagePath)) {
+                    // find match, assign the group
+                    group = groupRules[n][1];
+                    break;
+                }
+            }
+            if(Object.keys(groups).indexOf(group) < 0) {
+                // create the new group.
+                groups[group] = {};
+            }
+            // using the site as the key.
+            if(Object.keys(groups[group]).indexOf(site) < 0) {
+                // create the new site.
+                groups[group][site] = [];
+            }
+
+            var page = {
+              "name": pagePath,
+              "size": pagePageviews,
+            };
+            // push page to site.
+            groups[group][site].push(page);
+        }
+
+        var allGroups = [];
+        for(var group in groups) {
+
+            var sites = groups[group];
+            var groupChildren = [];
+            for(var site in sites) {
+                var pages = sites[site];
+                var eachSite = {
+                  "name": site,
+                  "children": pages
+                };
+                groupChildren.push(eachSite);
+            }
+
+            var eachGroup = {
+              "name": group,
+              "children":groupChildren
+            };
+            allGroups.push(eachGroup);
+        }
+
+        var jsonData = {
+            "name": "OPSpedia Traffic",
+            "children":allGroups
+        };
+
+        $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
+    });
+});
+
+function groupSites(sites) {
+
+    var rules = [ 
+      [/^mnr/, 'MNRF'], 
+      [/^natural/, 'MNRF'], 
+      [/^fin/, 'MOF'], 
+      [/^rev/, 'MOF'], 
+      [/^stevecheng/, 'MOF'], 
+      [/^mgcs/, 'MGCS'], 
+      [/^serviceontario/, 'MGCS'], 
+      [/^omafra/, 'OMAFRA'], 
+      [/^digitalomafra/, 'OMAFRA'], 
+      [/^mag/, 'MAG'], 
+      [/^moh/, 'MOHLTC'], 
+      [/^mcscs/, 'MCSCS'], 
+      [/^MCSCS/, 'MCSCS'], 
+      [/^mcys/, 'MCYS'], 
+      [/^mcss/, 'MCSS'], 
+      [/^tbs/, 'TBS'], 
+      [/^cac/, 'Cluster'], 
+      [/^its/, 'Cluster'], 
+      [/^cyssc/, 'Cluster'], 
+      [/^gsic/, 'Cluster'], 
+      [/^iit/, 'Cluster'], 
+      [/^its/, 'Cluster'] 
+    ];
+
+    for(var i = 0; i < sites.length; i ++) {
+        var site = sites[i];
+        var name = site[1];
+        // set the default group
+        var group = 'Personal';
+        for( var n = 0; n < rules.length; n ++) {
+            var rule = rules[n];
+            if(rule[0].test(name)) {
+                group = rule[1];
+                break;
+            }
+        }
+        site.push(group);
+    }
+
+    return sites;
+}
+
+</script>
+ 
+</body>
+</html>
