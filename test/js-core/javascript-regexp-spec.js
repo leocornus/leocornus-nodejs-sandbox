@@ -20,17 +20,20 @@ describe('JavaScript RegExp Prototype Testing Specs', function() {
         it('extract the beginning of a URI path', function() {
 
             // set the pattern.
-            var pattern = /^\/(.*)\//;
+            //var pattern = /^\/([a-z0-9]*|wp\-admin)\//;
+            var pattern = /^\/([a-z0-9\-]*)\//;
 
             // the case one.
             var source = "/wp-admin/themes.php";
             var result = pattern.exec(source);
 
+            expect(result != null).toBe(true);
             expect(result.length).toBe(2);
             expect(result[1]).toMatch('wp-admin');
 
             source = "/wiki/Web_accessibility_guide";
             result = pattern.exec(source);
+            expect(result != null).toBe(true);
             expect(result[1]).toMatch('wiki');
 
             source ="/?s=abc";
@@ -42,6 +45,18 @@ describe('JavaScript RegExp Prototype Testing Specs', function() {
             result = pattern.exec(source);
             expect(result).toBe(null);
             expect(result === null).toBe(true);
+
+            source = "/revenue/job-tools/";
+            result = pattern.exec(source);
+            expect(result != null).toBe(true);
+            expect(result.length).toBe(2);
+            expect(result[1]).toMatch('revenue');
+
+            source = "/fin/wp-admin/post-new.php?post_type=issue";
+            result = pattern.exec(source);
+            expect(result != null).toBe(true);
+            expect(result.length).toBe(2);
+            expect(result[1]).toMatch('fin');
         });
     });
 });
