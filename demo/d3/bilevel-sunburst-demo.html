@@ -48,8 +48,13 @@ circle {
   <script>
 jQuery(document).ready(function($) {
 
-var margin = {top: 350, right: 480, bottom: 350, left: 480},
-    radius = Math.min(margin.top, margin.right, margin.bottom, margin.left) - 10;
+//var margin = {top: 350, right: 480, bottom: 350, left: 480};
+//var radius = Math.min(margin.top, margin.right, margin.bottom, margin.left) - 10;
+var width = 960;
+var height = 700;
+var radius = Math.min(width / 2, height / 2) - 10;
+
+// calculate the position for the explanation overlay.
 
 var formatNumber = d3.format(",d");
 
@@ -61,10 +66,14 @@ var luminance = d3.scale.sqrt()
     .range([90, 20]);
 
 var svg = d3.select("body").append("svg")
-    .attr("width", margin.left + margin.right)
-    .attr("height", margin.top + margin.bottom)
+    .attr("id", "svgid")
+    //.attr("width", margin.left + margin.right)
+    .attr('width', width)
+    //.attr("height", margin.top + margin.bottom)
+    .attr('height', height)
   .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    //.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 var partition = d3.layout.partition()
     .sort(function(a, b) { return d3.ascending(a.name, b.name); })
@@ -94,7 +103,7 @@ d3.json("../google/data/2017-03-08-sunburst.json", function(error, root) {
         d.fill = fill(d);
       });
 
-  console.log("root.value = " + root.value);
+  //console.log("root.value = " + root.value);
   // date only need set once.
   $("#date").text('2017-03-08');
   $("#pageviews").text(formatNumber(root.value));
@@ -144,7 +153,7 @@ d3.json("../google/data/2017-03-08-sunburst.json", function(error, root) {
 
     //console.log("zoom out p.value = " + p.parent.value);
     //console.log("zoom out p.name = " + p.parent.name);
-    console.log(p.parent);
+    //console.log(p.parent);
     $("#pageviews").text(formatNumber(p.parent.sum));
     $("#group").text(p.parent.name);
 
@@ -233,7 +242,8 @@ function updateArc(d) {
   return {depth: d.depth, x: d.x, dx: d.dx};
 }
 
-d3.select(self.frameElement).style("height", margin.top + margin.bottom + "px");
+//d3.select(self.frameElement).style("height", margin.top + margin.bottom + "px");
+d3.select(self.frameElement).style("height", height + "px");
 });
   </script>
 </head>
