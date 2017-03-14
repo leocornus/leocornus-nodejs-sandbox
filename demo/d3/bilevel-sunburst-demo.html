@@ -31,8 +31,12 @@ circle {
   border: 1px solid black;
 }
 
-#percentage {
+#pageviews {
   font-size: 2.5em;
+}
+
+#date, #group {
+  font-weight: bold;
 }
 
 </style>
@@ -49,7 +53,7 @@ var margin = {top: 350, right: 480, bottom: 350, left: 480},
 
 var formatNumber = d3.format(",d");
 
-var hue = d3.scale.category10();
+var hue = d3.scale.category20();
 
 var luminance = d3.scale.sqrt()
     .domain([0, 1e6])
@@ -90,6 +94,12 @@ d3.json("../google/data/2017-03-08-sunburst.json", function(error, root) {
         d.fill = fill(d);
       });
 
+  console.log("root.value = " + root.value);
+  // date only need set once.
+  $("#date").text('2017-03-08');
+  $("#pageviews").text(formatNumber(root.value));
+  $("#group").text('All OPSpedia');
+
   // Now redefine the value function to use the previously-computed sum.
   partition
       .children(function(d, depth) { return depth < 2 ? d._children : null; })
@@ -100,6 +110,7 @@ d3.json("../google/data/2017-03-08-sunburst.json", function(error, root) {
       .on("click", zoomOut);
 
   center.append("title")
+      //.text(function(d) {return d.name + "\n" + formatNumber(d.value);});
       .text("zoom out");
 
   var path = svg.selectAll("path")
@@ -116,11 +127,25 @@ d3.json("../google/data/2017-03-08-sunburst.json", function(error, root) {
   function zoomIn(p) {
     if (p.depth > 1) p = p.parent;
     if (!p.children) return;
+
+    //console.log("zoom in p.value = " + p.value);
+    //console.log("zoom in p.name = " + p.name);
+    $("#pageviews").text(formatNumber(p.value));
+    $("#group").text(p.name);
+
     zoom(p, p);
   }
 
   function zoomOut(p) {
+    if (!p) return;
     if (!p.parent) return;
+
+    //console.log("zoom out p.value = " + p.parent.value);
+    //console.log("zoom out p.name = " + p.parent.name);
+    console.log(p.parent);
+    $("#pageviews").text(formatNumber(p.parent.sum));
+    $("#group").text(p.parent.name);
+
     zoom(p.parent, p);
   }
 
@@ -210,8 +235,9 @@ d3.select(self.frameElement).style("height", margin.top + margin.bottom + "px");
 </head>
 <body>
   <div id="explanation" style="visibility: ;">
-    <span id="percentage">40%</span><br/>
-    of visits begin with this sequence of pages
+    Day <span id="date">2017-03-08</span>
+    <span id="pageviews">40%</span><br/>
+    Pageviews - <span id="group">All OPSpedia</span>
   </div>
 </body>
 </html>
