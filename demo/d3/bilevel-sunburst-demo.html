@@ -32,6 +32,8 @@ jQuery(document).ready(function($) {
 var margin = {top: 350, right: 480, bottom: 350, left: 480},
     radius = Math.min(margin.top, margin.right, margin.bottom, margin.left) - 10;
 
+var formatNumber = d3.format(",d");
+
 var hue = d3.scale.category10();
 
 var luminance = d3.scale.sqrt()
@@ -92,6 +94,9 @@ d3.json("../google/data/2017-03-08-sunburst.json", function(error, root) {
       .style("fill", function(d) { return d.fill; })
       .each(function(d) { this._current = updateArc(d); })
       .on("click", zoomIn);
+  // add the tooltip
+  path.append("title")
+      .text(function(d) {return d.name + "\n" + formatNumber(d.value);});
 
   function zoomIn(p) {
     if (p.depth > 1) p = p.parent;
@@ -147,6 +152,9 @@ d3.json("../google/data/2017-03-08-sunburst.json", function(error, root) {
           .style("fill", function(d) { return d.fill; })
           .on("click", zoomIn)
           .each(function(d) { this._current = enterArc(d); });
+  // add the tooltip
+  path.append("title")
+      .text(function(d) {return d.name + "\n" + formatNumber(d.value);});
 
       path.transition()
           .style("fill-opacity", 1)
