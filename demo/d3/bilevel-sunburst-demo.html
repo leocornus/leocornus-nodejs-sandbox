@@ -28,7 +28,7 @@ circle {
   text-align: center;
   color: #666;
   z-index: -1;
-  border: 0px solid black;
+  border: 1px solid black;
 }
 
 #pageviews {
@@ -50,11 +50,10 @@ jQuery(document).ready(function($) {
 
 //var margin = {top: 350, right: 480, bottom: 350, left: 480};
 //var radius = Math.min(margin.top, margin.right, margin.bottom, margin.left) - 10;
-var width = 960;
+var width = 700;
 var height = 700;
-var radius = Math.min(width / 2, height / 2) - 10;
-
-// calculate the position for the explanation overlay.
+var margin = 10;
+var radius = Math.min(width / 2, height / 2) - margin;
 
 var formatNumber = d3.format(",d");
 
@@ -86,6 +85,13 @@ var arc = d3.svg.arc()
     .padRadius(radius / 3)
     .innerRadius(function(d) { return radius / 3 * d.depth; })
     .outerRadius(function(d) { return radius / 3 * (d.depth + 1) - 1; });
+
+// calculate the position for the explanation overlay.
+// we need wait the svg is create.
+var offset = $('#svgid').offset();
+var labelTop = offset['top'] + height / 2 - 50;
+var labelLeft = offset['left'] + width / 2 - 90;
+$('#explanation').css('left', labelLeft).css('top', labelTop);
 
 d3.json("../google/data/2017-03-08-sunburst.json", function(error, root) {
   if (error) throw error;
