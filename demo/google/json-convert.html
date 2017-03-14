@@ -159,9 +159,14 @@ jQuery(document).ready(function($) {
                 groupChildren.push(eachSite);
             }
 
+            // if the group only have one child.
+            var children = groupChildren;
+            if(groupChildren.length == 1) {
+                children = groupChildren[0]["children"];
+            }
             var eachGroup = {
               "name": group,
-              "children":groupChildren
+              "children": children
             };
             allGroups.push(eachGroup);
         }
