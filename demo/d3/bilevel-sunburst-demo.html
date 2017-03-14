@@ -20,6 +20,21 @@ circle {
   pointer-events: all;
 }
 
+#explanation {
+  position: absolute;
+  top: 305px;
+  left: 390px;
+  width: 180px;
+  text-align: center;
+  color: #666;
+  z-index: -1;
+  border: 1px solid black;
+}
+
+#percentage {
+  font-size: 2.5em;
+}
+
 </style>
 
   <script src='/bower_components/jquery/dist/jquery.min.js'></script>
@@ -194,5 +209,9 @@ d3.select(self.frameElement).style("height", margin.top + margin.bottom + "px");
   </script>
 </head>
 <body>
+  <div id="explanation" style="visibility: ;">
+    <span id="percentage">40%</span><br/>
+    of visits begin with this sequence of pages
+  </div>
 </body>
 </html>
