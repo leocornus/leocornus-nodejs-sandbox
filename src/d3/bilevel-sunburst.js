@@ -89,7 +89,8 @@ var bsExplanation =
 '<div id="explanation-' + bsId + '" + class="bs-explanation">' +
 '  Day <span id="date-' + bsId + '" class="bs-date">2017-03-08</span><br/>' +
 '  <span id="pageviews-' + bsId + '" class="bs-pageviews">40%</span><br/>' +
-'  Pageviews - <span id="group-' + bsId + '" class="bs-group">All OPSpedia</span>' +
+'  Pageviews - <span id="group-' + bsId + '" class="bs-group">All OPSpedia</span><br/>' +
+'  <span id="percentage-' + bsId + '" class="bs-percentage">100%</span>' +
 '</div>';
 $('body').append(bsExplanation);
 
@@ -174,6 +175,8 @@ d3.json("../google/data/" + bsDate + "-sunburst.json",
     //console.log("zoom in p.name = " + p.name);
     $("#pageviews-" + bsId).text(formatNumber(p.value));
     $("#group-" + bsId).text(p.name);
+    var percentage = Math.round10(p.value / bsTotal * 100, -2);
+    $("#percentage-" + bsId).text(percentage + "%");
 
     zoom(p, p);
   }
@@ -187,6 +190,8 @@ d3.json("../google/data/" + bsDate + "-sunburst.json",
     //console.log(p.parent);
     $("#pageviews-" + bsId).text(formatNumber(p.parent.sum));
     $("#group-" + bsId).text(p.parent.name);
+    var percentage = Math.round10(p.parent.sum/ bsTotal * 100, -2);
+    $("#percentage-" + bsId).text(percentage + "%");
 
     zoom(p.parent, p);
   }
