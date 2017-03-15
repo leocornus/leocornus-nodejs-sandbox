@@ -8,7 +8,7 @@ jQuery(document).ready(function($) {
 
 //var margin = {top: 350, right: 480, bottom: 350, left: 480};
 //var radius = Math.min(margin.top, margin.right, margin.bottom, margin.left) - 10;
-var bsDate = '2017-03-13';
+var bsDate = '2017-03-14';
 var bsWidth = 600;
 var bsHeight = 600;
 var bsMargin = 10;
@@ -34,6 +34,14 @@ var svg = d3.select(bsSelector).append("svg")
   .append("g")
     .attr("transform", 
           "translate(" + bsWidth / 2 + "," + bsHeight / 2 + ")");
+
+var bsExplanation = 
+'<div id="explanation" style="visibility: ;">' +
+'  Day <span id="date">2017-03-08</span><br/>' +
+'  <span id="pageviews">40%</span><br/>' +
+'  Pageviews - <span id="group">All OPSpedia</span>' +
+'</div>';
+$('body').append(bsExplanation);
 
 var partition = d3.layout.partition()
     .sort(function(a, b) { return d3.ascending(a.name, b.name); })
