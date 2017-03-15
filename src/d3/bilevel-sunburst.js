@@ -263,7 +263,7 @@ function key(d) {
 
 function fill(d) {
   var p = d;
-  while (p.depth > 1) p = p.parent;
+  //while (p.depth > 1) p = p.parent;
   var c = d3.lab(hue(p.name));
   c.l = luminance(d.sum);
   return c;
