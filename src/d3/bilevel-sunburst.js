@@ -24,7 +24,8 @@ var luminance = d3.scale.sqrt()
     .clamp(true)
     .range([90, 20]);
 
-var bsSvgId = 'svgid-' + Math.ceil((Math.random() * 100 + 100));
+var bsId = Math.ceil((Math.random() * 100 + 100));
+var bsSvgId = 'svgid-' + bsId;
 var svg = d3.select(bsSelector).append("svg")
     .attr("id", bsSvgId)
     //.attr("width", margin.left + margin.right)
@@ -36,10 +37,10 @@ var svg = d3.select(bsSelector).append("svg")
           "translate(" + bsWidth / 2 + "," + bsHeight / 2 + ")");
 
 var bsExplanation = 
-'<div id="explanation" style="visibility: ;">' +
-'  Day <span id="date">2017-03-08</span><br/>' +
-'  <span id="pageviews">40%</span><br/>' +
-'  Pageviews - <span id="group">All OPSpedia</span>' +
+'<div id="explanation-' + bsId + '" + class="bs-explanation">' +
+'  Day <span id="date-' + bsId + '" class="bs-date">2017-03-08</span><br/>' +
+'  <span id="pageviews-' + bsId + '" class="bs-pageviews">40%</span><br/>' +
+'  Pageviews - <span id="group-' + bsId + '" class="bs-group">All OPSpedia</span>' +
 '</div>';
 $('body').append(bsExplanation);
 
@@ -60,7 +61,7 @@ var arc = d3.svg.arc()
 var offset = $('#' + bsSvgId).offset();
 var labelTop = offset['top'] + bsHeight / 2 - 50;
 var labelLeft = offset['left'] + bsWidth / 2 - 90;
-$('#explanation').css('left', labelLeft).css('top', labelTop);
+$('#explanation-' + bsId).css('left', labelLeft).css('top', labelTop);
 
 d3.json("../google/data/" + bsDate + "-sunburst.json", 
         function(error, root) {
@@ -82,9 +83,9 @@ d3.json("../google/data/" + bsDate + "-sunburst.json",
 
   //console.log("root.value = " + root.value);
   // date only need set once.
-  $("#date").text(bsDate);
-  $("#pageviews").text(formatNumber(root.value));
-  $("#group").text('All OPSpedia');
+  $("#date-" + bsId).text(bsDate);
+  $("#pageviews-" + bsId).text(formatNumber(root.value));
+  $("#group-" + bsId).text('All OPSpedia');
 
   // Now redefine the value function to use the previously-computed sum.
   partition
@@ -118,8 +119,8 @@ d3.json("../google/data/" + bsDate + "-sunburst.json",
 
     //console.log("zoom in p.value = " + p.value);
     //console.log("zoom in p.name = " + p.name);
-    $("#pageviews").text(formatNumber(p.value));
-    $("#group").text(p.name);
+    $("#pageviews-" + bsId).text(formatNumber(p.value));
+    $("#group-" + bsId).text(p.name);
 
     zoom(p, p);
   }
@@ -131,8 +132,8 @@ d3.json("../google/data/" + bsDate + "-sunburst.json",
     //console.log("zoom out p.value = " + p.parent.value);
     //console.log("zoom out p.name = " + p.parent.name);
     //console.log(p.parent);
-    $("#pageviews").text(formatNumber(p.parent.sum));
-    $("#group").text(p.parent.name);
+    $("#pageviews-" + bsId).text(formatNumber(p.parent.sum));
+    $("#group-" + bsId).text(p.parent.name);
 
     zoom(p.parent, p);
   }
