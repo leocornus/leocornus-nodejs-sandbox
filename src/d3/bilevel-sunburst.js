@@ -1,3 +1,52 @@
+// Closure
+(function() {
+  /**
+   * Decimal adjustment of a number.
+   *
+   * @param {String}  type  The type of adjustment.
+   * @param {Number}  value The number.
+   * @param {Integer} exp   The exponent (the 10 logarithm of the adjustment base).
+   * @returns {Number} The adjusted value.
+   */
+  function decimalAdjust(type, value, exp) {
+    // If the exp is undefined or zero...
+    if (typeof exp === 'undefined' || +exp === 0) {
+      return Math[type](value);
+    }
+    value = +value;
+    exp = +exp;
+    // If the value is not a number or the exp is not an integer...
+    if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+      return NaN;
+    }
+    // Shift
+    value = value.toString().split('e');
+    value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+    // Shift back
+    value = value.toString().split('e');
+    return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+  }
+
+  // Decimal round
+  if (!Math.round10) {
+    Math.round10 = function(value, exp) {
+      return decimalAdjust('round', value, exp);
+    };
+  }
+  // Decimal floor
+  if (!Math.floor10) {
+    Math.floor10 = function(value, exp) {
+      return decimalAdjust('floor', value, exp);
+    };
+  }
+  // Decimal ceil
+  if (!Math.ceil10) {
+    Math.ceil10 = function(value, exp) {
+      return decimalAdjust('ceil', value, exp);
+    };
+  }
+})();
+
 jQuery(document).ready(function($) {
 
 /**
@@ -13,7 +62,7 @@ var bsWidth = 600;
 var bsHeight = 600;
 var bsMargin = 10;
 var bsRadius = Math.min(bsWidth / 2, bsHeight / 2) - bsMargin;
-var bsSelector = 'body';
+var bsSelector = '#preview';
 
 var formatNumber = d3.format(",d");
 
@@ -86,6 +135,7 @@ d3.json("../google/data/" + bsDate + "-sunburst.json",
   $("#date-" + bsId).text(bsDate);
   $("#pageviews-" + bsId).text(formatNumber(root.value));
   $("#group-" + bsId).text('All OPSpedia');
+  var bsTotal = root.value;
 
   // Now redefine the value function to use the previously-computed sum.
   partition
@@ -110,7 +160,10 @@ d3.json("../google/data/" + bsDate + "-sunburst.json",
   // add the tooltip
   path.append("title")
       .text(function(d) {
-          return d.name + "\n" + formatNumber(d.value) + " Pageviews";
+          return d.name + "\n" + 
+                 formatNumber(d.value) + " Pageviews\n" +
+                 Math.round10((d.value / bsTotal) * 100, -2) + 
+                 "% of total pageviews";
       });
 
   function zoomIn(p) {
@@ -184,7 +237,10 @@ d3.json("../google/data/" + bsDate + "-sunburst.json",
   // add the tooltip
   path.append("title")
       .text(function(d) {
-          return d.name + "\n" + formatNumber(d.value) + " Pageviews";
+          return d.name + "\n" + 
+                 formatNumber(d.value) + " Pageviews\n" +
+                 Math.round10((d.value / bsTotal) * 100, -2) + 
+                 "% of total pageviews";
       });
 
       path.transition()
