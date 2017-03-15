@@ -1,11 +1,19 @@
 jQuery(document).ready(function($) {
 
+/**
+ * bs prefix stands for bilevel sunburst.
+ * the interface should be:
+ *   selector, width, height, date,
+ */
+
 //var margin = {top: 350, right: 480, bottom: 350, left: 480};
 //var radius = Math.min(margin.top, margin.right, margin.bottom, margin.left) - 10;
-var width = 600;
-var height = 600;
-var margin = 10;
-var radius = Math.min(width / 2, height / 2) - margin;
+var bsDate = '2017-03-13';
+var bsWidth = 600;
+var bsHeight = 600;
+var bsMargin = 10;
+var bsRadius = Math.min(bsWidth / 2, bsHeight / 2) - bsMargin;
+var bsSelector = 'body';
 
 var formatNumber = d3.format(",d");
 
@@ -16,36 +24,39 @@ var luminance = d3.scale.sqrt()
     .clamp(true)
     .range([90, 20]);
 
-var svg = d3.select("body").append("svg")
-    .attr("id", "svgid")
+var bsSvgId = 'svgid-' + Math.ceil((Math.random() * 100 + 100));
+var svg = d3.select(bsSelector).append("svg")
+    .attr("id", bsSvgId)
     //.attr("width", margin.left + margin.right)
-    .attr('width', width)
+    .attr('width', bsWidth)
     //.attr("height", margin.top + margin.bottom)
-    .attr('height', height)
+    .attr('height', bsHeight)
   .append("g")
-    //.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    .attr("transform", 
+          "translate(" + bsWidth / 2 + "," + bsHeight / 2 + ")");
 
 var partition = d3.layout.partition()
     .sort(function(a, b) { return d3.ascending(a.name, b.name); })
-    .size([2 * Math.PI, radius]);
+    .size([2 * Math.PI, bsRadius]);
 
 var arc = d3.svg.arc()
     .startAngle(function(d) { return d.x; })
     .endAngle(function(d) { return d.x + d.dx ; })
     .padAngle(.01)
-    .padRadius(radius / 3)
-    .innerRadius(function(d) { return radius / 3 * d.depth; })
-    .outerRadius(function(d) { return radius / 3 * (d.depth + 1) - 1; });
+    .padRadius(bsRadius / 3)
+    .innerRadius(function(d) { return bsRadius / 3 * d.depth; })
+    .outerRadius(function(d) { return bsRadius / 3 * (d.depth + 1) - 1; });
 
 // calculate the position for the explanation overlay.
 // we need wait the svg is create.
-var offset = $('#svgid').offset();
-var labelTop = offset['top'] + height / 2 - 50;
-var labelLeft = offset['left'] + width / 2 - 90;
+var offset = $('#' + bsSvgId).offset();
+var labelTop = offset['top'] + bsHeight / 2 - 50;
+var labelLeft = offset['left'] + bsWidth / 2 - 90;
 $('#explanation').css('left', labelLeft).css('top', labelTop);
 
-d3.json("../google/data/2017-03-13-sunburst.json", function(error, root) {
+d3.json("../google/data/" + bsDate + "-sunburst.json", 
+        function(error, root) {
+
   if (error) throw error;
 
   // Compute the initial layout on the entire tree to sum sizes.
@@ -63,7 +74,7 @@ d3.json("../google/data/2017-03-13-sunburst.json", function(error, root) {
 
   //console.log("root.value = " + root.value);
   // date only need set once.
-  $("#date").text('2017-03-08');
+  $("#date").text(bsDate);
   $("#pageviews").text(formatNumber(root.value));
   $("#group").text('All OPSpedia');
 
@@ -73,7 +84,7 @@ d3.json("../google/data/2017-03-13-sunburst.json", function(error, root) {
       .value(function(d) { return d.sum; });
 
   var center = svg.append("circle")
-      .attr("r", radius / 3)
+      .attr("r", bsRadius / 3)
       .on("click", zoomOut);
 
   center.append("title")
@@ -201,5 +212,5 @@ function updateArc(d) {
 }
 
 //d3.select(self.frameElement).style("height", margin.top + margin.bottom + "px");
-d3.select(self.frameElement).style("height", height + "px");
+d3.select(self.frameElement).style("height", bsHeight + "px");
 });
