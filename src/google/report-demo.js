@@ -3,6 +3,23 @@ jQuery(document).ready(function($) {
     $('#query').on('click', function() {
         queryReports();
     });
+
+    // merge the result.
+    $('#merge').on('click', function() {
+
+        var inputOne = JSON.parse($('#input-one').val());
+        var inputTwo = JSON.parse($('#input-two').val());
+        var result = inputOne.concat(inputTwo);
+        // sort the pages by pageviews..
+        result = result.sort(function(a, b) {
+            // sort by size of the site.
+            return b[2] - a[2];
+        });
+        console.log(result.length);
+
+        var formattedJson = JSON.stringify(result, null, 2);
+        document.getElementById('query-output').value = formattedJson;
+    });
 });
 
 function showMessage() {
@@ -18,6 +35,7 @@ function queryReports() {
   var VIEW_ID = '41055556';
   var startDate = $('#start-date').val();
   var endDate = $('#end-date').val();
+  var pageToken = $('#page-token').val();
 
   gapi.client.request({
     path: '/v4/reports:batchGet',
@@ -30,7 +48,7 @@ function queryReports() {
           // page size set how many rows to return.
           // maxium is 10,000 for page path dimension
           pageSize: 10000,
-          pageToken: "0",
+          'pageToken': pageToken,
           dateRanges: [
             {
               startDate: startDate, 
@@ -76,6 +94,9 @@ function displayResults(response) {
   var nextPageToken = response.result.reports[0].nextPageToken;
   console.log(rows.length);
   console.log(nextPageToken);
+  if(nextPageToken) {
+    document.getElementById('page-token').value = nextPageToken;
+  }
   var pages = [];
   for(var i = 0; i < rows.length; i++) {
     var aRow = rows[i];
