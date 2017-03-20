@@ -30,6 +30,7 @@ function queryReports() {
           // page size set how many rows to return.
           // maxium is 10,000 for page path dimension
           pageSize: 10000,
+          pageToken: "0",
           dateRanges: [
             {
               startDate: startDate, 
@@ -70,8 +71,11 @@ function queryReports() {
 }
 
 function displayResults(response) {
+
   var rows = response.result.reports[0].data.rows;
+  var nextPageToken = response.result.reports[0].nextPageToken;
   console.log(rows.length);
+  console.log(nextPageToken);
   var pages = [];
   for(var i = 0; i < rows.length; i++) {
     var aRow = rows[i];
