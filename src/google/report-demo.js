@@ -1,8 +1,24 @@
-// Replace with your view ID.
-var VIEW_ID = '41055556';
+jQuery(document).ready(function($) {
+
+    $('#query').on('click', function() {
+        queryReports();
+    });
+});
+
+function showMessage() {
+
+  document.getElementById('query-output').value = 'Logged in!';
+}
+
 
 // Query the API and print the results to the page.
 function queryReports() {
+
+  // Replace with your view ID.
+  var VIEW_ID = '41055556';
+  var startDate = $('#start-date').val();
+  var endDate = $('#end-date').val();
+
   gapi.client.request({
     path: '/v4/reports:batchGet',
     root: 'https://analyticsreporting.googleapis.com/',
@@ -16,8 +32,8 @@ function queryReports() {
           pageSize: 10000,
           dateRanges: [
             {
-              startDate: '2013-02-25',
-              endDate: '2013-02-25'
+              startDate: startDate, 
+              endDate: endDate
             }
           ],
           metrics: [

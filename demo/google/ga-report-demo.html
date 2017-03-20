@@ -12,12 +12,16 @@
 
 <p>
   <!-- The Sign-in button. This will run `queryReports()` on success. -->
-  <div class="g-signin2" data-onsuccess="queryReports"></div>
+  <div class="g-signin2" data-onsuccess="showMessage"></div>
+  Start Date: <input id="start-date" type="text"/>
+  End Date: <input id="end-date" type="text"/><br/>
+  <button id="query">Query</button>
 </p>
 
 <!-- The API response will be printed here. -->
 <textarea cols="80" rows="20" id="query-output"></textarea>
 
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="/src/google/report-demo.js"></script>
 <!-- Load the JavaScript API client and Sign-in library. -->
 <script src="https://apis.google.com/js/client:platform.js"></script>
