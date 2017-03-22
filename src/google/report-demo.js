@@ -32,7 +32,7 @@ function showMessage() {
 function queryReports() {
 
   // Replace with your view ID.
-  var VIEW_ID = '41055556';
+  var VIEW_ID = $('#view-id').val();
   var startDate = $('#start-date').val();
   var endDate = $('#end-date').val();
   var pageToken = $('#page-token').val();
