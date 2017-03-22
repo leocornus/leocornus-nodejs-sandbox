@@ -20,6 +20,10 @@ jQuery(document).ready(function($) {
         var formattedJson = JSON.stringify(result, null, 2);
         document.getElementById('query-output').value = formattedJson;
     });
+
+    $('#convert-treemap').on('click', function() {
+        convertTreemap();
+    });
 });
 
 function showMessage() {
@@ -27,8 +31,13 @@ function showMessage() {
   document.getElementById('query-output').value = 'Logged in!';
 }
 
-
-// Query the API and print the results to the page.
+/**
+ * get ready the report request, which includes:
+ * 
+ * - metrics
+ * - dateRange
+ * - dimensions
+ */
 function queryReports() {
 
   // Replace with your view ID.
@@ -91,6 +100,14 @@ function queryReports() {
   }).then(displayResults, console.error.bind(console));
 }
 
+/**
+ * process the query result, including display the result
+ * it will do more than that.
+ *
+ * - handle pagination
+ * - merge the reult
+ * - update the cosmetic labels.
+ */
 function displayResults(response) {
 
     var rows = response.result.reports[0].data.rows;
@@ -141,3 +158,125 @@ function displayResults(response) {
     $('#query-output').val(formattedJson);
     console.log('Total length = ' + formattedJson.length);
 }
+
+/**
+ * convert the query result to treemapping format.
+ */
+function convertTreemap() {
+
+    // get all pages and pathes.
+    var pathes = JSON.parse($('#query-output').val());
+    // array for each circle:
+    var groups = {}; // decide by group rules.
+    //alert(originLines.length);
+    for(var i = 0; i < pathes.length; i++) {
+        // each path has sturcture:
+        // [page_path, sessions, pagevies]
+        var pagePath = pathes[i][0];
+        var pageSessions = pathes[i][1];
+        var pagePageviews = pathes[i][2];
+
+        // find the site for this page.
+        //var pattern = /^\/(.*)\//;
+        var pattern = /^\/([a-z0-9\-]*)\//;
+        var site = '/';
+        var result = pattern.exec(pagePath);
+        if(result != null) {
+            // find some match.
+            site = result[1];
+        }
+
+        // find the group and site for this page path.
+        // set the default group.
+        var group = 'Other Sites';
+        for(var n = 0; n < groupRules.length; n++) {
+            var condition = RegExp(groupRules[n][0]);
+            if(condition.test(pagePath)) {
+                // find match, assign the group
+                group = groupRules[n][1];
+                break;
+            }
+        }
+        if(Object.keys(groups).indexOf(group) < 0) {
+            // create the new group.
+            groups[group] = {};
+        }
+        // using the site as the key.
+        if(Object.keys(groups[group]).indexOf(site) < 0) {
+            // create the new site.
+            groups[group][site] = [];
+        }
+
+        var page = {
+          "name": pagePath,
+          "size": pagePageviews,
+        };
+        // push page to site.
+        groups[group][site].push(page);
+    }
+
+    var allGroups = [];
+    for(var group in groups) {
+
+        var sites = groups[group];
+        var groupChildren = [];
+        for(var site in sites) {
+            var pages = sites[site];
+            var eachSite = {
+              "name": site,
+              "children": pages
+            };
+            groupChildren.push(eachSite);
+        }
+
+        // if the group only have one child.
+        var children = groupChildren;
+        if(groupChildren.length == 1) {
+            children = groupChildren[0]["children"];
+        }
+        var eachGroup = {
+          "name": group,
+          "children": children
+        };
+        allGroups.push(eachGroup);
+    }
+
+    var jsonData = {
+        "name": "OPSpedia Traffic",
+        "children":allGroups
+    };
+
+    $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
+}
+
+/**
+ * set the rules for now.
+ */
+var groupRules = 
+    [ 
+      ["^/(mnr|natural)", "MNRF"], 
+      ["^/(fin|rev|stevecheng)", "MOF"], 
+      ["^/(mgcs|serviceontario|diversity|mgs)", "MGCS"], 
+      ["^/(omafra|OMAFRA|digitalomafra|debstark)", "OMAFRA"], 
+      ["^/mag", "MAG"], 
+      ["^/(moh|majamilosevic)", "MOHLTC"], 
+      ["^/(mcscs|MCSCS)", "MCSCS"], 
+      ["^/mcys", "MCYS"], 
+      ["^/mcss", "MCSS"], 
+      ["^/(labour|sophiedennis)", "MOL"],
+      ["^/mci", "MCI"],
+      ["^/mah", "MAH"],
+      ["^/mirr", "MIRR"],
+      ["^/(lrc|gis)", "LRC"],
+      ["^/(tbs|openon|greenoffice)", "TBS"], 
+      ["^/(cyssc)", "CYSSC"], 
+      ["^/(cac)", "CAC"], 
+      ["^/(tcu)", "TCU-ETD"],
+      ["^/(iit)", "IIT"], 
+      ["^/(its)", "ITS"], 
+      ["^/(groups)", "Groups"],
+      ["^/(mds)", "MDS"],
+      ["^/(wiki)", "Wiki"],
+      ["^/(customsearch)", "CustomSearch"],
+      ["^/(topical|tops|webcomm)", "Programs"]
+    ];
