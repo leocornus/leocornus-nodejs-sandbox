@@ -161,6 +161,21 @@ function displayResults(response) {
 
 /**
  * convert the query result to treemapping format.
+ * here is the data structure:
+ *  - all
+ *    - group one (MOF)
+ *      - site one (fin)
+ *        - page one
+ *        - page two
+ *      - site two (revenue)
+ *    - group two (MNRF)
+ *      - site one (naturalresources)
+ *
+ * strategy to order group by total group pageviews.
+ * 
+ * 1. create a groupsInOrder arrry, with structure:
+ *    [groupname, totalPageviews]
+ * 2. order the group after 
  */
 function convertTreemap() {
 
@@ -168,6 +183,7 @@ function convertTreemap() {
     var pathes = JSON.parse($('#query-output').val());
     // array for each circle:
     var groups = {}; // decide by group rules.
+    var groupsPageviews = {};
     //alert(originLines.length);
     for(var i = 0; i < pathes.length; i++) {
         // each path has sturcture:
@@ -200,6 +216,9 @@ function convertTreemap() {
         if(Object.keys(groups).indexOf(group) < 0) {
             // create the new group.
             groups[group] = {};
+            groupsPageviews[group] = {};
+            // track the total pageviews for a group.
+            groupsPageviews[group]['groupPageviews'] = 0;
         }
         // using the site as the key.
         if(Object.keys(groups[group]).indexOf(site) < 0) {
@@ -213,11 +232,25 @@ function convertTreemap() {
         };
         // push page to site.
         groups[group][site].push(page);
+        // add the page pageviews to group pageviews.
+        groupsPageviews[group]['groupPageviews'] += pagePageviews;
     }
 
-    var allGroups = [];
-    for(var group in groups) {
+    // try to sort the groups by group pageviews.
+    var groupsInOrder = [];
+    for(var group in groupsPageviews) {
+        groupsInOrder.push([group, 
+                           groupsPageviews[group]["groupPageviews"]]);
+    }
+    console.log(groupsInOrder);
+    groupsInOrder = groupsInOrder.sort(function(a, b) {
+        return b[1] - a[1];
+    });
 
+    var allGroups = [];
+    for(var i = 0; i < groupsInOrder.length; i ++) {
+
+        var group = groupsInOrder[i][0];
         var sites = groups[group];
         var groupChildren = [];
         for(var site in sites) {
@@ -272,11 +305,11 @@ var groupRules =
       ["^/(cyssc)", "CYSSC"], 
       ["^/(cac)", "CAC"], 
       ["^/(tcu)", "TCU-ETD"],
-      ["^/(iit)", "IIT"], 
-      ["^/(its)", "ITS"], 
+      ["^/(iit|IIT)", "IIT"], 
+      ["^/(its|ITS)", "ITS"], 
       ["^/(groups)", "Groups"],
       ["^/(mds)", "MDS"],
       ["^/(wiki)", "Wiki"],
-      ["^/(customsearch)", "CustomSearch"],
+      ["^/(customsearch|solrsearch)", "OPSpedia Search"],
       ["^/(topical|tops|webcomm)", "Programs"]
     ];
