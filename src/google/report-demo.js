@@ -76,8 +76,11 @@ function queryReports() {
             }
           ],
           dimensions: [
+            //{
+            //  name: 'ga:pagePath'
+            //},
             {
-              name: 'ga:pagePath'
+              name: 'ga:hour'
             }
           ]
           // ,
@@ -110,6 +113,7 @@ function queryReports() {
  */
 function displayResults(response) {
 
+    console.log(response);
     var rows = response.result.reports[0].data.rows;
     console.log(rows.length);
     // process the current query result.
