@@ -24,20 +24,23 @@
   <button id="query">Query</button>
   <br/>
   <button id="convert-treemap">Convert to Treemap</button>
+  <button id="create-summary">Create Summary</button>
 </p>
 
 <p>
 <!-- The API response will be printed here. -->
 <textarea cols="80" rows="20" id="query-output"></textarea>
 </p>
+<p>
+JSON String:
+<textarea cols="40" rows="10" id="jsonstring"></textarea>
+HTML:
+<textarea cols="40" rows="10" id="summary"></textarea>
+</p>
 
 <textarea cols="40" rows="5" id="input-one"></textarea>
 <textarea cols="40" rows="5" id="input-two"></textarea>
 <button id="merge">Merge</button>
-<p>
-JSON String:<br/>
-<textarea cols="40" rows="10" id="jsonstring"></textarea>
-</p>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="/src/google/report-demo.js"></script>

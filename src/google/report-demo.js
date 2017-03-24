@@ -24,6 +24,9 @@ jQuery(document).ready(function($) {
     $('#convert-treemap').on('click', function() {
         convertTreemap();
     });
+    $('#create-summary').on('click', function() {
+        createSummary();
+    });
 });
 
 function showMessage() {
@@ -76,12 +79,12 @@ function queryReports() {
             }
           ],
           dimensions: [
-            //{
-            //  name: 'ga:pagePath'
-            //},
             {
-              name: 'ga:hour'
+              name: 'ga:pagePath'
             }
+            //{
+            //  name: 'ga:hour'
+            //}
           ]
           // ,
           // dimensionFilterClauses: [{
@@ -284,6 +287,15 @@ function convertTreemap() {
     };
 
     $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
+}
+
+/**
+ * create summary
+ */
+function createSummary() {
+
+    // get all pages and pathes.
+    var pathes = JSON.parse($('#query-output').val());
 }
 
 /**
