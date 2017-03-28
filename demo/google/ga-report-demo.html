@@ -5,15 +5,58 @@
   <title>Hello Analytics Reporting API V4</title>
   <meta name="google-signin-client_id" content="279696884112-r02aupomgt1o91mfrg1fltj5ls6nvbhf.apps.googleusercontent.com">
   <meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
+  <!-- Load the JavaScript API client and Sign-in library. -->
+  <script src="https://apis.google.com/js/client:platform.js"></script>
+
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+
+  <script type="text/javascript" src="/src/google/report-demo.js"></script>
 </head>
+
 <body>
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Hello Analytics Reporting API V4
+          <!-- The Sign-in button. This will run `queryReports()` on success. -->
+          <span class="g-signin2" data-onsuccess="showMessage"></span>
+        </h1>
+      </div>
+    </div>
+  </div>
 
-<h1>Hello Analytics Reporting API V4</h1>
+  <!-- nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#controltab" aria-controls="controltab" role="tab"
+         data-toggle="tab"
+      >Preview</a>
+    </li>
+    <li role="presentation">
+      <a href="#memos" aria-controls="memos" role="tab"
+         data-toggle="tab"
+      >Memos</a>
+    </li>
+  </ul>
 
-<p>
-  <!-- The Sign-in button. This will run `queryReports()` on success. -->
-  <div class="g-signin2" data-onsuccess="showMessage"></div>
-</p>
+  <!-- tab panes -->
+  <div class="tab-content">
+    <!-- the preview pane -->
+    <div class="tab-pane active" id="controltab" role="tabpanel">
+    preview
+    </div>
+
+    <!-- the memo pane -->
+    <div class="tab-pane" id="memos" role="tabpanel">
+      Memo
+    </div>
+  </div>
+</div>
 
 <p>
   View ID: <input id="view-id" type="text" value="41055556"/><br/>
@@ -42,10 +85,6 @@ HTML:
 <textarea cols="40" rows="5" id="input-two"></textarea>
 <button id="merge">Merge</button>
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="/src/google/report-demo.js"></script>
-<!-- Load the JavaScript API client and Sign-in library. -->
-<script src="https://apis.google.com/js/client:platform.js"></script>
 
 </body>
 </html>
