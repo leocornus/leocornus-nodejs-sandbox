@@ -48,7 +48,81 @@
   <div class="tab-content">
     <!-- the preview pane -->
     <div class="tab-pane active" id="controltab" role="tabpanel">
-    preview
+<div class="row">
+  <div class="col-md-4">
+    <h3>Load Google Analytics Data</h3>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="view-id" 
+               class="col-sm-4 control-label">View ID:</label>
+        <div class="col-sm-8">
+          <input id="view-id" type="text" value="41055556"/>
+        </div>
+      </div>
+
+      <div>Set the date range. All dates are inclusive.</div>
+      <div class="form-group">
+        <label for="start-date" 
+               class="col-sm-4 control-label">Start Date:</label>
+        <div class="col-sm-8">
+          <input id="start-date" type="text" value="2017-03-18"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="end-date" 
+               class="col-sm-4 control-label">End Date:</label>
+        <div class="col-sm-8">
+          <input id="end-date" type="text" value="2017-03-18"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="page-token" 
+               class="col-sm-4 control-label">Page Token:</label>
+        <div class="col-sm-8">
+          <input id="page-token" type="text" value="0"/><br/>
+        </div>
+      </div>
+    </form>
+
+    <div>
+      <button type="button" id="query" 
+              class="btn btn-default">Query</button><br/>
+      <button id="convert-treemap" type="button"
+              class="btn btn-default">Convert to Treemap</button>
+      <button id="create-summary" type="button"
+              class="btn btn-default">Create Summary</button>
+    </div>
+
+    <!-- The API response will be printed here. -->
+    <div class="form-group">
+      <label for="query-output" 
+             class="col-sm-12 control-label">Query Output:</label>
+      <div class="col-sm-12">
+        <textarea cols="40" rows="5" id="query-output"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="jsonstring" 
+             class="col-sm-12 control-label">JSON String:</label>
+      <div class="col-sm-12">
+        <textarea cols="35" rows="5" id="jsonstring"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="summary" 
+             class="col-sm-12 control-label">HTML Summary:</label>
+      <div class="col-sm-12">
+        <textarea cols="35" rows="5" id="summary"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+  Preview
+  </div>
+</div>
     </div>
 
     <!-- the memo pane -->
@@ -57,34 +131,6 @@
     </div>
   </div>
 </div>
-
-<p>
-  View ID: <input id="view-id" type="text" value="41055556"/><br/>
-  Set the date range. All dates are inclusive.<br/>
-  Start Date: <input id="start-date" type="text" value="2017-03-18"/>
-  End Date: <input id="end-date" type="text" value="2017-03-18"/><br/>
-  Page Token: <input id="page-token" type="text" value="0"/><br/>
-  <button id="query">Query</button>
-  <br/>
-  <button id="convert-treemap">Convert to Treemap</button>
-  <button id="create-summary">Create Summary</button>
-</p>
-
-<p>
-<!-- The API response will be printed here. -->
-<textarea cols="80" rows="20" id="query-output"></textarea>
-</p>
-<p>
-JSON String:
-<textarea cols="40" rows="10" id="jsonstring"></textarea>
-HTML:
-<textarea cols="40" rows="10" id="summary"></textarea>
-</p>
-
-<textarea cols="40" rows="5" id="input-one"></textarea>
-<textarea cols="40" rows="5" id="input-two"></textarea>
-<button id="merge">Merge</button>
-
 
 </body>
 </html>
