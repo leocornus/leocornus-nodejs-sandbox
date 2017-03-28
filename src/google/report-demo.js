@@ -255,13 +255,21 @@ function convertTreemap() {
     });
 
     var allGroups = [];
+    var groupsSummary = [];
     for(var i = 0; i < groupsInOrder.length; i ++) {
 
         var group = groupsInOrder[i][0];
         var sites = groups[group];
+
+        // variables for summary:
+        var totalPageviews = groupsInOrder[i][1];
+        var totalSites = Object.keys(sites).length;
+        var totalPages = 0;
+
         var groupChildren = [];
         for(var site in sites) {
             var pages = sites[site];
+            totalPages = totalPages + pages.length;
             var eachSite = {
               "name": site,
               "children": pages
@@ -279,6 +287,19 @@ function convertTreemap() {
           "children": children
         };
         allGroups.push(eachGroup);
+
+        // build the groups summary.
+        var summary = 
+'<li class="list-group-item" >' +
+'  <span class="glyphicon glyphicon-stop"' +
+'        style="color: blue"></span>' +
+'  <a href="?group=cat:' + group + '">' + 
+group + ' - ' + totalSites + ' Sites, ' + 
+totalPages + ' Pages, ' +
+totalPageviews + ' Pageviews, ' +
+'</a>' +
+'</li>';
+        groupsSummary.push(summary);
     }
 
     var jsonData = {
@@ -287,6 +308,7 @@ function convertTreemap() {
     };
 
     $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
+    $('#summary-div').html(groupsSummary.join('\n'));
 }
 
 /**
@@ -296,6 +318,11 @@ function createSummary() {
 
     // get all pages and pathes.
     var pathes = JSON.parse($('#query-output').val());
+    var $summaryDiv = $('#summary-div');
+
+    // get ready the summary.
+    for(i = 0; i < 10; i ++) {
+    }
 }
 
 /**
