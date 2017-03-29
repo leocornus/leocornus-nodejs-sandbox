@@ -330,7 +330,7 @@ function createSummary(type, groupsSummary) {
 '  <th>Ministry/Group</th>' + 
 '  <th>Pageviews</th>' + 
 '  <th>Pages</th>' + 
-'  <th>Sites</th>' + 
+//'  <th>Sites</th>' + 
 '</tr></thead>' +
 '<tbody>' +
 groups.join('\n') +
@@ -389,7 +389,7 @@ function buildTableRow(groupName, totalSites, totalPages,
 '<td>' + groupName + '</td>' +
 '<td>' + totalPageviews + '</td>' +
 '<td>' + totalPages + '</td>' +
-'<td>' + totalSites + '</td>' +
+//'<td>' + totalSites + '</td>' +
 '</tr>';
 
     return summary;
