@@ -289,16 +289,8 @@ function convertTreemap() {
         allGroups.push(eachGroup);
 
         // build the groups summary.
-        var summary = 
-'<li class="list-group-item" >' +
-'  <span class="glyphicon glyphicon-stop"' +
-'        style="color: blue"></span>' +
-'  <a href="?group=cat:' + group + '">' + 
-group + ' - ' + totalSites + ' Sites, ' + 
-totalPages + ' Pages, ' +
-totalPageviews + ' Pageviews, ' +
-'</a>' +
-'</li>';
+        var summary = buildListGroupItem(group, totalSites, 
+                                         totalPages, totalPageviews);
         groupsSummary.push(summary);
     }
 
@@ -308,6 +300,7 @@ totalPageviews + ' Pageviews, ' +
     };
 
     $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
+    $('#summary').html(groupsSummary.join('\n'));
     $('#summary-div').html(groupsSummary.join('\n'));
 }
 
@@ -323,6 +316,34 @@ function createSummary() {
     // get ready the summary.
     for(i = 0; i < 10; i ++) {
     }
+}
+
+/**
+ * build the list group item.
+ *
+ * <li class="list-group-item" >
+ *   <span class="glyphicon glyphicon-stop"
+ *         style="color: blue"></span>
+ *   <a href="?group=cat:MCSCS">
+ *     MCSCS - 2 Sites, 161 Pages, 308 Pageviews, 
+ *   </a>
+ * </li>
+ */
+function buildListGroupItem(groupName, totalSites, totalPages,
+                            totalPageviews) {
+    // build
+    var summary = 
+'<li class="list-group-item" >' +
+'  <span class="glyphicon glyphicon-stop"' +
+'        style="color: blue"></span>' +
+'  <a href="?group=cat:' + groupName + '">' + 
+groupName + ' - ' + totalSites + ' Sites, ' + 
+totalPages + ' Pages, ' +
+totalPageviews + ' Pageviews, ' +
+'</a>' +
+'</li>';
+
+    return summary;
 }
 
 /**
