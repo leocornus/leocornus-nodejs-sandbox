@@ -277,3 +277,44 @@ function circleChart(selector, margin, diameter, jsonData) {
         });
     }
 }
+
+function bilevelSunburst(selector, width, height, jsonData) {
+
+    var margin = 10;
+    var radius = Math.min(width / 2, height / 2) - margin;
+
+    var formatNumber = d3.format(",d");
+    var hue = d3.scale.category20();
+    var luminance = d3.scale.sqrt()
+        .domain([0, 1e6])
+        .clamp(true)
+        .range([90, 20]);
+
+    var svg = d3.select(selector).append("svg")
+        .attr("id", "svgid")
+        //.attr("width", margin.left + margin.right)
+        .attr('width', width)
+        //.attr("height", margin.top + margin.bottom)
+        .attr('height', height)
+      .append("g")
+        //.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    var partition = d3.layout.partition()
+        .sort(function(a, b) { return d3.ascending(a.name, b.name); })
+        .size([2 * Math.PI, radius]);
+    
+    var arc = d3.svg.arc()
+        .startAngle(function(d) { return d.x; })
+        .endAngle(function(d) { return d.x + d.dx ; })
+        .padAngle(.01)
+        .padRadius(radius / 3)
+        .innerRadius(function(d) { return radius / 3 * d.depth; })
+        .outerRadius(function(d) { return radius / 3 * (d.depth + 1) - 1; });
+    
+    // calculate the position for the explanation overlay.
+    // we need wait the svg is create.
+    var offset = $('#svgid').offset();
+    var labelTop = offset['top'] + height / 2 - 50;
+    var labelLeft = offset['left'] + width / 2 - 90;
+    $('#explanation').css('left', labelLeft).css('top', labelTop);
+}

@@ -256,6 +256,8 @@ function convertTreemap() {
 
     var allGroups = [];
     var groupsSummary = [];
+    // [pageviews, pages, sites]
+    var total = [0,0,0]
     for(var i = 0; i < groupsInOrder.length; i ++) {
 
         var group = groupsInOrder[i][0];
@@ -292,6 +294,10 @@ function convertTreemap() {
         //var summary = buildListGroupItem(group, totalSites, 
         var summary = buildTableRow(group, totalSites, 
                                          totalPages, totalPageviews);
+        // calculate total.
+        total[0] += totalPageviews;
+        total[1] += totalPages;
+        total[2] += totalSites;
         groupsSummary.push(summary);
     }
 
@@ -301,14 +307,14 @@ function convertTreemap() {
     };
 
     $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
-    $('#summary').html(createSummary('table', groupsSummary));
-    $('#summary-div').html(createSummary('table', groupsSummary));
+    $('#summary').html(createSummary('table', groupsSummary, total));
+    $('#summary-div').html(createSummary('table', groupsSummary, total));
 }
 
 /**
  * create summary
  */
-function createSummary(type, groupsSummary) {
+function createSummary(type, groupsSummary, total) {
 
     var summary = '';
 
@@ -325,6 +331,11 @@ function createSummary(type, groupsSummary) {
             summary =
 '<div class="col-md-6">' +
 '<table class="table table-hover">' +
+'<caption>' +
+'Total Pageviews: <strong>' + total[0] + '</strong><br/>' +
+'Total Pages: <strong>' + total[1] + '</strong><br/>' +
+'Top 10 Ministries' +
+'</caption>' +
 '<thead><tr>' + 
 '  <th>#</th>' + 
 '  <th>Ministry/Group</th>' + 

@@ -57,7 +57,7 @@ jQuery(document).ready(function($) {
 
 //var margin = {top: 350, right: 480, bottom: 350, left: 480};
 //var radius = Math.min(margin.top, margin.right, margin.bottom, margin.left) - 10;
-var bsDate = '2017-03-14';
+var bsDate = '2017-03-12';
 var bsWidth = 600;
 var bsHeight = 600;
 var bsMargin = 10;
@@ -66,7 +66,7 @@ var bsSelector = '#preview';
 
 var formatNumber = d3.format(",d");
 
-var hue = d3.scale.category20();
+var hue = d3.scale.category20c();
 
 var luminance = d3.scale.sqrt()
     .domain([0, 1e6])
@@ -113,7 +113,7 @@ var labelTop = offset['top'] + bsHeight / 2 - 50;
 var labelLeft = offset['left'] + bsWidth / 2 - 90;
 $('#explanation-' + bsId).css('left', labelLeft).css('top', labelTop);
 
-d3.json("../google/data/" + bsDate + "-sunburst.json", 
+d3.json("../google/data/week-" + bsDate + "-sunburst.json", 
         function(error, root) {
 
   if (error) throw error;
