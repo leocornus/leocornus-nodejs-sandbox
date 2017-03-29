@@ -314,17 +314,26 @@ function createSummary(type, groupsSummary) {
 
     switch(type) {
         case 'table':
+            // add number column.
+            var groups = groupsSummary.map(function(group, index) {
+                if (index > 9) {
+                    return '';
+                }
+                return group.replace('<tr>', 
+                                '<tr><th>' + (index + 1) + '</th>');
+            });
             summary =
 '<div class="col-md-6">' +
 '<table class="table table-hover">' +
 '<thead><tr>' + 
+'  <th>#</th>' + 
 '  <th>Ministry/Group</th>' + 
 '  <th>Pageviews</th>' + 
 '  <th>Pages</th>' + 
 '  <th>Sites</th>' + 
 '</tr></thead>' +
 '<tbody>' +
-groupsSummary.join('\n') +
+groups.join('\n') +
 '</tbody></table>' +
 '</div>';
             break;;
