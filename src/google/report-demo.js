@@ -289,7 +289,8 @@ function convertTreemap() {
         allGroups.push(eachGroup);
 
         // build the groups summary.
-        var summary = buildListGroupItem(group, totalSites, 
+        //var summary = buildListGroupItem(group, totalSites, 
+        var summary = buildTableRow(group, totalSites, 
                                          totalPages, totalPageviews);
         groupsSummary.push(summary);
     }
@@ -300,22 +301,36 @@ function convertTreemap() {
     };
 
     $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
-    $('#summary').html(groupsSummary.join('\n'));
-    $('#summary-div').html(groupsSummary.join('\n'));
+    $('#summary').html(createSummary('table', groupsSummary));
+    $('#summary-div').html(createSummary('table', groupsSummary));
 }
 
 /**
  * create summary
  */
-function createSummary() {
+function createSummary(type, groupsSummary) {
 
-    // get all pages and pathes.
-    var pathes = JSON.parse($('#query-output').val());
-    var $summaryDiv = $('#summary-div');
+    var summary = '';
 
-    // get ready the summary.
-    for(i = 0; i < 10; i ++) {
+    switch(type) {
+        case 'table':
+            summary =
+'<div class="col-md-6">' +
+'<table class="table table-hover">' +
+'<thead><tr>' + 
+'  <th>Ministry/Group</th>' + 
+'  <th>Pageviews</th>' + 
+'  <th>Pages</th>' + 
+'  <th>Sites</th>' + 
+'</tr></thead>' +
+'<tbody>' +
+groupsSummary.join('\n') +
+'</tbody></table>' +
+'</div>';
+            break;;
     }
+
+    return summary;
 }
 
 /**
@@ -342,6 +357,31 @@ totalPages + ' Pages, ' +
 totalPageviews + ' Pageviews, ' +
 '</a>' +
 '</li>';
+
+    return summary;
+}
+
+/**
+ * build row for each table..
+ *
+ * <li class="list-group-item" >
+ *   <span class="glyphicon glyphicon-stop"
+ *         style="color: blue"></span>
+ *   <a href="?group=cat:MCSCS">
+ *     MCSCS - 2 Sites, 161 Pages, 308 Pageviews, 
+ *   </a>
+ * </li>
+ */
+function buildTableRow(groupName, totalSites, totalPages,
+                            totalPageviews) {
+    // build
+    var summary = 
+'<tr>' +
+'<td>' + groupName + '</td>' +
+'<td>' + totalPageviews + '</td>' +
+'<td>' + totalPages + '</td>' +
+'<td>' + totalSites + '</td>' +
+'</tr>';
 
     return summary;
 }
