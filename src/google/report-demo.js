@@ -246,9 +246,15 @@ function convertTreemap() {
 
         // sumamry for top 10 pages.
         if(i < 10) {
+            // get ready the href link for page.
+            var pageUrl = pagePath.substring(0,8);
+            pageUrl = pagePath.length > 8 ? pageUrl + "..." : pageUrl;
+            pageUrl = '<a href="http://intra.net.gov.on.ca' +
+               pagePath + '" title="' + pagePath + '">' + 
+               pageUrl + '</a>';
             var summary = 
                 '<tr>' +
-                '<td>' + pagePath + '</td>' +
+                '<td>' + pageUrl + '</td>' +
                 '<td>' + pagePageviews + '</td>' +
                 '<td>' + group + '</td>' +
                 '</tr>';
@@ -357,7 +363,7 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
   '</caption>' +
   '<thead><tr>' + 
   '  <th>#</th>' + 
-  '  <th>Ministry/Group</th>' + 
+  '  <th>Ministry</th>' + 
   '  <th>Pageviews</th>' + 
   '  <th>Pages</th>' + 
   //'  <th>Sites</th>' + 
@@ -375,7 +381,7 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
   '  <th>#</th>' + 
   '  <th>Page</th>' + 
   '  <th>Pageviews</th>' + 
-  '  <th>Ministries</th>' + 
+  '  <th>Ministry</th>' + 
   //'  <th>Sites</th>' + 
   '</tr></thead>' +
   '<tbody>' +
