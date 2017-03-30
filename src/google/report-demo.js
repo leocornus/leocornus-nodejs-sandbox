@@ -191,6 +191,7 @@ function convertTreemap() {
     // array for each circle:
     var groups = {}; // decide by group rules.
     var groupsPageviews = {};
+    var pagesSummary = [];
     //alert(originLines.length);
     for(var i = 0; i < pathes.length; i++) {
         // each path has sturcture:
@@ -198,6 +199,7 @@ function convertTreemap() {
         var pagePath = pathes[i][0];
         var pageSessions = pathes[i][1];
         var pagePageviews = pathes[i][2];
+
 
         // find the site for this page.
         //var pattern = /^\/(.*)\//;
@@ -241,6 +243,17 @@ function convertTreemap() {
         groups[group][site].push(page);
         // add the page pageviews to group pageviews.
         groupsPageviews[group]['groupPageviews'] += pagePageviews;
+
+        // sumamry for top 10 pages.
+        if(i < 10) {
+            var summary = 
+                '<tr>' +
+                '<td>' + pagePath + '</td>' +
+                '<td>' + pagePageviews + '</td>' +
+                '<td>' + group + '</td>' +
+                '</tr>';
+            pagesSummary.push(summary);
+        }
     }
 
     // try to sort the groups by group pageviews.
@@ -307,20 +320,22 @@ function convertTreemap() {
     };
 
     $('#jsonstring').html(JSON.stringify(jsonData, null, 2));
-    $('#summary').html(createSummary('table', groupsSummary, total));
-    $('#summary-div').html(createSummary('table', groupsSummary, total));
+    $('#summary').html(createSummary('table', groupsSummary, 
+                                     pagesSummary, total));
+    $('#summary-div').html(createSummary('table', groupsSummary, 
+                                         pagesSummary, total));
 }
 
 /**
  * create summary
  */
-function createSummary(type, groupsSummary, total) {
+function createSummary(type, groupsSummary, pagesSummary, total) {
 
     var summary = '';
 
     switch(type) {
         case 'table':
-            // add number column.
+            // add number column by search and replace.
             var groups = groupsSummary.map(function(group, index) {
                 if (index > 9) {
                     return '';
@@ -328,27 +343,67 @@ function createSummary(type, groupsSummary, total) {
                 return group.replace('<tr>', 
                                 '<tr><th>' + (index + 1) + '</th>');
             });
+            var pages = pagesSummary.map(function(page, index) {
+                return page.replace('<tr>',
+                                '<tr><th>' + (index + 1) + '</th>');
+            });
+
             summary =
+'<div class="tab-content">' +
+'<div class="tab-pane active" id="groups" role="tabpanel">' +
+  '<table class="table table-hover">' +
+  '<caption>' +
+  'Top 10 Ministries by Pageviews' +
+  '</caption>' +
+  '<thead><tr>' + 
+  '  <th>#</th>' + 
+  '  <th>Ministry/Group</th>' + 
+  '  <th>Pageviews</th>' + 
+  '  <th>Pages</th>' + 
+  //'  <th>Sites</th>' + 
+  '</tr></thead>' +
+  '<tbody>' +
+  groups.join('\n') +
+  '</tbody></table>' +
+'</div>' +
+'<div class="tab-pane" id="pages" role="tabpanel">' +
+  '<table class="table table-hover">' +
+  '<caption>' +
+  'Top 10 Pages by Pageviews' +
+  '</caption>' +
+  '<thead><tr>' + 
+  '  <th>#</th>' + 
+  '  <th>Page</th>' + 
+  '  <th>Pageviews</th>' + 
+  '  <th>Ministries</th>' + 
+  //'  <th>Sites</th>' + 
+  '</tr></thead>' +
+  '<tbody>' +
+  pages.join('\n') +
+  '</tbody></table>' +
+'</div>' +
+'</div>';
+            break;
+    }
+
+    summary =
 '<div class="col-md-6">' +
-'<table class="table table-hover">' +
-'<caption>' +
 'Total Pageviews: <strong>' + total[0] + '</strong><br/>' +
 'Total Pages: <strong>' + total[1] + '</strong><br/>' +
-'Top 10 Ministries' +
-'</caption>' +
-'<thead><tr>' + 
-'  <th>#</th>' + 
-'  <th>Ministry/Group</th>' + 
-'  <th>Pageviews</th>' + 
-'  <th>Pages</th>' + 
-//'  <th>Sites</th>' + 
-'</tr></thead>' +
-'<tbody>' +
-groups.join('\n') +
-'</tbody></table>' +
+'<ul class="nav nav-tabs" role="tablist">' +
+'  <li role="presentation" class="active">' +
+'    <a href="#groups" aria-controls="groups" role="tab"' +
+'       data-toggle="tab"' +
+'    >Top Ministries</a>' +
+'  </li>' +
+'  <li role="presentation">' +
+'    <a href="#pages" aria-controls="pages" role="tab"' +
+'       data-toggle="tab"' +
+'    >Top Pages</a>' +
+'  </li>' +
+'</ul>' +
+summary +
 '</div>';
-            break;;
-    }
 
     return summary;
 }
@@ -384,13 +439,11 @@ totalPageviews + ' Pageviews, ' +
 /**
  * build row for each table..
  *
- * <li class="list-group-item" >
- *   <span class="glyphicon glyphicon-stop"
- *         style="color: blue"></span>
- *   <a href="?group=cat:MCSCS">
- *     MCSCS - 2 Sites, 161 Pages, 308 Pageviews, 
- *   </a>
- * </li>
+ * <tr>
+ *   <td>MOF</td>
+ *   <td>2089</td>
+ *   <td>345</td>
+ * </tr>
  */
 function buildTableRow(groupName, totalSites, totalPages,
                             totalPageviews) {
