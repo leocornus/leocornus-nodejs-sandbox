@@ -130,4 +130,18 @@ describe('JavaScript String Prototype Testing Specs', function() {
             expect(number).toBe(123);
         });
     });
+
+    describe('Testing the substring', function() {
+
+        it('Basic usage for substring', function() {
+
+            var aString = 'some string';
+            var sub = aString.substring(0);
+            expect(sub).toBe('some string');
+            sub = aString.substring(0, 1);
+            expect(sub).toBe('s');
+            sub = aString.substring(0, 100);
+            expect(sub).toBe('some string');
+        });
+    });
 });
