@@ -186,6 +186,8 @@ function displayResults(response) {
  */
 function convertTreemap() {
 
+    var formatNumber = d3.format(',d');
+
     // get all pages and pathes.
     var pathes = JSON.parse($('#query-output').val());
     // array for each circle:
@@ -255,7 +257,7 @@ function convertTreemap() {
             var summary = 
                 '<tr>' +
                 '<td>' + pageUrl + '</td>' +
-                '<td>' + pagePageviews + '</td>' +
+                '<td>' + formatNumber(pagePageviews) + '</td>' +
                 '<td>' + group + '</td>' +
                 '</tr>';
             pagesSummary.push(summary);
@@ -338,6 +340,7 @@ function convertTreemap() {
 function createSummary(type, groupsSummary, pagesSummary, total) {
 
     var summary = '';
+    var format = d3.format(',d');
 
     switch(type) {
         case 'table':
@@ -394,8 +397,8 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
 
     summary =
 '<div class="col-md-6">' +
-'Total Pageviews: <strong>' + total[0] + '</strong><br/>' +
-'Total Pages: <strong>' + total[1] + '</strong><br/>' +
+'Total Pageviews: <strong>' + format(total[0]) + '</strong><br/>' +
+'Total Pages: <strong>' + format(total[1]) + '</strong><br/>' +
 '<ul class="nav nav-tabs" role="tablist">' +
 '  <li role="presentation" class="active">' +
 '    <a href="#groups" aria-controls="groups" role="tab"' +
@@ -453,12 +456,13 @@ totalPageviews + ' Pageviews, ' +
  */
 function buildTableRow(groupName, totalSites, totalPages,
                             totalPageviews) {
+    var format = d3.format(',d');
     // build
     var summary = 
 '<tr>' +
 '<td>' + groupName + '</td>' +
-'<td>' + totalPageviews + '</td>' +
-'<td>' + totalPages + '</td>' +
+'<td>' + format(totalPageviews) + '</td>' +
+'<td>' + format(totalPages) + '</td>' +
 //'<td>' + totalSites + '</td>' +
 '</tr>';
 
