@@ -3,6 +3,8 @@
  */
 jQuery(document).ready(function($) {
 
+    $('#alphabet-rain').alphabetRain({});
+
     var defaultOps = {
       gameBoard: {
         id: 'alphabet-rain',

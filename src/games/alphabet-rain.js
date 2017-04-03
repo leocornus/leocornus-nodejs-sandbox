@@ -82,7 +82,7 @@
             if(!$.data(this, dataKey)) {
                 // no plugin created yet, let create a new one.
                 $.data(this, dataKey, 
-                       new Plugin(this, options, jsonData));
+                       new Plugin(this, options));
             } else{
                 // replace with new one.
                 //$.data(this, "plugin_" + pluginName, 
@@ -109,6 +109,7 @@
 
             // save this id attribute.
             self.attrId = $element.attr('id');
+            $element.text("I am comming....");
         },
         
         /**
