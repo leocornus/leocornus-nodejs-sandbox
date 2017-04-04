@@ -48,6 +48,7 @@ function queryReports() {
   var startDate = $('#start-date').val();
   var endDate = $('#end-date').val();
   var pageToken = $('#page-token').val();
+  var pagePathExpression = $('#page-path-exp').val();
   
   // set the page on query button.
   $('#query').attr('pageToken', pageToken);
@@ -85,20 +86,20 @@ function queryReports() {
             //{
             //  name: 'ga:hour'
             //}
-          ]
-          //dimensionFilterClauses: [{
-          //  operator: "OR",
-          //  filters: [
-          //    {
-          //      dimensionName: "ga:pagePath",
-          //      not: false,
-          //      operator: "REGEXP",
-          //      expressions: [
-          //        "^/topical-agencies"
-          //      ]
-          //    }
-          //  ]
-          //}]
+          ],
+          dimensionFilterClauses: [{
+            operator: "OR",
+            filters: [
+              {
+                dimensionName: "ga:pagePath",
+                not: false,
+                operator: "REGEXP",
+                expressions: [
+                  pagePathExpression
+                ]
+              }
+            ]
+          }]
         }
       ]
     }
@@ -399,7 +400,7 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
     }
 
     summary =
-'<div class="col-md-6">' +
+//'<div class="col-md-6">' +
 'Total Pageviews: <strong>' + format(total[0]) + '</strong><br/>' +
 'Total Pages: <strong>' + format(total[1]) + '</strong><br/>' +
 'Total Sessions: <strong>' + format(total[3]) + '</strong><br/>' +
@@ -415,8 +416,8 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
 '    >Top Pages</a>' +
 '  </li>' +
 '</ul>' +
-summary +
-'</div>';
+summary;
+//'</div>';
 
     return summary;
 }
@@ -502,5 +503,6 @@ var groupRules =
       ["^/(mds)", "MDS"],
       ["^/(wiki)", "Wiki"],
       ["^/(customsearch|solrsearch)", "OPSpedia Search"],
-      ["^/(topical|tops|webcomm)", "Programs"]
+      ["^/(topical)", "Topical"],
+      ["^/(tops|webcomm)", "Programs"]
     ];
