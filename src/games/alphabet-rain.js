@@ -12,7 +12,7 @@
     // set the default options.
     var defaultOptions = {
         gameBoard: {
-          id: 'alphabet-rain',
+          id: 'gameboard',
           width: '400px',
           height: '600px'
         },
@@ -39,7 +39,7 @@
             r: "97",
             fill: "yellow",
             stroke: "navy",
-            stroke_width: "6"
+            "stroke-width": "6"
           },
           styles: {}
         },
@@ -48,8 +48,8 @@
             x: "40",
             y: "160",
             fill: "red",
-            font_family: '"Lucida Console", Courier, monospace',
-            font_size: "190"
+            "font-family": '"Lucida Console", Courier, monospace',
+            "font-size": "190"
           },
           styles: {}
         }
@@ -89,7 +89,7 @@
                 //       new Plugin(this, options, jsonData));
                 // try reload for the existing plugin.
                 var plugin = $.data(this, dataKey);
-                plugin.reload(options, jsonData);
+                plugin.reload(options);
             }
         });
     };
@@ -110,8 +110,10 @@
             // save this id attribute.
             self.attrId = $element.attr('id');
             $element.text("I am comming....");
+            // get started from drawing the game board.
+            self.drawGameBoard();
         },
-        
+
         /**
          * test reload.
          */
@@ -125,6 +127,40 @@
             // need merge the options with default options.
             self.options = $.extend({}, defaultOptions, options);
             self.init();
+        },
+
+        /**
+         * draw the game board.
+         */
+        drawGameBoard: function() {
+
+            var self = this;
+
+            // we will use d3 to do the drawing work.
+            var d3Self = d3.select('#' + self.attrId);
+            // remove the existing one.
+            $('#' + self.options.gameBoard.id).remove();
+            self.drawSvgElement(d3Self, 'svg', 
+                                {'attrs': self.options.gameBoard,
+                                 'styles': {}});
+        },
+
+        /**
+         * draw a svg element for the given d3 element.
+         * dist, the d3 element.
+         * elementName, the tag name of the element.
+         */
+        drawSvgElement: function(dist, elementName, options) {
+
+            var element = dist.append(elementName);
+            for(var attr in options.attrs) {
+                element.attr(attr, options.attrs[attr]);
+            }
+            for(var style in options.styles) {
+                element.style(style, options.styles[style]);
+            }
+        
+            return element;
         }
     });
 
