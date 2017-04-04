@@ -86,20 +86,19 @@ function queryReports() {
             //  name: 'ga:hour'
             //}
           ]
-          // ,
-          // dimensionFilterClauses: [{
-          //   operator: "OR",
-          //   filters: [
-          //     {
-          //       dimensionName: "ga:pagePath",
-          //       not: false,
-          //       operator: "REGEXP",
-          //       expressions: [
-          //         "^/(mnr|naturalresources)"
-          //       ]
-          //     }
-          //   ]
-          // }]
+          //dimensionFilterClauses: [{
+          //  operator: "OR",
+          //  filters: [
+          //    {
+          //      dimensionName: "ga:pagePath",
+          //      not: false,
+          //      operator: "REGEXP",
+          //      expressions: [
+          //        "^/topical-agencies"
+          //      ]
+          //    }
+          //  ]
+          //}]
         }
       ]
     }
@@ -193,6 +192,8 @@ function convertTreemap() {
     // array for each circle:
     var groups = {}; // decide by group rules.
     var groupsPageviews = {};
+    //var groupsSessions = {};
+    var totalSessions = 0;
     var pagesSummary = [];
     //alert(originLines.length);
     for(var i = 0; i < pathes.length; i++) {
@@ -262,6 +263,7 @@ function convertTreemap() {
                 '</tr>';
             pagesSummary.push(summary);
         }
+        totalSessions += pageSessions;
     }
 
     // try to sort the groups by group pageviews.
@@ -321,6 +323,7 @@ function convertTreemap() {
         total[2] += totalSites;
         groupsSummary.push(summary);
     }
+    total[3] = totalSessions;
 
     var jsonData = {
         "name": "OPSpedia Traffic",
@@ -399,6 +402,7 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
 '<div class="col-md-6">' +
 'Total Pageviews: <strong>' + format(total[0]) + '</strong><br/>' +
 'Total Pages: <strong>' + format(total[1]) + '</strong><br/>' +
+'Total Sessions: <strong>' + format(total[3]) + '</strong><br/>' +
 '<ul class="nav nav-tabs" role="tablist">' +
 '  <li role="presentation" class="active">' +
 '    <a href="#groups" aria-controls="groups" role="tab"' +
