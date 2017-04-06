@@ -130,19 +130,42 @@
         },
 
         /**
-         * draw the game board.
+         * Draw the game board.
+         * 
+         * we will use the bootstrap panel as the default 
+         * game board.
+         *
+         * TODO: allow user to build the game board through
+         * the option gameBoardBuilder.
          */
         drawGameBoard: function() {
 
             var self = this;
 
-            // we will use d3 to do the drawing work.
-            var d3Self = d3.select('#' + self.attrId);
-            // remove the existing one.
-            $('#' + self.options.gameBoard.id).remove();
-            self.drawSvgElement(d3Self, 'svg', 
-                                {'attrs': self.options.gameBoard,
-                                 'styles': {}});
+            // set width on panel and set height on panedl body.
+            // we need the size of the game board to be fixed.
+            var panel = 
+'<div class="panel panel-success"' +
+'     style="width:500px;">' +
+'  <div class="panel-heading">' +
+'    The Game' +
+'  </div>' +
+// this panel-body div will be the game board.
+// We have to set position here, so the child svg
+// element could use absolute postion.
+'  <div class="panel-body" id="svgpreview"' +
+'       style="height: 500px; nowidth:500px;' +
+'              border: 0px black solid;' +
+'              position: relative;' +
+'              padding: 0px"' +
+'  >' +
+'  </div>' +
+'  <div class="panel-footer">' +
+'    messaging' +
+'  </div>' +
+'</div>';
+
+            $('#' + self.attrId).html(panel); 
         },
 
         /**
