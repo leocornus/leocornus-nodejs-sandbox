@@ -153,7 +153,7 @@
 // this panel-body div will be the game board.
 // We have to set position here, so the child svg
 // element could use absolute postion.
-'  <div class="panel-body" id="svgpreview"' +
+'  <div class="panel-body" id="' + self.options.gameBoard.id + '"' +
 '       style="height: 500px; nowidth:500px;' +
 '              border: 0px black solid;' +
 '              position: relative;' +
@@ -161,11 +161,18 @@
 '  >' +
 '  </div>' +
 '  <div class="panel-footer">' +
-'    messaging' +
+'    <button id="play">Play</button>' +
 '  </div>' +
 '</div>';
 
             $('#' + self.attrId).html(panel); 
+
+            // hook the play event.
+            $('#play').click(function() {
+
+                // start the game.
+                //Self.startGame();
+            });
         },
 
         /**
