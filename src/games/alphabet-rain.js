@@ -208,7 +208,8 @@
                 $('#' + self.options.gameBoard.id).innerHeight();
 
             // get all svg with match id patterns:
-            $("svg[id^='letter-']").each(function(index) {
+            $("svg[id^='" + self.attrId + "-letter-']")
+                .each(function(index) {
                 // the object this will be the DOM element.
                 var $svg = $(this);
                 // get the position in the game board.
@@ -276,8 +277,10 @@
             var svg = self.drawSvgElement(gameBoard, 'svg',
                                           self.options.svg);
             // to make id unique, we will have this format.
-            //   letter-[x]-[style.left]
-            var theId = 'letter-' + character + '-' +
+            // this will keep the same with droppingRain
+            // and keydown event handler.
+            //   slef.attrId-letter-[x]-[style.left]
+            var theId = self.attrId + '-letter-' + character + '-' +
                         self.options.svg.styles.left;
             svg.attr('id', theId);
 
