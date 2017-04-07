@@ -162,6 +162,7 @@
 '  </div>' +
 '  <div class="panel-footer">' +
 '    <button id="play">Play</button>' +
+'    <button id="pause">Pause</button>' +
 '  </div>' +
 '</div>';
 
@@ -169,9 +170,13 @@
 
             // hook the play event.
             $('#play').click(function() {
-
                 // start the game.
                 self.startGame();
+            });
+
+            $('#pause').click(function() {
+                // start the game.
+                self.pauseGame();
             });
         },
 
@@ -193,6 +198,17 @@
                       self.droppingRain();
                   },
                   self.options.gameControl.initialDroppingInterval);
+        },
+
+        /**
+         * pause game, mainly stop rain dropping...
+         */
+        pauseGame: function() {
+
+            var self = this;
+            window.clearInterval(self.gameId);
+            // reset game id.
+            self.gameId = 0;
         },
 
         /**

@@ -486,7 +486,7 @@ var groupRules =
       ["^/mag", "MAG"], 
       ["^/(moh|majamilosevic)", "MOHLTC"], 
       ["^/(mcscs|MCSCS)", "MCSCS"], 
-      ["^/mcys", "MCYS"], 
+      ["^/(mcys|nancymatthews)", "MCYS"], 
       ["^/mcss", "MCSS"], 
       ["^/(labour|sophiedennis)", "MOL"],
       ["^/mci", "MCI"],
