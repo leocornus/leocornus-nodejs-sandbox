@@ -171,8 +171,121 @@
             $('#play').click(function() {
 
                 // start the game.
-                //Self.startGame();
+                self.startGame();
             });
+        },
+
+        /**
+         * here is how we start the game.
+         */
+        startGame: function() {
+
+            var self = this;
+
+            // we will use the JavaScript timer to track the game.
+            // To make sure there is only one game running as one
+            // time.
+            self.gameId = self.gameId > 0 ? self.gameId :
+                 window.setInterval(
+                  function() {
+                      self.droppingRain();
+                  },
+                  self.options.gameControl.initialDroppingInterval);
+        },
+
+        /**
+         * function to start dropping alphabet rain.
+         */
+        droppingRain: function() {
+
+            var self = this;
+            //console.log(self);
+
+            // get the game board height.
+            var boardHeight = 
+                $('#' + self.options.gameBoard.id).innerHeight();
+
+            // get all svg with match id patterns:
+            $("svg[id^='letter-']").each(function(index) {
+                // the object this will be the DOM element.
+                var $svg = $(this);
+                // get the position in the game board.
+                var currentTop = parseInt($svg.css('top'));
+                // the dropping space for each dropping.
+                var pace = $svg.height();
+
+                // caculate the new top position.
+                var newTop = currentTop + pace / 2;
+                if (newTop + pace >= boardHeight) {
+                    // it will drop out of game board, remove it.
+                    $svg.remove();
+                } else {
+                    // move to the new position.
+                    $svg.css({"top": newTop + "px"});
+                }
+            });
+
+            // draw a letter after moving rain drops.
+            specs = self.setRandomLeft();
+            self.drawCharacterInCircle(getRandomChar());
+        },
+
+        /**
+         * calculate the position for new character.
+         *
+         * the left offset will control the position of 
+         * the rain drop, whih is a svg.
+         * We will always have to top offset starts from 0.
+         * As result of using relative position for all rain drops.
+         */
+        setRandomLeft: function() {
+
+            var self = this;
+
+            // find the inner width of the game board.
+            var $preview = $('#' + self.options.gameBoard.id);
+            var innerWidth = $preview.innerWidth();
+            var charWidth = parseInt(self.options.svg.styles.width);
+            var max = innerWidth - charWidth;
+            var left = Math.floor(Math.random() * max);
+
+            // set the new left.
+            self.options.svg.styles.left = left;
+        },
+
+        /**
+         * try to builde the svg with 
+         * a circle and text inside the circle.
+         * here are the HTML code.
+         *   <svg>
+         *     <circle></circle>
+         *     <text></text>
+         *   </svg>
+         */
+        drawCharacterInCircle: function(character) {
+
+            var self = this;
+
+            var gameBoard =
+                d3.select('#' + self.options.gameBoard.id);
+
+            //console.log(options.svg.styles.width);
+            // append the svg.
+            var svg = self.drawSvgElement(gameBoard, 'svg',
+                                          self.options.svg);
+            //var svg = previewdiv.append("svg");
+            // to make id unique, we will have this format.
+            //   letter-[x]-[style.left]
+            var theId = 'letter-' + character + '-' +
+                        self.options.svg.styles.left;
+            svg.attr('id', theId);
+
+            // append the circle.
+            self.drawSvgElement(svg, 'circle', self.options.circle);
+            // append the text.
+            var text = 
+                self.drawSvgElement(svg, 'text', self.options.text);
+            text.text(character);
         },
 
         /**
@@ -189,7 +302,7 @@
             for(var style in options.styles) {
                 element.style(style, options.styles[style]);
             }
-        
+
             return element;
         }
     });
