@@ -187,6 +187,8 @@
             // time.
             self.gameId = self.gameId > 0 ? self.gameId :
                  window.setInterval(
+                  // define function here, so we could use the 
+                  // plugin object (self) and it methods.
                   function() {
                       self.droppingRain();
                   },
@@ -243,8 +245,8 @@
             var self = this;
 
             // find the inner width of the game board.
-            var $preview = $('#' + self.options.gameBoard.id);
-            var innerWidth = $preview.innerWidth();
+            var $gameBoard = $('#' + self.options.gameBoard.id);
+            var innerWidth = $gameBoard.innerWidth();
             var charWidth = parseInt(self.options.svg.styles.width);
             var max = innerWidth - charWidth;
             var left = Math.floor(Math.random() * max);
@@ -273,7 +275,6 @@
             // append the svg.
             var svg = self.drawSvgElement(gameBoard, 'svg',
                                           self.options.svg);
-            //var svg = previewdiv.append("svg");
             // to make id unique, we will have this format.
             //   letter-[x]-[style.left]
             var theId = 'letter-' + character + '-' +
