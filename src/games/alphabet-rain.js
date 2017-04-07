@@ -180,6 +180,13 @@
                 // start the game.
                 self.pauseGame();
             });
+
+            // hook the keydown event.
+            $('body').keydown(function(event) {
+
+                // 
+                self.handleKeydown(event);
+            });
         },
 
         /**
@@ -211,6 +218,29 @@
             window.clearInterval(self.gameId);
             // reset game id.
             self.gameId = 0;
+        },
+
+        /**
+         * keydown will kill those rain drops.
+         */
+        handleKeydown: function(event) {
+
+            var self = this;
+
+            var theKey = event.key.toUpperCase();
+            var selector = "svg[id^='" + self.attrId +
+                           "-letter-" + theKey + "-']";
+            // here is how we check 
+            // if the selector has matched elements
+            if($(selector).length > 0) {
+                // kill the first one only.
+                $(selector)[0].remove();
+                // kill all matches.
+                //$(selector).each(function(index) {
+                //    // remove it to kill
+                //    $(this).remove();
+                //});
+            }
         },
 
         /**
