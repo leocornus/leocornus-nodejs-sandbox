@@ -161,8 +161,10 @@
 '  >' +
 '  </div>' +
 '  <div class="panel-footer">' +
-'    <button id="play">Play</button>' +
-'    <button id="pause">Pause</button>' +
+'    <button id="play">' +
+'      <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play</button>' +
+'    <button id="pause">' +
+'      <span class="glyphicon glyphicon-pause" aria-hidden="true"></span> Pause</button>' +
 '  </div>' +
 '</div>';
 
