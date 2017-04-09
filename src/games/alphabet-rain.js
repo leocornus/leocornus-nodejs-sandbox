@@ -278,7 +278,19 @@
 
             // draw a letter after moving rain drops.
             specs = self.setRandomLeft();
-            self.drawCharacterInCircle(getRandomChar());
+            self.drawCharacterInCircle(self.getRandomChar());
+        },
+
+        /**
+         * randomly return a char code.
+         */
+        getRandomChar: function() {
+        
+            // 65 to 90 for now.
+            var min = Math.ceil(35);
+            var max = Math.floor(91);
+            var code = Math.floor(Math.random() * (max - min)) + 65;
+            return String.fromCharCode(code);
         },
 
         /**
