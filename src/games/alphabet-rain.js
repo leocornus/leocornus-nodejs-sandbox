@@ -283,6 +283,11 @@
 
         /**
          * randomly return a char code.
+         * About ASCII characters:
+         *  - 32 - 127 will cover the whole keyboard.
+         *  - 48 - 57 are number keys, 0 - 9
+         *  - 65 - 90 are upercase letters A - Z
+         *  - 97 - 122 are lowercase letters a - z
          */
         getRandomChar: function() {
         
