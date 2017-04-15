@@ -196,6 +196,10 @@
 
             var self = this;
 
+            // prepare the charts.
+            // TODO: group should be a options for users.
+            self.prepareCharsByGroup('home');
+
             // we will use the JavaScript timer to track the game.
             // To make sure there is only one game running as one
             // time.
@@ -266,7 +270,7 @@
                 var pace = $svg.height();
 
                 // caculate the new top position.
-                var newTop = currentTop + pace / 2;
+                var newTop = currentTop + pace / 3;
                 if (newTop + pace >= boardHeight) {
                     // it will drop out of game board, remove it.
                     $svg.remove();
@@ -296,6 +300,24 @@
             var max = Math.floor(91);
             var code = Math.floor(Math.random() * (max - min)) + 65;
             return String.fromCharCode(code);
+        },
+
+        /**
+         * return one of the home keys randomly.
+         *
+         * Here are home keys:
+         *  a, s, d, f, j, k, l, ;
+         */
+        prepareCharsByGroup: function(group = 'home') {
+
+            var chars;
+            // return a set of chars by group:
+            switch(group) {
+            case "home":
+                 chars = ['a', 's', 'd', 'f', 'j', 'k', 'l', ';'];
+                 break;
+            }
+            return chars;
         },
 
         /**
