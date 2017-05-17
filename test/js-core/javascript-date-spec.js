@@ -11,9 +11,10 @@ describe('JavaScript date testing specs', function() {
         /**
          */
         it('test get range.', function() {
+
             /**
              * define the function to get date range.
-             *   getDates('2017-05-01', '2017-05-15');
+             *   getDates('05/01/2017', '05/15/2017');
              * inclusive!
              */
             var getDates = function(startDate, endDate) {
