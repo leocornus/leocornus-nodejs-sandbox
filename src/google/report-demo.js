@@ -370,8 +370,14 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
             });
             // add number column for top pages.
             var pages = pagesSummary.map(function(page, index) {
-                return page.replace('<tr>',
+                var pageViews = parseInt(pvPattern.exec(page)[1]);
+                var percent = pageViews / total[0];
+                var newPage = page.replace('<tr>',
                                 '<tr><th>' + (index + 1) + '</th>');
+                return newPage.replace(
+                  '<td class="pageviews">' + pageViews + '</td>',
+                  '<td class="pageviews">' + format(pageViews) + 
+                  '</td><td>' + formatPercentage(percent) + '</td>');
             });
 
             summary =
@@ -402,6 +408,7 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
   '  <th>#</th>' + 
   '  <th>Page</th>' + 
   '  <th>Pageviews</th>' + 
+  '  <th>Percentage</th>' +
   '  <th>Ministry</th>' + 
   //'  <th>Sites</th>' + 
   '</tr></thead>' +
