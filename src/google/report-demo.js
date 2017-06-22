@@ -508,7 +508,7 @@ function buildProgressBar(percentage) {
     '<div class="progress">' +
       '<div class="progress-bar" role="grogress-bar" ' +
       '     style="width:' + percentage + ';">' +
-      percentage
+      percentage +
       '</div>' +
     '</div>';
 
