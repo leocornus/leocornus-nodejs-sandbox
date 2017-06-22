@@ -58,5 +58,21 @@ describe('JavaScript RegExp Prototype Testing Specs', function() {
             expect(result.length).toBe(2);
             expect(result[1]).toMatch('fin');
         });
+
+        it('extract the content of a table column', function() {
+
+            // set the pattern
+            var pattern = /<td class=\"pageviews\">([0-9]*)<\/td>/;
+
+            var source = 
+                '<td>title</td><td class="pageviews">1234</td>';
+            var result = pattern.exec(source);
+
+            // verify...
+            expect(result != null).toBe(true);
+            expect(result.length).toBe(2);
+            expect(result[1]).toMatch('1234');
+            expect(parseInt(result[1])).toBe(1234);
+        });
     });
 });
