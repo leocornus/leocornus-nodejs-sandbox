@@ -395,7 +395,7 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
   '  <th>#</th>' + 
   '  <th>Ministry</th>' + 
   '  <th>Pageviews</th>' + 
-  '  <th>Percentage</th>' +
+  '  <th width="400px">Percentage</th>' +
   '  <th>Pages</th>' + 
   //'  <th>Sites</th>' + 
   '</tr></thead>' +
@@ -412,7 +412,7 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
   '  <th>#</th>' + 
   '  <th>Page</th>' + 
   '  <th>Pageviews</th>' + 
-  '  <th>Percentage</th>' +
+  '  <th width="400px">Percentage</th>' +
   '  <th>Ministry</th>' + 
   //'  <th>Sites</th>' + 
   '</tr></thead>' +
@@ -544,6 +544,9 @@ var groupRules =
       ["^/(mds)", "MDS"],
       ["^/(wiki)", "Wiki"],
       ["^/(customsearch|solrsearch)", "OPSpedia Search"],
-      ["^/(topical|Topical)", "Topical"],
+      ["^/(topical|Topical)/$", "Topical Homepage"],
+      ["^/(topical/category|topical/ops-weekly|topical/event-calendar)", "Topical Categories"],
+      ["^/topical-agencies", "Topical Agencies"],
+      ["^/(topical|Topical)", "Story Pageviews"],
       ["^/(tops|webcomm)", "Programs"]
     ];
