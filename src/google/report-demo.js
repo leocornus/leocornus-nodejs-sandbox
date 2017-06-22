@@ -366,7 +366,9 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
                 return newGroup.replace(
                   '<td class="pageviews">' + pageViews + '</td>',
                   '<td class="pageviews">' + format(pageViews) + 
-                  '</td><td>' + formatPercentage(percent) + '</td>');
+                  '</td><td>' + 
+                  buildProgressBar(formatPercentage(percent)) + 
+                  '</td>');
             });
             // add number column for top pages.
             var pages = pagesSummary.map(function(page, index) {
@@ -377,7 +379,9 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
                 return newPage.replace(
                   '<td class="pageviews">' + pageViews + '</td>',
                   '<td class="pageviews">' + format(pageViews) + 
-                  '</td><td>' + formatPercentage(percent) + '</td>');
+                  '</td><td>' + 
+                  buildProgressBar(formatPercentage(percent)) + 
+                  '</td>');
             });
 
             summary =
@@ -493,6 +497,22 @@ function buildTableRow(groupName, totalSites, totalPages,
 '</tr>';
 
     return summary;
+}
+
+/**
+ * build the bootstrap progress bar fro the given percentage.
+ */
+function buildProgressBar(percentage) {
+
+    var theBar = 
+    '<div class="progress">' +
+      '<div class="progress-bar" role="grogress-bar" ' +
+      '     style="width:' + percentage + ';">' +
+      percentage
+      '</div>' +
+    '</div>';
+
+    return theBar;
 }
 
 /**
