@@ -45,6 +45,7 @@ function queryReports() {
 
   // Replace with your view ID.
   var VIEW_ID = $('#view-id').val();
+  // date format: 2017-05-01
   var startDate = $('#start-date').val();
   var endDate = $('#end-date').val();
   var pageToken = $('#page-token').val();
@@ -249,7 +250,7 @@ function convertTreemap() {
         groupsPageviews[group]['groupPageviews'] += pagePageviews;
 
         // sumamry for top 10 pages.
-        if(i < 10) {
+        if(i < 20) {
             // get ready the href link for page.
             var pageUrl = pagePath.substring(0,8);
             pageUrl = pagePath.length > 8 ? pageUrl + "..." : pageUrl;
@@ -259,7 +260,7 @@ function convertTreemap() {
             var summary = 
                 '<tr>' +
                 '<td>' + pageUrl + '</td>' +
-                '<td>' + formatNumber(pagePageviews) + '</td>' +
+                '<td class="pageviews">' + pagePageviews + '</td>' +
                 '<td>' + group + '</td>' +
                 '</tr>';
             pagesSummary.push(summary);
@@ -281,7 +282,7 @@ function convertTreemap() {
     var allGroups = [];
     var groupsSummary = [];
     // [pageviews, pages, sites]
-    var total = [0,0,0]
+    var total = [0,0,0];
     for(var i = 0; i < groupsInOrder.length; i ++) {
 
         var group = groupsInOrder[i][0];
@@ -345,17 +346,29 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
 
     var summary = '';
     var format = d3.format(',d');
+    var formatPercentage = d3.format(".2%");
 
     switch(type) {
         case 'table':
-            // add number column by search and replace.
+            var pvPattern = /<td class=\"pageviews\">([0-9]*)<\/td>/;
+            // add number column and percentage column
             var groups = groupsSummary.map(function(group, index) {
                 if (index > 9) {
                     return '';
                 }
-                return group.replace('<tr>', 
+                var pageViews = parseInt(pvPattern.exec(group)[1]);
+                var percent = pageViews / total[0];
+                // by search the beginning <tr>
+                // and replace with <tr><th></th>
+                var newGroup = group.replace('<tr>', 
                                 '<tr><th>' + (index + 1) + '</th>');
+                // add the percentage column.
+                return newGroup.replace(
+                  '<td class="pageviews">' + pageViews + '</td>',
+                  '<td class="pageviews">' + format(pageViews) + 
+                  '</td><td>' + formatPercentage(percent) + '</td>');
             });
+            // add number column for top pages.
             var pages = pagesSummary.map(function(page, index) {
                 return page.replace('<tr>',
                                 '<tr><th>' + (index + 1) + '</th>');
@@ -372,6 +385,7 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
   '  <th>#</th>' + 
   '  <th>Ministry</th>' + 
   '  <th>Pageviews</th>' + 
+  '  <th>Percentage</th>' +
   '  <th>Pages</th>' + 
   //'  <th>Sites</th>' + 
   '</tr></thead>' +
@@ -382,7 +396,7 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
 '<div class="tab-pane" id="pages" role="tabpanel">' +
   '<table class="table table-hover">' +
   '<caption>' +
-  'Top 10 Pages by Pageviews' +
+  'Top 20 Pages by Pageviews' +
   '</caption>' +
   '<thead><tr>' + 
   '  <th>#</th>' + 
@@ -466,7 +480,7 @@ function buildTableRow(groupName, totalSites, totalPages,
     var summary = 
 '<tr>' +
 '<td>' + groupName + '</td>' +
-'<td>' + format(totalPageviews) + '</td>' +
+'<td class="pageviews">' + totalPageviews + '</td>' +
 '<td>' + format(totalPages) + '</td>' +
 //'<td>' + totalSites + '</td>' +
 '</tr>';
@@ -482,7 +496,7 @@ var groupRules =
       ["^/(mnr|natural)", "MNRF"], 
       ["^/(fin|rev|stevecheng)", "MOF"], 
       ["^/(mgcs|serviceontario|diversity|mgs)", "MGCS"], 
-      ["^/(omafra|OMAFRA|digitalomafra|debstark)", "OMAFRA"], 
+      ["^/(omafra|OMAFRA|digitalomafra|debstark|gregmeredith)", "OMAFRA"], 
       ["^/mag", "MAG"], 
       ["^/(moh|majamilosevic)", "MOHLTC"], 
       ["^/(mcscs|MCSCS)", "MCSCS"], 
@@ -503,6 +517,6 @@ var groupRules =
       ["^/(mds)", "MDS"],
       ["^/(wiki)", "Wiki"],
       ["^/(customsearch|solrsearch)", "OPSpedia Search"],
-      ["^/(topical)", "Topical"],
+      ["^/(topical|Topical)", "Topical"],
       ["^/(tops|webcomm)", "Programs"]
     ];
