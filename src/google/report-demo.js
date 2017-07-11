@@ -86,6 +86,9 @@ function queryReports() {
             },
             {
               name: 'ga:hour'
+            },
+            {
+              name: 'ga:minute'
             }
           ],
           dimensionFilterClauses: [{
