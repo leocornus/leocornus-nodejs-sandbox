@@ -83,10 +83,10 @@ function queryReports() {
           dimensions: [
             {
               name: 'ga:pagePath'
+            },
+            {
+              name: 'ga:hour'
             }
-            //{
-            //  name: 'ga:hour'
-            //}
           ],
           dimensionFilterClauses: [{
             operator: "OR",
@@ -536,7 +536,7 @@ var groupRules =
       ["^/(lrc|gis)", "LRC"],
       ["^/(tbs|openon|greenoffice)", "TBS"], 
       ["^/(cyssc)", "CYSSC"], 
-      ["^/(cac)", "CAC"], 
+      ["^/(cac|CAC)", "CAC"], 
       ["^/(tcu)", "TCU-ETD"],
       ["^/(iit|IIT)", "IIT"], 
       ["^/(its|ITS)", "ITS"], 
