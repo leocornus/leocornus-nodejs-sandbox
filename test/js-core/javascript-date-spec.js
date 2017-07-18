@@ -9,6 +9,7 @@ describe('JavaScript date testing specs', function() {
     describe('Testing cases to get a date range', function() {
 
         /**
+         * test case for get a list of dates in the format.
          */
         it('test get range.', function() {
 
@@ -44,6 +45,22 @@ describe('JavaScript date testing specs', function() {
             // it is safe to use this format: MM/DD/YYYY.
             var dateRange = getDates("05/01/2017", "05/04/2017");
             expect(dateRange).toEqual(['2017-05-01', '2017-05-02', '2017-05-03', '2017-05-04']);
+        });
+    });
+
+    /**
+     * test case for parse the format a date string.
+     */
+    describe('test parse and format date', function() {
+
+        /**
+         */ 
+        it('parse date string', function() {
+
+            var theString = '2016-01-13T16:33:17Z';
+            var theDate = new Date(theString);
+
+            expect(theDate.getMonth()).toEqual(0);
         });
     });
 });
