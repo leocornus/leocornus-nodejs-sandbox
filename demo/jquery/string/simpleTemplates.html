@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Simple Templates demo</title>
+  <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+  <div class="page-header"><h1>Handle Simple Templates</h1></div>
+
+  <div class="row" id="search-bar">
+    <div class="col-md-5">
+    Template:<br/>
+    <textarea style="width:100%" id="source" rows="20"></textarea>
+    Parameters:<br/>
+    <textarea style="width:100%" id="parameters" rows="10"></textarea>
+    </div>
+
+    <div class="col-md-2">
+      <button id="convert">Convert</button><br/>
+    </div>
+
+    <div class="col-md-5">
+    result:<br/>
+    <textarea style="width:100%" id="result" rows="30"></textarea>
+    </div>
+  </div>
+</div>
+ 
+<script>
+
+jQuery(document).ready(function($) {
+
+    // convert the CSV string to zoomable circle json format.
+    $('#convert').on('click', function() {
+
+        // read the csv.
+        var source = $('#source').val();
+        var params = $('#parameters').val();
+
+        $('#result').html(source);
+    });
+});
+
+</script>
+ 
+</body>
+</html>
