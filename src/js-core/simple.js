@@ -6,7 +6,7 @@
     /**
      * simple function to show message.
      */
-    function showMessage(msg) {
+    var showMessage = function(msg) {
     
         alert('...' + msg + '---');
     }
