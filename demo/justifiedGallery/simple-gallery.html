@@ -12,9 +12,26 @@
     <script>
 jQuery(document).ready(function($) {
   $("#simple-gallery").justifiedGallery({
-      rowHeight : 200,
+      rowHeight : 250,
       lastRow : 'justify',
       margins : 3
+  });
+
+  $(window).scroll(function() {
+
+    var theWindow = $(this);       
+    var theContainer = $('body');
+    var tweak = 10;
+    if ( theWindow.scrollTop() >= theContainer.height() - theWindow.height() - tweak ) {
+
+        // load 5 more ...
+        for (var i = 0; i < 5; i++) {
+          $('#simple-gallery').append('<a>' +
+              '<img src="http://path/to/image" />' + 
+              '</a>');
+        }
+        $('#simple-gallery').justifiedGallery('norewind');
+      }
   });
 });
     </script>
