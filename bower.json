@@ -43,7 +43,8 @@
     "video.js": "~5.10.2",
     "jsoneditor": "~5.5.7",
     "leocornus-visualdata": "^0.0.7",
-    "d3-queue": "^3.0.7"
+    "d3-queue": "^3.0.7",
+    "justifiedGallery": "justified-gallery#^3.6.3"
   },
   "resolutions": {
     "font-awesome": "~4.7.0"
