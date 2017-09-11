@@ -11,7 +11,11 @@
 
     <script>
 jQuery(document).ready(function($) {
-  $("#simple-gallery").justifiedGallery();
+  $("#simple-gallery").justifiedGallery({
+      rowHeight : 200,
+      lastRow : 'justify',
+      margins : 3
+  });
 });
     </script>
   </head>
