@@ -39,6 +39,6 @@ bower_components
 # Optional REPL history
 .node_repl_history
 
-# the bundle file from webpack,
-# we set to ignore for now, as they are only for demo / teting.
+# the bundle files from webpack,
+# we set them to be ignored for now, as they are only for demo / testing.
 *bundle.js
