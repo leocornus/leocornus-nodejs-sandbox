@@ -89,6 +89,7 @@
   "dependencies": {
     "jquery": "^2.1.4",
     "jquery.cookie": "^1.4.1",
+    "justified-layout": "^2.1.0",
     "nodemw": "^0.7.5",
     "tipso": "^1.0.5"
   }
