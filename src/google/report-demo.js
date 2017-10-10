@@ -84,9 +84,9 @@ function queryReports() {
             }
           ],
           dimensions: [
-            //{
-            //  name: 'ga:pagePath'
-            //}
+            {
+              name: 'ga:pagePath'
+            }
             //{
             //  name: 'ga:hour'
             //},
