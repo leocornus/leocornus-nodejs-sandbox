@@ -78,18 +78,21 @@ function queryReports() {
             },
             {
               expression: 'ga:pageviews'
+            },
+            {
+              expression: 'ga:users'
             }
           ],
           dimensions: [
-            {
-              name: 'ga:pagePath'
-            },
-            {
-              name: 'ga:hour'
-            },
-            {
-              name: 'ga:minute'
-            }
+            //{
+            //  name: 'ga:pagePath'
+            //}
+            //{
+            //  name: 'ga:hour'
+            //},
+            //{
+            //  name: 'ga:minute'
+            //}
           ],
           dimensionFilterClauses: [{
             operator: "OR",
@@ -130,7 +133,8 @@ function displayResults(response) {
         // page has structure: [path, sessions, pageviews]
         pages.push([aRow.dimensions[0],
                     parseInt(aRow.metrics[0].values[0]),
-                    parseInt(aRow.metrics[0].values[1])]);
+                    parseInt(aRow.metrics[0].values[1]),
+                    parseInt(aRow.metrics[0].values[2])]);
     }
 
     // sort the pages by pageviews..
@@ -199,6 +203,7 @@ function convertTreemap() {
     var groupsPageviews = {};
     //var groupsSessions = {};
     var totalSessions = 0;
+    var totalUsers = 0;
     var pagesSummary = [];
     //alert(originLines.length);
     for(var i = 0; i < pathes.length; i++) {
@@ -207,6 +212,7 @@ function convertTreemap() {
         var pagePath = pathes[i][0];
         var pageSessions = pathes[i][1];
         var pagePageviews = pathes[i][2];
+        var pageUsers = pathes[i][3];
 
 
         // find the site for this page.
@@ -269,6 +275,7 @@ function convertTreemap() {
             pagesSummary.push(summary);
         }
         totalSessions += pageSessions;
+        totalUsers += pageUsers;
     }
 
     // try to sort the groups by group pageviews.
@@ -329,6 +336,7 @@ function convertTreemap() {
         groupsSummary.push(summary);
     }
     total[3] = totalSessions;
+    total[4] = totalUsers;
 
     var jsonData = {
         "name": "OPSpedia Traffic",
@@ -432,6 +440,7 @@ function createSummary(type, groupsSummary, pagesSummary, total) {
 'Total Pageviews: <strong>' + format(total[0]) + '</strong><br/>' +
 'Total Pages: <strong>' + format(total[1]) + '</strong><br/>' +
 'Total Sessions: <strong>' + format(total[3]) + '</strong><br/>' +
+'Total Users: <strong>' + format(total[4]) + '</strong><br/>' +
 '<ul class="nav nav-tabs" role="tablist">' +
 '  <li role="presentation" class="active">' +
 '    <a href="#groups" aria-controls="groups" role="tab"' +
@@ -523,6 +532,7 @@ function buildProgressBar(percentage) {
  */
 var groupRules = 
     [ 
+      ["(^/(customsearch|solrsearch)|.*/?(search_term|searchterm|s)=.*)", "OPSpedia Search"],
       ["^/(mnr|natural)", "MNRF"], 
       ["^/(fin|rev|stevecheng)", "MOF"], 
       ["^/(mgcs|serviceontario|diversity|mgs)", "MGCS"], 
@@ -546,7 +556,6 @@ var groupRules =
       ["^/(groups)", "Groups"],
       ["^/(mds)", "MDS"],
       ["^/(wiki)", "Wiki"],
-      ["^/(customsearch|solrsearch)", "OPSpedia Search"],
       ["^/(topical|Topical)/$", "Topical Homepage"],
       ["^/(topical/category|topical/ops-weekly|topical/event-calendar)", "Topical Categories"],
       ["^/topical-agencies", "Topical Agencies"],
