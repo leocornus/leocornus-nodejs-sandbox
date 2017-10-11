@@ -1,9 +1,23 @@
-{
-    // sandbox development app 
+// this will support multiple apps.
+// it will use array to manage.
+[
+  // sandbox development app 
+  {
     "uid": "dev-sandbox",
     "append": true,
     "watch": true,
     "watchDirectory": "/usr/rd/leocornus-nodejs-sandbox/demo",
     "script": "test/express/simple.js",
     "sourceDir": "/usr/rd/leocornus-nodejs-sandbox"
-}
+  },
+
+  // wikistrap development application
+  {
+    "uid": "dev-wikistrap",
+    "append": true,
+    "watch": true,
+    "watchDirectory": "/usr/rd/wikistrap.js/demo",
+    "script": "test/express/local-app.js",
+    "sourceDir": "/usr/rd/wikistrap.js"
+  }
+]
