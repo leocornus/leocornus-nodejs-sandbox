@@ -1,0 +1,9 @@
+{
+    // sandbox development app 
+    "uid": "dev-sandbox",
+    "append": true,
+    "watch": true,
+    "watchDirectory": "/usr/rd/leocornus-nodejs-sandbox/demo",
+    "script": "test/express/simple.js",
+    "sourceDir": "/usr/rd/leocornus-nodejs-sandbox"
+}
