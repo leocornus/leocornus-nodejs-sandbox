@@ -24,3 +24,18 @@ var app2 = new Vue({
     title: 'the current date is ' + new Date().toLocaleString()
   }
 });
+
+/**
+ * get data in loop... v-for, like forEach
+ */
+var appFor = new Vue({
+
+  el: "#app-for",
+  data: {
+    todos: [
+      {text: 'one item'},
+      {text: 'item two'},
+      {text: 'three items'}
+    ]
+  }
+});
