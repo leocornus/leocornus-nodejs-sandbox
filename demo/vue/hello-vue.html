@@ -46,31 +46,37 @@
   </div>
 </nav>
 
-<div class="container">
+<div class="container"><div class="row">
 
-  <div id="app">
-    <p>{{ message }}</p>
-  </div>
-  
-  <div id="app-2">
-    <span v-bind:title="title">
-      Mouse hover over this line to see the dynamically bound title!
-    </span>
-  </div>
-  
-  <div id="app-for">
-    <ul>
-      <li v-for="todo in todos">
-        {{todo.text}}
-      </li>
-    </ul>
-  </div>
-  
-  <div id="app-if">
-    <span v-if="seen">testing v-if seen</span>
+  <div class="col">
+    table of content
   </div>
 
-</div>
+  <div class="col-9">
+    <div id="app">
+      <p>{{ message }}</p>
+    </div>
+    
+    <div id="app-2">
+      <span v-bind:title="title">
+        Mouse hover over this line to see the dynamically bound title!
+      </span>
+    </div>
+    
+    <div id="app-for">
+      <ul>
+        <li v-for="todo in todos">
+          {{todo.text}}
+        </li>
+      </ul>
+    </div>
+    
+    <div id="app-if">
+      <span v-if="seen">testing v-if seen</span>
+    </div>
+  </div>
+
+</div></div>
 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
