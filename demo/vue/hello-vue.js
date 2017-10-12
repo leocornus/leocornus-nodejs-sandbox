@@ -46,6 +46,22 @@ var appFor = new Vue({
 });
 
 /**
+ * v-on directive will hook events.
+ */
+var appOn = new Vue({
+
+  el: "#app-on",
+  data: {
+    theWord: "Reverse Me!"
+  },
+  methods: {
+    reverseMessage: function() {
+        this.theWord = this.theWord.split('').reverse().join('');
+    }
+  }
+});
+
+/**
  * v-if directive is for conditional
  * the value for v-if is the property name of the Vue instance.
  */
