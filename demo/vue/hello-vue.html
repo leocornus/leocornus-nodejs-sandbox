@@ -95,7 +95,7 @@
     <p>
     <div id="app-on">
       <span class="badge badge-info">{{theWord}}</span>
-      <button v-on:click="reverseMessage">Click me the reverse...</button>
+      <button class="btn btn-outline-warning" v-on:click="reverseMessage">Click me the reverse...</button>
     </div>
     </p>
     
@@ -103,6 +103,7 @@
     <p>
     <div id="app-if">
       <span v-if="seen">testing v-if seen</span>
+      <button class="btn btn-outline-warning" v-on:click="onAndOff">Click me to show and hide</button>
     </div>
     </p>
 

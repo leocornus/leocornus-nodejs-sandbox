@@ -56,7 +56,7 @@ var appOn = new Vue({
   },
   methods: {
     reverseMessage: function() {
-        this.theWord = this.theWord.split('').reverse().join('');
+      this.theWord = this.theWord.split('').reverse().join('');
     }
   }
 });
@@ -70,5 +70,11 @@ var appIf = new Vue({
   el: "#app-if",
   data: {
     seen: true
+  },
+  methods: {
+    onAndOff: function() {
+
+      this.seen = !this.seen;
+    }
   }
 });
