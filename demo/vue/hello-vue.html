@@ -53,16 +53,35 @@
   </div>
 
   <div class="col-9">
+
+    <h1>Vue.js Get Started</h1>
+    <p>Get started to learn Vue.js</p>
+
+    <h3>Some notes to get started</h3>
+    <p>
+      <ul>
+        <li>Do we have to use div for Vue.js application?</li>
+      </ul>
+    </p>
+
+    <h3>The simple template syntax</h3>
+    <p>
     <div id="app">
-      <p>{{ message }}</p>
+      <div>{{ message }}</div>
     </div>
-    
+    </p>
+
+    <h3>v-bind directive</h3>
+    <p>
     <div id="app-2">
       <span v-bind:title="title">
         Mouse hover over this line to see the dynamically bound title!
       </span>
     </div>
+    </p>
     
+    <h3>v-for directive</h3>
+    <p>
     <div id="app-for">
       <ul>
         <li v-for="todo in todos">
@@ -70,10 +89,15 @@
         </li>
       </ul>
     </div>
+    </p>
     
+    <h3>v-if directive</h3>
+    <p>
     <div id="app-if">
       <span v-if="seen">testing v-if seen</span>
     </div>
+    </p>
+
   </div>
 
 </div></div>
