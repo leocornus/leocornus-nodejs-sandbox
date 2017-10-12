@@ -5,6 +5,9 @@
 /**
  * the very first app, just render data to DOM by using
  * the straightforward template syntax.
+ *  {{message}}
+ * 
+ * the syntax to load template.
  */
 var app = new Vue({
   el: '#app',
@@ -14,7 +17,8 @@ var app = new Vue({
 });
 
 /**
- * binding data to HTML element attriburtes.
+ * v-bind directive will be used in element attributes
+ * binding data to HTML element attributes.
  * the v-bind: prefix made the magic!
  */
 var app2 = new Vue({
@@ -26,6 +30,7 @@ var app2 = new Vue({
 });
 
 /**
+ * v-for directive.
  * get data in loop... v-for, like forEach
  */
 var appFor = new Vue({
@@ -37,5 +42,17 @@ var appFor = new Vue({
       {text: 'item two'},
       {text: 'three items'}
     ]
+  }
+});
+
+/**
+ * v-if directive is for conditional
+ * the value for v-if is the property name of the Vue instance.
+ */
+var appIf = new Vue({
+
+  el: "#app-if",
+  data: {
+    seen: true
   }
 });
