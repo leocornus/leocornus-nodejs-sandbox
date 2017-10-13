@@ -56,6 +56,7 @@ var appOn = new Vue({
   },
   methods: {
     reverseMessage: function() {
+
       this.theWord = this.theWord.split('').reverse().join('');
     }
   }
