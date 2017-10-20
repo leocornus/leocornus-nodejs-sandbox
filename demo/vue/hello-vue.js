@@ -100,9 +100,24 @@ var appModel = new Vue({
  */
 // define a new componet.
 Vue.component('todo-item', {
-  template: '<li>Item one</li>'
+
+  // props will the properties used in this component.
+  // it is called custom attributes.
+  props: ['todo'],
+  // html template to present thi component.
+  // NOTE: it could be html DOM element selector.
+  template: '<li>{{todo.id}} - {{todo.text}}</li>'
 });
+
+// the component app.
 var appComponent = new Vue({
 
-  el: "#app-component"
+  el: "#app-component",
+  data: {
+    someList: [
+      {id: 'a', text: 'item a'},
+      {id: '2', text: 'item ab'},
+      {id: 'c', text: 'item 123'}
+    ]
+  }
 });

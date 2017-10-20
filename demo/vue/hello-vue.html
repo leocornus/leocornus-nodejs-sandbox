@@ -120,7 +120,10 @@
     <p>
     <div id="app-component">
       <ul>
-        <todo-item></todo-item>
+        <todo-item v-for='item in someList'
+          :todo="item" v-bind:nokey="item.id"
+        >
+        </todo-item>
       </ul>
     </div>
     </p>
