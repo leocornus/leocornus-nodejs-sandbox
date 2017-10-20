@@ -1,10 +1,17 @@
+/**
+ * define the componet for each step or the step navigation bar.
+ */
 Vue.component("step-navigation-step", {
+    // we will use the html blok with the id selector.
     template: "#step-navigation-step-template",
 
+    // each step will need this 2 attributes to be binded.
     props: ["step", "currentstep"],
 
+    // computed is the dynamic binding, we could use function here.
+    // it is like data.
     computed: {
-        indicatorclass() {
+        indicatorclass: function() {
             return {
                 active: this.step.id == this.currentstep,
                 complete: this.currentstep > this.step.id
