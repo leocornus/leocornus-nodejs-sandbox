@@ -67,7 +67,8 @@
     <h3>The simple template syntax</h3>
     <p>
     <div id="app">
-      <div>{{ message }}</div>
+      <div>{{ staticMessage }}</div>
+      <div class="badge badge-success" v-text="dynamicMessage" @load="fnDynamicMsg"></div>
     </div>
     </p>
 

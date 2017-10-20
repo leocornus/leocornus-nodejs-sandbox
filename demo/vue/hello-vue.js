@@ -12,7 +12,13 @@
 var app = new Vue({
   el: '#app',
   data: {
-    message: 'Hello Vue.js!'
+    staticMessage: 'Hello Vue.js!',
+    dynamicMessage: 'this will be replaced, but when!'
+  },
+  methods: {
+    fnDynamicMsg: function() {
+      this.dynamicMessage = "I am from a function";
+    }
   }
 });
 
@@ -53,12 +59,14 @@ var appFor = new Vue({
 var appOn = new Vue({
 
   el: "#app-on",
+  // all data will be attribute of the Vue application object.
   data: {
     theWord: "Reverse Me!"
   },
   methods: {
     reverseMessage: function() {
 
+      // this will be the Vue application object.
       this.theWord = this.theWord.split('').reverse().join('');
     }
   }
