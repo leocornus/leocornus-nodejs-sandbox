@@ -20,12 +20,19 @@ Vue.component("step-navigation-step", {
     }
 });
 
+/**
+ * define component the step navigation bar.
+ */
 Vue.component("step-navigation", {
+
     template: "#step-navigation-template",
 
     props: ["steps", "currentstep"]
 });
 
+/**
+ * define the component for each step.
+ */
 Vue.component("step", {
     template: "#step-template",
 
@@ -62,10 +69,15 @@ Vue.component("step", {
     }
 });
 
+/**
+ * the the Vue application object for the Wizard app.
+ */
 new Vue({
     el: "#app",
 
     data: {
+        // initial step.
+        // using the computed to set it if this wizard are in the middle.
         currentstep: 1,
 
         steps: [
