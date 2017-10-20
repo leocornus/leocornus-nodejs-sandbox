@@ -94,3 +94,15 @@ var appModel = new Vue({
     theInput: "change the input to see what changed!"
   }
 });
+
+/**
+ * simple component, 
+ */
+// define a new componet.
+Vue.component('todo-item', {
+  template: '<li>Item one</li>'
+});
+var appComponent = new Vue({
+
+  el: "#app-component"
+});
