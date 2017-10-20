@@ -92,11 +92,11 @@
                 <button class="btn btn-primary" @click="lastStep" :disabled="firststep">
                     Back
                 </button>
-                <button class="btn btn-primary" @click="nextStep" :disabled="laststep">
-                    Next
-                </button>
                 <button class="btn btn-primary" v-if="laststep">
                     Submit
+                </button>
+                <button class="btn btn-primary" v-else @click="nextStep" :disabled="laststep">
+                    Next
                 </button>
             </div>
         </script>
