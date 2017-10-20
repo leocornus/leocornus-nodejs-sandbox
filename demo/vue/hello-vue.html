@@ -68,7 +68,9 @@
     <p>
     <div id="app">
       <div>{{ staticMessage }}</div>
-      <div class="badge badge-success" v-text="dynamicMessage" @load="fnDynamicMsg"></div>
+      <div class="badge badge-success" v-text="dynamicMessage">
+      everything here will be replaced with v-text
+      </div>
     </div>
     </p>
 

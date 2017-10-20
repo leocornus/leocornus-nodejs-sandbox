@@ -12,12 +12,13 @@
 var app = new Vue({
   el: '#app',
   data: {
-    staticMessage: 'Hello Vue.js!',
-    dynamicMessage: 'this will be replaced, but when!'
+    staticMessage: 'Hello Vue.js!'
   },
-  methods: {
-    fnDynamicMsg: function() {
-      this.dynamicMessage = "I am from a function";
+  // computed will binding dynamic data, it just like 
+  // data, but could use function.
+  computed: {
+    dynamicMessage: function() {
+      return "I am from a function";
     }
   }
 });
