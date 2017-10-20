@@ -20,6 +20,7 @@ var app = new Vue({
  * v-bind directive will be used in element attributes
  * binding data to HTML element attributes.
  * the v-bind: prefix made the magic!
+ * it has shortcode: :
  */
 var app2 = new Vue({
   // el is like the selector.
@@ -47,6 +48,7 @@ var appFor = new Vue({
 
 /**
  * v-on directive will hook events.
+ * it has shortcode @
  */
 var appOn = new Vue({
 
@@ -78,5 +80,17 @@ var appIf = new Vue({
 
       this.seen = !this.seen;
     }
+  }
+});
+
+/**
+ * the v-model directive will make 2-way binding between form
+ * input and app state.
+ */
+var appModel = new Vue({
+
+  el: "#app-model",
+  data: {
+    theInput: "change the input to see what changed!"
   }
 });
