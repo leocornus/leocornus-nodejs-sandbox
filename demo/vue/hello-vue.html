@@ -74,7 +74,7 @@
     <h3>v-bind directive</h3>
     <p>
     <div id="app-2">
-      <span v-bind:title="title">
+      <span :title="title">
         Mouse hover over this line to see the dynamically bound title!
       </span>
     </div>
@@ -104,7 +104,7 @@
     <div id="app-if">
       <span class="badge badge-danger" v-if="seen">testing v-if seen</span>
       <span class="badge badge-info" v-else>I am showing because of v-else</span>
-      <button class="btn btn-outline-warning" v-on:click="onAndOff">Click me to show and hide</button>
+      <button class="btn btn-outline-warning" @click="onAndOff">Click me to show and hide</button>
     </div>
     </p>
 
