@@ -122,8 +122,10 @@
     <div id="app-component">
       <ul>
         <todo-item v-for='item in someList'
-          :todo="item" v-bind:nokey="item.id"
+          :todo="item" v-bind:key="item.id"
+          comment="we need a unique key here to avoid many tricky issues for a complex app"
         >
+        everything here will be gone!
         </todo-item>
       </ul>
     </div>
