@@ -65,6 +65,7 @@ var appOn = new Vue({
 /**
  * v-if directive is for conditional
  * the value for v-if is the property name of the Vue instance.
+ * v-else is like if not
  */
 var appIf = new Vue({
 
