@@ -43,8 +43,8 @@ Vue.component("step", {
             return this.step.id == this.currentstep;
         },
 
-        firststep() {
-            return this.currentstep == 1;
+        notFirstStep() {
+            return this.currentstep > 1;
         },
 
         laststep() {
