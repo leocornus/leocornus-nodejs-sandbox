@@ -241,16 +241,10 @@
 
     <div v-if="currentstep == 4">
         <h2>User Readiness</h2>
-        <div class="form-group">
-            <label class="h4" for="exampleSelect1">Example select</label>
-            <select class="form-control" id="exampleSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-        </div>
+        <h3>A) Real Estate Market Research</h3>
+        <question-anwsers v-for="question in researchQuestions" 
+                          :question="question" :key="question.id">
+        </question-anwsers>
     </div>
 
     <step v-for="step in steps" :currentstep="currentstep" :key="step.id" :step="step" :stepcount="steps.length" @step-change="stepChanged">
@@ -259,33 +253,45 @@
   </div>
 </div>
 
-        <script type="x-template" id="step-navigation-template">
-            <ol class="step-indicator">
-                <li v-for="step in steps" is="step-navigation-step" :key="step.id" :step="step" :currentstep="currentstep">
-                </li>
-            </ol>
-        </script>
+<!-- templates for components -->
+<script type="x-template" id="step-navigation-template">
+    <ol class="step-indicator">
+        <li v-for="step in steps" is="step-navigation-step" :key="step.id" :step="step" :currentstep="currentstep">
+        </li>
+    </ol>
+</script>
 
-        <script type="x-template" id="step-navigation-step-template">
-            <li :class="indicatorclass">
-                <div class="step"><i :class="step.icon_class"></i></div>
-                <div class="caption d-none d-sm-block"><span v-text="step.title"></span></div>
-            </li>
-        </script>
+<script type="x-template" id="step-navigation-step-template">
+    <li :class="indicatorclass">
+        <div class="step"><i :class="step.icon_class"></i></div>
+        <div class="caption d-none d-sm-block"><span v-text="step.title"></span></div>
+    </li>
+</script>
 
-        <script type="x-template" id="step-template">
-            <div class="step-wrapper" :class="stepWrapperClass">
-                <button class="btn btn-primary" @click="lastStep" v-if="notFirstStep">
-                    Back
-                </button>
-                <button class="btn btn-primary" v-if="laststep">
-                    Submit
-                </button>
-                <button class="btn btn-primary" v-else @click="nextStep" :disabled="laststep">
-                    Next
-                </button>
-            </div>
-        </script>
+<script type="x-template" id="step-template">
+    <div class="step-wrapper" :class="stepWrapperClass">
+        <button class="btn btn-primary" @click="lastStep" v-if="notFirstStep">
+            Back
+        </button>
+        <button class="btn btn-primary" v-if="laststep">
+            Submit
+        </button>
+        <button class="btn btn-primary" v-else @click="nextStep" :disabled="laststep">
+            Next
+        </button>
+    </div>
+</script>
+
+<script type="x-template" id="question-anwsers-template">
+  <div class="form-group">
+    <label class="h4" for="questionNeighbourhood"><span v-text="question.id"></span>) <span v-text="question.title"></span>:</label>
+    <div class="form-check" v-for="anwser in question.anwsers" :key="anwser.id">
+      <label class="form-check-label">
+        <input class="form-check-input" type="radio" name="a" value="A"><span v-text="anwser.id"></span>) <span v-text="anwser.title"></span>
+      </label>
+    </div>
+  </div>
+</script>
 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>

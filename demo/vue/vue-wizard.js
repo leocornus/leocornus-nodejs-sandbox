@@ -70,6 +70,15 @@ Vue.component("step", {
 });
 
 /**
+ * define the component for question and anwers.
+ */
+Vue.component("question-anwsers", {
+
+    template: "#question-anwsers-template",
+    props: ["question"]
+});
+
+/**
  * the the Vue application object for the Wizard app.
  */
 new Vue({
@@ -78,7 +87,7 @@ new Vue({
     data: {
         // initial step.
         // using the computed to set it if this wizard are in the middle.
-        currentstep: 3,
+        currentstep: 4,
 
         steps: [
             {
@@ -101,6 +110,46 @@ new Vue({
                 title: "User Readiness",
                 icon_class: "fa fa-paper-plane"
             }
+        ],
+
+        // research questions.
+        researchQuestions: [
+          {
+            id: 1,
+            title: "Have you discovered which neighbourhood is most suited for your needs?",
+            anwsers: [
+              {
+                id: 'A',
+                title: 'Starting to research'
+              },
+              {
+                id: 'B',
+                title: 'Somewhat familiar'
+              },
+              {
+                id: 'C',
+                title: 'I know exactly where I want to live'
+              }
+            ]
+          },
+          {
+            id: 2,
+            title: "Do you know the average asking price for the home you are looking for?",
+            anwsers: [
+              {
+                id: 'A',
+                title: 'Starting to do research'
+              },
+              {
+                id: 'B',
+                title: 'More or less aware'
+              },
+              {
+                id: 'C',
+                title: 'I know pretty well what to expect'
+              }
+            ]
+          }
         ]
     },
 
