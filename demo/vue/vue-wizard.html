@@ -122,16 +122,78 @@
     </div>
 
     <div v-if="currentstep == 2">
-        <h1>Step 2</h1>
+        <h1>User's house preferences</h1>
         <div class="form-group">
-            <label class="h4" for="exampleSelect1">Example select</label>
-            <select class="form-control" id="exampleSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
+          <label class="h4" for="checkboxBuyingDecision">Which of the following are top factor in your buying decision?:</label>
+          <div class="form-check">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">proximity to work</span>
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">proximity to transportation</span>
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">proximity to entertainment district</span>
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">proximity to good schools</span>
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">proximity to health care</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="h4" for="radioNewHouse">Are you looking for new house or resale?:</label>
+
+          <div class="form-check">
+            <label class="custom-control custom-radio">
+              <input id="radio1" name="radioNewHouse" type="radio" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">New House</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input id="radio2" name="radioNewHouse" type="radio" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Re-sale</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="h4" for="radioFinished">Fully finished or upgradeable?:</label>
+
+          <div class="form-check">
+            <label class="custom-control custom-radio">
+              <input id="radio1" name="radioFinished" type="radio" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Fully finished</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input id="radio2" name="radioFinished" type="radio" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Upgradeable</span>
+            </label>
+          </div>
         </div>
     </div>
 
