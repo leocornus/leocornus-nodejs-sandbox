@@ -148,6 +148,20 @@
         </div>
     </div>
 
+    <div v-if="currentstep == 4">
+        <h1>User Readiness</h1>
+        <div class="form-group">
+            <label class="h4" for="exampleSelect1">Example select</label>
+            <select class="form-control" id="exampleSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+    </div>
+
     <step v-for="step in steps" :currentstep="currentstep" :key="step.id" :step="step" :stepcount="steps.length" @step-change="stepChanged">
     </step>
 

@@ -95,6 +95,11 @@ new Vue({
                 id: 3,
                 title: "House Specifications",
                 icon_class: "fa fa-paper-plane"
+            },
+            {
+                id: 4,
+                title: "User Readiness",
+                icon_class: "fa fa-paper-plane"
             }
         ]
     },
