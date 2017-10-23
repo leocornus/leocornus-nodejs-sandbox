@@ -294,8 +294,10 @@
   <div class="form-group">
     <label class="h4" for="questionNeighbourhood"><span v-text="question.id"></span>) <span v-text="question.title"></span>:</label>
     <div class="form-check" v-for="anwser in question.anwsers" :key="anwser.id">
-      <label class="form-check-label">
-        <input class="form-check-input" type="radio" name="a" value="A"><span v-text="anwser.id"></span>) <span v-text="anwser.title"></span>
+      <label class="custom-control custom-radio">
+        <input id="radio2" name="radioFinished" type="radio" class="custom-control-input">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description" v-text="anwser.id + ') ' + anwser.title"></span>
       </label>
     </div>
   </div>
