@@ -198,15 +198,44 @@
     </div>
 
     <div v-if="currentstep == 3">
-        <h1>Step 3</h1>
+        <h1>House Specifications</h1>
         <div class="form-group">
-            <label class="h4" for="exampleTextarea">Example textarea</label>
-            <textarea class="form-control" id="exampleTextarea" rows="4"></textarea>
+          <label class="h4" for="inputPriceRange">Price range between:</label>
+          <div class="form-inline">
+            <input type="number" class="form-control" id="inputPriceRangeFrom" placeholder="entery from price">
+            -
+            <input type="number" class="form-control" id="inputPriceRangeTo" placeholder="entery to price">
+          </div>
         </div>
         <div class="form-group">
-            <label class="h4" for="exampleInputFile">File input</label>
-            <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-            <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+            <label class="h4" for="selectResidenceType">Residence type:</label>
+            <select class="form-control" id="selectResidenceType">
+              <option value="select">Select</option>
+              <option value="condominium">Condominium</option>
+              <option value="detachedhouse">Detached house</option>
+              <option value="semidetached">Semi-detached</option>
+              <option value="other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+          <label class="h4" for="inputBedroomNumber">Number of bedrooms:</label>
+          <input type="number" class="form-control" id="inputBedroomNumber" placeholder="number of bedrooms">
+        </div>
+        <div class="form-group">
+          <label class="h4" for="inputBathroomNumber">Number of bathrooms:</label>
+          <input type="number" class="form-control" id="inputBathroomNumber" placeholder="number of bathrooms">
+        </div>
+        <div class="form-group">
+          <label class="h4" for="inputParkingNumber">Parking lot:</label>
+          <input type="number" class="form-control" id="inputParkingNumber" placeholder="number of parking lot">
+        </div>
+        <div class="form-group">
+            <label class="h4" for="inputHouseCity">City:</label>
+            <input type="text" class="form-control" id="inputHouseCity">
+        </div>
+        <div class="form-group">
+            <label class="h4" for="inputHouseNeighbourhood">Nerghbourhood:</label>
+            <input type="text" class="form-control" id="inputHouseNeighbourhood">
         </div>
     </div>
 
