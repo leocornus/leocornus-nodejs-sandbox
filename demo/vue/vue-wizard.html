@@ -283,8 +283,8 @@
 
 <script type="x-template" id="group-questions-template">
   <div>
-  <h3><span v-text="group.id"></span>) <span v-text="group.title"></span></h3>
-  <question-anwsers v-for="question in group.questions" 
+  <h3 v-text="group.id + ') ' + group.title">Group Title</h3>
+  <question-anwsers v-for="question in group.questions"
                     :question="question" :key="question.id">
   </question-anwsers>
   </div>
@@ -292,7 +292,8 @@
 
 <script type="x-template" id="question-anwsers-template">
   <div class="form-group">
-    <label class="h4" for="questionNeighbourhood"><span v-text="question.id"></span>) <span v-text="question.title"></span>:</label>
+    <label class="h4" for="questionNeighbourhood"
+           v-text="question.id + ') ' + question.title + ':'">Question Title</label>
     <div class="form-check" v-for="anwser in question.anwsers" :key="anwser.id">
       <label class="custom-control custom-radio">
         <input id="radio2" name="radioFinished" type="radio" class="custom-control-input">
