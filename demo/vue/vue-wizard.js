@@ -71,7 +71,6 @@ Vue.component("step", {
 
 /**
  * define the componet for group of questions.
- *******
  * NOTE: A component can ONLY have one root HTML element!
  */
 Vue.component("group-questions", {
@@ -162,6 +161,120 @@ new Vue({
                   {
                     id: 'C',
                     title: 'I know pretty well what to expect'
+                  }
+                ]
+              },
+              {
+                id: 3,
+                title: "Have you decided what would be the number one objective for wanting to buy?",
+                anwsers: [
+                  {
+                    id: 'A',
+                    title: 'Starting to think about it'
+                  },
+                  {
+                    id: 'B',
+                    title: 'I have multiple reasons for buying'
+                  },
+                  {
+                    id: 'C',
+                    title: 'I know exactly the reason why I want to buy'
+                  }
+                ]
+              },
+              {
+                id: 4,
+                title: "Are you very familiar with all of the steps involved in buying real estate?",
+                anwsers: [
+                  {
+                    id: 'A',
+                    title: 'Starting to research'
+                  },
+                  {
+                    id: 'B',
+                    title: 'Somewhat familiar'
+                  },
+                  {
+                    id: 'C',
+                    title: 'I know all of the steps pretty well'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            id: "B",
+            title: "Financial Readiness",
+            questions: [
+              {
+                id: 1,
+                title: "Do you know how much you can afford?",
+                anwsers: [
+                  {
+                    id: 'A',
+                    title: 'Starting to research'
+                  },
+                  {
+                    id: 'B',
+                    title: 'I know approximately how much'
+                  },
+                  {
+                    id: 'C',
+                    title: 'Title C'
+                  }
+                ]
+              },
+              {
+                id: 2,
+                title: "Do you know the average asking price for the home you are looking for?",
+                anwsers: [
+                  {
+                    id: 'A',
+                    title: 'Starting to do research'
+                  },
+                  {
+                    id: 'B',
+                    title: 'More or less aware'
+                  },
+                  {
+                    id: 'C',
+                    title: 'I know pretty well what to expect'
+                  }
+                ]
+              },
+              {
+                id: 3,
+                title: "Have you decided what would be the number one objective for wanting to buy?",
+                anwsers: [
+                  {
+                    id: 'A',
+                    title: 'Starting to think about it'
+                  },
+                  {
+                    id: 'B',
+                    title: 'I have multiple reasons for buying'
+                  },
+                  {
+                    id: 'C',
+                    title: 'I know exactly the reason why I want to buy'
+                  }
+                ]
+              },
+              {
+                id: 4,
+                title: "Are you very familiar with all of the steps involved in buying real estate?",
+                anwsers: [
+                  {
+                    id: 'A',
+                    title: 'Starting to research'
+                  },
+                  {
+                    id: 'B',
+                    title: 'Somewhat familiar'
+                  },
+                  {
+                    id: 'C',
+                    title: 'I know all of the steps pretty well'
                   }
                 ]
               }
