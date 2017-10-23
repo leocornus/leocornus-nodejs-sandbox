@@ -83,17 +83,17 @@ new Vue({
         steps: [
             {
                 id: 1,
-                title: "Position",
+                title: "User Information",
                 icon_class: "fa fa-map-marker"
             },
             {
                 id: 2,
-                title: "Category",
+                title: "House Preference",
                 icon_class: "fa fa-folder-open"
             },
             {
                 id: 3,
-                title: "Send",
+                title: "House Specifications",
                 icon_class: "fa fa-paper-plane"
             }
         ]
