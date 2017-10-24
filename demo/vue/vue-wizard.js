@@ -97,7 +97,7 @@ new Vue({
     data: {
         // initial step.
         // using the computed to set it if this wizard are in the middle.
-        currentstep: 4,
+        currentstep: 1,
 
         steps: [
             {
