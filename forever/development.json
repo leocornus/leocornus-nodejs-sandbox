@@ -11,6 +11,16 @@
     "sourceDir": "/usr/rd/leocornus-nodejs-sandbox"
   },
 
+  // sandbox development app 
+  {
+    "uid": "dev-ar",
+    "append": true,
+    "watch": true,
+    "watchDirectory": "/usr/rd/leocornus-nodejs-sandbox/demo/vue",
+    "script": "test/express/ar.js",
+    "sourceDir": "/usr/rd/leocornus-nodejs-sandbox"
+  },
+
   // wikistrap development application
   {
     "uid": "dev-wikistrap",
