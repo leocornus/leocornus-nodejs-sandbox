@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- viewport is important for responsive view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Vue Wizard Demo Page</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+  <link rel="stylesheet" href="vue-wizard.css">
+
+  <!-- load Vue.js development version -->
+  <script src="https://unpkg.com/vue"></script>
+
+  <style>
+    /* Show it is fixed to the top */
+    body {
+      /*min-height: 75rem;*/
+      padding-top: 4.5rem;
+    }
+  </style>
+
+</head>
+
+<body>
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">AgentReva Registration</a>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form class="form-inline mt-2 mt-md-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="container">
+  <div id="app">
+    <step-navigation :steps="steps" :currentstep="currentstep">
+    </step-navigation>
+
+    <div v-if="currentstep == 1">
+        <h2>User Details</h2>
+        <div class="form-group">
+            <label class="h4" class="h4" for="inputFirstName">First name:</label>
+            <input type="text" class="form-control" id="inputFirstName" placeholder="Enter first name">
+        </div>
+        <div class="form-group">
+            <label class="h4" for="inputLastName">Last name:</label>
+            <input type="text" class="form-control" id="inputLastName" placeholder="Enter last name">
+        </div>
+        <div class="form-group">
+            <label class="h4" for="inputEmail">Email address:</label>
+            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else. Your email address will by your username.</small>
+        </div>
+        <div class="form-group">
+            <label class="h4" for="inputPassword">Password:</label>
+            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label class="h4" for="inputCellphone">Cellphone:</label>
+            <input type="tel" class="form-control" id="inputCellphone" placeholder="Enter Cellphone">
+        </div>
+        <div class="form-group">
+            <label class="h4" for="inputCity">City:</label>
+            <input type="text" class="form-control" id="inputCity" placeholder="Enter city">
+        </div>
+        <div class="form-group">
+            <label class="h4" for="inputAgeGroup">Age Group:</label>
+            <select class="form-control" id="inputAgeGroup">
+              <option value="Below 25">Below 25</option>
+              <option value="25-29">25-29</option>
+              <option value="30-34">30-34</option>
+              <option value="35-39">35-39</option>
+              <option value="40-44">40-44</option>
+              <option value="45 above">45 above</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="h4" for="inputUserCategory">Are you?:</label>
+            <select class="form-control" id="inputUserCategory">
+              <option value="a">First time buyer</option>
+              <option value="b">Bought house before</option>
+              <option value="c">Just evaluating this service</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="h4" for="inputFamilyStatus">Family status:</label>
+            <select class="form-control" id="inputFamilyStatus">
+              <option value="Single">Single (no kids)</option>
+              <option value="couple">Couple (no kids)</option>
+              <option value="yonungkids">Family with young kids</option>      
+              <option value="youth">Family with youth</option>
+              <option value="old">Older family</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="h4" for="inputBuyingStage">Where are you in byuing stage?:</label>
+            <select class="form-control" id="inputBuyingStage">
+              <option value="A">Initial stage - researching</option>
+              <option value="B">Qualifying and preparing</option>
+              <option value="C">Actively shopping</option>
+              <option value="D">Just evaluating this service</option>
+            </select>
+        </div>
+    </div>
+
+    <div v-if="currentstep == 2">
+        <h2>User's house preferences</h2>
+        <div class="form-group">
+          <label class="h4" for="checkboxBuyingDecision">Which of the following are top factor in your buying decision?:</label>
+          <div class="form-check">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">proximity to work</span>
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">proximity to transportation</span>
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">proximity to entertainment district</span>
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">proximity to good schools</span>
+            </label>
+          </div>
+          <div class="form-check">
+            <label class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">proximity to health care</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="h4" for="radioNewHouse">Are you looking for new house or resale?:</label>
+
+          <div class="form-check">
+            <label class="custom-control custom-radio">
+              <input id="radio1" name="radioNewHouse" type="radio" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">New House</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input id="radio2" name="radioNewHouse" type="radio" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Re-sale</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="h4" for="radioFinished">Fully finished or upgradeable?:</label>
+
+          <div class="form-check">
+            <label class="custom-control custom-radio">
+              <input id="radio1" name="radioFinished" type="radio" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Fully finished</span>
+            </label>
+            <label class="custom-control custom-radio">
+              <input id="radio2" name="radioFinished" type="radio" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Upgradeable</span>
+            </label>
+          </div>
+        </div>
+    </div>
+
+    <div v-if="currentstep == 3">
+        <h2>House Specifications</h2>
+        <div class="form-group">
+          <label class="h4" for="inputPriceRange">Price range between:</label>
+          <div class="form-inline">
+            <input type="number" class="form-control" id="inputPriceRangeFrom" placeholder="entery from price">
+            -
+            <input type="number" class="form-control" id="inputPriceRangeTo" placeholder="entery to price">
+          </div>
+        </div>
+        <div class="form-group">
+            <label class="h4" for="selectResidenceType">Residence type:</label>
+            <select class="form-control" id="selectResidenceType">
+              <option value="select">Select</option>
+              <option value="condominium">Condominium</option>
+              <option value="detachedhouse">Detached house</option>
+              <option value="semidetached">Semi-detached</option>
+              <option value="other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+          <label class="h4" for="inputBedroomNumber">Number of bedrooms:</label>
+          <input type="number" class="form-control" id="inputBedroomNumber" placeholder="number of bedrooms">
+        </div>
+        <div class="form-group">
+          <label class="h4" for="inputBathroomNumber">Number of bathrooms:</label>
+          <input type="number" class="form-control" id="inputBathroomNumber" placeholder="number of bathrooms">
+        </div>
+        <div class="form-group">
+          <label class="h4" for="inputParkingNumber">Parking lot:</label>
+          <input type="number" class="form-control" id="inputParkingNumber" placeholder="number of parking lot">
+        </div>
+        <div class="form-group">
+            <label class="h4" for="inputHouseCity">City:</label>
+            <input type="text" class="form-control" id="inputHouseCity">
+        </div>
+        <div class="form-group">
+            <label class="h4" for="inputHouseNeighbourhood">Neighbourhood:</label>
+            <input type="text" class="form-control" id="inputHouseNeighbourhood">
+        </div>
+    </div>
+
+    <div v-if="currentstep == 4">
+        <h2>User Readiness</h2>
+        <group-questions v-for="group in groupQuestions"
+                         :group="group" :key="group.id">
+        </group-questions>
+    </div>
+
+    <step v-for="step in steps" :currentstep="currentstep" :key="step.id" :step="step" :stepcount="steps.length" @step-change="stepChanged">
+    </step>
+
+  </div>
+</div>
+
+<!-- templates for components -->
+<script type="x-template" id="step-navigation-template">
+    <ol class="step-indicator">
+        <li v-for="step in steps" is="step-navigation-step" :key="step.id" :step="step" :currentstep="currentstep">
+        </li>
+    </ol>
+</script>
+
+<script type="x-template" id="step-navigation-step-template">
+    <li :class="indicatorclass">
+        <div class="step"><i :class="step.icon_class"></i></div>
+        <div class="caption d-none d-sm-block"><span v-text="step.title"></span></div>
+    </li>
+</script>
+
+<script type="x-template" id="step-template">
+    <div class="step-wrapper" :class="stepWrapperClass">
+        <button class="btn btn-primary" @click="lastStep" v-if="notFirstStep">
+            Back
+        </button>
+        <button class="btn btn-primary" v-if="laststep">
+            Submit
+        </button>
+        <button class="btn btn-primary" v-else @click="nextStep" :disabled="laststep">
+            Next
+        </button>
+    </div>
+</script>
+
+<script type="x-template" id="group-questions-template">
+  <div>
+  <h3 v-text="group.id + ') ' + group.title">Group Title</h3>
+  <question-anwsers v-for="question in group.questions"
+                    :question="question" :key="question.id">
+  </question-anwsers>
+  </div>
+</script>
+
+<script type="x-template" id="question-anwsers-template">
+  <div class="form-group">
+    <label class="h4" for="questionNeighbourhood"
+           v-text="question.id + ') ' + question.title + ':'">Question Title</label>
+    <div class="form-check" v-for="anwser in question.anwsers" :key="anwser.id">
+      <label class="custom-control custom-radio">
+        <input id="radio2" name="radioFinished" type="radio" class="custom-control-input">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description" v-text="anwser.id + ') ' + anwser.title"></span>
+      </label>
+    </div>
+  </div>
+</script>
+
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+<!-- the js file has to be at the bottom. -->
+<script src="vue-wizard.js"></script>
+</body>
+</html>
