@@ -28,6 +28,19 @@ describe('JavaScript String Prototype Testing Specs', function() {
             expect(result).toMatch('purple');
         });
 
+        it('Testing the replace url function', function() {
+            var source = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Bit%27s_moments_036.jpg/375px-Bit%27s_moments_036.jpg";
+            var oldUrl = "https://upload.wikimedia.org/wikipedia/commons";
+            var newUrl = "/images";
+            var result = source.replace(oldUrl, newUrl);
+            // verify
+            expect(result).toMatch("/images/thumb/d/d4/Bit%27s_moments_036.jpg/375px-Bit%27s_moments_036.jpg");
+            var fromPattern = new RegExp("https://upload.wikimedia.org/wikipedia/commons", "g");
+            var result = source.replace(fromPattern, "/newimages");
+            expect(result).toMatch("/newimages/thumb/d/d4/Bit%27s_moments_036.jpg/375px-Bit%27s_moments_036.jpg");
+
+        });
+
         it('Testing the replace all funtion', function() {
 
             var colors = 'Colors list, red, Blue, organge, red';
