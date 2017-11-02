@@ -35,6 +35,7 @@ describe('JavaScript String Prototype Testing Specs', function() {
             var result = source.replace(oldUrl, newUrl);
             // verify
             expect(result).toMatch("/images/thumb/d/d4/Bit%27s_moments_036.jpg/375px-Bit%27s_moments_036.jpg");
+            // the RegExp class will escape the special chars, like /
             var fromPattern = new RegExp("https://upload.wikimedia.org/wikipedia/commons", "g");
             var result = source.replace(fromPattern, "/newimages");
             expect(result).toMatch("/newimages/thumb/d/d4/Bit%27s_moments_036.jpg/375px-Bit%27s_moments_036.jpg");
