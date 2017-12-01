@@ -50,14 +50,14 @@
       <button class="btn btn-outline-primary" type="submit" 
               v-on:click="simpleSearch">Search</button>
     </div>
-    <div>
-      <p>Result List</p>
+    <p>
+      <h3>Result List</h3>
       <ul class="list-group">
-        <li v-for="doc in results">
-          {{doc.title}} - {{doc.url}} - {{doc.desc}}
+        <li class="list-group-item" v-for="(doc, index) in results">
+          {{index + 1}} : {{doc.title}} - {{doc.url}} - {{doc.desc}}
         </li>
       </ul>
-    </div>
+    </p>
   </div>
 </div>
 
