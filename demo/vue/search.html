@@ -45,12 +45,19 @@
 
 <div class="container">
   <div id="search-app">
-        <div class="form-inline">
-            <input type="text" class="form-control" id="inputFirstName" placeholder="Enter first name">
-            <button class="btn btn-outline-primary" type="submit" 
-                    v-on:click="simpleSearch">Search</button>
-        </div>
-
+    <div class="form-inline">
+      <input type="text" class="form-control" id="inputFirstName" placeholder="Enter first name">
+      <button class="btn btn-outline-primary" type="submit" 
+              v-on:click="simpleSearch">Search</button>
+    </div>
+    <div>
+      <p>Result List</p>
+      <ul class="list-group">
+        <li v-for="doc in results">
+          {{doc.title}} - {{doc.url}} - {{doc.desc}}
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 
