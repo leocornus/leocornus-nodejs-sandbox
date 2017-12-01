@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- viewport is important for responsive view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Vue Wizard Demo Page</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+  <link rel="stylesheet" href="vue-wizard.css">
+
+  <!-- load Vue.js development version -->
+  <script src="https://unpkg.com/vue"></script>
+
+  <style>
+    /* Show it is fixed to the top */
+    body {
+      /*min-height: 75rem;*/
+      padding-top: 4.5rem;
+    }
+  </style>
+
+</head>
+
+<body>
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">AgentReva Search</a>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form class="form-inline mt-2 mt-md-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="container">
+  <div id="search-app">
+        <div class="form-inline">
+            <input type="text" class="form-control" id="inputFirstName" placeholder="Enter first name">
+            <button class="btn btn-outline-primary" type="submit" 
+                    v-on:click="simpleSearch">Search</button>
+        </div>
+
+  </div>
+</div>
+
+<!-- templates for components -->
+<script type="x-template" id="step-navigation-template">
+    <ol class="step-indicator">
+        <li v-for="step in steps" is="step-navigation-step" :key="step.id" :step="step" :currentstep="currentstep">
+        </li>
+    </ol>
+</script>
+
+<script type="x-template" id="step-navigation-step-template">
+    <li :class="indicatorclass">
+        <div class="step"><i :class="step.icon_class"></i></div>
+        <div class="caption d-none d-sm-block"><span v-text="step.title"></span></div>
+    </li>
+</script>
+
+<script type="x-template" id="step-template">
+    <div class="step-wrapper" :class="stepWrapperClass">
+        <button class="btn btn-primary" @click="lastStep" v-if="notFirstStep">
+            Back
+        </button>
+        <button class="btn btn-primary" v-if="laststep">
+            Submit
+        </button>
+        <button class="btn btn-primary" v-else @click="nextStep" :disabled="laststep">
+            Next
+        </button>
+    </div>
+</script>
+
+<script type="x-template" id="group-questions-template">
+  <div>
+  <h3 v-text="group.id + ') ' + group.title">Group Title</h3>
+  <question-anwsers v-for="question in group.questions"
+                    :question="question" :key="question.id">
+  </question-anwsers>
+  </div>
+</script>
+
+<script type="x-template" id="question-anwsers-template">
+  <div class="form-group">
+    <label class="h4" for="questionNeighbourhood"
+           v-text="question.id + ') ' + question.title + ':'">Question Title</label>
+    <div class="form-check" v-for="anwser in question.anwsers" :key="anwser.id">
+      <label class="custom-control custom-radio">
+        <input id="radio2" name="radioFinished" type="radio" class="custom-control-input">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description" v-text="anwser.id + ') ' + anwser.title"></span>
+      </label>
+    </div>
+  </div>
+</script>
+
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+<!-- the js file has to be at the bottom. -->
+<script src="search.js"></script>
+</body>
+</html>
