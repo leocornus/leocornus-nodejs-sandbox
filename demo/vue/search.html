@@ -56,7 +56,7 @@
       <h3>Result List, total {{totalHits}}</h3>
       <ul class="list-group">
         <li class="list-group-item" v-for="(doc, index) in results">
-          {{index + 1}} : {{doc.fields['.id']}} - {{doc.fields.title}} - {{doc.fields.description}}
+          {{index + 1}} : {{doc.fields['.id'][0]}} - {{doc.fields.title[0]}} - {{doc.fields.description[0]}}
         </li>
       </ul>
     </p>

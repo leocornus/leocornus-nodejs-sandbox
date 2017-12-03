@@ -13,13 +13,13 @@ var app = new Vue({
           '.id': '123',
           title: 'title one',
           url: 'http://example.com/one',
-          desc: 'description one'
+          description: 'description one'
         }},
         {fields: {
           '.id': 'abc',
           title: 'title two',
           url: 'http://example.com/two',
-          desc: 'description two'
+          description: 'description two'
         }}
       ]
     },
