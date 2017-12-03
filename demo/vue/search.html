@@ -46,15 +46,17 @@
 <div class="container">
   <div id="search-app">
     <div class="form-inline">
-      <input type="text" class="form-control" id="inputFirstName" placeholder="Enter first name">
+      <input type="text" class="form-control" id="inputFirstName" 
+             v-model="query"
+             placeholder="Enter first name">
       <button class="btn btn-outline-primary" type="submit" 
               v-on:click="simpleSearch">Search</button>
     </div>
     <p>
-      <h3>Result List</h3>
+      <h3>Result List, total {{totalHits}}</h3>
       <ul class="list-group">
         <li class="list-group-item" v-for="(doc, index) in results">
-          {{index + 1}} : {{doc.title}} - {{doc.url}} - {{doc.desc}}
+          {{index + 1}} : {{doc.fields['.id']}} - {{doc.fields.title}} - {{doc.fields.description}}
         </li>
       </ul>
     </p>
