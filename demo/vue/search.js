@@ -35,13 +35,19 @@ var app = new Vue({
             self = this;
             console.log('I am in...');
 
-            axios.get('https://dev-attivio.sites.leocorn.com/rest/searchApi/simpleCgi',
+            //axios.get('https://dev-attivio.sites.leocorn.com/rest/searchApi/simpleCgi',
+            //{
+            //  params: {
+            //    q: this.query,
+            //    hits:20,
+            //    offset: 0
+            //  }
+            //})
+            axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
             {
-              params: {
-                q: this.query,
-                hits:20,
+                query: this.query,
+                rows:20,
                 offset: 0
-              }
             })
             .then(function(response) {
                 console.log(JSON.stringify(response.data.documents[0]));
