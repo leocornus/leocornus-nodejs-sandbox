@@ -50,10 +50,12 @@ var app = new Vue({
                 offset: 0
             })
             .then(function(response) {
-                console.log(JSON.stringify(response.data.documents[0]));
-                console.log(response.data.documents[0].fields['title']);
                 self.totalHits = response.data.totalHits;
                 self.results = response.data.documents;
+                if(self.totalHits > 0) {
+                    console.log(JSON.stringify(response.data.documents[0]));
+                    console.log(response.data.documents[0].fields['title']);
+                }
             })
             .catch(function(error) {
               console.log(error);
