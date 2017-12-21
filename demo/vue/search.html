@@ -48,6 +48,7 @@
     <div class="form-inline">
       <input type="text" class="form-control" id="inputFirstName" 
              v-model="query"
+             v-on:keyup.enter="simpleSearch"
              placeholder="Enter first name">
       <button class="btn btn-outline-primary" type="submit" 
               v-on:click="simpleSearch">Search</button>
