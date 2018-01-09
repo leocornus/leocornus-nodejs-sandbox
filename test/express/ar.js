@@ -6,7 +6,7 @@ var app = express();
 
 //load static files.
 app.use('/', express.static('demo/vue'));
-//app.use('/', serveIndex('demo/vue'));
+app.use('/', serveIndex('demo/vue'));
 app.use('/bower_components', express.static('bower_components'));
 // hello world simple get.
 app.get('/hello', function(req, res) {
