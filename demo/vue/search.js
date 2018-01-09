@@ -8,20 +8,7 @@ var app = new Vue({
     data: {
       query: '*',
       totalHits: 0,
-      results: [
-        {fields: { 
-          '.id': '123',
-          title: 'title one',
-          url: 'http://example.com/one',
-          description: 'description one'
-        }},
-        {fields: {
-          '.id': 'abc',
-          title: 'title two',
-          url: 'http://example.com/two',
-          description: 'description two'
-        }}
-      ]
+      results: []
     },
 
     computed: {
@@ -43,7 +30,8 @@ var app = new Vue({
             //    offset: 0
             //  }
             //})
-            axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
+            //axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
+            axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
             {
                 query: this.query,
                 rows:20,
