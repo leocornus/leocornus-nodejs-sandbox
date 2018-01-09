@@ -45,8 +45,8 @@ var app = new Vue({
                 axios.post(self.baseUrl + '/delete/' + self.sessionId,
                   {
                       query: self.query,
-                      queryLanguage: "advanced",
-                      queryInitWorkflow: "queryInit"
+                      //queryLanguage: "advanced",
+                      //queryInitWorkflow: "queryInit"
                   }
                 )
                 .then(function(response) {
