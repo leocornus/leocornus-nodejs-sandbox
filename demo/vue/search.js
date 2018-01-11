@@ -34,8 +34,9 @@ var app = new Vue({
             axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
             {
                 query: this.query,
-                rows:20,
-                offset: 0
+                rows:50,
+                offset: 0,
+                sort: ["avgScore:DESC"]
             })
             .then(function(response) {
                 self.totalHits = response.data.totalHits;
