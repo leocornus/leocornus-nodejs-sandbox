@@ -30,13 +30,22 @@ var app = new Vue({
             //    offset: 0
             //  }
             //})
-            //axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
-            axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
+            axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
+            //axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
             {
                 query: this.query,
+                queryLanguage: "advanced",
+                realm: "test",
+                username: "sean.chen@leocorn.com",
                 rows:50,
                 offset: 0,
-                sort: ["avgScore:DESC"]
+                facetFilters: [
+                  { "name" : "facetName", 
+                    "label" : "Bucket Display Value", 
+                    "filter" : "fieldName:FACET(bucketValue)" 
+                  }
+                ],
+                sort: ["title:ASC"]
             })
             .then(function(response) {
                 self.totalHits = response.data.totalHits;
