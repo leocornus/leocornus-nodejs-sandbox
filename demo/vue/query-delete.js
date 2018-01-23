@@ -42,7 +42,7 @@ var app = new Vue({
                 console.log(response);
                 self.sessionId = response.data;
                 // try to do delet by query.
-                axios.post(self.baseUrl + '/delete/' + self.sessionId,
+                axios.post(self.baseUrl + '/deleteByQuery/' + self.sessionId,
                   {
                       query: self.query,
                       //queryLanguage: "advanced",
@@ -51,6 +51,11 @@ var app = new Vue({
                 )
                 .then(function(response) {
                   console.log(response);
+                  axios.get(self.baseUrl + '/commit/' + self.sessionId)
+                  .then(function(response) {
+                    console.log('commit --->');
+                    console.log(response);
+                  });
                 })
                 .catch(function(error) {
                   console.log(error);
