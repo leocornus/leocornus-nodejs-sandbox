@@ -67,14 +67,22 @@ var app = new Vue({
  */
 Vue.component("listing-details", {
     // we will use the html blok with the id selector.
-    template: "#table-listing-details",
+    template: "#accordion-listing-details",
 
     // the doc will have all details and a index field.
     props: ["doc", "index"],
 
     computed: {
         listingID() {
-            return this.doc.fields['.id'][0];
+            return this.doc.fields['.id'][0].replace(/[@\.]/g, '');
+        },
+
+        collapseID() {
+            return "collapse" + this.doc.fields['.id'][0].replace(/[@\.]/g, '');
+        },
+
+        targetCollapseID() {
+            return "#collapse" + this.doc.fields['.id'][0].replace(/[@\.]/g, '');
         },
 
         caption() {
