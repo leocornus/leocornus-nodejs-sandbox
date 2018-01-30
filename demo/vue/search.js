@@ -79,10 +79,17 @@ Vue.component("listing-details", {
 
         caption() {
             var table = this.doc.fields['table'][0];
+            var caption = this.doc.fields['.id'][0];
             switch(table) {
               case 'xmldata':
-                return this.doc.fields['.id'][0] + ' - ' +
-                    this.doc.fields.title[0];
+                return caption + ' - ' +
+                    this.doc.fields.title[0] + ' -- ' +
+                    this.doc.fields.avgScore[0];
+              case 'userprefs':
+                return caption + ' - ' +
+                    this.doc.fields.useremail[0];
+              default:
+                return caption;
             }
         }
     }
