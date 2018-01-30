@@ -6,7 +6,7 @@ var app = new Vue({
     el: "#search-app",
 
     data: {
-      query: '*',
+      query: '*:*',
       totalHits: 0,
       results: []
     },
@@ -60,4 +60,15 @@ var app = new Vue({
             });
         }
     }
+});
+
+/**
+ * listing details template.
+ */
+Vue.component("listing-details", {
+    // we will use the html blok with the id selector.
+    template: "#template-listing-details",
+
+    // the doc will have all details and a index field.
+    props: ["doc", "index"],
 });

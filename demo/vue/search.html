@@ -56,9 +56,8 @@
     <p>
       <h3>Result List, total {{totalHits}}</h3>
       <ul class="list-group">
-        <li class="list-group-item" v-for="(doc, index) in results">
-          {{index + 1}} : {{doc.fields.avgScore[0]}} -- {{doc.fields.list[0]}} - {{doc.fields['.id'][0]}} - {{doc.fields.title[0]}} - {{doc.fields.description[0]}}
-        </li>
+        <listing-details v-for="(doc, index) in results" :doc="doc" :key="index" :index="index">
+        </listing-details>
       </ul>
     </p>
   </div>
@@ -69,11 +68,10 @@
 <!-- ==================================================== -->
 
 <!-- template to show details for each listing, the result doc -->
-<script type="x-template" id="listing-detail">
-    <ol class="step-indicator">
-        <li v-for="step in steps" is="step-navigation-step" :key="step.id" :step="step" :currentstep="currentstep">
-        </li>
-    </ol>
+<script type="x-template" id="template-listing-details">
+<li class="list-group-item">
+  {{index + 1}} : {{doc.fields.avgScore[0]}} -- {{doc.fields.list[0]}} - {{doc.fields['.id'][0]}} - {{doc.fields.title[0]}} - {{doc.fields.description[0]}}
+</li>
 </script>
 
 <script type="x-template" id="step-navigation-step-template">
