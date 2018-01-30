@@ -6,7 +6,7 @@ var app = new Vue({
     el: "#query-app",
 
     data: {
-      baseUrl: 'https://dev-attivio.sites.leocorn.com/rest/ingestApi',
+      baseUrl: 'https://dev-acis-attivio.sites.leocorn.com/rest/ingestApi',
       query: 'id:abc',
       sessionId: 'abc',
       totalHits: 0,

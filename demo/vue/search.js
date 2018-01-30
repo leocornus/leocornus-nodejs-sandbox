@@ -30,13 +30,13 @@ var app = new Vue({
             //    offset: 0
             //  }
             //})
-            axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
-            //axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
+            //axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
+            axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
             {
                 workflow: "customsearch",
                 query: this.query,
                 queryLanguage: "advanced",
-                realm: "sean.chen@leocorn.com",
+                realm: "sean.chen",
                 username: "sean.chen@leocorn.com",
                 rows:50,
                 offset: 0,
