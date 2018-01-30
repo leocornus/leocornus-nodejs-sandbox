@@ -21,6 +21,19 @@
     "sourceDir": "/usr/rd/leocornus-nodejs-sandbox"
   },
 
+  // UTS application
+  {
+    "uid": "uts",
+    "append": true,
+    "watch": true,
+    //"watchDirectory": "/usr/rd/wikistrap.js/demo",
+    "watchDirectory": "/usr/rd/leocornus.social/projects/uts/html",
+    //"script": "test/express/app-uts.js",
+    "script": "apps/uts.js",
+    //"sourceDir": "/usr/rd/wikistrap.js"
+    "sourceDir": "/usr/rd/leocornus.social/projects/uts"
+  },
+
   // wikistrap development application
   {
     "uid": "dev-wikistrap",

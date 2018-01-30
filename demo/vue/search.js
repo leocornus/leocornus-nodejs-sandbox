@@ -71,4 +71,10 @@ Vue.component("listing-details", {
 
     // the doc will have all details and a index field.
     props: ["doc", "index"],
+
+    computed: {
+        listingID() {
+            return this.doc.fields['.id'][0];
+        }
+    }
 });

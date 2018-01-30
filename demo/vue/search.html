@@ -70,7 +70,12 @@
 <!-- template to show details for each listing, the result doc -->
 <script type="x-template" id="template-listing-details">
 <li class="list-group-item">
-  {{index + 1}} : {{doc.fields.avgScore[0]}} -- {{doc.fields.list[0]}} - {{doc.fields['.id'][0]}} - {{doc.fields.title[0]}} - {{doc.fields.description[0]}}
+  <div class="card" v-for="fieldName in Object.keys(doc.fields)" :fieldName="fieldName">
+    <div class="card-body">
+      <h5 class="card-title">{{fieldName}}</h5>
+      <p class="card-text">{{doc.fields[fieldName][0]}}</p>
+    </div>
+  </div>
 </li>
 </script>
 
