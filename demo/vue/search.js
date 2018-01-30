@@ -75,6 +75,15 @@ Vue.component("listing-details", {
     computed: {
         listingID() {
             return this.doc.fields['.id'][0];
+        },
+
+        caption() {
+            var table = this.doc.fields['table'][0];
+            switch(table) {
+              case 'xmldata':
+                return this.doc.fields['.id'][0] + ' - ' +
+                    this.doc.fields.title[0];
+            }
         }
     }
 });
