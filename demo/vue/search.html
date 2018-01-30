@@ -68,7 +68,7 @@
 <!-- ==================================================== -->
 
 <!-- template to show details for each listing, the result doc -->
-<script type="x-template" id="template-listing-details">
+<script type="x-template" id="card-listing-details">
 <li class="list-group-item">
   <div class="card" v-for="fieldName in Object.keys(doc.fields)" :fieldName="fieldName">
     <div class="card-body">
@@ -76,6 +76,25 @@
       <p class="card-text">{{doc.fields[fieldName][0]}}</p>
     </div>
   </div>
+</li>
+</script>
+
+<script type="x-template" id="table-listing-details">
+<li class="list-group-item">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col" width="88px">Field</th>
+      <th scope="col">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="fieldName in Object.keys(doc.fields)" :fieldName="fieldName">
+      <td>{{fieldName}}</td>
+      <td>{{doc.fields[fieldName][0]}}</td>
+    </tr>
+  </tbody>
+</table>
 </li>
 </script>
 

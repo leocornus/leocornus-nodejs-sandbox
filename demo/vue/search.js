@@ -67,7 +67,7 @@ var app = new Vue({
  */
 Vue.component("listing-details", {
     // we will use the html blok with the id selector.
-    template: "#template-listing-details",
+    template: "#table-listing-details",
 
     // the doc will have all details and a index field.
     props: ["doc", "index"],
