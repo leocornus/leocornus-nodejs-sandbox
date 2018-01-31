@@ -12,8 +12,14 @@ var app = new Vue({
     },
 
     computed: {
+      // calculate result summary.
       resultSummary: function() {
           return "Found " + this.totalHits + " in total";
+      },
+
+      // produce the csv format.
+      resultsInCSV: function() {
+          return "TODO: result list in CSV format!";
       }
     },
 
@@ -100,5 +106,39 @@ Vue.component("listing-details", {
                 return caption;
             }
         }
+    }
+});
+
+/**
+ * result list in csv format.
+ */
+Vue.component("results-list", {
+
+    template: "#accordion-results-list",
+
+    props: ["docs"],
+
+    computed: {
+
+      docsListCSV() {
+
+          if(!this.docs) {
+
+            return '--';
+          }
+
+          var theList = [];
+          for(var doc in this.docs) {
+            console.log(doc);
+            var fields = [];
+            for(var fieldName in doc.fields) {
+              console.log(fieldName);
+              fields.push(doc.fields[fieldName][0]);
+            }
+            theList.push(fields.join(","));
+          }
+
+          return theList.join("\\n");
+      }
     }
 });
