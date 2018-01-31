@@ -120,25 +120,29 @@ Vue.component("results-list", {
 
     computed: {
 
+      // show the list of docs in JSON format.
+      docsListJSON() {
+          return JSON.stringify(this.docs, null, '  ');
+      },
+
       docsListCSV() {
 
           if(!this.docs) {
-
             return '--';
           }
 
           var theList = [];
-          for(var doc in this.docs) {
-            console.log(doc);
+          this.docs.forEach(function(doc) {
+            //console.log(doc);
             var fields = [];
             for(var fieldName in doc.fields) {
-              console.log(fieldName);
+              //console.log(fieldName);
               fields.push(doc.fields[fieldName][0]);
             }
             theList.push(fields.join(","));
-          }
+          });
 
-          return theList.join("\\n");
+          return theList.join("\n");
       }
     }
 });
