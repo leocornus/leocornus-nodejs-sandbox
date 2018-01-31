@@ -72,6 +72,8 @@ Vue.component("results-list", {
                   // do nothing.
                 } else if(field === ".zone") {
                   // do nothing.
+                } else if(field === "table") {
+                  // do nothing.
                 } else {
                   fields.push(field);
                 }
@@ -85,6 +87,8 @@ Vue.component("results-list", {
               if(fieldName === ".zone") {
                 continue;
               } else if(fieldName === ".score") {
+                continue;
+              } else if(fieldName === "table") {
                 continue;
               }
               fields.push(doc.fields[fieldName][0]);
