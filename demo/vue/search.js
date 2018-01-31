@@ -62,9 +62,23 @@ Vue.component("results-list", {
           }
 
           var theList = [];
-          this.docs.forEach(function(doc) {
+          this.docs.forEach(function(doc, index) {
             //console.log(doc);
             var fields = [];
+            if(index === 0) {
+              // the first doc, we will get all keys.
+              Object.keys(doc.fields).forEach(function(field) {
+                if(field === ".score") {
+                  // do nothing.
+                } else if(field === ".zone") {
+                  // do nothing.
+                } else {
+                  fields.push(field);
+                }
+              });
+              theList.push(fields.join(","));
+              fields = [];
+            }
             for(var fieldName in doc.fields) {
               //console.log(fieldName);
               // skip some fields.
