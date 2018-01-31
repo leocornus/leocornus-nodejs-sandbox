@@ -153,8 +153,14 @@
 <div id="collapse-csv-list" class="collapse" aria-labelledby="results-csv" 
      data-parent="#accordion">
   <div class="card-body">
-    <textarea cols="80">{{docsListJSON}}</textarea>
-    <textarea cols="80">{{docsListCSV}}</textarea>
+    <div class="form-group">
+      <label for="jsonFormat">Docs list in JSON format:</label>
+      <textarea class="form-control" id="jsonFormat" rows="3">{{docsListJSON}}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="csvFormat">Docs list in CSV format:</label>
+      <textarea class="form-control" id="csvFormat" rows="3">{{docsListCSV}}</textarea>
+    </div>
   </div>
 </div>
 </div>
