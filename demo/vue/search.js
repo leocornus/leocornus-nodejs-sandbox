@@ -1,74 +1,4 @@
 /**
- * the the Vue application object for the Wizard app.
- */
-var app = new Vue({
-    // HTML element selector.
-    el: "#search-app",
-
-    data: {
-      query: '*:*',
-      totalHits: 0,
-      results: []
-    },
-
-    computed: {
-      // calculate result summary.
-      resultSummary: function() {
-          return "Found " + this.totalHits + " in total";
-      },
-
-      // produce the csv format.
-      resultsInCSV: function() {
-          return "TODO: result list in CSV format!";
-      }
-    },
-
-    methods: {
-        simpleSearch() {
-            self = this;
-            console.log('I am in...');
-
-            //axios.get('https://dev-attivio.sites.leocorn.com/rest/searchApi/simpleCgi',
-            //{
-            //  params: {
-            //    q: this.query,
-            //    hits:20,
-            //    offset: 0
-            //  }
-            //})
-            //axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
-            axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
-            {
-                workflow: "customsearch",
-                query: this.query,
-                queryLanguage: "advanced",
-                realm: "sean.chen",
-                username: "sean.chen@leocorn.com",
-                rows:50,
-                offset: 0,
-                facetFilters: [
-                  { "name" : "bedrooms"
-                  }
-                ],
-                sort: ["title:ASC"]
-            })
-            .then(function(response) {
-                self.totalHits = response.data.totalHits;
-                self.results = response.data.documents;
-                if(self.totalHits > 0) {
-                    console.log('total hits: ' + self.totalHits);
-                    console.log(JSON.stringify(response.data.documents[0]));
-                    console.log(response.data.documents[0].fields['title']);
-                }
-            })
-            .catch(function(error) {
-              console.log(error);
-            });
-        }
-    }
-});
-
-/**
  * listing details template.
  */
 Vue.component("listing-details", {
@@ -144,5 +74,75 @@ Vue.component("results-list", {
 
           return theList.join("\n");
       }
+    }
+});
+
+/**
+ * the the Vue application object for the Wizard app.
+ */
+var app = new Vue({
+    // HTML element selector.
+    el: "#search-app",
+
+    data: {
+      query: '*:*',
+      totalHits: 0,
+      results: []
+    },
+
+    computed: {
+      // calculate result summary.
+      resultSummary: function() {
+          return "Found " + this.totalHits + " in total";
+      },
+
+      // produce the csv format.
+      resultsInCSV: function() {
+          return "TODO: result list in CSV format!";
+      }
+    },
+
+    methods: {
+        simpleSearch() {
+            self = this;
+            console.log('I am in...');
+
+            //axios.get('https://dev-attivio.sites.leocorn.com/rest/searchApi/simpleCgi',
+            //{
+            //  params: {
+            //    q: this.query,
+            //    hits:20,
+            //    offset: 0
+            //  }
+            //})
+            //axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
+            axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
+            {
+                workflow: "customsearch",
+                query: this.query,
+                queryLanguage: "advanced",
+                realm: "sean.chen",
+                username: "sean.chen@leocorn.com",
+                rows:50,
+                offset: 0,
+                facetFilters: [
+                  { "name" : "bedrooms"
+                  }
+                ],
+                sort: ["title:ASC"]
+            })
+            .then(function(response) {
+                self.totalHits = response.data.totalHits;
+                self.results = response.data.documents;
+                if(self.totalHits > 0) {
+                    console.log('total hits: ' + self.totalHits);
+                    console.log(JSON.stringify(response.data.documents[0]));
+                    console.log(response.data.documents[0].fields['title']);
+                }
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
+        }
     }
 });

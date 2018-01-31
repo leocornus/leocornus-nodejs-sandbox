@@ -55,7 +55,7 @@
     </div>
     <p>
       <h3>Result List, total {{totalHits}}</h3>
-      <div class="accordion" v-if="results">
+      <div class="accordion">
         <results-list :docs="results">
         </results-list>
         <listing-details v-for="(doc, index) in results" :doc="doc" :key="index" :index="index">
