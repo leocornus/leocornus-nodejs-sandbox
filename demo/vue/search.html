@@ -79,6 +79,8 @@
 </li>
 </script>
 
+<!-- this template will show listing details in a table -->
+<!-- it will show all fields and one row for each field. -->
 <script type="x-template" id="table-listing-details">
 <li class="list-group-item">
 <h5>{{caption}}</h5>
@@ -99,6 +101,7 @@
 </li>
 </script>
 
+<!-- using accordion class to make collapsible for each listing -->
 <script type="x-template" id="accordion-listing-details">
 <div class="card">
 <div class="card-header" :id="listingID">
@@ -132,50 +135,6 @@
   </div>
 </div>
 </div>
-</script>
-
-<script type="x-template" id="step-navigation-step-template">
-    <li :class="indicatorclass">
-        <div class="step"><i :class="step.icon_class"></i></div>
-        <div class="caption d-none d-sm-block"><span v-text="step.title"></span></div>
-    </li>
-</script>
-
-<script type="x-template" id="step-template">
-    <div class="step-wrapper" :class="stepWrapperClass">
-        <button class="btn btn-primary" @click="lastStep" v-if="notFirstStep">
-            Back
-        </button>
-        <button class="btn btn-primary" v-if="laststep">
-            Submit
-        </button>
-        <button class="btn btn-primary" v-else @click="nextStep" :disabled="laststep">
-            Next
-        </button>
-    </div>
-</script>
-
-<script type="x-template" id="group-questions-template">
-  <div>
-  <h3 v-text="group.id + ') ' + group.title">Group Title</h3>
-  <question-anwsers v-for="question in group.questions"
-                    :question="question" :key="question.id">
-  </question-anwsers>
-  </div>
-</script>
-
-<script type="x-template" id="question-anwsers-template">
-  <div class="form-group">
-    <label class="h4" for="questionNeighbourhood"
-           v-text="question.id + ') ' + question.title + ':'">Question Title</label>
-    <div class="form-check" v-for="anwser in question.anwsers" :key="anwser.id">
-      <label class="custom-control custom-radio">
-        <input id="radio2" name="radioFinished" type="radio" class="custom-control-input">
-        <span class="custom-control-indicator"></span>
-        <span class="custom-control-description" v-text="anwser.id + ') ' + anwser.title"></span>
-      </label>
-    </div>
-  </div>
 </script>
 
 <!-- ==================================================== -->
