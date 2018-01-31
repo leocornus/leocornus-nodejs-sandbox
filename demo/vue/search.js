@@ -67,6 +67,12 @@ Vue.component("results-list", {
             var fields = [];
             for(var fieldName in doc.fields) {
               //console.log(fieldName);
+              // skip some fields.
+              if(fieldName === ".zone") {
+                continue;
+              } else if(fieldName === ".score") {
+                continue;
+              }
               fields.push(doc.fields[fieldName][0]);
             }
             theList.push(fields.join(","));
@@ -115,15 +121,15 @@ var app = new Vue({
             //    offset: 0
             //  }
             //})
-            //axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
-            axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
+            axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
+            //axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
             {
                 workflow: "customsearch",
                 query: this.query,
                 queryLanguage: "advanced",
                 realm: "sean.chen",
                 username: "sean.chen@leocorn.com",
-                rows:50,
+                rows:250,
                 offset: 0,
                 facetFilters: [
                   { "name" : "bedrooms"
