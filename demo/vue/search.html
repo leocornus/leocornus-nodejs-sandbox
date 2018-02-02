@@ -45,13 +45,15 @@
 
 <div class="container">
   <div id="search-app">
-    <div class="form-inline">
-      <input type="text" class="form-control" id="inputFirstName" 
+    <div class="input-group">
+      <input type="text" class="form-control" id="inputFirstName"
              v-model="query"
              v-on:keyup.enter="simpleSearch"
-             placeholder="Enter first name">
-      <button class="btn btn-outline-primary" type="submit" 
-              v-on:click="simpleSearch">Search</button>
+             placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-outline-primary" type="submit"
+                v-on:click="simpleSearch">Search!</button>
+      </span>
     </div>
     <p>
       <h3>Result List, total {{totalHits}}</h3>
