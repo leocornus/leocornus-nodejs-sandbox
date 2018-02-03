@@ -111,15 +111,11 @@ var app = new Vue({
     data: {
       query: '*:*',
       totalHits: 0,
-      results: []
+      results: [],
+      resultSummary: "Click search to start.."
     },
 
     computed: {
-      // calculate result summary.
-      resultSummary: function() {
-          return "Found " + this.totalHits + " in total";
-      },
-
       // produce the csv format.
       resultsInCSV: function() {
           return "TODO: result list in CSV format!";
@@ -130,6 +126,8 @@ var app = new Vue({
         simpleSearch() {
             self = this;
             console.log('I am in...');
+            self.resultSummary = "Searching ...";
+            self.results = [];
 
             //axios.get('https://dev-attivio.sites.leocorn.com/rest/searchApi/simpleCgi',
             //{
@@ -158,6 +156,7 @@ var app = new Vue({
             .then(function(response) {
                 self.totalHits = response.data.totalHits;
                 self.results = response.data.documents;
+                self.resultSummary = "Found " + self.totalHits + " docs in total!"
                 if(self.totalHits > 0) {
                     console.log('total hits: ' + self.totalHits);
                     console.log(JSON.stringify(response.data.documents[0]));
@@ -165,6 +164,7 @@ var app = new Vue({
                 }
             })
             .catch(function(error) {
+              self.resultSummary = "Query Error!"
               console.log(error);
             });
         }
