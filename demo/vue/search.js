@@ -111,7 +111,7 @@ var app = new Vue({
     data: {
       query: '*:*',
       totalHits: 0,
-      results: [],
+      results: null,
       resultSummary: "Click search to start.."
     },
 
@@ -127,7 +127,7 @@ var app = new Vue({
             self = this;
             console.log('I am in...');
             self.resultSummary = "Searching ...";
-            self.results = [];
+            self.results = null;
 
             //axios.get('https://dev-attivio.sites.leocorn.com/rest/searchApi/simpleCgi',
             //{
@@ -137,8 +137,8 @@ var app = new Vue({
             //    offset: 0
             //  }
             //})
-            //axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
-            axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
+            axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
+            //axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
             {
                 workflow: "customsearch",
                 query: this.query,
