@@ -127,7 +127,14 @@ var app = new Vue({
             self = this;
             console.log('I am in...');
             self.resultSummary = "Searching ...";
+            // set the results to null for hiding the whole section.
             self.results = null;
+
+            // check the query, 
+            if(!this.query) {
+              // reset the query to search everything!
+              this.query="*:*";
+            }
 
             //axios.get('https://dev-attivio.sites.leocorn.com/rest/searchApi/simpleCgi',
             //{
@@ -137,8 +144,8 @@ var app = new Vue({
             //    offset: 0
             //  }
             //})
-            axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
-            //axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
+            //axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
+            axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
             {
                 workflow: "customsearch",
                 query: this.query,
