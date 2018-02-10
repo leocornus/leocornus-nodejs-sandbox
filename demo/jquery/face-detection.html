@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Testing Face Detection</title>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+
+    <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+
+    <script src='https://rawgit.com/jaysalvat/jquery.facedetection/master/dist/jquery.facedetection.min.js'></script>
+    <script>
+jQuery(document).ready(function($) {
+$('#picture').faceDetection({
+    complete: function (faces) {
+        console.log(faces);
+    }
+});
+});
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header"><h1>Hello Face Detection</h1></div>
+      <span><img id="picture" src="img/faces.jpg"></span>
+      <p><button id="plus">Click Me</button></p>
+    </div>
+  </body>
+</html>
