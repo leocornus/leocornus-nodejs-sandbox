@@ -110,6 +110,8 @@ var app = new Vue({
 
     data: {
       query: '*:*',
+      // the base URL will include the ending /
+      restBaseUrl: "https://localhost/rest/",
       totalHits: 0,
       results: null,
       resultSummary: "Click search to start.."
@@ -144,8 +146,9 @@ var app = new Vue({
             //    offset: 0
             //  }
             //})
-            //axios.post('https://dev-attivio.sites.leocorn.com/rest/searchApi/search',
-            axios.post('https://dev-acis-attivio.sites.leocorn.com/rest/searchApi/search',
+            // the query url should be some thing like this: 
+            // - 'https://one.sites.leocorn.com/rest/searchApi/search',
+            axios.post(this.restBaseUrl + 'searchApi/search',
             {
                 workflow: "customsearch",
                 query: this.query,
