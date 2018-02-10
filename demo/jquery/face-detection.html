@@ -8,11 +8,76 @@
     <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
 
     <script src='https://rawgit.com/jaysalvat/jquery.facedetection/master/dist/jquery.facedetection.min.js'></script>
+<style>
+.demo-video-wrapper,
+.demo-img-wrapper {
+    position: relative;
+    border: 10px solid white;
+    box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.5);
+    background: #000;
+
+    /*transform: rotate(2deg);*/
+    transition: transform 6s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    &:hover {
+        transform: rotate(-1deg);
+    }
+}
+
+    .demo-img-wrapper {
+        margin: 20px auto 30px;
+        max-width: 630px;
+        width: 100%;
+        border: 10px solid white;
+    }
+
+.demo-img {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    transition: 1s;
+    filter: sepia(30%);
+
+    &:hover {
+        filter: sepia(0);
+    }
+}
+
+.face-img,
+.face-video {
+    position: absolute;
+    border: 3px solid #fff;
+    border-radius: 4px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+}
+</style>
     <script>
 jQuery(document).ready(function($) {
+var $img = $('#picture');
+
 $('#picture').faceDetection({
     complete: function (faces) {
         console.log(faces);
+        var marg = 20;
+
+        for (var i = 0; i < faces.length; i++) {
+            var left   = (faces[i].x - marg),
+                top    = (faces[i].y - marg),
+                width  = (faces[i].width  + (marg * 2)),
+                height = (faces[i].height + (marg * 2));
+
+            $('<div />', {
+                'class': 'face-img',
+                'css': {
+                    'left':   left   * faces[i].scaleX + 'px',
+                    'top':    top    * faces[i].scaleY + 'px',
+                    'width':  width  * faces[i].scaleX + 'px',
+                    'height': height * faces[i].scaleY + 'px'
+                }
+            })
+            .appendTo($img.closest('div'));
+        }
     }
 });
 });
@@ -21,7 +86,8 @@ $('#picture').faceDetection({
   <body>
     <div class="container">
       <div class="page-header"><h1>Hello Face Detection</h1></div>
-      <span><img id="picture" src="img/faces.jpg"></span>
+      
+      <div class="demo-img-wrapper"><img class="demo-img" id="picture" src="img/faces.jpg"></div>
       <p><button id="plus">Click Me</button></p>
     </div>
   </body>
