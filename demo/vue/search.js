@@ -138,7 +138,8 @@ var app = new Vue({
               this.query="*:*";
             }
 
-            //axios.get('https://dev-attivio.sites.leocorn.com/rest/searchApi/simpleCgi',
+            // the simple cgi url.
+            //axios.get(this.restBaseUrl + 'searchApi/simpleCgi',
             //{
             //  params: {
             //    q: this.query,
@@ -146,6 +147,7 @@ var app = new Vue({
             //    offset: 0
             //  }
             //})
+
             // the query url should be some thing like this: 
             // - 'https://one.sites.leocorn.com/rest/searchApi/search',
             axios.post(this.restBaseUrl + 'searchApi/search',
