@@ -1,4 +1,26 @@
 /**
+ * facet buckets..
+ */
+Vue.component("facet-buckets", {
+    // The x-template id.
+    template: "#facet-buckets",
+    props: ["facet"],
+
+    // using computed for dynamic data.
+    computed: {
+        // the facet label.
+        facetLabel() {
+            return this.facet.label;
+        },
+
+        // facet buckets.
+        facetBuckets() {
+            return this.facet.buckets;
+        }
+    }
+});
+
+/**
  * listing details template. 
  */
 Vue.component("listing-details", {

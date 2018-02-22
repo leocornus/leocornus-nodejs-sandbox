@@ -67,11 +67,17 @@
     </div>
     <p>
       <h3>{{resultSummary}}</h3>
-      <div class="accordion">
-        <results-list :docs="results" v-if="results">
-        </results-list>
-        <listing-details v-for="(doc, index) in results" :doc="doc" :key="index" :index="index">
-        </listing-details>
+      <div class="row">
+        <div class="col-3">
+          <facet-buckets v-for="(facet, index) in facets" :facet="facet" :key="index">
+          </facet-buckets>
+        </div>
+        <div class="col-9 accordion">
+          <results-list :docs="results" v-if="results">
+          </results-list>
+          <listing-details v-for="(doc, index) in results" :doc="doc" :key="index" :index="index">
+          </listing-details>
+        </div>
       </div>
     </p>
   </div>
@@ -176,6 +182,11 @@
   </div>
 </div>
 </div>
+</script>
+
+<!-- component to show each facet and its buckets -->
+<script type="x-template" id="facet-buckets">
+<h5>{{facetLabel}}</h5>
 </script>
 
 <!-- ==================================================== -->
