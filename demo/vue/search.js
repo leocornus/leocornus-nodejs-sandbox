@@ -1,5 +1,5 @@
 /**
- * listing details template.
+ * listing details template. 
  */
 Vue.component("listing-details", {
     // we will use the html blok with the id selector.
@@ -68,6 +68,7 @@ Vue.component("results-list", {
           return JSON.stringify(this.docs, null, '  ');
       },
 
+      // show the list of docs in CSV format.
       docsListCSV() {
 
           if(!this.docs) {
@@ -126,6 +127,7 @@ var app = new Vue({
       // the base URL will include the ending /
       restBaseUrl: "https://localhost/rest/",
       totalHits: 0,
+      facets: null,
       results: null,
       resultSummary: "Click search to start.."
     },
@@ -173,19 +175,18 @@ var app = new Vue({
                 rows:250,
                 offset: 0,
                 //sort: ["title:ASC"],
-                facetFilters: [
-                  { "name" : "bedrooms"
-                  }
-                ]
+                facets: ["city", "bedrooms"]
             })
             .then(function(response) {
                 self.totalHits = response.data.totalHits;
                 self.results = response.data.documents;
+                self.facets = response.data.facets;
                 self.resultSummary = "Found " + self.totalHits + " docs in total!"
                 if(self.totalHits > 0) {
                     console.log('total hits: ' + self.totalHits);
-                    console.log(JSON.stringify(response.data.documents[0]));
-                    console.log(response.data.documents[0].fields['title']);
+                    console.log(JSON.stringify(self.facets));
+                    //console.log(JSON.stringify(response.data.documents[0]));
+                    //console.log(response.data.documents[0].fields['title']);
                 }
             })
             .catch(function(error) {
