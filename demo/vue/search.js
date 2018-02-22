@@ -3,12 +3,18 @@
  */
 Vue.component("listing-details", {
     // we will use the html blok with the id selector.
+    // the HTML template. 
+    // It should be a script element with type "x-template"
     template: "#accordion-listing-details",
 
     // the doc will have all details and a index field.
     props: ["doc", "index"],
 
     computed: {
+
+        // for all th IDs, we need replace the special char @ with
+        // empty string.
+
         listingID() {
             return this.doc.fields['.id'][0].replace(/[@\.]/g, '');
         },
@@ -21,9 +27,15 @@ Vue.component("listing-details", {
             return "#collapse" + this.doc.fields['.id'][0].replace(/[@\.]/g, '');
         },
 
+        /**
+         * title for each doc.
+         */
         caption() {
+            // we will tweak the caption based on table.
             var table = this.doc.fields['table'][0];
+            // by default, we will using id as the caption.
             var caption = this.doc.fields['.id'][0];
+
             switch(table) {
               case 'xmldata':
                 return caption + ' - ' +
@@ -44,6 +56,7 @@ Vue.component("listing-details", {
  */
 Vue.component("results-list", {
 
+    // the HTML template element id.
     template: "#accordion-results-list",
 
     props: ["docs"],
