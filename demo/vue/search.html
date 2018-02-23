@@ -186,7 +186,20 @@
 
 <!-- component to show each facet and its buckets -->
 <script type="x-template" id="facet-buckets">
-<h5>{{facetLabel}}</h5>
+<div class="card" style="width: 18rem;">
+  <div class="card-header">
+    <h5>{{facetLabel}}</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item d-flex justify-content-between align-items-center"
+        v-for="(bucket, index) in facetBuckets" 
+        :bucket="bucket" :key="index">
+      {{bucket.value}}
+      <span class="badge badge-primary badge-pill">{{bucket.count}}</span>
+    </li>
+  </ul>
+</div>
+
 </script>
 
 <!-- ==================================================== -->
