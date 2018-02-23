@@ -197,7 +197,7 @@ var app = new Vue({
                 rows:250,
                 offset: 0,
                 //sort: ["title:ASC"],
-                facets: ["city", "bedrooms"]
+                facets: ["city", "agentname", "brokername", "bedrooms"]
             })
             .then(function(response) {
                 self.totalHits = response.data.totalHits;
