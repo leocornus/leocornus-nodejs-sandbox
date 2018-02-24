@@ -43,7 +43,7 @@
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
   <div id="search-app">
     <div class="form-group">
     <div class="input-group">
@@ -64,6 +64,9 @@
                v-model="restBaseUrl"
                placeholder="RESTful API base URL https://www.rest.com">
       </div>
+    </div>
+    <div class="card">
+      future forms!
     </div>
     <p>
       <h3>{{resultSummary}}</h3>
@@ -186,9 +189,9 @@
 
 <!-- component to show each facet and its buckets -->
 <script type="x-template" id="facet-buckets">
-<div class="card" style="width: 18rem;">
-  <div class="card-header card-header-inverse card-header-primary">
-    <h5>{{facetLabel}}</h5>
+<div class="card card-success mb-2">
+  <div class="card-header text-white">
+    {{facetLabel}}
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item d-flex justify-content-between align-items-center"
