@@ -179,6 +179,7 @@ var app = new Vue({
             self.resultSummary = "Searching ...";
             // set the results to null for hiding the whole section.
             self.results = null;
+            self.facets = null;
 
             // check the query, 
             if(!this.query) {
