@@ -13,6 +13,17 @@ Vue.component("facet-buckets", {
             return this.facet.label;
         },
 
+        // ids for collapse.
+        facetID() {
+            return this.facet.label.replace(/ /g, '-');
+        },
+        facetCollapseID() {
+            return "collapse" + this.facet.label.replace(/ /g, '-');
+        },
+        facetTargetCollapseID() {
+            return "#collapse" + this.facet.label.replace(/ /g, '-');
+        },
+
         // facet buckets.
         facetBuckets() {
             return this.facet.buckets;
