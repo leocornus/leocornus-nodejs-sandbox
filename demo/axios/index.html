@@ -9,8 +9,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
 
-  <link rel="stylesheet" href="vue-wizard.css">
-
   <!-- load Vue.js development version -->
   <script src="https://unpkg.com/vue"></script>
 
@@ -46,7 +44,7 @@
   </div>
 </nav>
 
-<div class="container"><div class="row">
+<div class="container" id="axios-app"><div class="row">
   <div class="col-sm-3">
   </div>
 
@@ -55,7 +53,9 @@
     <p>play around with axios.js</p>
 
     <h3>Simple GET request</h3>
-    <p>
+    <p>get system metadata
+      <button class="btn btn-outline-primary" @click="getSystemMetadata">System Metadata</button>
+      <textarea v-model="systemMetadata"></textarea>
     </p>
   </div>
 </div></div>
