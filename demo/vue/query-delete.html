@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <!-- viewport is important for responsive view -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Vue Wizard Demo Page</title>
+  <title>Query Demo Page</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
@@ -64,11 +64,10 @@
              placeholder="RESTful API base URL https://www.rest.com">
     </div>
     <p>
-      <h3>Result List, total {{totalHits}}</h3>
-      <h4>Session ID: {{sessionId}}</h3>
+      <h3>Status:</h3>
       <ul class="list-group">
-        <li class="list-group-item" v-for="(doc, index) in results">
-          {{index + 1}} : {{doc.fields['.id'][0]}} - {{doc.fields.title[0]}} - {{doc.fields.description[0]}}
+        <li class="list-group-item" v-for="(msg, index) in messages" :key="index">
+          {{index + 1}} : {{msg}}
         </li>
       </ul>
     </p>

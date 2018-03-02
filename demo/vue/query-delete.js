@@ -10,6 +10,7 @@ var app = new Vue({
       query: 'id:abc',
       sessionId: 'abc',
       totalHits: 0,
+      messages: null,
       results: [
         {fields: { 
           '.id': '123',
@@ -35,13 +36,17 @@ var app = new Vue({
     methods: {
         simpleQuery() {
             self = this;
+            self.messages=[];
             console.log('I am in...');
+            self.messages.push('Geting started');
 
             axios.get(self.baseUrl + '/connect')
             .then(function(response) {
                 console.log(response);
                 self.sessionId = response.data;
+                self.messages.push("get Session ID: " + self.sessionId);
                 // try to do delet by query.
+                self.messages.push("Try to do delete by query");
                 axios.post(self.baseUrl + '/deleteByQuery/' + self.sessionId,
                   {
                       query: self.query,
@@ -51,6 +56,7 @@ var app = new Vue({
                 )
                 .then(function(response) {
                   console.log(response);
+                  self.messages.push(response);
                   axios.get(self.baseUrl + '/commit/' + self.sessionId)
                   .then(function(response) {
                     console.log('commit --->');
