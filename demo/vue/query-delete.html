@@ -45,12 +45,16 @@
 
 <div class="container">
   <div id="query-app">
-    <div class="form-inline">
-      <input type="text" class="form-control" id="inputFirstName" 
+    <div class="form-group">
+    <div class="input-group">
+      <input type="text" class="form-control form-control-lg" id="inputFirstName" 
              v-model="query"
              placeholder="search all">
+      <span class="input-group-btn">
       <button class="btn btn-outline-primary" type="submit" 
               v-on:click="simpleQuery">Query</button>
+      </span>
+    </div>
     </div>
     <p>
       <h3>Result List, total {{totalHits}}</h3>
