@@ -37,7 +37,23 @@ var app = new Vue({
         /**
          * handle delet by query
          */
-        simpleQuery() {
+        deleteByQuery: function() {
+
+            self = this;
+            this.processIngest('deleteByQuery', 
+                {
+                    query: self.query,
+                    //queryLanguage: "advanced",
+                    //queryInitWorkflow: "queryInit"
+                }
+            );
+        },
+
+        /**
+         * the general function to call ingest end point.
+         * it will serve different action end point.
+         */
+        processIngest: function(actionEndPoint, inputPayload) {
             self = this;
             self.messages=[];
             console.log('I am in...');
@@ -50,13 +66,9 @@ var app = new Vue({
                 self.messages.push("get Session ID: " + self.sessionId);
                 // try to do delet by query.
                 self.messages.push("Try to do delete by query");
-                axios.post(self.baseUrl + '/deleteByQuery/' + self.sessionId,
-                  {
-                      query: self.query,
-                      //queryLanguage: "advanced",
-                      //queryInitWorkflow: "queryInit"
-                  }
-                )
+                self.messages.push(inputPayload);
+                axios.post(self.baseUrl + '/' + actionEndPoint + '/' + self.sessionId,
+                           inputPayload)
                 .then(function(response) {
                   console.log(response);
                   self.messages.push(response);
@@ -64,14 +76,13 @@ var app = new Vue({
                   axios.get(self.baseUrl + '/getDocumentsQueued/' + self.sessionId)
                   .then (function(response) {
                     self.messages.push(response.data + ' docs queued!');
-                  });
-
-                  // try to commit.
-                  self.messages.push("Try to commit queued docs!");
-                  axios.get(self.baseUrl + '/commit/' + self.sessionId)
-                  .then(function(response) {
-                    console.log('commit --->');
-                    console.log(response);
+                    // try to commit.
+                    self.messages.push("Try to commit queued docs!");
+                    axios.get(self.baseUrl + '/commit/' + self.sessionId)
+                    .then(function(response) {
+                      console.log('commit --->');
+                      console.log(response);
+                    });
                   });
                 })
                 .catch(function(error) {
