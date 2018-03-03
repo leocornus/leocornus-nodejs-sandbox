@@ -34,6 +34,9 @@ var app = new Vue({
     },
 
     methods: {
+        /**
+         * handle delet by query
+         */
         simpleQuery() {
             self = this;
             self.messages=[];
@@ -57,6 +60,14 @@ var app = new Vue({
                 .then(function(response) {
                   console.log(response);
                   self.messages.push(response);
+                  // check queued docs.
+                  axios.get(self.baseUrl + '/getDocumentsQueued/' + self.sessionId)
+                  .then (function(response) {
+                    self.messages.push(response.data + ' docs queued!');
+                  });
+
+                  // try to commit.
+                  self.messages.push("Try to commit queued docs!");
                   axios.get(self.baseUrl + '/commit/' + self.sessionId)
                   .then(function(response) {
                     console.log('commit --->');
