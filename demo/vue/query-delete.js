@@ -50,6 +50,25 @@ var app = new Vue({
         },
 
         /**
+         * bulk update by query
+         */
+        bulkUpdateByQuery: function() {
+
+            self = this;
+            self.processIngest('bulkUpdateByQuery',
+              {
+                "fields": {
+                  "table" : ["testbulk"],
+                  "schoolpreference" : [1204]
+                },
+                "query": self.query,
+                "queryLanguage" : "advanced",
+                "queryInitWorkflow" : "queryInit"
+              }
+            );
+        },
+
+        /**
          * the general function to call ingest end point.
          * it will serve different action end point.
          */
@@ -81,7 +100,8 @@ var app = new Vue({
                     axios.get(self.baseUrl + '/commit/' + self.sessionId)
                     .then(function(response) {
                       console.log('commit --->');
-                      console.log(response);
+                      //console.log(response);
+                      self.messages.push(response);
                     });
                   });
                 })
