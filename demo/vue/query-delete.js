@@ -102,6 +102,11 @@ var app = new Vue({
                       console.log('commit --->');
                       //console.log(response);
                       self.messages.push(response);
+                      // disconnect.
+                      axios.get(self.baseUrl + '/disconnect/' + self.sessionId)
+                      .then(function(response) {
+                        self.messages.push(response);
+                      });
                     });
                   });
                 })
