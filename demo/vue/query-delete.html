@@ -46,15 +46,25 @@
 <div class="container">
   <div id="query-app">
     <div class="input-group mb-2">
-      <input type="text" class="form-control form-control-lg" id="inputFirstName" 
-             v-model="query"
+      <div class="input-group-prepend">
+        <span id="action-addon" class="input-group-text">Action: </span>
+      </div>
+      <input type="text" class="form-control form-control-lg" id="action" 
+             v-model="actionName"
+             aria-describedby="action-addon"
              placeholder="search all">
       <span class="input-group-btn">
-      <button class="btn btn-outline-primary btn-lg" type="submit" 
-              v-on:click="deleteByQuery">Delete</button>
-      <button class="btn btn-outline-primary btn-lg" type="submit" 
-              v-on:click="bulkUpdateByQuery">Update</button>
+        <button class="btn btn-outline-primary btn-lg" type="submit" 
+                v-on:click="executeIngest">Execute</button>
       </span>
+    </div>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <span id="payload-addon" class="input-group-text">Payload: </span>
+      </div>
+      <textarea class="form-control" aria-label="payload" rows="8"
+                v-model="payload"
+      ></textarea>
     </div>
     <div class="input-group mb-2">
       <div class="input-group-prepend">

@@ -8,6 +8,8 @@ var app = new Vue({
     data: {
       baseUrl: 'https://dev-acis-attivio.sites.leocorn.com/rest/ingestApi',
       query: 'id:abc',
+      actionName: 'getSessionCount',
+      payload: '',
       sessionId: 'abc',
       totalHits: 0,
       messages: null,
@@ -34,6 +36,17 @@ var app = new Vue({
     },
 
     methods: {
+
+        /**
+         * execute ingest
+         */
+        executeIngest: function() {
+
+            // TODO: check action and payload.
+
+            this.processIngest(this.actionName, this.payload);
+        },
+
         /**
          * handle delet by query
          */
