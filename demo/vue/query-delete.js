@@ -44,7 +44,7 @@ var app = new Vue({
 
             // TODO: check action and payload.
 
-            this.processIngest(this.actionName, this.payload);
+            this.processIngest(this.actionName, JSON.parse(this.payload));
         },
 
         /**
