@@ -64,8 +64,14 @@
              v-model="restBaseUrl"
              placeholder="RESTful API base URL https://www.rest.com">
     </div>
-    <div class="card">
-      future forms!
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <span id="facetFields-addon" class="input-group-text">Pick facets, separate by ,: </span>
+      </div>
+      <input type="text" class="form-control" id="facetFields"
+             aria-describedby="facetFields-addon"
+             v-model="facetFields"
+             placeholder="table,agentname,brokername">
     </div>
     <p>
       <h3>{{resultSummary}}</h3>

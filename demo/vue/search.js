@@ -157,6 +157,7 @@ var app = new Vue({
 
     data: {
       query: '*:*',
+      facetFields: "table,city,importdate",
       // the base URL will include the ending /
       restBaseUrl: "https://localhost/rest/",
       totalHits: 0,
@@ -174,6 +175,7 @@ var app = new Vue({
 
     methods: {
         simpleSearch() {
+
             self = this;
             console.log('I am in...');
             self.resultSummary = "Searching ...";
@@ -209,7 +211,8 @@ var app = new Vue({
                 rows:250,
                 offset: 0,
                 //sort: ["title:ASC"],
-                facets: ["city", "agentname", "brokername", "bedrooms"]
+                // facets: ["table", "city", "agentname"],
+                facets: self.facetFields.split(',')
             })
             .then(function(response) {
                 self.totalHits = response.data.totalHits;
@@ -224,7 +227,7 @@ var app = new Vue({
                 }
             })
             .catch(function(error) {
-              self.resultSummary = "Query Error!"
+              self.resultSummary = "Query Error!";
               console.log(error);
             });
         }
