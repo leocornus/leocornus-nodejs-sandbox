@@ -42,9 +42,20 @@ var app = new Vue({
          */
         executeIngest: function() {
 
-            // TODO: check action and payload.
+            var self = this;
 
-            this.processIngest(this.actionName, JSON.parse(this.payload));
+            // get ready the messages area.
+            this.messages=[];
+
+            // TODO: check action and payload.
+            var payload = JSON.parse(this.payload);
+            switch(this.actionName) {
+                case "bulkUpdate":
+                    self.bulkUpdate(payload.query, payload.fields);
+                    break;
+                default:
+                    self.processIngest(this.actionName, payload);
+            }
         },
 
         /**
@@ -67,7 +78,44 @@ var app = new Vue({
          */
         bulkUpdate: function(query, fields) {
 
+            var self = this;
             // execute the query
+            axios.post(this.baseUrl + "/searchApi/search",
+                {
+                  "workflow": "customsearch",
+                  "query": query,
+                  //"fields": [".id"],
+                  "rows": 1000,
+                  "offset": 0
+                }
+            ).then(function(response) {
+                var docs = response.data.documents;
+                self.messages.push("Found " + response.data.totalHits + " docs in total!");
+                self.messages.push(docs);
+
+                var payloadList = [];
+                docs.forEach(function(doc) {
+                    var docId = doc.fields['.id'][0];
+                    // template for each payload.
+                    var docPayload = {
+                        "fields": fields,
+                        "id": docId,
+                        "mode": "ADD",
+                        "permissions" : [ {
+                            "principal" : {
+                                  "name" : "Anonymous",
+                                  "realm" : "Anonymous",
+                                  "type" : "user"
+                            }
+                        } ]
+                    }
+                    payloadList.push(docPayload);
+                });
+
+                self.messages.push(payloadList);
+            }).catch(function(error){
+                self.messages.push(error);
+            });
             // collect all ids
             // prepare the payload for list of documents.
             // process the Ingest.
@@ -100,7 +148,6 @@ var app = new Vue({
          */
         processIngest: function(actionEndPoint, inputPayload) {
             self = this;
-            self.messages=[];
             console.log('I am in...');
             self.messages.push('Geting started');
 
@@ -138,10 +185,12 @@ var app = new Vue({
                 })
                 .catch(function(error) {
                   console.log(error);
+                  self.messages.push(error);
                 });
             })
             .catch(function(error) {
               console.log(error);
+              self.messages.push(error);
             });
         }
     }
