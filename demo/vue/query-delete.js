@@ -85,7 +85,7 @@ var app = new Vue({
                   "workflow": "customsearch",
                   "query": query,
                   //"fields": [".id"],
-                  "rows": 1000,
+                  "rows": 20,
                   "offset": 0
                 }
             ).then(function(response) {
@@ -105,11 +105,17 @@ var app = new Vue({
                 var payloadList = [];
                 docs.forEach(function(doc) {
                     var docId = doc.fields['.id'][0];
+                    var newFields = doc.fields;
+                    // replace the fields.
+                    Object.keys(fields).forEach(function(fieldName) {
+                        newFields[fieldName] = fields[fieldName];
+                    });
                     // template for each payload.
                     var docPayload = {
-                        "fields": fields,
+                        "fields": newFields,
                         "id": docId,
                         "mode": "ADD",
+                        //"mode": "PARTIAL",
                         "permissions" : [ {
                             "principal" : {
                                   "name" : "Anonymous",
