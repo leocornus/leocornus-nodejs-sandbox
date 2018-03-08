@@ -205,11 +205,12 @@ var app = new Vue({
             {
                 workflow: "customsearch",
                 query: this.query,
-                queryLanguage: "advanced",
-                realm: "sean.chen",
-                username: "sean.chen@leocorn.com",
+                //queryLanguage: "advanced",
+                //realm: "sean.chen",
+                //username: "sean.chen@leocorn.com",
                 rows:250,
                 offset: 0,
+                //fields: [".id","title","table","avgScore"],
                 //sort: ["title:ASC"],
                 // facets: ["table", "city", "agentname"],
                 facets: self.facetFields.split(',')
