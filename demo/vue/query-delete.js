@@ -90,9 +90,18 @@ var app = new Vue({
                 }
             ).then(function(response) {
                 var docs = response.data.documents;
-                self.messages.push("Found " + response.data.totalHits + " docs in total!");
-                self.messages.push(docs);
+                var totalDocs = response.data.totalHits;
+                self.messages.push("Found " + totalDocs + " docs in total!");
+                if(totalDocs <= 0) {
+                    return;
+                }
 
+                if(totalDocs < 10) {
+                    self.messages.push(docs);
+                }
+
+                // collect all ids
+                // prepare the payload for list of documents.
                 var payloadList = [];
                 docs.forEach(function(doc) {
                     var docId = doc.fields['.id'][0];
@@ -112,14 +121,15 @@ var app = new Vue({
                     payloadList.push(docPayload);
                 });
 
-                self.messages.push(payloadList);
+                if(totalDocs < 10) {
+                    self.messages.push(payloadList);
+                }
+
+                // execute the ingest.
+                self.processIngest('feedDocuments', payloadList);
             }).catch(function(error){
                 self.messages.push(error);
             });
-            // collect all ids
-            // prepare the payload for list of documents.
-            // process the Ingest.
-            //this.processIngest('feedDocuments', payload);
         },
 
         /**
@@ -176,7 +186,7 @@ var app = new Vue({
                       //console.log(response);
                       self.messages.push(response);
                       // disconnect.
-                      axios.get(self.baseUrl + '/ingestApidisconnect/' + self.sessionId)
+                      axios.get(self.baseUrl + '/ingestApi/disconnect/' + self.sessionId)
                       .then(function(response) {
                         self.messages.push(response);
                       });
