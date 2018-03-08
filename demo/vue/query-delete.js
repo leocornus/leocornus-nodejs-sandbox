@@ -63,7 +63,20 @@ var app = new Vue({
         },
 
         /**
+         * bulk update by using the feedDocuments end point.
+         */
+        bulkUpdate: function(query, fields) {
+
+            // execute the query
+            // collect all ids
+            // prepare the payload for list of documents.
+            // process the Ingest.
+            //this.processIngest('feedDocuments', payload);
+        },
+
+        /**
          * bulk update by query
+         * this end point only works for real time field.
          */
         bulkUpdateByQuery: function() {
 
