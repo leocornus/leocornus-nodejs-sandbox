@@ -7,21 +7,21 @@ node_js:
   - "4.2"
   - "5.1"
 
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - npm install
-  - bower install
+#before_script:
+#  - export DISPLAY=:99.0
+#  - sh -e /etc/init.d/xvfb start
+#  - npm install
+#  - bower install
   # we will use gulp file to load web server too.
   #- npm start > /dev/null &
   #- sleep 1 # let the server start...
 
-script: 
-  - bower install
-  #- npm test
-  - npm run mocha
-  - npm run karma-jasmine
-  - npm run karma-mocha
-  - npm run test-vows
-  - npm run unit-test
+#script: 
+#  - bower install
+#  #- npm test
+#  - npm run mocha
+#  - npm run karma-jasmine
+#  - npm run karma-mocha
+#  - npm run test-vows
+#  - npm run unit-test
   #- npm run gulp wdio-test
