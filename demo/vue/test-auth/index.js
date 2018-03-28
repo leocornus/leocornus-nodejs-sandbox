@@ -1,14 +1,14 @@
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = 'https://dev-agentreva.sites.leocorn.com';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 Vue.use(VueAuthenticate, {
   tokenName: 'access_token',
-  baseUrl: 'http://localhost:4000',
+  baseUrl: 'https://dev-agentreva.sites.leocorn.com',
   storageType: 'cookieStorage',
   providers: {
     // Define OAuth providers config
   }
-})
+});
 
 var router = new VueRouter({
   mode: 'history',
