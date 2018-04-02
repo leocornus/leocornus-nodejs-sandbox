@@ -237,7 +237,8 @@ var app = new Vue({
                 self.totalHits = response.data.totalHits;
                 self.results = response.data.documents;
                 self.facets = response.data.facets;
-                self.stats = self.facets[self.facets.length - 1];
+                self.stats = self.facets[self.facets.length - 1].statistics;
+                console.log("statistics: " + self.stats);
                 self.resultSummary = "Found " + self.totalHits + " docs in total!"
                 if(self.totalHits > 0) {
                     console.log('total hits: ' + self.totalHits);
