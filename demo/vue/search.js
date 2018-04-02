@@ -1,3 +1,13 @@
+
+/**
+ * facet buckets..
+ */
+Vue.component("statistics", {
+    // The x-template id.
+    template: "#statistics",
+    props: ["stats"]
+});
+
 /**
  * facet buckets..
  */
@@ -162,6 +172,7 @@ var app = new Vue({
       restBaseUrl: "https://localhost/rest/",
       totalHits: 0,
       facets: null,
+      stats: null,
       results: null,
       resultSummary: "Click search to start.."
     },
@@ -182,6 +193,7 @@ var app = new Vue({
             // set the results to null for hiding the whole section.
             self.results = null;
             self.facets = null;
+            self.stats = null;
 
             // check the query, 
             if(!this.query) {
@@ -198,6 +210,12 @@ var app = new Vue({
             //    offset: 0
             //  }
             //})
+            if(self.facetFields.includes('statistics')) {
+            } else {
+                // add the statistics on listvalue_i
+                self.facetFields = self.facetFields + 
+                  ",listvalue_i(statistics=true)";
+            }
 
             // the query url should be some thing like this: 
             // - 'https://one.sites.leocorn.com/rest/searchApi/search',
@@ -219,6 +237,7 @@ var app = new Vue({
                 self.totalHits = response.data.totalHits;
                 self.results = response.data.documents;
                 self.facets = response.data.facets;
+                self.stats = self.facets[self.facets.length - 1];
                 self.resultSummary = "Found " + self.totalHits + " docs in total!"
                 if(self.totalHits > 0) {
                     console.log('total hits: ' + self.totalHits);
