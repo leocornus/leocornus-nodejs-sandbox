@@ -82,11 +82,13 @@ Vue.component("listing-details", {
             switch(table) {
               case 'xmldata':
                 return caption + ' - ' +
-                    this.doc.fields.title[0] + ' -- ' +
+                    this.doc.fields.title[0] + ', ' +
+                    this.doc.fields.city[0] + ' -- ' +
                     this.doc.fields.avgScore[0];
               case 'offlisting':
                 return caption + ' - ' +
-                    this.doc.fields.title[0];
+                    this.doc.fields.title[0] + ', ' +
+                    this.doc.fields.city[0];
               case 'userprefs':
                 return caption + ' - ' +
                     this.doc.fields.useremail[0];
