@@ -71,6 +71,7 @@ bar.append("text")
     .attr("fill", "white")
     .attr("x", "3")
     .attr("y", function(d) {return y(d.salesperson) + y.bandwidth() - 5;})
+    .attr("font-size", y.bandwidth() * 3 / 5)
     .text(function(d) {return d.salesperson + ": " + d.sales;});
 
 // add the x Axis
