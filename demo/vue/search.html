@@ -222,8 +222,8 @@
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item list-group-item-info d-flex justify-content-between align-items-center"
-        v-for="(value, key, index) in stats">
-      {{key}} : {{value}}
+        v-for="(item, index) in theStats">
+      {{item.key}} : {{item.value}}
     </li>
   </ul>
 </div>
@@ -237,6 +237,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
 
 <!-- ==================================================== -->
 <!-- the js file has to be at the bottom. -->

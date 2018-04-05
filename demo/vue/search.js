@@ -5,7 +5,30 @@
 Vue.component("statistics", {
     // The x-template id.
     template: "#statistics",
-    props: ["stats"]
+    props: ["stats"],
+
+    computed: {
+        theStats() {
+
+            var self = this;
+            if(self.stats) {
+
+            var format = d3.format(",.2f");
+            var items = [];
+            Object.keys(self.stats).forEach(function(theKey) {
+                var item = {
+                  "key": theKey,
+                  "value": format(self.stats[theKey])
+                }
+                items.push(item);
+            });
+
+            return items;
+            } else {
+                return [];
+            }
+        }
+    }
 });
 
 /**
