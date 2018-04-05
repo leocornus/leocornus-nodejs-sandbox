@@ -13,7 +13,7 @@ var data = [{"salesperson":"Bob","sales":33},{"salesperson":"Robin","sales":12},
 // set the dimensions and margins of the graph
 var margin = {top: 1, right: 1, bottom: 1, left: 1},
     width = 360 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+    height = 400 - margin.top - margin.bottom;
 
 // set up the ranges
 // TODO: what is band? how to understand it?
@@ -48,22 +48,37 @@ x.domain([0, d3.max(data, function(d){ return d.sales; })])
 // the results of the provided function.
 y.domain(data.map(function(d) { return d.salesperson; }));
 
-// append the rectangles for the bar chart
-svg.selectAll()
+var bar = svg.selectAll(".bar")
     .data(data)
-  .enter().append("rect")
-    .attr("class", "bar")
+    .enter().append("g")
+    .attr("class", "bar");
+
+// append the rectangles for the bar chart
+//var barRect = bar.selectAll(".bar-rect")
+//    .data(function(d) {return d;})
+//  .enter().append("rect")
+bar.append("rect")
+    .attr("class", "bar-rect")
     //.attr("x", function(d) { return x(d.sales); })
     .attr("width", function(d) {return x(d.sales); } )
     .attr("y", function(d) { return y(d.salesperson); })
     .attr("height", y.bandwidth());
+// try to append text.
+//var barText = bar.selectAll(".bar-text")
+//    .data(function(d) {return d;})
+//  .enter().append("text")
+bar.append("text")
+    .attr("fill", "white")
+    .attr("x", "3")
+    .attr("y", function(d) {return y(d.salesperson) + y.bandwidth() - 5;})
+    .text(function(d) {return d.salesperson + ": " + d.sales;});
 
 // add the x Axis
 //svg.append("g")
 //    .attr("transform", "translate(0," + height + ")")
 //    .call(d3.axisBottom(x));
 
-//// add the y Axis
+// add the y Axis
 //svg.append("g")
 //    .call(d3.axisLeft(y));
 
