@@ -38,9 +38,11 @@
 <script>
 var data = [{"salesperson":"Bob","sales":33},{"salesperson":"Robin","sales":12},{"salesperson":"Anne","sales":41},{"salesperson":"Mark","sales":16},{"salesperson":"Joe","sales":59},{"salesperson":"Eve","sales":38},{"salesperson":"Karen","sales":21},{"salesperson":"Kirsty","sales":25},{"salesperson":"Chris","sales":30},{"salesperson":"Lisa","sales":47},{"salesperson":"Tom","sales":5},{"salesperson":"Stacy","sales":20},{"salesperson":"Charles","sales":13},{"salesperson":"Mary","sales":29}];
 
+// get the width of he container.
+var divWidth = parseInt(d3.select("#theSvg").style("width"));
 // set the dimensions and margins of the graph
-var margin = {top: 1, right: 1, bottom: 1, left: 1},
-    width = 360 - margin.left - margin.right,
+var margin = {top: 2, right: 3, bottom: 1, left: 3},
+    width = divWidth - margin.left - margin.right,
     height = 250 - margin.top - margin.bottom;
 
 // set up the ranges
@@ -56,7 +58,7 @@ var x = d3.scaleLinear()
 // append a 'group' element to 'svg'
 // moves the 'group' element to the top left margin
 var svg = d3.select("#theSvg").append("svg")
-    .attr("style", "border:red 1px solid;")
+    //.attr("style", "border:red 1px solid;")
     .attr("class", "card-img-top")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
