@@ -13,17 +13,18 @@ Vue.component("statistics", {
             var self = this;
             if(self.stats) {
 
-            var format = d3.format(",.2f");
-            var items = [];
-            Object.keys(self.stats).forEach(function(theKey) {
-                var item = {
-                  "key": theKey,
-                  "value": format(self.stats[theKey])
-                }
-                items.push(item);
-            });
+                // using d3-format to format numbers.
+                var format = d3.format(",.2f");
+                var items = [];
+                Object.keys(self.stats).forEach(function(theKey) {
+                    var item = {
+                      "key": theKey,
+                      "value": format(self.stats[theKey])
+                    }
+                    items.push(item);
+                });
 
-            return items;
+                return items;
             } else {
                 return [];
             }

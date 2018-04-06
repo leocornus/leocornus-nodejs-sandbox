@@ -217,12 +217,12 @@
 
 <script type="x-template" id="statistics">
 <div class="card bg-primary mb-2">
-  <div class="card-header text-white">
+  <div class="card-header text-white" v-if="theStats">
     Statistics
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item list-group-item-info d-flex justify-content-between align-items-center"
-        v-for="(item, index) in theStats">
+        v-for="(item, index) in theStats" :key="index">
       {{item.key}} : {{item.value}}
     </li>
   </ul>
