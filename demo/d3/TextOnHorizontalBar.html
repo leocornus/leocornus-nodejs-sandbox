@@ -1,11 +1,39 @@
 <!DOCTYPE html>
+<html>
+<head>
 <meta charset="utf-8">
+<title>Text on Horizontal Bar</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style> 
 
 .bar { fill: steelblue; }
 
 </style>
+</head>
 <body>    	
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      
+<div class="card border-primary mb-2">
+  <div class="card-header bg-primary text-white">
+    Horizontal Bar 
+  </div>
+  <div id="theSvg">
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item list-group-item-info d-flex justify-content-between align-items-center">
+      {{item.key}} : {{item.value}}
+    </li>
+  </ul>
+</div>
+
+    </div>
+    <div class="col-8">
+    </div>
+  </div>
+</div>
 <script src="//d3js.org/d3.v4.min.js"></script>
 <script>
 var data = [{"salesperson":"Bob","sales":33},{"salesperson":"Robin","sales":12},{"salesperson":"Anne","sales":41},{"salesperson":"Mark","sales":16},{"salesperson":"Joe","sales":59},{"salesperson":"Eve","sales":38},{"salesperson":"Karen","sales":21},{"salesperson":"Kirsty","sales":25},{"salesperson":"Chris","sales":30},{"salesperson":"Lisa","sales":47},{"salesperson":"Tom","sales":5},{"salesperson":"Stacy","sales":20},{"salesperson":"Charles","sales":13},{"salesperson":"Mary","sales":29}];
@@ -13,7 +41,7 @@ var data = [{"salesperson":"Bob","sales":33},{"salesperson":"Robin","sales":12},
 // set the dimensions and margins of the graph
 var margin = {top: 1, right: 1, bottom: 1, left: 1},
     width = 360 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    height = 250 - margin.top - margin.bottom;
 
 // set up the ranges
 // TODO: what is band? how to understand it?
@@ -27,8 +55,9 @@ var x = d3.scaleLinear()
 // append the svg object to the body of the page
 // append a 'group' element to 'svg'
 // moves the 'group' element to the top left margin
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#theSvg").append("svg")
     .attr("style", "border:red 1px solid;")
+    .attr("class", "card-img-top")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -72,6 +101,8 @@ bar.append("text")
     .attr("x", "3")
     .attr("y", function(d) {return y(d.salesperson) + y.bandwidth() - 5;})
     .attr("font-size", y.bandwidth() * 3 / 5)
+    //.attr("font-size", "1.1em")
+    //.attr("dy", "1.2em")
     .text(function(d) {return d.salesperson + ": " + d.sales;});
 
 // add the x Axis
@@ -86,3 +117,4 @@ bar.append("text")
 
 </script>
 </body>
+</html>
