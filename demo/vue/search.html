@@ -195,8 +195,8 @@
 
 <!-- component to show each facet and its buckets -->
 <script type="x-template" id="facet-buckets">
-<div class="card bg-success mb-2">
-  <div class="card-header text-white" :id="facetID">
+<div class="card border-success mb-2">
+  <div class="card-header bg-success text-white" :id="facetID">
     <a data-toggle="collapse" :data-target="facetTargetCollapseID"
        aria-expanded="true" :aria-controls="facetCollapseID">
     {{facetLabel}} - {{facetBuckets.length}}
