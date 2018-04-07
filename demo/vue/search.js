@@ -62,6 +62,85 @@ Vue.component("facet-buckets", {
         facetBuckets() {
             return this.facet.buckets;
         }
+    },
+
+    // methods.
+    methods: {
+
+        /**
+         * draw horizontal bars.
+         */
+        drawHorizontalBar() {
+            var self = this;
+
+            // calculate the dimension for bar chart.
+            var divId = "#collapse" + self.facet.label.replace(/ /g, '-');
+            var divWidth = parseInt(d3.select(divId).style("width"));
+            var margin = {top: 1, right: 2, bottom: 1, left: 2};
+            var width = divWidth - margin.left - margin.right;
+            var height = 250 - margin.top - margin.bottom;
+
+            /**
+             * the data will have format
+             * [{value:"label", count:"2"}, {}]
+             */
+            var data = self.facet.buckets;
+
+            // make sure the count is number type.
+            data.forEach(function(d) {
+                d.count = +d.count;
+            });
+
+            // set up x and y axis
+            var y = d3.scaleBand().range([height, 0]).padding(0.1);
+            var x = d3.scaleLinear().range([0, width]);
+            // Scale the range of the data in the domains
+            x.domain([0, d3.max(data, function(d){ return d.count; })])
+            // map will create a new array with 
+            // the results of the provided function.
+            y.domain(data.map(function(d) { return d.value; }));
+
+            // remove the existing content.
+            d3.select(divId).html("");
+
+            // draw the svg element.
+            var svg = d3.select(divId).append("svg")
+                .attr("class", "card-img-top")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+                .attr("transform", 
+                      "translate(" + margin.left + "," + margin.top + ")");
+
+            // draw the group bar.
+            var bar = svg.selectAll(".bar")
+                .data(data)
+                .enter().append("g")
+                .attr("class", "bar");
+
+            // append the rectangles for the bar chart
+            //var barRect = bar.selectAll(".bar-rect")
+            //    .data(function(d) {return d;})
+            //  .enter().append("rect")
+            bar.append("rect")
+                .attr("class", "bar-rect")
+                //.attr("x", function(d) { return x(d.sales); })
+                .attr("width", function(d) {return x(d.count); } )
+                .attr("y", function(d) { return y(d.value); })
+                .attr("height", y.bandwidth());
+            // try to append text.
+            //var barText = bar.selectAll(".bar-text")
+            //    .data(function(d) {return d;})
+            //  .enter().append("text")
+            bar.append("text")
+                .attr("fill", "white")
+                .attr("x", "3")
+                .attr("y", function(d) {return y(d.value) + y.bandwidth() - 5;})
+                .attr("font-size", y.bandwidth() * 3 / 5)
+                //.attr("font-size", "1.1em")
+                //.attr("dy", "1.2em")
+                .text(function(d) {return d.value+ ": " + d.count;});
+        }
     }
 });
 
