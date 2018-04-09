@@ -101,7 +101,8 @@ Vue.component("facet-buckets", {
             y.domain(data.map(function(d) { return d.value; }));
 
             // remove the existing content.
-            d3.select(divId).html("");
+            //d3.select(divId).html("");
+            d3.select(divId + ">ul").classed("d-none", true);
 
             // draw the svg element.
             var svg = d3.select(divId).append("svg")
@@ -116,6 +117,7 @@ Vue.component("facet-buckets", {
             var bar = svg.selectAll(".bar")
                 .data(data)
                 .enter().append("g")
+                .attr("fill", "steelblue")
                 .attr("class", "bar");
 
             // append the rectangles for the bar chart
