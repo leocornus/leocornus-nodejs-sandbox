@@ -68,6 +68,47 @@ Vue.component("facet-buckets", {
     methods: {
 
         /**
+         * show the horizontal bar and hide the list group.
+         * if the horizontal bar not exist, we will draw it.
+         */
+        showHorizontalBar() {
+
+            // Try to find the corrent element..
+            var divId = "#collapse" + this.facet.label.replace(/ /g, '-');
+
+            // hide the list gourp..
+            d3.select(divId + ">ul").classed("d-none", true);
+
+            // check if the svg is exist
+            // d3.select will return a selection object.
+            var svgElement = d3.select(divId + ">svg");
+            if(svgElement.empty()) {
+                this.drawHorizontalBar();
+            } else {
+                // show up the svg by remove the d-none class.
+                svgElement.classed("d-none", false);
+            }
+        },
+
+        showListGroup() {
+            // Try to find the corrent element..
+            var divId = "#collapse" + this.facet.label.replace(/ /g, '-');
+
+            // check if the svg is exist
+            // d3.select will return a selection object.
+            var svgElement = d3.select(divId + ">svg");
+            if(svgElement.empty()) {
+                // do nothing...
+            } else {
+                // show up the svg by remove the d-none class.
+                svgElement.classed("d-none", true);
+            }
+
+            // hide the list gourp..
+            d3.select(divId + ">ul").classed("d-none", false);
+        },
+
+        /**
          * draw horizontal bars.
          */
         drawHorizontalBar() {
@@ -102,7 +143,6 @@ Vue.component("facet-buckets", {
 
             // remove the existing content.
             //d3.select(divId).html("");
-            d3.select(divId + ">ul").classed("d-none", true);
 
             // draw the svg element.
             var svg = d3.select(divId).append("svg")
