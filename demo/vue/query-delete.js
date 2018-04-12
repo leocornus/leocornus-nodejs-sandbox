@@ -85,7 +85,7 @@ var app = new Vue({
                   "workflow": "customsearch",
                   "query": query,
                   //"fields": [".id"],
-                  "rows": 20,
+                  "rows": 5,
                   "offset": 0
                 }
             ).then(function(response) {
@@ -110,7 +110,10 @@ var app = new Vue({
                     // replace the fields.
                     Object.keys(doc.fields).forEach(function(fieldName) {
 
-                        if(fieldName.startsWith('.')) {
+                        //console.log(fieldName);
+
+                        if(fieldName.startsWith('.') ||
+                           (fieldName === "position")) {
                             // ignore this field.
                         } else if (fields.hasOwnProperty(fieldName)) {
                             // this is the field to update.
