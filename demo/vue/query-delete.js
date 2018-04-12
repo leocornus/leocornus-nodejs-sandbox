@@ -51,7 +51,7 @@ var app = new Vue({
             var payload = JSON.parse(this.payload);
             switch(this.actionName) {
                 case "bulkUpdate":
-                    self.bulkUpdate(payload.query, payload.fields);
+                    self.bulkUpdate(payload.query, payload.rows, payload.fields);
                     break;
                 default:
                     self.processIngest(this.actionName, payload);
@@ -76,7 +76,7 @@ var app = new Vue({
         /**
          * bulk update by using the feedDocuments end point.
          */
-        bulkUpdate: function(query, fields) {
+        bulkUpdate: function(query, rows, fields) {
 
             var self = this;
             // execute the query
@@ -85,7 +85,7 @@ var app = new Vue({
                   "workflow": "customsearch",
                   "query": query,
                   //"fields": [".id"],
-                  "rows": 5,
+                  "rows": rows,
                   "offset": 0
                 }
             ).then(function(response) {
