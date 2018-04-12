@@ -6,7 +6,7 @@ var app = new Vue({
     el: "#query-app",
 
     data: {
-      baseUrl: 'https://dev-acis-attivio.sites.leocorn.com/rest',
+      baseUrl: 'https://search.example.com/rest',
       query: 'id:abc',
       actionName: 'getSessionCount',
       payload: '',
@@ -108,7 +108,11 @@ var app = new Vue({
                     var newFields = doc.fields;
                     // replace the fields.
                     Object.keys(fields).forEach(function(fieldName) {
-                        newFields[fieldName] = fields[fieldName];
+                        if(fieldName == 'table') {
+                            newFields[fieldName] = "newtable";
+                        } else {
+                            newFields[fieldName] = fields[fieldName];
+                        }
                     });
                     // template for each payload.
                     var docPayload = {
