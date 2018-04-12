@@ -41,7 +41,7 @@ var data = [{"salesperson":"Bob","sales":33},{"salesperson":"Robin","sales":12},
 // get the width of he container.
 var divWidth = parseInt(d3.select("#theSvg").style("width"));
 // set the dimensions and margins of the graph
-var margin = {top: 2, right: 3, bottom: 1, left: 3},
+var margin = {top: 2, right: 3, bottom: 20, left: 3},
     width = divWidth - margin.left - margin.right,
     height = 250 - margin.top - margin.bottom;
 
@@ -108,9 +108,9 @@ bar.append("text")
     .text(function(d) {return d.salesperson + ": " + d.sales;});
 
 // add the x Axis
-//svg.append("g")
-//    .attr("transform", "translate(0," + height + ")")
-//    .call(d3.axisBottom(x));
+svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
 
 // add the y Axis
 //svg.append("g")

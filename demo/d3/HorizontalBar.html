@@ -11,7 +11,7 @@
 var data = [{"salesperson":"Bob","sales":33},{"salesperson":"Robin","sales":12},{"salesperson":"Anne","sales":41},{"salesperson":"Mark","sales":16},{"salesperson":"Joe","sales":59},{"salesperson":"Eve","sales":38},{"salesperson":"Karen","sales":21},{"salesperson":"Kirsty","sales":25},{"salesperson":"Chris","sales":30},{"salesperson":"Lisa","sales":47},{"salesperson":"Tom","sales":5},{"salesperson":"Stacy","sales":20},{"salesperson":"Charles","sales":13},{"salesperson":"Mary","sales":29}];
 
 // set the dimensions and margins of the graph
-var margin = {top: 1, right: 1, bottom: 1, left: 1},
+var margin = {top: 1, right: 1, bottom: 25, left: 55},
     width = 360 - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
@@ -59,13 +59,13 @@ svg.selectAll()
     .attr("height", y.bandwidth());
 
 // add the x Axis
-//svg.append("g")
-//    .attr("transform", "translate(0," + height + ")")
-//    .call(d3.axisBottom(x));
+svg.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
 
-//// add the y Axis
-//svg.append("g")
-//    .call(d3.axisLeft(y));
+// add the y Axis
+svg.append("g")
+    .call(d3.axisLeft(y));
 
 
 </script>
