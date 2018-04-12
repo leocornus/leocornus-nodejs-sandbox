@@ -105,13 +105,19 @@ var app = new Vue({
                 var payloadList = [];
                 docs.forEach(function(doc) {
                     var docId = doc.fields['.id'][0];
-                    var newFields = doc.fields;
+                    //var newFields = doc.fields;
+                    var newFields = {};
                     // replace the fields.
-                    Object.keys(fields).forEach(function(fieldName) {
-                        if(fieldName == 'table') {
-                            newFields[fieldName] = "newtable";
-                        } else {
+                    Object.keys(doc.fields).forEach(function(fieldName) {
+
+                        if(fieldName.startsWith('.')) {
+                            // ignore this field.
+                        } else if (fields.hasOwnProperty(fieldName)) {
+                            // this is the field to update.
                             newFields[fieldName] = fields[fieldName];
+                        } else {
+                            // copy the current value.
+                            newFields[fieldName] = doc.fields[fieldName];
                         }
                     });
                     // template for each payload.
