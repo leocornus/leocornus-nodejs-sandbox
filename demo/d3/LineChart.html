@@ -33,10 +33,11 @@ d3.csv("data/lines.csv", function(d) {
 
   g.append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
-    //.select(".domain")
-    //  .remove();
+      .call(d3.axisBottom(x))
+    .select(".domain")
+      .remove();
 
+  // add lable for Y axis.
   g.append("g")
       .call(d3.axisLeft(y))
     .append("text")
@@ -47,17 +48,25 @@ d3.csv("data/lines.csv", function(d) {
       .attr("text-anchor", "end")
       .text("Price ($)");
 
-  g.append("path")
+  var path = g.append("path")
       .datum(data)
       .attr("fill", "none")
-      .transition()
-      .duration(1000)
-      .delay(function(d, i) { return i * 100; })
       .attr("stroke", "steelblue")
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
       .attr("stroke-width", 1.5)
       .attr("d", line);
+
+  var totalLength = path.node().getTotalLength();
+  console.log(totalLength);
+
+  path
+    .attr("stroke-dasharray", totalLength + " " + totalLength)
+    .attr("stroke-dashoffset", totalLength)
+    .transition()
+      .duration(2000)
+      .ease(d3.easeCircle)
+      .attr("stroke-dashoffset", 0);
 });
 
 </script>
