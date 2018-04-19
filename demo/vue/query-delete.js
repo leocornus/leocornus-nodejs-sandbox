@@ -51,7 +51,20 @@ var app = new Vue({
             var payload = JSON.parse(this.payload);
             switch(this.actionName) {
                 case "bulkUpdate":
+                    /**
+                     * here is a example of the payload:
+                     * {
+                     *   "query":"importdate:2018--04--10",
+                     *   "rows": 10,
+                     *   "fields":{
+                     *     "table":["offlisting"]
+                     *   }
+                     * }
+                     */
                     self.bulkUpdate(payload.query, payload.rows, payload.fields);
+                    break;
+                case "dailyAverage":
+                    self.statDailyAvarage();
                     break;
                 default:
                     self.processIngest(this.actionName, payload);
@@ -71,6 +84,42 @@ var app = new Vue({
                     //queryInitWorkflow: "queryInit"
                 }
             );
+        },
+
+        /**
+         * try to generate daily total.
+         */
+        statDailyTotal: function() {
+
+            self = this;
+            // preparing query the daily total:
+            var queryTotal = {
+              workflow: "customsearch",
+              query: "table:xmldata",
+              facets: [
+                "city(maxBuckets=-1)",
+                "agentname(maxBuckets=-1)",
+                "brokername(maxBuckets=-1)",
+                "neighbourhoodname(maxBuckets=-1)",
+                "residencetype(maxBuckets=-1)",
+                "listvalue_i(statistics=true)"
+              ]
+            };
+
+            // execute the query.
+
+            // collect data and prepare payload.
+
+            // commit ingest.
+        },
+
+        /**
+         * try to generate daily average price.
+         */
+        statDailyAverage: function() {
+
+            self = this;
+            self.messages.push("try to collect daily average!");
         },
 
         /**
