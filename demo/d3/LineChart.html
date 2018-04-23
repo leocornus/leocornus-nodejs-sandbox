@@ -78,15 +78,18 @@ d3.csv("data/lines.csv", function(d) {
       .attr("d", line);
 
   var totalLength = path.node().getTotalLength();
-  console.log(totalLength);
+  //console.log(totalLength);
 
+  // the stroke-dasharray and stroke-dashoffset are the 
+  // attributes to help transition.
   path
     .attr("stroke-dasharray", totalLength + " " + totalLength)
+    // this is the initial value
     .attr("stroke-dashoffset", totalLength)
     .transition()
-      .duration(2000)
-      .ease(d3.easeCircle)
-      .attr("stroke-dashoffset", 0);
+      .duration(4000)
+      .ease(d3.easeLinear)
+      .attr("stroke-dashoffset", 0); // this is the final value.
 });
 
 function responsivefy(svg) {
