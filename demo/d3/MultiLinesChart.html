@@ -23,10 +23,14 @@ var svg = d3.select("svg"),
     height = svg.attr("height") - margin.top - margin.bottom,
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+// set up the function to parse time from data source
 var parseTime = d3.timeParse("%Y%m%d");
 
+// set range for x axis, the date
 var x = d3.scaleTime().range([0, width]),
+    // set the range for y axis, the temperature.
     y = d3.scaleLinear().range([height, 0]),
+    // set the range for z, basically the color scheme.
     z = d3.scaleOrdinal(d3.schemeCategory10);
 
 var line = d3.line()
@@ -38,6 +42,7 @@ d3.tsv("https://gist.githubusercontent.com/mbostock/3884955/raw/95ccdeac9bbf2012
   if (error) throw error;
 
   var cities = data.columns.slice(1).map(function(id) {
+    console.log("id = " + id);
     return {
       id: id,
       values: data.map(function(d) {
@@ -46,6 +51,9 @@ d3.tsv("https://gist.githubusercontent.com/mbostock/3884955/raw/95ccdeac9bbf2012
     };
   });
 
+  // set up the domain for the X and Y Axis.
+
+  // dx.extent will calculate the min and max values for an array.
   x.domain(d3.extent(data, function(d) { return d.date; }));
 
   y.domain([
@@ -74,9 +82,12 @@ d3.tsv("https://gist.githubusercontent.com/mbostock/3884955/raw/95ccdeac9bbf2012
     .data(cities)
     .enter().append("g")
       .attr("class", "city");
+  console.log("type of city -> " + typeof(city));
 
   city.append("path")
       .attr("class", "line")
+      // the d attribute will hava a series of commands to 
+      // draw lines.
       .attr("d", function(d) { return line(d.values); })
       .style("stroke", function(d) { return z(d.id); });
 
@@ -89,10 +100,18 @@ d3.tsv("https://gist.githubusercontent.com/mbostock/3884955/raw/95ccdeac9bbf2012
       .text(function(d) { return d.id; });
 });
 
-function type(d, _, columns) {
-  d.date = parseTime(d.date);
-  for (var i = 1, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
-  return d;
+/**
+ * convert the data for each row to the propery type.
+ */
+function type(aRow, _, columns) {
+  console.log(aRow);
+  // convert string to date type.
+  aRow.date = parseTime(aRow.date);
+  for (var i = 1, n = columns.length, c; i < n; ++i) 
+    // make sure the value is number type.
+    aRow[c = columns[i]] = +aRow[c];
+  console.log(aRow);
+  return aRow;
 }
 
 </script>
