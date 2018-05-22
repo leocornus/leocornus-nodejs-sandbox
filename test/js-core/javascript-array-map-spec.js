@@ -1,7 +1,5 @@
 describe('JavaScript array map testing specs', function() {
 
-    // we will use jQuery to manipulate HTML for testing...
-
     beforeEach(function() {
         // empty for now...
     });
@@ -20,6 +18,8 @@ describe('JavaScript array map testing specs', function() {
 
             numbers = [[1, 2], [2, 3], [1, 4], [3, 5], [2, 6]];
             var merged = numbers.map(function(current, index, a) {
+                // the parameter a is the array numbers.
+                expect(a[index]).toEqual(current);
                 return current[0];
             });
             expect(merged).toEqual([1, 2, 1, 3, 2]);
