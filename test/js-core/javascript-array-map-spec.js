@@ -13,6 +13,7 @@ describe('JavaScript array map testing specs', function() {
         it('access the new array', function() {
 
             var numbers = [1, 4, 9];
+            // map will not change the source array.
             var roots = numbers.map(Math.sqrt);
             expect(roots).toEqual([1, 2, 3]);
 
@@ -20,6 +21,7 @@ describe('JavaScript array map testing specs', function() {
             var merged = numbers.map(function(current, index, a) {
                 // the parameter a is the array numbers.
                 expect(a[index]).toEqual(current);
+                // return the first value of each item in the source.
                 return current[0];
             });
             expect(merged).toEqual([1, 2, 1, 3, 2]);
