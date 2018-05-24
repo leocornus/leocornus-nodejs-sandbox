@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- viewport is important for responsive view -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Search Demo Page</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="vue-wizard.css">
+
+  <!-- load Vue.js development version -->
+  <script src="https://unpkg.com/vue"></script>
+
+  <style>
+    /* Show it is fixed to the top */
+    body {
+      /*min-height: 75rem;*/
+      padding-top: 4.5rem;
+    }
+  </style>
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Solr Search</a>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/index.html">Home <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form class="form-inline mt-2 mt-md-0">
+      <input class="form-control form-control-lg mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="container">
+  <div id="search-app">
+    <div class="input-group mb-2">
+      <input type="text" class="form-control form-control-lg" id="inputQuery"
+             v-model="query"
+             v-on:keyup.enter="simpleSearch"
+             placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-outline-primary btn-lg" type="submit"
+                v-on:click="simpleSearch">Search!</button>
+      </span>
+    </div>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <span id="restBaseUrl-addon" class="input-group-text">REST API Base URL: </span>
+      </div>
+      <input type="text" class="form-control" id="restBaseUrl"
+             aria-describedby="restBaseUrl-addon"
+             v-model="restBaseUrl"
+             placeholder="RESTful API base URL https://www.rest.com">
+    </div>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <span id="facetFields-addon" class="input-group-text">Pick facets, separate by ,: </span>
+      </div>
+      <input type="text" class="form-control" id="facetFields"
+             aria-describedby="facetFields-addon"
+             v-model="facetFields"
+             placeholder="table,agentname,brokername">
+    </div>
+    <p>
+      <h3>{{resultSummary}}</h3>
+      <div class="row">
+        <div class="col-3">
+          <statistics :stats="stats"></statistics>
+          <facet-buckets v-for="(facet, index) in facets" :facet="facet" :key="index">
+          </facet-buckets>
+        </div>
+        <div class="col-9 accordion">
+          <results-list :docs="results" v-if="results">
+          </results-list>
+          <listing-details v-for="(doc, index) in results" :doc="doc" :key="index" :index="index">
+          </listing-details>
+        </div>
+      </div>
+    </p>
+  </div>
+</div>
+
+<!-- ==================================================== -->
+<!-- templates for Vue.js components -->
+<!-- ==================================================== -->
+
+<!-- template to show details for each listing, the result doc -->
+<script type="x-template" id="card-listing-details">
+<li class="list-group-item">
+  <div class="card" v-for="fieldName in Object.keys(doc.fields)" :fieldName="fieldName">
+    <div class="card-body">
+      <h5 class="card-title">{{fieldName}}</h5>
+      <p class="card-text">{{doc.fields[fieldName][0]}}</p>
+    </div>
+  </div>
+</li>
+</script>
+
+<!-- this template will show listing details in a table -->
+<!-- it will show all fields and one row for each field. -->
+<script type="x-template" id="table-listing-details">
+<li class="list-group-item">
+<h5>{{caption}}</h5>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col" width="88px">Field</th>
+      <th scope="col">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="fieldName in Object.keys(doc.fields)" :fieldName="fieldName">
+      <td>{{fieldName}}</td>
+      <td>{{doc.fields[fieldName][0]}}</td>
+    </tr>
+  </tbody>
+</table>
+</li>
+</script>
+
+<!-- using accordion class to make collapsible for each listing -->
+<script type="x-template" id="accordion-listing-details">
+<div class="card mb-1">
+<div class="card-header" :id="listingID">
+  <h5 class="mb-0">
+    <button class="btn btn-link" data-toggle="collapse" :data-target="targetCollapseID" 
+            aria-expanded="true" :aria-controls="collapseID">
+      {{caption}}
+    </button>
+  </h5>
+</div>
+<div :id="collapseID" class="collapse" :aria-labelledby="listingID" 
+     data-parent="#accordion">
+  <div class="card-body">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col" width="20px">#</th>
+      <th scope="col" width="88px">Field</th>
+      <th scope="col">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(fieldName, index) in Object.keys(doc.fields)" 
+        :index="index" :fieldName="fieldName">
+      <th scope="row">{{index}}</th>
+      <td>{{fieldName}}</td>
+      <td>{{doc.fields[fieldName].join(' ')}}</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+</div>
+</script>
+
+<!-- using accordion class to make collapsible for each listing -->
+<script type="x-template" id="accordion-results-list">
+<div class="card mb-1">
+<div class="card-header" id="results-csv">
+  <h5 class="mb-0">
+    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse-csv-list" 
+            aria-expanded="true" aria-controls="collapse-csv-list">
+      All docs in CSV format
+    </button>
+  </h5>
+</div>
+<div id="collapse-csv-list" class="collapse" aria-labelledby="results-csv" 
+     data-parent="#accordion">
+  <div class="card-body">
+    <div class="form-group">
+      <label for="jsonFormat">Docs list in JSON format:</label>
+      <textarea class="form-control" id="jsonFormat" rows="3">{{docsListJSON}}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="csvFormat">Docs list in CSV format:</label>
+      <textarea class="form-control" id="csvFormat" rows="3">{{docsListCSV}}</textarea>
+    </div>
+  </div>
+</div>
+</div>
+</script>
+
+<!-- component to show each facet and its buckets -->
+<script type="x-template" id="facet-buckets">
+<div class="card border-success mb-2">
+  <div class="card-header bg-success text-white" :id="facetID">
+    <a data-toggle="collapse" :data-target="facetTargetCollapseID"
+       aria-expanded="true" :aria-controls="facetCollapseID"
+       href="#" class="card-link text-white">
+    {{facetLabel}} - {{facetBuckets.length}}
+    </a>
+    <span class="badge badge-light badge-not-pill float-right ml-1">
+      <a v-on:click="showListGroup" href="#" class="card-link"
+      ><i class="fas fa-list"></i></a>
+    </span>
+    <span class="badge badge-warning badge-not-pill float-right ml-1">
+      <a v-on:click="showHorizontalBar" href="#" class="card-link"
+      ><i class="fas fa-chart-bar"></i></a>
+    </span>
+  </div>
+  <div :id="facetCollapseID" class="collapse" :aria-labelledby="facetID">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item list-group-item-success d-flex justify-content-between align-items-center"
+        v-for="(bucket, index) in facetBuckets" 
+        :bucket="bucket" :key="index">
+      {{bucket.value}}
+      <span class="badge badge-primary badge-pill">{{bucket.count}}</span>
+    </li>
+  </ul>
+  </div>
+</div>
+</script>
+
+<script type="x-template" id="statistics">
+<div class="card bg-primary mb-2">
+  <div class="card-header text-white" v-if="theStats">
+    Statistics
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item list-group-item-info d-flex justify-content-between align-items-center"
+        v-for="(item, index) in theStats" :key="index">
+      {{item.key}} : {{item.value}}
+    </li>
+  </ul>
+</div>
+</script>
+
+<!-- ==================================================== -->
+<!-- load javascript libs -->
+<!-- ==================================================== -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<!-- ==================================================== -->
+<!-- the js file has to be at the bottom. -->
+<!-- ==================================================== -->
+<script src="search.js"></script>
+</body>
+</html>
