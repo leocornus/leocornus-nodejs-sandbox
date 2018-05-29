@@ -204,15 +204,15 @@ Vue.component("listing-details", {
         // empty string.
 
         listingID() {
-            return this.doc.fields['.id'][0].replace(/[@\.]/g, '');
+            return this.doc['id'][0].replace(/[@\.]/g, '');
         },
 
         collapseID() {
-            return "collapse" + this.doc.fields['.id'][0].replace(/[@\.]/g, '');
+            return "collapse" + this.doc['id'][0].replace(/[@\.]/g, '');
         },
 
         targetCollapseID() {
-            return "#collapse" + this.doc.fields['.id'][0].replace(/[@\.]/g, '');
+            return "#collapse" + this.doc['id'][0].replace(/[@\.]/g, '');
         },
 
         /**
@@ -220,9 +220,9 @@ Vue.component("listing-details", {
          */
         caption() {
             // we will tweak the caption based on table.
-            var table = this.doc.fields['table'][0];
+            var table = this.doc['name'];
             // by default, we will using id as the caption.
-            var caption = this.doc.fields['.id'][0];
+            var caption = this.doc['id'];
 
             switch(table) {
               case 'xmldata':
@@ -274,7 +274,7 @@ Vue.component("results-list", {
             var fields = [];
             if(index === 0) {
               // the first doc, we will get all keys.
-              Object.keys(doc.fields).forEach(function(field) {
+              Object.keys(doc).forEach(function(field) {
                 if(field === ".score") {
                   // do nothing.
                 } else if(field === ".zone") {
@@ -384,16 +384,17 @@ var app = new Vue({
                 //facets: self.facetFields.split(',')
             })
             .then(function(response) {
-                console.log(response);
-                self.totalHits = response.data.totalHits;
-                self.results = response.data.documents;
-                self.facets = response.data.facets;
-                self.stats = self.facets[self.facets.length - 1].statistics;
-                console.log("statistics: " + self.stats);
+                //console.log(response);
+                self.totalHits = response.data.response.numFound;
+                self.results = response.data.response.docs;
+                console.log(self.results);
+                //self.facets = response.data.facets;
+                //self.stats = self.facets[self.facets.length - 1].statistics;
+                //console.log("statistics: " + self.stats);
                 self.resultSummary = "Found " + self.totalHits + " docs in total!"
                 if(self.totalHits > 0) {
                     console.log('total hits: ' + self.totalHits);
-                    console.log(JSON.stringify(self.facets));
+                    //console.log(JSON.stringify(self.facets));
                     //console.log(JSON.stringify(response.data.documents[0]));
                     //console.log(response.data.documents[0].fields['title']);
                 }

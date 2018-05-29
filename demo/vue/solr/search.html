@@ -100,7 +100,7 @@
   <div class="card" v-for="fieldName in Object.keys(doc.fields)" :fieldName="fieldName">
     <div class="card-body">
       <h5 class="card-title">{{fieldName}}</h5>
-      <p class="card-text">{{doc.fields[fieldName][0]}}</p>
+      <p class="card-text">{{doc[fieldName][0]}}</p>
     </div>
   </div>
 </li>
@@ -151,11 +151,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-for="(fieldName, index) in Object.keys(doc.fields)" 
+    <tr v-for="(fieldName, index) in Object.keys(doc)" 
         :index="index" :fieldName="fieldName">
       <th scope="row">{{index}}</th>
       <td>{{fieldName}}</td>
-      <td>{{doc.fields[fieldName].join(' ')}}</td>
+      <td>{{doc[fieldName][0]}}</td>
     </tr>
   </tbody>
 </table>
