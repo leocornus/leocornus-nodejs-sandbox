@@ -200,19 +200,20 @@ Vue.component("listing-details", {
 
     computed: {
 
-        // for all th IDs, we need replace the special char @ with
-        // empty string.
+        // for all th IDs, we need replace the following special chars with
+        // empty string:
+        // @ . /
 
         listingID() {
-            return this.doc['id'][0].replace(/[@\.]/g, '');
+            return this.doc['id'].replace(/[@\.\/]/g, '');
         },
 
         collapseID() {
-            return "collapse" + this.doc['id'][0].replace(/[@\.]/g, '');
+            return "collapse" + this.doc['id'].replace(/[@\.\/]/g, '');
         },
 
         targetCollapseID() {
-            return "#collapse" + this.doc['id'][0].replace(/[@\.]/g, '');
+            return "#collapse" + this.doc['id'].replace(/[@\.\/]/g, '');
         },
 
         /**
