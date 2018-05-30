@@ -380,9 +380,19 @@ var app = new Vue({
                 // facets: ["table", "city", "agentname"],
                 //facets: self.facetFields.split(',')
             };
+            // this will show how to use query parameters in a JSON request.
+            var postParams = {
+                query: this.query,
+                // we could mix parameters and JSON request.
+                params: {
+                  rows: 25,
+                  start: 50 
+                }
+            }
+
             // the query url should be some thing like this: 
             // - 'https://one.sites.leocorn.com/rest/searchApi/search',
-            axios.post(this.restBaseUrl + 'select', postPayload)
+            axios.post(this.restBaseUrl + 'select', postParams)
             .then(function(response) {
                 //console.log(response);
                 self.totalHits = response.data.response.numFound;
