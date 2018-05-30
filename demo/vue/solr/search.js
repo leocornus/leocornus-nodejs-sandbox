@@ -368,22 +368,21 @@ var app = new Vue({
                   ",listvalue_i(statistics=true)";
             }
 
-            // the query url should be some thing like this: 
-            // - 'https://one.sites.leocorn.com/rest/searchApi/search',
-            axios.post(this.restBaseUrl + 'select',
-            {
+            // post payload, it will be the query parameters here:
+            // This is the JSON request payload.
+            var postPayload = {
                 //workflow: "customsearch",
                 query: this.query,
-                //queryLanguage: "advanced",
-                //realm: "sean.chen",
-                //username: "sean.chen@leocorn.com",
                 limit: 250,
                 offset: 0
                 //fields: [".id","title","table","avgScore"],
                 //sort: ["title:ASC"],
                 // facets: ["table", "city", "agentname"],
                 //facets: self.facetFields.split(',')
-            })
+            };
+            // the query url should be some thing like this: 
+            // - 'https://one.sites.leocorn.com/rest/searchApi/search',
+            axios.post(this.restBaseUrl + 'select', postPayload)
             .then(function(response) {
                 //console.log(response);
                 self.totalHits = response.data.response.numFound;
