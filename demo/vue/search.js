@@ -70,7 +70,7 @@ Vue.component("facet-buckets", {
             this.facet.buckets.forEach(function(aBucket) {
                 csv.push(aBucket.value);
             });
-            console.log(csv.join('\n'));
+            //console.log(csv.join('\n'));
             return csv.join(',');
         }
     },
@@ -331,6 +331,7 @@ var app = new Vue({
       facetFields: "table,city,importdate",
       // the base URL will include the ending /
       restBaseUrl: "https://localhost/rest/",
+      //restBaseUrl: "https://dev-acis-attivio.sites.leocorn.com/rest/",
       totalHits: 0,
       facets: null,
       stats: null,
@@ -349,7 +350,7 @@ var app = new Vue({
         simpleSearch() {
 
             self = this;
-            console.log('I am in...');
+            //console.log('I am in...');
             self.resultSummary = "Searching ...";
             // set the results to null for hiding the whole section.
             self.results = null;
