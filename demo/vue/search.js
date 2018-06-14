@@ -61,6 +61,17 @@ Vue.component("facet-buckets", {
         // facet buckets.
         facetBuckets() {
             return this.facet.buckets;
+        },
+
+        // facet buckets in csv format.
+        facetBucketsCSV() {
+            var self = this;
+            var csv = [];
+            this.facet.buckets.forEach(function(aBucket) {
+                csv.push(aBucket.value);
+            });
+            console.log(csv.join('\n'));
+            return csv.join(',');
         }
     },
 
