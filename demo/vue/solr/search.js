@@ -374,11 +374,14 @@ var app = new Vue({
                 //workflow: "customsearch",
                 query: this.query,
                 limit: 250,
-                offset: 0
+                offset: 0,
                 //fields: [".id","title","table","avgScore"],
                 //sort: ["title:ASC"],
                 // facets: ["table", "city", "agentname"],
                 //facets: self.facetFields.split(',')
+                facet: "on",
+                "facet.field": "project_id",
+                "facet.field": "customer_id"
             };
             // this will show how to use query parameters in a JSON request.
             var postParams = {
@@ -386,15 +389,23 @@ var app = new Vue({
                 // we could mix parameters and JSON request.
                 params: {
                   rows: 25,
-                  start: 50 
+                  start: 0,
+                  facet: "on",
+                  // using array for multiple values
+                  // in association with multiple values in HTTP parameters.
+                  // ?facet_field=project_id&facet_field=customer_id
+                  "facet.field":["project_id", "customer_id"]
+                  // here is for single value
+                  //"facet.field":"customer_id"
                 }
             }
 
             // the query url should be some thing like this: 
             // - 'https://one.sites.leocorn.com/rest/searchApi/search',
+            // it is seems easier to use query parameters in a JSON request.
             axios.post(this.restBaseUrl + 'select', postParams)
             .then(function(response) {
-                //console.log(response);
+                console.log(response.data);
                 self.totalHits = response.data.response.numFound;
                 self.results = response.data.response.docs;
                 console.log(self.results);
