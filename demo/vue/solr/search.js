@@ -15,6 +15,7 @@ Vue.component("statistics", {
 
                 // using d3-format to format numbers.
                 var format = d3.format(",.2f");
+                // get ready the array from the object.
                 var items = [];
                 Object.keys(self.stats).forEach(function(theKey) {
                     var item = {
@@ -29,6 +30,45 @@ Vue.component("statistics", {
                 return [];
             }
         }
+    }
+});
+
+/**
+ * Solr facet buckets..
+ */
+Vue.component("solr-facet-buckets", {
+    // The x-template id.
+    template: "#solr-facet-buckets",
+    props: ["facet"],
+
+    // using computed for dynamic data.
+    computed: {
+        // the facet label.
+        facetLabel() {
+            return this.facet.label;
+        },
+
+        // ids for collapse.
+        facetID() {
+            return this.facet.label.replace(/ /g, '-');
+        },
+        facetCollapseID() {
+            return "collapse" + this.facet.label.replace(/ /g, '-');
+        },
+        facetTargetCollapseID() {
+            return "#collapse" + this.facet.label.replace(/ /g, '-');
+        },
+
+        // facet buckets.
+        facetBuckets() {
+            return this.facet.buckets;
+        }
+    },
+
+    // methods.
+    methods: {
+
+        // empty for now.
     }
 });
 
@@ -318,7 +358,7 @@ var app = new Vue({
 
     data: {
       query: '*:*',
-      facetFields: "table,city,importdate",
+      facetFields: "project_id,customer_name",
       // the base URL will include the ending /
       restBaseUrl: "https://localhost/rest/",
       totalHits: 0,
@@ -336,6 +376,9 @@ var app = new Vue({
     },
 
     methods: {
+        /**
+         * simple search function to demonstrate Solr search function.
+         */
         simpleSearch() {
 
             self = this;
@@ -352,21 +395,13 @@ var app = new Vue({
               this.query="*:*";
             }
 
-            // the simple cgi url.
-            //axios.get(this.restBaseUrl + 'searchApi/simpleCgi',
-            //{
-            //  params: {
-            //    q: this.query,
-            //    hits:20,
-            //    offset: 0
-            //  }
-            //})
-            if(self.facetFields.includes('statistics')) {
-            } else {
-                // add the statistics on listvalue_i
-                self.facetFields = self.facetFields + 
-                  ",listvalue_i(statistics=true)";
-            }
+            // make sure we have at less one statistics.
+            //if(self.facetFields.includes('statistics')) {
+            //} else {
+            //    // add the statistics on listvalue_i
+            //    self.facetFields = self.facetFields + 
+            //      ",listvalue_i(statistics=true)";
+            //}
 
             // post payload, it will be the query parameters here:
             // This is the JSON request payload.
@@ -394,7 +429,8 @@ var app = new Vue({
                   // using array for multiple values
                   // in association with multiple values in HTTP parameters.
                   // ?facet_field=project_id&facet_field=customer_id
-                  "facet.field":["project_id", "customer_id"]
+                  //"facet.field":["project_id", "customer_id"]
+                  "facet.field": self.facetFields.split(',')
                   // here is for single value
                   //"facet.field":"customer_id"
                 }
@@ -410,6 +446,7 @@ var app = new Vue({
                 self.results = response.data.response.docs;
                 console.log(self.results);
                 //self.facets = response.data.facets;
+                self.facets = self.getReadyFacets(response.data.facet_counts.facet_fields);
                 //self.stats = self.facets[self.facets.length - 1].statistics;
                 //console.log("statistics: " + self.stats);
                 self.resultSummary = "Found " + self.totalHits + " docs in total!"
@@ -424,6 +461,52 @@ var app = new Vue({
               self.resultSummary = "Query Error!";
               console.log(error);
             });
+        },
+
+        /**
+         * process the facet_fields response to different format.
+         *
+         *  [
+         *    { label:"field name",
+         *      buckets: [
+         *        {value: "field value one",
+         *         count: 120},
+         *        {value: "field value two",
+         *         count: 20},
+         *      ]
+         *    }
+         *  ]
+         */
+        getReadyFacets(facetFields) {
+
+            // we will return the facets as array.
+            var retFacets = [];
+            // key is the field name.
+            Object.keys(facetFields).forEach(function(fieldName) {
+
+                var buckets = facetFields[fieldName];
+                // get ready the buckets for each field.
+                var facetBuckets = [];
+                for(var i=0; i < buckets.length; i = i+2) {
+
+                    facetBuckets.push(
+                      {
+                        value: buckets[i],
+                        count: buckets[i + 1]
+                      }
+                    );
+                }
+
+                // get ready the facet object.
+                var facetItem = {
+                  label: fieldName,
+                  buckets: facetBuckets
+                };
+
+                retFacets.push(facetItem);
+            });
+
+            return retFacets;
         }
     }
 });
