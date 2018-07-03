@@ -34,45 +34,6 @@ Vue.component("statistics", {
 });
 
 /**
- * Solr facet buckets..
- */
-Vue.component("solr-facet-buckets", {
-    // The x-template id.
-    template: "#solr-facet-buckets",
-    props: ["facet"],
-
-    // using computed for dynamic data.
-    computed: {
-        // the facet label.
-        facetLabel() {
-            return this.facet.label;
-        },
-
-        // ids for collapse.
-        facetID() {
-            return this.facet.label.replace(/ /g, '-');
-        },
-        facetCollapseID() {
-            return "collapse" + this.facet.label.replace(/ /g, '-');
-        },
-        facetTargetCollapseID() {
-            return "#collapse" + this.facet.label.replace(/ /g, '-');
-        },
-
-        // facet buckets.
-        facetBuckets() {
-            return this.facet.buckets;
-        }
-    },
-
-    // methods.
-    methods: {
-
-        // empty for now.
-    }
-});
-
-/**
  * facet buckets..
  */
 Vue.component("facet-buckets", {
