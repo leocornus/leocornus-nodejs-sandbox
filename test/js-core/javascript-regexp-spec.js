@@ -83,6 +83,17 @@ describe('JavaScript RegExp Prototype Testing Specs', function() {
             var matches = source.match(pattern);
             expect(matches[0]).toMatch('(qtp1929600551-13009)');
             expect(matches[1]).toMatch('qtp1929600551-13009');
+
+            // greedy match.
+            matches = source.match(/suggest\.q=(.*)&/);
+            expect(matches[0]).toMatch('suggest.q=C22&suggest=true&suggest.dictionary=CSASuggester&');
+            expect(matches[1]).toMatch('C22&suggest=true&suggest.dictionary=CSASuggester');
+
+            // non-greedy match.
+            // Adding a ? on a quantifier (?, * or +) makes it non-greedy
+            matches = source.match(/suggest\.q=(.*?)&/);
+            expect(matches[0]).toMatch('suggest.q=C22&');
+            expect(matches[1]).toMatch('C22');
         });
     });
 });
