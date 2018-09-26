@@ -74,5 +74,15 @@ describe('JavaScript RegExp Prototype Testing Specs', function() {
             expect(result[1]).toMatch('1234');
             expect(parseInt(result[1])).toBe(1234);
         });
+
+        it('extract fields from solr logging message', function() {
+
+            var source = "2018-06-19 13:07:21.394 INFO  (qtp1929600551-13009) [c:polaris s:shard1 r:core_node4 x:polaris_shard1_replica_n2] o.a.s.c.S.Request [polaris_shard1_replica_n2]  webapp=/solr path=/suggest params={suggest.q=C22&suggest=true&suggest.dictionary=CSASuggester&wt=json} status=0 QTime=0"
+
+            var pattern = /\((.*)\)/;
+            var matches = source.match(pattern);
+            expect(matches[0]).toMatch('(qtp1929600551-13009)');
+            expect(matches[1]).toMatch('qtp1929600551-13009');
+        });
     });
 });
