@@ -42,3 +42,6 @@ bower_components
 # the bundle files from webpack,
 # we set them to be ignored for now, as they are only for demo / testing.
 *bundle.js
+
+# ignore local config file for forever.
+local.json
