@@ -1,3 +1,9 @@
+# NOTE
+
+All activities continue on repository: https://github.com/leocorn/javascript-sandbox
+
+Demo page on: https://dev.leocorn.com/javascript-sandbox
+
 # leocornus-nodejs-sandbox
 
 A sandbox and playground to learn Node.js and have fun!
