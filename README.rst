@@ -1,3 +1,10 @@
+NOTE
+====
+
+All activities continue on repository: https://github.com/leocorn/javascript-sandbox
+
+Demo page on: https://dev.leocorn.com/javascript-sandbox
+
 |travis|_ |npm-version|_ |npm-license|_
 
 It is very simple to get started with JavaScript programming.
