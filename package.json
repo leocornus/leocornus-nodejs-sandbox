@@ -88,7 +88,7 @@
     "yahoo-finance-stream": "^0.1.2"
   },
   "dependencies": {
-    "jquery": "^2.1.4",
+    "jquery": "^3.5.0",
     "jquery.cookie": "^1.4.1",
     "justified-layout": "^2.1.0",
     "nodemw": "^0.7.5",
